@@ -6,7 +6,7 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 
 
 ## Goal
-- Verify and preserve the extracted faculties workspace as the authoritative sysadmin editing surface for governance, curriculum, and semester controls. The source implementation is landed and repo-local proof is green, but live acceptance is currently blocked by deployed GitHub Pages bundle drift.
+- Verify and preserve the extracted faculties workspace as the authoritative sysadmin editing surface for governance, curriculum, and semester controls. The source implementation, repo-local proof, and refreshed live acceptance/teaching parity are all green on the deployed stack.
 - The extracted workspace is the authoritative sysadmin editing surface for academic terms, semester navigation, curriculum rows, course-leader assignment, provisioning launch points, policy editing, and stage-policy editing.
 
 ## Repo Truth Anchors
@@ -74,15 +74,15 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 
 ## Current Execution Status
 - `2026-03-30`: repo-local extracted-workspace parity and accessibility proof passed through `tests/system-admin-faculties-workspace.test.tsx` and `tests/system-admin-accessibility-contracts.test.tsx` inside the targeted frontend verifier.
-- `2026-03-30`: `LIVE-TEACHING` passed and refreshed `output/playwright/system-admin-teaching-parity-smoke.png`.
-- `2026-03-30`: `LIVE-ACCEPTANCE` failed at `workspace-tab-bands`. The refreshed failure report shows the deployed GitHub Pages bundle exposes `Academic Bands` text but does not ship `Save Scope Governance` or `Reset To Inherited Policy`, so the extracted `Bands` editor is not live on the deployed stack.
-- Open blocker: `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT`.
+- `2026-03-30`: refreshed `LIVE-TEACHING` passed and rerecorded `output/playwright/system-admin-teaching-parity-smoke.png`.
+- `2026-03-30`: refreshed `LIVE-ACCEPTANCE` passed across Overview, Bands, CE / SEE, CGPA Formula, Stage Gates, Courses, and Provision on the deployed stack.
+- `2026-03-30`: `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT` is closed.
 
 ## Exit Contract
-- Stage `02A` is `passed` only after the deployed frontend bundle serves the extracted faculties workspace parity path and the refreshed `LIVE-ACCEPTANCE` artifacts are green.
+- Stage `02A` is now `passed`; the deployed frontend bundle serves the extracted faculties workspace parity path and the refreshed `LIVE-ACCEPTANCE` artifacts are green.
 
 ## Handoff Update Required In Ledger
 - `stageId: 02A`
-- parity is only recordable as passed after the live acceptance blocker is cleared
+- pass row appended after live acceptance and teaching parity re-cleared on the deployed stack
 - extracted editor owners recorded
 - local/live parity proof references

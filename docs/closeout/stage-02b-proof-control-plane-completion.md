@@ -6,7 +6,7 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 
 
 ## Goal
-- Complete the dedicated sysadmin proof control plane so it owns lifecycle, diagnostics, checkpoint playback, semester activation, import/crosswalk review, and operator readiness without leaning on unrelated hierarchy UI. The implementation is landed and proof verifiers are green, but formal stage pass is blocked until `02A` live acceptance is green again on the deployed stack.
+- Complete the dedicated sysadmin proof control plane so it owns lifecycle, diagnostics, checkpoint playback, semester activation, import/crosswalk review, and operator readiness without leaning on unrelated hierarchy UI. The implementation is landed and repo-local plus deployed proof verifiers are green with no remaining predecessor blocker.
 
 ## Repo Truth Anchors
 - `src/system-admin-proof-dashboard-workspace.tsx` exposes proof imports, run actions, queue diagnostics, worker diagnostics, checkpoint readiness, lifecycle audit, retained operational events, and semester activation controls.
@@ -80,14 +80,14 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 ## Current Execution Status
 - `2026-03-30`: backend contract, persistence, API typing, frontend proof dashboard controls, and live-auth hardening landed in source.
 - `2026-03-30`: repo-local proof passed, including targeted backend/frontend suites and `npm run verify:proof-closure:proof-rc`.
-- `2026-03-30`: `LIVE-PROOF` passed and refreshed `output/playwright/system-admin-proof-control-plane.png`.
-- `2026-03-30`: stage remains blocked, not failed on its own proof path, because `02A` is still open under `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT` and the hard-stop predecessor rule therefore remains unsatisfied.
+- `2026-03-30`: refreshed `LIVE-PROOF`, `LIVE-TEACHING`, and `LIVE-ACCEPTANCE` all passed on the deployed stack after Stage 02A re-cleared.
+- `2026-03-30`: the predecessor blocker is gone, so Stage `02B` is formally passed.
 
 ## Exit Contract
-- Stage `02B` is `passed` only after `02A` is re-cleared on the deployed stack and the proof-control-plane evidence is rerecorded without an open predecessor blocker.
+- Stage `02B` is now `passed`; the proof-control-plane evidence is rerecorded without an open predecessor blocker.
 
 ## Handoff Update Required In Ledger
 - `stageId: 02B`
 - proof control-plane controls completed
 - semester activation contract recorded
-- local/live proof artifact references, plus explicit blocker linkage when `02A` is still open
+- local/live proof artifact references

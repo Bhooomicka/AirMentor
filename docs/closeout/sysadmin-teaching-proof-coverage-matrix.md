@@ -4,7 +4,7 @@ This file maps every sysadmin surface, every teaching-profile-reachable surface,
 
 The execution ledger, evidence manifest, evidence index, and defect register under `output/playwright/` are the shared proof backbone for every artifact named here. The Stage `00B` support-doc deliverables `final-authoritative-plan-security-observability-annex.md`, `deploy-env-contract.md`, and `operational-event-taxonomy.md` provide the closeout-wide security, deployment, and telemetry context that this coverage matrix assumes.
 
-Current blocker as of `2026-03-30`: `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT` is open. Repo-local proof, `LIVE-PROOF`, and `LIVE-TEACHING` are current, but `LIVE-ACCEPTANCE` on the deployed GitHub Pages build is blocked because the bundle does not yet ship the extracted faculties-workspace `Bands` editor controls.
+Current status as of `2026-03-30`: `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT` is closed. Repo-local proof, `LIVE-PROOF`, `LIVE-TEACHING`, and refreshed `LIVE-ACCEPTANCE` are current on the deployed GitHub Pages + Railway stack.
 
 ## Backbone And Support Docs
 - Evidence backbone:
