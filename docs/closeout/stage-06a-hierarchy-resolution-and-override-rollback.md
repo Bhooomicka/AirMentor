@@ -1,0 +1,92 @@
+# Stage 06A - Hierarchy Resolution And Override Rollback
+
+Hard stop: do not start unless `stage-05b-ux-stability-motion-and-queue-polish.md` is marked passed in the execution ledger, its artifacts are present in the evidence manifest/index, and no unresolved blocker tagged to `05B` remains open in the defect register.
+
+Operational rule: run every non-trivial verify/build/deploy command through `bash scripts/run-detached.sh <job-name> <command...>`, deploy the current frontend/backend before live proof, and carry forward the lessons in `docs/closeout/operational-execution-rules.md` before continuing.
+
+
+## Goal
+- Make hierarchy-derived policy and stage-policy resolution fully explainable, section-aware, and rollback-safe so operators can prove where an override came from and reverse it without stale scope state.
+
+## Repo Truth Anchors
+- `air-mentor-api/src/modules/admin-structure.ts` already owns `resolveBatchPolicy` and `resolveBatchStagePolicy`.
+- `air-mentor-api/tests/admin-hierarchy.test.ts` already exercises policy override inheritance and resolved-policy reads.
+- `src/system-admin-faculties-workspace.tsx` already shows a lightweight "Resolved from ..." hint for governance content, but it is not yet a complete authoritative lineage surface.
+- The authoritative plan requires resolved policy/proof payloads to expose `scopeDescriptor`, `resolvedFrom`, and `scopeMode`, and the repo does not yet consistently expose those fields.
+
+## Inputs Required From Previous Stage
+- `05B` ledger row
+- accessibility and keyboard proof artifacts
+- updated matrix rows for shared shell, metadata, and UX stability
+
+## Allowed Change Surface
+- `air-mentor-api/src/modules/admin-structure.ts`
+- extracted hierarchy/policy helpers created under `air-mentor-api/src/lib/`
+- `src/system-admin-faculties-workspace.tsx`
+- `src/system-admin-live-data.ts`
+- hierarchy/policy tests and targeted admin scripts
+
+## Ordered Implementation Tasks
+### backend
+- Finish authoritative hierarchy resolution across institution, academic faculty, department, branch, batch, and section where section-level scope applies.
+- Extend resolved policy and resolved stage-policy payloads with `scopeDescriptor`, `resolvedFrom`, and `scopeMode`.
+- Add explicit rollback-safe behavior for override removal, override replacement, and any scope reassignment that should invalidate older derived state.
+
+### frontend
+- Replace generic "resolved from scope" hints with explicit lineage, resolved scope labels, and rollback-ready operator messaging.
+- Keep override lineage display inside the extracted faculties workspace and its helpers.
+- Ensure section-aware lineage appears anywhere a section selection changes the effective source of truth.
+
+### tests
+- Tighten resolved-policy and rollback-path coverage on the backend.
+- Add UI assertions for lineage labels and rollback-safe messages if the extracted governance UI changes.
+- Keep section-aware selector coverage aligned with the new lineage contract.
+
+### evidence
+- Capture local and live proof that the active override lineage is visible and that a rollback or removal path leaves no stale resolved state.
+- Record the scope chain exercised, including any section-level resolution.
+- Update both matrices for lineage fields and rollback proof.
+
+### non-goals
+- Do not add bulk mentor-assignment features here.
+- Do not move proof-run lifecycle logic into hierarchy modules.
+
+## Modularity Constraints
+- New resolution and rollback behavior belongs in structure-specific modules or extracted helpers under `air-mentor-api/src/lib/`.
+- Do not add new hierarchy resolution branches to `air-mentor-api/src/modules/academic.ts` or `air-mentor-api/src/lib/msruas-proof-control-plane.ts`.
+- `src/system-admin-live-app.tsx` may only receive thin display wiring.
+
+## Required Proof Before Exit
+- Resolved policy and stage-policy payloads explain their source with authoritative lineage fields.
+- Override rollback or removal does not leave stale UI or derived payload state.
+- Section-aware lineage works locally and on the live stack.
+
+## Commands And Expected Artifacts
+| Command | Expected Artifacts | Pass Signal |
+| --- | --- | --- |
+| `cd air-mentor-api && npx vitest run tests/admin-hierarchy.test.ts tests/admin-control-plane.test.ts tests/policy-phenotypes.test.ts` | backend vitest output; ledger reference | resolved lineage and rollback behavior stay correct |
+| `npm test -- --run tests/system-admin-live-data.test.ts tests/system-admin-accessibility-contracts.test.tsx` | frontend vitest output; ledger reference | lineage display and section-aware selectors remain stable |
+| `npm run playwright:admin-live:acceptance` | `output/playwright/system-admin-live-acceptance-report.json`, `output/playwright/system-admin-live-acceptance.png` | local hierarchy/override workflow remains usable |
+| `npm run playwright:admin-live:keyboard-regression` | `output/playwright/system-admin-live-keyboard-regression-report.json`, `output/playwright/system-admin-live-keyboard-regression.png` | local keyboard traversal through override surfaces passes |
+| `PLAYWRIGHT_APP_URL=<pages-url> PLAYWRIGHT_API_URL=<railway-url> AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:acceptance` | refreshed live acceptance artifacts; ledger reference | live hierarchy/override workflow passes |
+| `PLAYWRIGHT_APP_URL=<pages-url> PLAYWRIGHT_API_URL=<railway-url> AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:keyboard-regression` | refreshed live keyboard artifacts; ledger reference | live hierarchy/override keyboard path passes |
+
+## Regression Watchlist
+- Override rollback clearing the database row but leaving stale resolved labels or cached counts
+- Section selection changing scope labels without changing resolved lineage
+- Rollback logic implemented ad hoc in UI handlers instead of authoritative backend helpers
+
+## Blockers That Stop The Next Stage
+- Missing lineage fields on resolved payloads
+- Any rollback path that leaves stale resolved state
+- Any local/live failure on hierarchy or keyboard proof
+
+## Exit Contract
+- Stage `06A` is `passed` only when hierarchy resolution and override rollback are authoritative, explainable, section-aware, and proven locally and live.
+
+## Handoff Update Required In Ledger
+- `stageId: 06A`
+- lineage fields added
+- rollback scenario used for proof
+- local/live artifact references
+
