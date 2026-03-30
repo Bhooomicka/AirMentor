@@ -12,7 +12,12 @@ This document defines the universal execution contract for every stage prompt in
 ## Execution Discipline
 - Run every non-trivial verify, build, proof, and deploy command through `bash scripts/run-detached.sh <job-name> <command...>` so the job survives terminal closure and leaves a durable log in `output/detached/`.
 - Do not continue a stage against a stale live stack. After frontend or backend changes that affect live verification, deploy the current surface first and then rerun the required live commands.
+- Before rerunning expensive live browser proof, confirm deploy propagation with a cheap deterministic live probe against the exact dependency that changed, such as proof bundle, checkpoint route, or build metadata.
+- If the live probe still returns stale, `null`, or inactive proof state, treat that as propagation lag or stale deployment until a direct probe proves otherwise.
+- Reuse shared shell primitives only where the target surface actually matches their interaction contract. If a proof surface is intentionally all-visible, do not convert it to tabs just to match neighboring pages unless the stage explicitly changes that behavior and its tests.
 - Carry forward the current failure-memory rules from `docs/closeout/operational-execution-rules.md` before continuing into the next stage.
+- Shared-contract stages must preserve the surface-specific evidence model. Reuse shared owners where they fit, but do not force every surface into tabs, carousels, or hidden panels unless the stage contract explicitly requires that behavior.
+- New jsdom contract tests must respect the repo runtime assumptions. Prefer `createElement` harnesses or explicitly import the React runtime before using JSX so transform mismatches do not masquerade as product regressions.
 
 ## Mandatory Files And Artifacts
 - `output/playwright/execution-ledger.jsonl`
@@ -21,6 +26,13 @@ This document defines the universal execution contract for every stage prompt in
 - `output/playwright/defect-register.json`
 
 If any of these files do not exist when stage execution begins, the current stage must create them before changing product code.
+
+## Recording Discipline
+- A stage cannot move to `passed` until `execution-ledger.jsonl`, `proof-evidence-manifest.json`, and `proof-evidence-index.md` are all updated and agree on the stage artifact ids.
+- `proof-evidence-manifest.json` must preserve its top-level `artifacts` array and the established artifact-record field shape.
+- Negative-path or denied-path findings discovered during a stage must be recorded as first-class artifacts in the same stage and linked from the relevant assertion and coverage documents.
+- Do not force every proof-aware surface into the same navigation pattern during shared-shell or shared-UI stages. Stable always-visible control planes can adopt shared owners without being turned into tabs.
+- If a stage claims adoption of a shared owner or extracted primitive, the stage tests must assert the owner markers and linkage semantics directly instead of relying only on content assertions.
 
 ## Universal Stage Template
 Every stage file must contain these headings in this order:

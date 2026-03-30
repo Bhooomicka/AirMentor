@@ -62,6 +62,18 @@ This plan explicitly covers:
 - Use official docs and official changelogs first. Avoid tutorial-grade sources when official docs are available.
 - When implementation depends on current browser/platform behavior, verify it on the deployed GitHub Pages plus Railway stack, not only locally.
 
+## Failure Memory The Next Agent Must Not Repeat
+- Do not trust a green deploy trigger by itself for live-proof work. After frontend or backend changes that affect proof context, confirm propagation with a cheap deterministic live probe first, preferably the exact proof bundle, checkpoint route, or build-metadata surface that the UI depends on.
+- If a live proof surface still reports `null`, inactive, or stale checkpoint context immediately after deploy, treat propagation lag or stale live stack as the first hypothesis. Record the probe result, wait for readiness, and rerun only after the live dependency confirms the new state.
+- Reuse the shared proof-shell owner only where the surface semantics actually match. Do not force tabbed proof panels onto intentionally all-visible surfaces such as the faculty proof panel, or you will hide evidence by default and create false parity failures. Use the shared hero or launcher pieces there unless the stage explicitly changes that contract.
+- A stage is not complete when only the ledger row is written. `output/playwright/execution-ledger.jsonl`, `output/playwright/proof-evidence-manifest.json`, and `output/playwright/proof-evidence-index.md` must be updated together with the same stage artifact ids before the stage can be marked `passed`.
+- `output/playwright/proof-evidence-manifest.json` is canonicalized under the top-level `artifacts` array. Do not invent alternate top-level keys such as `items`, and do not change the established artifact object shape when extending the manifest.
+- When verification uncovers an invalid-checkpoint, denied-path, or stale-proof negative path, capture it as a first-class artifact in the same stage and wire it into the assertion and coverage matrices immediately.
+- Do not force every proof-aware surface into the same navigation pattern. If a surface is already stable as an always-visible control plane, adopt the shared shell and launcher without hiding working sections behind new tabs.
+- When a stage depends on a shared owner or extracted primitive, add explicit contract assertions for owner markers and linkage semantics. Content-only assertions are not enough to prove shared-contract adoption.
+- When adding new jsdom contract tests in this repo, prefer `createElement` harnesses or explicitly wire the React runtime before using JSX. A correct product change can still produce `React is not defined` if the test file assumes a different transform path.
+- Do not overfit a shared-surface stage by forcing every consumer into the most complex shared pattern. Reuse the shared owner contract that a surface actually needs. If a proof surface only needs the shared hero and launcher, do not add shared tabs just because other surfaces use them, and do not hide previously visible evidence sections without updating the stage contract and tests first.
+
 ## Authoritative Deliverables
 - `docs/closeout/final-authoritative-plan.md`
 - `docs/closeout/final-authoritative-plan-security-observability-annex.md`
