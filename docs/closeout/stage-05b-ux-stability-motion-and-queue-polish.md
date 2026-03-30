@@ -99,3 +99,8 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 - queue bulk-action status
 - motion/shell artifact references
 - unresolved visual or interaction regressions
+
+## Completion Notes
+- `2026-03-30`: `src/system-admin-action-queue.ts`, `src/system-admin-ui.tsx`, `src/ui-primitives.tsx`, `src/system-admin-live-app.tsx`, and `src/academic-workspace-topbar.tsx` now own queue bulk hide/restore helpers, shared queue-control chrome, accessible queue count badges, and darker primary-action accents for the action rail.
+- `2026-03-30`: detached local verification passed in `output/detached/airmentor-05b-local-ui-tests-r2-20260330T141357Z.log` and `output/detached/airmentor-05b-build-web-r2-20260330T141411Z.log` after the contrast and queue-chrome fix landed.
+- `2026-03-30`: GitHub Pages deploy run `23749418896` propagated commit `b542b844ad91d623b50b0e3b950646918d089662` as `index-DL9CIFbe.js`; `LIVE-ACCEPTANCE`, `LIVE-A11Y`, and `LIVE-KEYBOARD` then passed on the deployed Pages + Railway stack, closing `DEF-05B-LIVE-A11Y-QUEUE-CONTRAST`.
