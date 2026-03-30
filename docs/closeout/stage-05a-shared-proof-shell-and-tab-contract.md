@@ -100,3 +100,8 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 - shared proof shell owner path
 - launcher coverage by surface
 - local/live artifact references
+
+## Completion Notes
+- `2026-03-30`: `src/proof-surface-shell.tsx` became the shared owner for proof hero, launcher, tabs, and tab panels, and the system-admin proof dashboard, faculty proof panel, HoD analytics, risk explorer, and student shell now consume that contract.
+- `2026-03-30`: detached local verification passed in `output/detached/airmentor-05a-local-contracts-r3-20260330T133319Z.log` and `output/detached/airmentor-05a-build-web-r3-20260330T133319Z.log` after the proof-hero contrast fix landed.
+- `2026-03-30`: GitHub Pages deploy run `23747472879` propagated commit `b5e1a0f8b72358ef32a061726edeae5318f0b96e` as `index-BTlTEY8n.js`; `LIVE-A11Y`, `LIVE-KEYBOARD`, and `LIVE-PROOF` then passed on the deployed Pages + Railway stack, closing `DEF-05A-LIVE-A11Y-PROOF-HERO-CONTRAST`.
