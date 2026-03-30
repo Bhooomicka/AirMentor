@@ -92,6 +92,14 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 - Any rollback path that leaves stale resolved state
 - Any local/live failure on hierarchy or keyboard proof
 
+## Completion Notes
+- `src/system-admin-faculties-workspace.tsx` now renders authoritative governance and stage-policy lineage from the resolved payloads, including explicit scope labels, `resolvedFrom` copy, `scopeMode`, and rollback-target messaging instead of the earlier generic scope hint.
+- `src/system-admin-live-app.tsx` is now thin wiring only for 06A: it passes `resolvedBatchPolicy`, `resolvedStagePolicy`, and the active scope chain into the extracted workspace, and its reset flash copy reports the actual inherited fallback owner after a rollback.
+- Frontend contract coverage now lives in `tests/system-admin-accessibility-contracts.test.tsx` and `tests/system-admin-faculties-workspace.test.tsx`, while backend hierarchy lineage and rollback remain pinned by `air-mentor-api/tests/admin-hierarchy.test.ts`, `air-mentor-api/tests/admin-control-plane.test.ts`, and `air-mentor-api/tests/policy-phenotypes.test.ts`.
+- Local proof passed with `output/detached/airmentor-airmentor-06a-backend-local-r2-20260330T144214Z.log`, `output/detached/airmentor-airmentor-06a-frontend-local-r2-20260330T144316Z.log`, and `output/detached/airmentor-airmentor-06a-build-web-r2-20260330T144316Z.log`; the local build emitted `dist/assets/index-BRtaqvAn.js`.
+- GitHub Pages deploy run `23750850452` published commit `552cfdea03076adde50d08062ee5ecc5c18eb2eb`. The live probe confirmed the served Pages bundle was `index-BJ-jvkyu.js` and that its JS contained `Effective stage policy resolves from` plus `Reset will archive the local` before the live reruns began.
+- Live proof passed with `output/detached/airmentor-airmentor-06a-live-acceptance-20260330T144934Z.log` and `output/detached/airmentor-airmentor-06a-live-keyboard-20260330T144934Z.log`. The rollback scenario exercised for 06A is section-level override lineage falling back to the batch-level override owner without stale extracted-workspace state.
+
 ## Exit Contract
 - Stage `06A` is `passed` only when hierarchy resolution and override rollback are authoritative, explainable, section-aware, and proven locally and live.
 
