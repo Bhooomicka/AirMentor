@@ -22,8 +22,8 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 ## Repo Truth Anchors
 - `air-mentor-api/src/modules/admin-structure.ts` already owns `resolveBatchPolicy` and `resolveBatchStagePolicy`.
 - `air-mentor-api/tests/admin-hierarchy.test.ts` already exercises policy override inheritance and resolved-policy reads.
-- `src/system-admin-faculties-workspace.tsx` already shows a lightweight "Resolved from ..." hint for governance content, but it is not yet a complete authoritative lineage surface.
-- The authoritative plan requires resolved policy/proof payloads to expose `scopeDescriptor`, `resolvedFrom`, and `scopeMode`, and the repo does not yet consistently expose those fields.
+- `src/system-admin-faculties-workspace.tsx` is the extracted owner for hierarchy lineage display and must render the authoritative resolved payloads instead of generic scope hints.
+- `src/api/types.ts` and the resolved policy/stage-policy endpoints already expose `scopeDescriptor`, `resolvedFrom`, `scopeMode`, `countSource`, and `activeOperationalSemester`; the remaining 06A gap is authoritative display and rollback copy, not missing payload fields.
 
 ## Inputs Required From Previous Stage
 - `05B` ledger row
@@ -40,7 +40,7 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 ## Ordered Implementation Tasks
 ### backend
 - Finish authoritative hierarchy resolution across institution, academic faculty, department, branch, batch, and section where section-level scope applies.
-- Extend resolved policy and resolved stage-policy payloads with `scopeDescriptor`, `resolvedFrom`, and `scopeMode`.
+- Keep resolved policy and resolved stage-policy payloads authoritative, including `scopeDescriptor`, `resolvedFrom`, and `scopeMode`, while tightening any rollback or label gaps that still affect direct operator display.
 - Add explicit rollback-safe behavior for override removal, override replacement, and any scope reassignment that should invalidate older derived state.
 
 ### frontend
