@@ -67,7 +67,7 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 | `cd air-mentor-api && npx vitest run tests/academic-parity.test.ts tests/academic-access.test.ts tests/academic-runtime-narrow-routes.test.ts` | backend test output; ledger reference | faculty/course-leader/mentor proof payload parity passes |
 | `npm test -- tests/faculty-profile-proof.test.tsx tests/system-admin-live-data.test.ts tests/portal-routing.test.ts` | frontend test output; ledger reference | faculty profile proof sections, route launches, and scoped counts pass |
 | `PLAYWRIGHT_APP_URL=<pages-url> PLAYWRIGHT_API_URL=<railway-url> AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:teaching-parity` | `output/playwright/system-admin-teaching-parity-smoke.png` | live sysadmin-to-teaching parity passes |
-| `PLAYWRIGHT_APP_URL=<pages-url> PLAYWRIGHT_API_URL=<railway-url> npm run verify:proof-closure:live` | `output/playwright/teacher-proof-panel.png`; `output/playwright/system-admin-proof-control-plane.png` | live teaching proof surfaces stay aligned with proof control plane |
+| `PLAYWRIGHT_APP_URL=<pages-url> PLAYWRIGHT_API_URL=<railway-url> npm run verify:proof-closure:teaching-live` | `output/playwright/teacher-proof-panel.png`; `output/playwright/system-admin-proof-control-plane.png` | live teaching proof surfaces stay aligned with proof control plane |
 
 ## Regression Watchlist
 - Faculty profile still depending on `src/App.tsx` for nontrivial proof logic

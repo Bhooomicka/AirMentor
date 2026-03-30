@@ -44,17 +44,17 @@ Current status as of `2026-03-30`: `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT` is cl
 ## Teaching-Profile-Reachable Surfaces
 | Surface | Owner Role | Entry Route Or Surface | Backend/API Dependency | Repo-local Proof | Live Proof | Primary Artifact | Owning Stage |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Faculty profile | `COURSE_LEADER`, `MENTOR`, `HOD` | academic workspace `faculty-profile` | `/api/academic/faculty-profile/:facultyId` | `npm test -- --run tests/faculty-profile-proof.test.tsx` | `LIVE-TEACHING` | `system-admin-teaching-parity-smoke.png` | 04A |
-| Teacher proof panel | `COURSE_LEADER` | faculty profile proof section | faculty profile + proof bundle + proof provenance formatting | targeted faculty/profile tests, `LOCAL-PROOF` | `LIVE-PROOF`, `LIVE-TEACHING` | `teacher-proof-panel.png`, `system-admin-teaching-parity-smoke.png` | 01B, 04A |
-| Course leader dashboard | `COURSE_LEADER` | academic dashboard | `/api/academic/bootstrap` | selectors/page tests | `LIVE-TEACHING` | teaching parity screenshot | 04A |
+| Faculty profile | `COURSE_LEADER`, `MENTOR`, `HOD` | academic workspace `faculty-profile` | `/api/academic/faculty-profile/:facultyId` | `npm test -- --run tests/faculty-profile-proof.test.tsx` | `LIVE-TEACHING`, `LIVE-TEACHING-PROOF` | `system-admin-teaching-parity-smoke.png`, `teacher-proof-panel.png` | 04A |
+| Teacher proof panel | `COURSE_LEADER` | faculty profile proof section | faculty profile + proof bundle + proof provenance formatting | targeted faculty/profile tests, `LOCAL-PROOF` | `LIVE-PROOF`, `LIVE-TEACHING`, `LIVE-TEACHING-PROOF` | `teacher-proof-panel.png`, `system-admin-teaching-parity-smoke.png` | 01B, 04A |
+| Course leader dashboard | `COURSE_LEADER` | academic dashboard | `/api/academic/bootstrap` | selectors/page tests | `LIVE-TEACHING` | `course-leader-dashboard-proof.png` | 04A |
 | Course detail | `COURSE_LEADER`, `HOD` | academic route `course` | offering attendance, assessment, scheme, question paper | academic parity tests | `LIVE-TEACHING` | teaching parity screenshot | 04A |
 | Scheme setup | `COURSE_LEADER` | academic route `scheme-setup` | `/api/academic/offerings/:offeringId/scheme` | academic parity tests | `LIVE-TEACHING` | teaching parity screenshot | 04A |
 | Upload workspace | `COURSE_LEADER` | academic route `upload` | attendance and assessment entry routes | academic parity tests | `LIVE-TEACHING` | teaching parity screenshot | 04A |
 | Entry workspace | `COURSE_LEADER` | academic route `entry-workspace` | entry commits + lock/unlock routes | academic parity tests | `LIVE-TEACHING` | teaching parity screenshot | 04A |
 | Calendar and timetable | `COURSE_LEADER`, `MENTOR`, `HOD` | academic route `calendar` | meetings, placements, calendar audit, faculty timetable | calendar tests | `LIVE-TEACHING` | teaching parity screenshot | 04A |
-| Mentor mentee list | `MENTOR` | academic route `mentees` | bootstrap + mentor assignments | mentor-specific tests | `LIVE-TEACHING` | teaching parity screenshot | 04A |
-| Mentee detail | `MENTOR` | academic route `mentee-detail` | bootstrap + student history | mentor/history tests | `LIVE-TEACHING` | teaching parity screenshot | 04A |
-| Queue history | `COURSE_LEADER`, `MENTOR`, `HOD` | academic route `queue-history` | academic task routes | domain/runtime tests | `LIVE-TEACHING`, `LIVE-KEYBOARD` | keyboard report | 04A, 08A |
+| Mentor mentee list | `MENTOR` | academic route `mentees` | bootstrap + mentor assignments | mentor-specific tests | `LIVE-TEACHING` | `mentor-view-proof.png` | 04A |
+| Mentee detail | `MENTOR` | academic route `mentee-detail` | bootstrap + student history | mentor/history tests | `LIVE-TEACHING` | `mentor-view-proof.png` | 04A |
+| Queue history | `COURSE_LEADER`, `MENTOR`, `HOD` | academic route `queue-history` | academic task routes | domain/runtime tests | `LIVE-TEACHING`, `LIVE-KEYBOARD` | `queue-history-proof.png`, keyboard report | 04A, 08A |
 | Unlock review | `HOD` | academic route `unlock-review` | admin requests + academic locks | targeted unlock tests | `LIVE-REQUESTS` | request-flow report | 08A, 08B |
 | HoD overview | `HOD` | academic route `department` | `/api/academic/hod/proof-*` + proof provenance selectors | `cd air-mentor-api && npx vitest run tests/hod-proof-analytics.test.ts`, `LOCAL-PROOF` | `LIVE-PROOF` | `hod-proof-analytics.png` | 01B, 04B |
 | HoD course hotspots | `HOD` | HoD overview course tab | `/api/academic/hod/proof-courses` | HoD proof tests | `LIVE-PROOF` | HoD screenshot | 04B |
@@ -62,7 +62,7 @@ Current status as of `2026-03-30`: `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT` is cl
 | HoD reassessment audit | `HOD` | HoD overview reassessment tab | `/api/academic/hod/proof-reassessments` | HoD proof tests | `LIVE-PROOF` | HoD screenshot | 04B |
 | Risk explorer | `COURSE_LEADER`, `MENTOR`, `HOD` | student drilldown to risk explorer | `/api/academic/students/:studentId/risk-explorer` + shared proof provenance copy | `npm test -- --run tests/risk-explorer.test.tsx` and backend risk tests, `LOCAL-PROOF` | `LIVE-PROOF` | `teacher-risk-explorer-proof.png`, `hod-risk-explorer-proof.png` | 01B, 04B |
 | Student shell | `COURSE_LEADER`, `MENTOR`, `HOD`, `SYSTEM_ADMIN` archived inspection | student drilldown to student shell | `/api/academic/student-shell/*` + shared proof provenance copy | `npm test -- --run tests/student-shell.test.tsx` and backend student-shell tests, `LOCAL-PROOF` | `LIVE-PROOF` | `student-shell-proof.png` | 01B, 04B |
-| Student history / partial profile drilldown | `COURSE_LEADER`, `MENTOR`, `SYSTEM_ADMIN` | all students, mentee detail, admin student detail | bootstrap + student history + student shell routes | selectors/page tests | `LIVE-TEACHING`, `LIVE-PROOF` | teaching parity screenshot, student-shell screenshot | 04A, 04B |
+| Student history / partial profile drilldown | `COURSE_LEADER`, `MENTOR`, `SYSTEM_ADMIN` | all students, mentee detail, admin student detail | bootstrap + student history + student shell routes | selectors/page tests | `LIVE-TEACHING`, `LIVE-TEACHING-PROOF`, `LIVE-PROOF` | `system-admin-teaching-parity-smoke.png`, `teacher-proof-panel.png`, `student-shell-proof.png` | 04A, 04B |
 
 ## Negative Paths
 | Negative Path | Owner Role | Entry Route Or Surface | Backend/API Dependency | Repo-local Proof | Live Proof | Primary Artifact | Owning Stage |
