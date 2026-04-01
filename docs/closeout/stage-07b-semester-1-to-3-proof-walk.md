@@ -16,6 +16,29 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 - When adding new jsdom contract tests, prefer `createElement` harnesses or explicitly import the React runtime before using JSX. Otherwise the test layer can fail on `React is not defined` and waste time on a non-product issue.
 - Shared shell adoption does not mean every proof surface must gain tabs. Keep always-visible proof sections visible when the surface only needs the shared hero and launcher, and treat hiding previously visible evidence as a behavioral change that requires an explicit stage decision plus updated tests.
 
+## Completion Update
+- Status: `passed`
+- Commit `cbc8723` extended the proof walk into deterministic semester-scoped runs for semesters `1`, `2`, and `3`, with explicit checkpoint selection, per-semester summaries, and semester-scoped artifact copies.
+- Repo-local verification for the landed contract is recorded in:
+  - `output/detached/airmentor-07b-backend-parity-r4-20260401T131703Z.log`
+  - `output/detached/airmentor-07b-frontend-parity-exact-20260401T132708Z.log`
+  - `output/detached/airmentor-07b-local-proof-walk-20260401T131815Z.log`
+- Deployed proof for the same contract used GitHub Pages run `23851507121` and Railway run `23851507075` on commit `cbc87236f534229e3750324031935315af9607ee`; the refreshed GitHub Pages bundle served `assets/index-savaPUFX.js`.
+- Live probe and live proof are recorded in:
+  - `output/detached/airmentor-07b-live-semester-probe-r2-20260401T134144Z.log`
+  - `output/detached/airmentor-airmentor-07b-live-proof-20260401T134220Z.log`
+  - `output/detached/airmentor-airmentor-07b-finalize-20260401T134253Z.log`
+- Semester-walk artifacts are recorded in:
+  - `output/playwright/07b-local-semester-walk-summary.json`
+  - `output/playwright/07b-live-probe-semester-probe.json`
+  - `output/playwright/07b-live-semester-walk-summary.json`
+- Deterministic checkpoint and artifact families:
+  - Semester `1` -> `stage_checkpoint_78ee47d5a45be74db6419d24`; local family `07B--LOCAL-PROOF--07b-local-semester-1-*`; live family `07B--LIVE-PROOF--07b-live-semester-1-*`
+  - Semester `2` -> `stage_checkpoint_d6aa3455a8cf8433f94ab773`; local family `07B--LOCAL-PROOF--07b-local-semester-2-*`; live family `07B--LIVE-PROOF--07b-live-semester-2-*`
+  - Semester `3` -> `stage_checkpoint_6452ecb8ca56b5b88168e2da`; local family `07B--LOCAL-PROOF--07b-local-semester-3-*`; live family `07B--LIVE-PROOF--07b-live-semester-3-*`
+- Ledger, manifest, and evidence index now share the same semester-specific artifact ids for semesters `1`, `2`, and `3`.
+
+
 ## Goal
 - Prove that the first half of the proof trajectory, semesters 1 through 3, is fully materialized, explorable, and consistent across sysadmin, faculty profile, HoD, Risk Explorer, and Student Shell.
 
