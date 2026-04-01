@@ -16,6 +16,22 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 - When adding new jsdom contract tests, prefer `createElement` harnesses or explicitly import the React runtime before using JSX. Otherwise the test layer can fail on `React is not defined` and waste time on a non-product issue.
 - Shared shell adoption does not mean every proof surface must gain tabs. Keep always-visible proof sections visible when the surface only needs the shared hero and launcher, and treat hiding previously visible evidence as a behavioral change that requires an explicit stage decision plus updated tests.
 
+## Completion Update
+- Status: `passed`
+- Local backend suite: `env -C air-mentor-api npx vitest run --reporter=verbose --maxWorkers=1 tests/session.test.ts tests/startup-diagnostics.test.ts tests/academic-access.test.ts`
+- Local frontend suite: `npm test -- --run tests/api-client.test.ts tests/frontend-startup-diagnostics.test.ts tests/hod-pages.test.ts tests/student-shell.test.tsx tests/risk-explorer.test.tsx`
+- Local session-security report: `output/playwright/08b-local-session-security-system-admin-live-session-security-report.json`
+- Local proof summary: `output/playwright/08b-local-proof-risk-smoke-summary.json`
+- Live session-contract report: `air-mentor-api/output/08b-live-contract-railway-live-session-contract.json`
+- Live session-security report: `output/playwright/08b-live-session-security-system-admin-live-session-security-report.json`
+- Live proof summary: `output/playwright/08b-live-proof-risk-smoke-summary.json`
+- Live accessibility report: `output/playwright/08b-live-a11y/system-admin-live-accessibility-report.json`
+- Live keyboard report: `output/playwright/08b-live-keyboard-system-admin-live-keyboard-regression-report.json`
+- Denied-path artifact: `output/playwright/08b-live-denied-hod-proof-invalid-checkpoint-live.json`
+- Closed Stage 08B defects: none
+- Ledger, manifest, and evidence index now share the same 08B session-security, HoD/student proof, accessibility, keyboard, and denied-path artifact ids.
+
+
 ## Goal
 - Prove the HoD and student-facing closeout journey end to end, including session, CSRF, origin, and denied-path behavior on the live deployment.
 

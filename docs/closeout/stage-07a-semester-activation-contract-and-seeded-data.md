@@ -4,6 +4,24 @@ Hard stop: do not start unless `stage-06b-provisioning-permissions-and-bulk-ment
 
 Operational rule: run every non-trivial verify/build/deploy command through `bash scripts/run-detached.sh <job-name> <command...>`, deploy the current frontend/backend before live proof, and carry forward the lessons in `docs/closeout/operational-execution-rules.md` before continuing.
 
+## Completion Update
+- Status: `passed`
+- Commit `abcdb25` hardened proof activation so re-activating a seeded semester refreshes the published operational projection without duplicating runtime rows.
+- Repo-local proof for the landed backend contract is recorded in:
+  - `output/detached/airmentor-airmentor-07a-activation-build-20260330T203557Z.log`
+  - `output/detached/airmentor-airmentor-07a-activation-count-stability-20260330T203633Z.log`
+  - `output/detached/airmentor-airmentor-07a-activation-idempotence-exact2-20260330T203637Z.log`
+  - `output/detached/airmentor-airmentor-07a-local-proof-risk-20260330T205105Z.log`
+- Deployed proof for the same contract is recorded in:
+  - `output/detached/airmentor-airmentor-07a-live-activation-route-probe-rerun-20260330T204759Z.log`
+  - `output/detached/airmentor-airmentor-07a-live-proof-risk-rerun7-20260330T204819Z.log`
+- Activation request/response JSON is captured for both local and live runs in:
+  - `output/playwright/system-admin-proof-semester-activation-local-request.json`
+  - `output/playwright/system-admin-proof-semester-activation-local-response.json`
+  - `output/playwright/system-admin-proof-semester-activation-live-request.json`
+  - `output/playwright/system-admin-proof-semester-activation-live-response.json`
+- The final live walkthrough proved checkpoint playback restore at `stage_checkpoint_654335929a345857eab259b0` (`Semester 6 · Post SEE`) and restored the seeded run to `activeOperationalSemester: 6` before exit.
+
 ## Carry-Forward Failure Memory
 - Before expensive live browser reruns, confirm deploy propagation with a cheap deterministic live probe against the exact dependency that changed, such as the proof bundle, checkpoint route, or build metadata.
 - If live proof still shows stale, `null`, or inactive checkpoint context right after deploy, treat propagation lag or stale live stack as the first hypothesis and prove otherwise before changing product code.

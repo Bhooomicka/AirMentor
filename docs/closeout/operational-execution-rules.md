@@ -44,7 +44,12 @@ These rules are mandatory for every remaining closeout stage.
 ## Detached Usage
 ```bash
 bash scripts/run-detached.sh proof-rc npm run verify:proof-closure:proof-rc
-bash scripts/run-detached.sh live-acceptance env AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=... AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=... PLAYWRIGHT_APP_URL=... PLAYWRIGHT_API_URL=... AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:acceptance
+export AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=...
+export AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=...
+export PLAYWRIGHT_APP_URL=...
+export PLAYWRIGHT_API_URL=...
+export AIRMENTOR_LIVE_STACK=1
+bash scripts/run-detached.sh live-acceptance npm run playwright:admin-live:acceptance
 ```
 
 ## Expected Outcome

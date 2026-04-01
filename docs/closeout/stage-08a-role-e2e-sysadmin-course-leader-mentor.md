@@ -16,6 +16,19 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 - When adding new jsdom contract tests, prefer `createElement` harnesses or explicitly import the React runtime before using JSX. Otherwise the test layer can fail on `React is not defined` and waste time on a non-product issue.
 - Shared shell adoption does not mean every proof surface must gain tabs. Keep always-visible proof sections visible when the surface only needs the shared hero and launcher, and treat hiding previously visible evidence as a behavioral change that requires an explicit stage decision plus updated tests.
 
+## Completion Update
+- Status: `passed`
+- Local acceptance report: `output/playwright/08a-local-acceptance-system-admin-live-acceptance-report.json`
+- Local request-flow report: `output/playwright/08a-local-request-flow-system-admin-live-request-flow-report.json`
+- Local teaching parity screenshot: `output/playwright/08a-local-teaching-system-admin-teaching-parity-smoke.png`
+- Local proof summary: `output/playwright/08a-local-proof-risk-smoke-summary.json`
+- Live acceptance report: `output/playwright/08a-live-acceptance-system-admin-live-acceptance-report.json`
+- Live request-flow report: `output/playwright/08a-live-request-flow-system-admin-live-request-flow-report.json`
+- Live teaching parity screenshot: `output/playwright/08a-live-teaching-system-admin-teaching-parity-smoke.png`
+- Live proof summary: `output/playwright/08a-live-proof-risk-smoke-summary.json`
+- Closed Stage 08A defects: `DEF-08A-LOCAL-REQUEST-FLOW-PREVIEW-PORT-DRIFT`, `DEF-08A-LOCAL-TEACHING-PARITY-PORTAL-HANDOFF`
+- Ledger, manifest, and evidence index now share the same 08A role-e2e artifact ids for sysadmin, course leader, mentor, and teacher-facing proof surfaces.
+
 ## Goal
 - Run a strict end-to-end proof pass for the Sysadmin, Course Leader, and Mentor journey now that hierarchy, proof control, semester walkthroughs, and provisioning contracts are complete.
 
