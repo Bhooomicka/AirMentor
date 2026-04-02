@@ -16,6 +16,19 @@ Operational rule: run every non-trivial verify/build/deploy command through `bas
 - When adding new jsdom contract tests, prefer `createElement` harnesses or explicitly import the React runtime before using JSX. Otherwise the test layer can fail on `React is not defined` and waste time on a non-product issue.
 - Shared shell adoption does not mean every proof surface must gain tabs. Keep always-visible proof sections visible when the surface only needs the shared hero and launcher, and treat hiding previously visible evidence as a behavioral change that requires an explicit stage decision plus updated tests.
 
+## Completion Update
+- Status: `passed`
+- Final local closeout artifact bundle: `output/playwright/08c-local-closeout-artifact-bundle.json`
+- Final live closeout artifact bundle: `output/playwright/08c-live-closeout-artifact-bundle.json`
+- Self-audit summary: `output/playwright/08c-self-audit-summary.json`
+- Verified frontend commit: `2687c2bc5e8d5bf7b2c70a82bd824521ad0ffa50`
+- Verified backend deploy commit: `ff68150b034a23327216be1b4ea48a1c34300892`
+- GitHub Pages run: `23872504711`
+- Railway run: `23871540040`
+- Three-pass self-audit completed: authoritative-plan coverage, repo/test/script crosswalk, and full sysadmin-plus-teaching surface coverage all reconciled against the final proof backbone.
+- Historical live credential strings in the ledger, evidence index, and defect register were redacted to placeholders as part of the final proof-pack hygiene sweep.
+- Support docs finalized: security/observability annex, deploy environment contract, and operational event taxonomy.
+
 ## Goal
 - Complete the final closeout proof pack with a full local and live verification sweep, a three-pass self-audit, and fully updated coverage and assertion documents.
 

@@ -1,8 +1,8 @@
 # Final Authoritative Plan Security And Observability Annex
 
 ## Status
-- Stage `00B` backbone support doc is now populated from current repo truth instead of a stub.
-- Stage `08C` still has to attach the final local/live closeout artifact references and pass row before this annex is fully sealed.
+- Stage `00B` backbone support doc is populated from current repo truth instead of a stub.
+- Finalized for Stage `08C`.
 
 ## Scope
 - This annex is the closeout-wide contract for auth, session, CSRF, role-boundary enforcement, startup/readiness diagnostics, operational telemetry, and evidence redaction.
@@ -106,10 +106,5 @@
 - Live deploy/readiness wrapper contract: `tests/railway-deploy-readiness.test.ts`, `tests/verify-final-closeout-live.test.ts`
 
 ## 08C Seal Requirements
-- The final `08C` pass must reference:
-  - the final local closeout bundle
-  - the final live closeout bundle
-  - the live session-contract output
-  - the completed assertion and coverage matrices
-  - the append-only ledger row
-- Until those references are written into the proof backbone, this annex is complete in substance but not yet fully sealed.
+- Finalized for Stage `08C`.
+- The final `08C` proof backbone now records the final local closeout artifact bundle, the final live closeout artifact bundle, the live session-contract artifact, the completed assertion and coverage matrices, and the append-only ledger row.

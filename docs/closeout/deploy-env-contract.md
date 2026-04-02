@@ -1,15 +1,15 @@
 # Deploy Environment Contract
 
 ## Status
-- This document now records the actual deploy-time contract enforced by the repo and its verification wrappers.
-- Stage `08C` still has to append the final live closeout evidence references and pass row after the final suite completes.
+- This document records the actual deploy-time contract enforced by the repo and its verification wrappers.
+- Finalized for Stage `08C`.
 
 ## Canonical Live Targets
 - GitHub Pages app URL: `https://raed2180416.github.io/AirMentor/`
 - Canonical frontend origin for backend checks: `https://raed2180416.github.io`
 - Railway public API URL: `https://api-production-ab72.up.railway.app/`
 - GitHub Actions variables currently expose:
-  - `AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin`
+  - `AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier>`
   - `RAILWAY_ALLOWED_FRONTEND_ORIGIN=https://raed2180416.github.io`
   - `RAILWAY_PUBLIC_API_URL=https://api-production-ab72.up.railway.app`
   - `VITE_AIRMENTOR_API_BASE_URL=https://api-production-ab72.up.railway.app`
@@ -77,7 +77,7 @@
   - optional diagnostics capture on failure
 
 ### Local-vs-live credential handling
-- `scripts/live-admin-common.sh` intentionally falls back to seeded `sysadmin` / `admin1234` only for non-live local runs.
+- `scripts/live-admin-common.sh` intentionally falls back to seeded local system-admin credentials only for non-live local runs.
 - When `AIRMENTOR_LIVE_STACK=1`, live verification must fail fast unless both:
   - `AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER`
   - `AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD`
@@ -104,9 +104,5 @@
 - `air-mentor-api/tests/startup-diagnostics.test.ts` and `tests/frontend-startup-diagnostics.test.ts` prove the backend/frontend startup gates that this contract relies on.
 
 ## 08C Seal Requirements
-- The final `08C` closeout must append:
-  - the exact deploy workflow run ids used for the verified live stack
-  - the exact deployed commit SHA
-  - the final live session-contract artifact
-  - the final live closeout artifact bundle
-- Until those are written into the backbone, this contract is materially current but not yet fully sealed.
+- Finalized for Stage `08C`.
+- The final `08C` closeout records the exact deploy workflow run ids, the verified frontend/backend deploy SHAs, the live session-contract artifact, and the final live closeout artifact bundle in the proof backbone.

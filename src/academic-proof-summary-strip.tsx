@@ -38,6 +38,9 @@ export function AcademicProofSummaryStrip({
   const selectedCheckpoint = proofOps.selectedCheckpoint
   const highWatchCount = selectedCheckpoint?.highRiskCount ?? proofOps.monitoringQueue.filter(item => item.riskBand === 'High').length
   const openQueueCount = selectedCheckpoint?.openQueueCount ?? proofOps.monitoringQueue.length
+  const monitoredStudentCount = new Set(proofOps.monitoringQueue.map(item => item.studentId)).size
+  const electiveFitCount = proofOps.electiveFits.length
+  const activeRunCount = proofOps.activeRunContexts.length
 
   return (
     <Card
@@ -70,9 +73,9 @@ export function AcademicProofSummaryStrip({
         <SummaryMetric label="Operational Semester" value={proofOps.activeOperationalSemester ? `Semester ${proofOps.activeOperationalSemester}` : 'Unavailable'} />
         <SummaryMetric label="High Watch" value={String(highWatchCount)} />
         <SummaryMetric label="Open Queue" value={String(openQueueCount)} />
-        <SummaryMetric label="Mentor Scope" value={String(profile.mentorScope.activeStudentCount)} />
-        <SummaryMetric label="Requests" value={String(profile.requestSummary.openCount)} />
-        <SummaryMetric label="Owned Classes" value={String(profile.currentOwnedClasses.length)} />
+        <SummaryMetric label="Monitored Students" value={String(monitoredStudentCount)} />
+        <SummaryMetric label="Elective Fits" value={String(electiveFitCount)} />
+        <SummaryMetric label="Active Runs" value={String(activeRunCount)} />
       </div>
     </Card>
   )

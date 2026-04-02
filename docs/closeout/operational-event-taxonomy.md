@@ -1,8 +1,8 @@
 # Operational Event Taxonomy
 
 ## Status
-- This taxonomy now reflects the event families that are actually emitted by the current frontend, backend, and proof-worker owners.
-- Stage `08C` still has to bind the final local/live closeout artifacts to this taxonomy in the proof backbone.
+- This taxonomy reflects the event families actually emitted by the current frontend, backend, and proof-worker owners.
+- Finalized for Stage `08C`.
 
 ## Scope
 - This document covers operational telemetry and diagnostics.
@@ -79,8 +79,5 @@
 - Live wrapper/readiness expectations: `tests/verify-final-closeout-live.test.ts`, `tests/railway-deploy-readiness.test.ts`
 
 ## 08C Seal Requirements
-- The final `08C` pass must point this taxonomy at:
-  - the final live closeout bundle
-  - the live session-contract artifact
-  - the final ledger row
-- Until those links are recorded, the taxonomy is repo-current but not yet fully sealed in the evidence backbone.
+- Finalized for Stage `08C`.
+- The final `08C` pass now points this taxonomy at the final live closeout artifact bundle, the live session-contract artifact, and the final ledger row.

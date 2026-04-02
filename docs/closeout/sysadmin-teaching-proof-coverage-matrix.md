@@ -4,7 +4,7 @@ This file maps every sysadmin surface, every teaching-profile-reachable surface,
 
 The execution ledger, evidence manifest, evidence index, and defect register under `output/playwright/` are the shared proof backbone for every artifact named here. The Stage `00B` support-doc deliverables `final-authoritative-plan-security-observability-annex.md`, `deploy-env-contract.md`, and `operational-event-taxonomy.md` provide the closeout-wide security, deployment, and telemetry context that this coverage matrix assumes.
 
-Current status as of `2026-04-02`: `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT`, `DEF-05A-LIVE-A11Y-PROOF-HERO-CONTRAST`, `DEF-05B-LIVE-A11Y-QUEUE-CONTRAST`, `DEF-06B-LOCAL-TEACHING-PARITY-NAV-CLOSE`, `DEF-06B-LIVE-PROOF-LOCK-COLLISION`, `DEF-07A-LIVE-PROOF-CSRF-CROSS-ORIGIN-ACTIVATION`, `DEF-07A-LIVE-PROOF-NONSEEDED-BATCH-SELECTION`, `DEF-08A-LOCAL-REQUEST-FLOW-PREVIEW-PORT-DRIFT`, and `DEF-08A-LOCAL-TEACHING-PARITY-PORTAL-HANDOFF` are closed. Stage `08A` and `08B` closeout artifacts remain current, the Stage `00B` support docs are now populated from repo truth, and Stage `08C` final local/live closeout proof is still in flight.
+Current status as of `2026-04-02`: `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT`, `DEF-05A-LIVE-A11Y-PROOF-HERO-CONTRAST`, `DEF-05B-LIVE-A11Y-QUEUE-CONTRAST`, `DEF-06B-LOCAL-TEACHING-PARITY-NAV-CLOSE`, `DEF-06B-LIVE-PROOF-LOCK-COLLISION`, `DEF-07A-LIVE-PROOF-CSRF-CROSS-ORIGIN-ACTIVATION`, `DEF-07A-LIVE-PROOF-NONSEEDED-BATCH-SELECTION`, `DEF-08A-LOCAL-REQUEST-FLOW-PREVIEW-PORT-DRIFT`, and `DEF-08A-LOCAL-TEACHING-PARITY-PORTAL-HANDOFF` are closed. Stage `08A`, `08B`, and `08C` closeout artifacts are current, the final support docs are no longer stubs, and no Stage `08A`, `08B`, or `08C` defects remain open in the defect register.
 
 ## Backbone And Support Docs
 - Evidence backbone:
@@ -18,6 +18,7 @@ Current status as of `2026-04-02`: `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT`, `DEF
   - `docs/closeout/operational-event-taxonomy.md`
 
 ## Sysadmin Surfaces
+| Final closeout sweep | `SYSTEM_ADMIN` | repo-local and live closeout wrappers | `scripts/verify-final-closeout.sh`, `scripts/verify-final-closeout-live.sh`, detached logs, stage-scoped closeout snapshots, and finalized support docs | `LOCAL-LINT`, `LOCAL-COMPAT`, `LOCAL-CLOSEOUT` | `LIVE-CLOSEOUT` | `08c-local-closeout-artifact-bundle.json`, `08c-live-closeout-artifact-bundle.json`, `08c-self-audit-summary.json` | 08C |
 | Surface | Owner Role | Entry Route Or Surface | Backend/API Dependency | Repo-local Proof | Live Proof | Primary Artifact | Owning Stage |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Operations dashboard | `SYSTEM_ADMIN` | `#/admin` overview | admin bootstrap + search/audit/reminders | `LOCAL-CLOSEOUT` | `LIVE-ACCEPTANCE` | `system-admin-live-acceptance-report.json` | 03A |
@@ -79,6 +80,10 @@ Current status as of `2026-04-02`: `DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT`, `DEF
 | Invalid checkpoint or inactive HoD slice returns explicit not-found/empty state instead of false data | `HOD` | HoD overview and HoD risk-explorer drilldowns | HoD proof summary + checkpoint-scoped academic routes | HoD proof tests | `LIVE-PROOF`, `LIVE-DENIED` | `hod-proof-analytics.png`, `08b-live-denied-hod-proof-invalid-checkpoint-live.json` | 04B, 08B |
 | Queue/state diagnostics do not hide degraded conditions | `SYSTEM_ADMIN` | proof control plane | dashboard service + telemetry | dashboard service tests | `LIVE-PROOF`, `LIVE-CLOSEOUT` | proof screenshot, closeout artifacts | 02B, 08C |
 | Accessibility tab/panel contracts hold on dense proof/admin surfaces | all keyboard users | proof/admin tab rails | `src/proof-surface-shell.tsx` shared hero/launcher/tab owner plus proof-surface contract tests across sysadmin, faculty proof, HoD, risk explorer, and student shell | `npm test -- --run tests/system-admin-accessibility-contracts.test.tsx tests/proof-surface-shell.test.tsx tests/system-admin-proof-dashboard-workspace.test.tsx tests/faculty-profile-proof.test.tsx tests/hod-pages.test.ts tests/risk-explorer.test.tsx tests/student-shell.test.tsx` | `LIVE-A11Y`, `LIVE-KEYBOARD`, `LIVE-PROOF` | accessibility report, keyboard report, proof screenshots | 05A, 05B, 08B |
+
+
+
+
 
 
 
