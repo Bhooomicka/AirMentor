@@ -36,6 +36,7 @@ export function AcademicProofSummaryStrip({
   if (!profile || !proofOps) return null
 
   const selectedCheckpoint = proofOps.selectedCheckpoint
+  const semesterMetricLabel = proofOps.scopeMode === 'proof' ? 'Proof Semester' : 'Operational Semester'
   const highWatchCount = selectedCheckpoint?.highRiskCount ?? proofOps.monitoringQueue.filter(item => item.riskBand === 'High').length
   const openQueueCount = selectedCheckpoint?.openQueueCount ?? proofOps.monitoringQueue.length
   const monitoredStudentCount = new Set(proofOps.monitoringQueue.map(item => item.studentId)).size
@@ -65,12 +66,12 @@ export function AcademicProofSummaryStrip({
         </div>
       </div>
 
-      <InfoBanner message={`Authoritative ${surfaceLabel.toLowerCase()} proof context. Use these checkpoint-bound counts and scope labels when comparing teacher, mentor, and queue surfaces.`} />
+      <InfoBanner message={`Authoritative ${surfaceLabel.toLowerCase()} proof context. Use these checkpoint-bound counts, model usefulness cues, and scope labels when comparing policy-derived status, no-action comparator, and simulated intervention / realized path surfaces.`} />
       <InfoBanner tone="neutral" message={describeProofProvenance(proofOps)} />
       <InfoBanner tone="neutral" message={describeProofAvailability(proofOps)} />
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 10 }}>
-        <SummaryMetric label="Operational Semester" value={proofOps.activeOperationalSemester ? `Semester ${proofOps.activeOperationalSemester}` : 'Unavailable'} />
+        <SummaryMetric label={semesterMetricLabel} value={proofOps.activeOperationalSemester ? `Semester ${proofOps.activeOperationalSemester}` : 'Unavailable'} />
         <SummaryMetric label="High Watch" value={String(highWatchCount)} />
         <SummaryMetric label="Open Queue" value={String(openQueueCount)} />
         <SummaryMetric label="Monitored Students" value={String(monitoredStudentCount)} />
