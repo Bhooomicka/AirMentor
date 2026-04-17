@@ -1,6 +1,7 @@
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
+import type { ApiAcademicFacultyProfile } from '../src/api/types'
 import { AcademicProofSummaryStrip } from '../src/academic-proof-summary-strip'
 
 describe('AcademicProofSummaryStrip', () => {
@@ -27,7 +28,7 @@ describe('AcademicProofSummaryStrip', () => {
           },
           scopeMode: 'proof',
           countSource: 'proof-checkpoint',
-          activeOperationalSemester: 6,
+          activeOperationalSemester: 5,
           activeRunContexts: [
             {
               batchId: 'batch_mnc_2023',
@@ -61,15 +62,30 @@ describe('AcademicProofSummaryStrip', () => {
             { studentId: 'student_001' },
           ],
         },
-      } as any,
+      } as unknown as ApiAcademicFacultyProfile,
       surfaceId: 'faculty-profile',
       surfaceLabel: 'Faculty Profile',
     }))
 
     expect(markup).toContain('data-proof-surface="academic-proof-summary"')
     expect(markup).toContain('data-proof-summary-mode="proof"')
+    expect(markup).toContain('data-proof-launcher="floating"')
+    expect(markup).toContain('data-proof-launcher-mode="popup-capable"')
     expect(markup).toContain('Proof Semester')
     expect(markup).toContain('Model usefulness')
     expect(markup).toContain('policy-derived status, no-action comparator, and simulated intervention / realized path')
+    expect(markup).toMatch(/data-proof-summary-value="proof-semester"[^>]*>Semester 6<\/div>/)
+    expect(markup).not.toMatch(/data-proof-summary-value="proof-semester"[^>]*>Semester 5<\/div>/)
+  })
+
+  it('shows an explicit unavailable state instead of hiding the strip when proof context is missing', () => {
+    const markup = renderToStaticMarkup(createElement(AcademicProofSummaryStrip, {
+      profile: null,
+      surfaceId: 'mentor-view',
+      surfaceLabel: 'Mentor View',
+    }))
+
+    expect(markup).toContain('Proof context unavailable')
+    expect(markup).toContain('This summary stays empty instead of inventing queue counts')
   })
 })
