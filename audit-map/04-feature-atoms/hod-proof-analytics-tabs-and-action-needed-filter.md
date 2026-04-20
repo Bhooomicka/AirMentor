@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: HoD proof analytics tabs and action-needed filter
+- Parent domain: HoD surface
+- Feature scope boundary: The HoD analytics page, proof hero, tabs, action-needed filter, and drilldowns into course, faculty, or student evidence. Excludes the sysadmin proof dashboard and the mentor queue.
+- Roles and role-specific variants: HoD primary; the page is read-only and tied to the current active proof run.
+- Product or user intent: Give the HoD a read-only oversight view of the same proof-backed truth that powers the teaching and admin surfaces, with an action-needed-only filter for triage.
+- Source files: [`src/pages/hod-pages.tsx`](../../src/pages/hod-pages.tsx), [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`air-mentor-api/src/modules/academic-proof-routes.ts`](../../air-mentor-api/src/modules/academic-proof-routes.ts), [`air-mentor-api/src/modules/academic.ts`](../../air-mentor-api/src/modules/academic.ts)
+- Entry points: `HodView`, proof hero controls, queue history button, and the row-level drilldown handlers.
+- Routes, deep links, query params, and restore entry states: HoD route state inside the academic workspace; the current active proof run and checkpoint context are restored from the workspace.
+- Preconditions and guard conditions: An active proof run must exist for the supervised batch; the page remains read-only.
+- Visible surfaces involved: Loading/error/no-active-proof-run states, proof hero, launcher popup, overview/courses/faculty/reassessments tabs, action-needed-only toggle, queue history button, and row-level drilldowns.
+- Hidden or conditional surfaces involved: Read-only checkpoint overlay, blocked progression state, and proof-queue items that only appear when action-needed filtering is disabled.
+- Trigger sources: Open the HoD page, toggle action-needed-only, click queue history, or open a row drilldown.
+- Atomic user actions: Inspect the proof hero, filter to action-needed items, open queue history, or drill into course/faculty/student evidence.
+- Hidden, hover-only, or keyboard-only actions: Tabs and row drilldowns are keyboard reachable; no edit controls are exposed.
+- Automatic or system actions: Load the read-only overview from the active proof run; keep the checkpoint overlay in sync with the selected proof stage; preserve the blocked-progression warning when present.
+- API and backend calls: HoD proof summary and analytics routes through the academic proof module and shared client.
+- State dependencies: Active proof run, checkpoint context, selected tab, and the action-needed filter flag.
+- Persistence dependencies: Route state and shared proof caches only.
+- Restore behavior: Returning to the HoD page restores the current active proof run and checkpoint overlay if the workspace still points at the same run.
+- Permissions and scope logic: The page is read-only and limited to the supervised batch and proof-backed scope resolved by the backend.
+- State transitions: HoD mount -> proof hero -> tab/filter change -> drilldown or queue history.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Loading, error, and no-active-proof-run states are explicit; the checkpoint overlay can become read-only/blocked when queue items remain unresolved.
+- Success path: The HoD inspects the current proof run, filters to action-needed items if desired, and opens the right course or faculty drilldown.
+- Failure and recovery paths: No active proof run keeps the page in the fallback state; the user must wait for sysadmin to activate a run or switch to a scoped batch.
+- Data read: Proof summary, active run context, checkpoint context, queue items, course/faculty/student evidence, and reassessment items.
+- Data written: Tab state, filter flag, and drilldown route state.
+- Telemetry, analytics, or audit-trail side effects: HoD oversight actions remain in the shared proof audit trail.
+- Downstream effects: The page links back into student shell, risk explorer, and faculty-profile drilldowns for the same active proof run.
+- Hidden couplings: The HoD view is coupled to the same active proof run, checkpoint selection, and scope checks used by the faculty profile and student shell.
+- Expected behavior: The HoD should get a read-only, proof-bound oversight view that can be narrowed to action-needed items without losing the proof context.
+- Implemented behavior: `HodView` renders the proof hero, tabs, action-needed filter, queue button, and drilldowns.
+- Tested behavior: [`tests/hod-pages.test.tsx`](../../tests/hod-pages.test.tsx), [`air-mentor-api/tests/hod-proof-analytics.test.ts`](../../air-mentor-api/tests/hod-proof-analytics.test.ts), [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/faculty-profile-proof.test.tsx`](../../tests/faculty-profile-proof.test.tsx).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/hod-pages.test.tsx`](../../tests/hod-pages.test.tsx), [`air-mentor-api/tests/hod-proof-analytics.test.ts`](../../air-mentor-api/tests/hod-proof-analytics.test.ts), [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/faculty-profile-proof.test.tsx`](../../tests/faculty-profile-proof.test.tsx).
+- Known gaps: No live browser pass confirmed the action-needed-only toggle or row drilldown transitions.
+- Open questions: Should the HoD page expose the queue-history button more prominently when action-needed items are present?
+- Confidence level: High

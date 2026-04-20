@@ -1,6 +1,6 @@
 import type { ApiAcademicFacultyProfile } from './api/types'
 import { T, mono, sora } from './data'
-import { describeProofAvailability, describeProofProvenance } from './proof-provenance'
+import { describeProofProvenance } from './proof-provenance'
 import { ProofSurfaceLauncher } from './proof-surface-shell'
 import { InfoBanner } from './system-admin-ui'
 import { Btn, Card, Chip } from './ui-primitives'
@@ -50,20 +50,25 @@ export function AcademicProofSummaryStrip({
           </div>
           <Chip color={T.dim}>Proof context unavailable</Chip>
         </div>
-        <InfoBanner message="No authoritative proof projection is attached to this academic surface yet. This summary stays empty instead of inventing queue counts, semester scope, or monitored students." />
+        <InfoBanner message="This page does not have a proof snapshot yet. The summary stays empty instead of guessing queue counts, semester scope, or monitored students." />
       </Card>
     )
   }
 
   const selectedCheckpoint = proofOps.selectedCheckpoint
-  const semesterMetricLabel = proofOps.scopeMode === 'proof' ? 'Proof Semester' : 'Operational Semester'
+  const semesterMetricLabel = selectedCheckpoint ? 'Selected Checkpoint' : (proofOps.scopeMode === 'proof' ? 'Preview Semester' : 'Live Semester')
   const semesterValue = selectedCheckpoint?.semesterNumber ?? proofOps.activeOperationalSemester
-  const semesterMetricValue = semesterValue != null ? `Semester ${semesterValue}` : 'Unavailable'
+  const semesterMetricValue = selectedCheckpoint
+    ? `Semester ${selectedCheckpoint.semesterNumber} · ${selectedCheckpoint.stageLabel}`
+    : semesterValue != null
+      ? `Semester ${semesterValue}`
+      : 'Unavailable'
   const highWatchCount = selectedCheckpoint?.highRiskCount ?? proofOps.monitoringQueue.filter(item => item.riskBand === 'High').length
   const openQueueCount = selectedCheckpoint?.openQueueCount ?? proofOps.monitoringQueue.length
   const monitoredStudentCount = new Set(proofOps.monitoringQueue.map(item => item.studentId)).size
   const electiveFitCount = proofOps.electiveFits.length
   const activeRunCount = proofOps.activeRunContexts.length
+  const proofModeChipLabel = proofOps.scopeMode === 'proof' ? 'Preview data' : 'Live data'
 
   return (
     <>
@@ -77,7 +82,7 @@ export function AcademicProofSummaryStrip({
           : proofOps.scopeDescriptor.label}
         popupContent={() => (
           <div style={{ display: 'grid', gap: 12 }}>
-            <InfoBanner message="This popup is bound to the same proof-scoped faculty projection used by sysadmin. Queue, monitored-student, and elective-fit counts here are authoritative for the current proof branch and semester only." />
+            <InfoBanner message="This popup uses the same proof snapshot as the full proof pages. Queue, monitored-student, and elective-fit counts stay aligned to the selected scope and stage." />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 10 }}>
               <SummaryMetric label={semesterMetricLabel} value={semesterMetricValue} />
               <SummaryMetric label="Open Queue" value={String(openQueueCount)} />
@@ -87,7 +92,7 @@ export function AcademicProofSummaryStrip({
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               <Chip color={T.accent}>{proofOps.scopeDescriptor.label}</Chip>
               <Chip color={proofOps.scopeMode === 'proof' ? T.warning : T.success}>
-                {proofOps.scopeMode === 'proof' ? 'Proof mode' : 'Operational mode'}
+                {proofModeChipLabel}
               </Chip>
               <Chip color={T.success}>{`${activeRunCount} run${activeRunCount === 1 ? '' : 's'}`}</Chip>
             </div>
@@ -117,15 +122,13 @@ export function AcademicProofSummaryStrip({
             </div>
             <div data-proof-summary-mode={proofOps.scopeMode}>
               <Chip color={proofOps.scopeMode === 'proof' ? T.warning : T.success}>
-                {proofOps.scopeMode === 'proof' ? 'Proof mode' : 'Operational mode'}
+                {proofModeChipLabel}
               </Chip>
             </div>
           </div>
         </div>
 
-        <InfoBanner message={`Authoritative ${surfaceLabel.toLowerCase()} proof context. Use these checkpoint-bound counts, model usefulness cues, and scope labels when comparing policy-derived status, no-action comparator, and simulated intervention / realized path surfaces.`} />
         <InfoBanner tone="neutral" message={describeProofProvenance(proofOps)} />
-        <InfoBanner tone="neutral" message={describeProofAvailability(proofOps)} />
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 10 }}>
           <SummaryMetric label={semesterMetricLabel} value={semesterMetricValue} />

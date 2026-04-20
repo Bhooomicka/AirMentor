@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Queue history filters and restore actions
+- Parent domain: Academic cross-role surface
+- Feature scope boundary: The queue-history page and its filters, row actions, and restore/resume controls. Excludes the live mentor queue and unlock-review page.
+- Roles and role-specific variants: Course Leader, Mentor, and HoD can all reach `queue-history`; row actions vary by current role and task scope, and `Open Unlock Review` appears only when the row carries an HoD unlock task.
+- Product or user intent: Let the user review active, resolved, or dismissed queue series and restore a hidden or completed thread when needed.
+- Source files: [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`air-mentor-api/src/modules/academic.ts`](../../air-mentor-api/src/modules/academic.ts)
+- Entry points: `QueueHistoryPage` and its row action handlers.
+- Routes, deep links, query params, and restore entry states: `queue-history` route state inside the academic workspace; no special query restore state is used here.
+- Preconditions and guard conditions: The current academic role must have access to the queue history scope.
+- Visible surfaces involved: All/active/resolved/dismissed filters, row actions, restore/resume series, open unlock-review, open student, open risk explorer, and open student shell.
+- Hidden or conditional surfaces involved: Dismissed series that are hidden from the live queue but still visible in history, plus restoreable series.
+- Trigger sources: Open queue history, change the filter, click a row action, or restore a hidden series.
+- Atomic user actions: Filter the history view; open a student; open the risk explorer; open the student shell; restore or resume a series; open unlock review.
+- Hidden, hover-only, or keyboard-only actions: Row actions are keyboard accessible; no hidden restore menu exists outside the row controls.
+- Automatic or system actions: Keep the filtered history aligned with the current queue state and return the restored series to the live queue model.
+- API and backend calls: Academic queue-history routes and shared academic client calls.
+- State dependencies: Queue history records, filter state, row action state, and the current academic scope.
+- Persistence dependencies: Backend queue history plus any restoreable series state kept by the academic model.
+- Restore behavior: Restoring or resuming a series should rehydrate the series in the live queue model while preserving the history record.
+- Permissions and scope logic: Only scoped academic users should see the history rows and restore actions that belong to their student set.
+- State transitions: Filter change -> narrowed history -> row action -> drilldown or restore.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Empty history or filter-empty state if no rows match; restore may be blocked by scope or series state.
+- Success path: The user inspects history, restores a thread if needed, or jumps into a student drilldown from history.
+- Failure and recovery paths: If restore is not allowed, the row remains visible in history and the user can continue with drilldowns instead.
+- Data read: Queue history rows, series status, student identifiers, and restoreability markers.
+- Data written: Filter state and any restore/resume mutation returned by the academic queue model.
+- Telemetry, analytics, or audit-trail side effects: Queue history and restore actions remain visible in the academic audit trail.
+- Downstream effects: Restoring a series can repopulate the mentor queue and unlock follow-on reviews.
+- Hidden couplings: The queue history uses the same queue-series identity model as the live mentor queue and unlock-review flow.
+- Expected behavior: Filters should narrow the history list, and restore actions should resurrect the selected series when permitted.
+- Implemented behavior: `QueueHistoryPage` renders the filtered history and exposes restore/resume and drilldown actions from each row.
+- Tested behavior: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts).
+- Known gaps: No browser pass confirmed the restore/resume visual feedback.
+- Open questions: Should dismissed history rows be visually distinguished from resolved rows more strongly?
+- Confidence level: Medium-high

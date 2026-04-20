@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Academic role switching and route sync
+- Parent domain: Bootstrap / academic role surface
+- Feature scope boundary: Topbar role chips, role-change state, and page correction within the academic workspace. Excludes portal selection and system-admin switching.
+- Roles and role-specific variants: Course Leader, Mentor, and HoD all use the same role-switcher shell; `SYSTEM_ADMIN` is intentionally omitted from the academic chips.
+- Product or user intent: Switch the active academic role within the current session and keep the visible page aligned with that role's allowed pages.
+- Source files: [`src/App.tsx`](../../src/App.tsx), [`src/academic-workspace-route-helpers.ts`](../../src/academic-workspace-route-helpers.ts), [`air-mentor-api/src/modules/session.ts`](../../air-mentor-api/src/modules/session.ts), [`src/academic-workspace-topbar.tsx`](../../src/academic-workspace-topbar.tsx)
+- Entry points: `handleRoleChange()`, `resolveRoleSyncState()`, `canAccessPage()`, `POST /api/session/role-context`
+- Routes, deep links, query params, and restore entry states: Internal academic workspace state, not URL path segments.
+- Preconditions and guard conditions: The current session must already contain the target role grant; the topbar must not be disabled by an in-flight switch.
+- Visible surfaces involved: Academic topbar role switcher, role-change error display, home-page reset behavior, and the action-queue badge nearby.
+- Hidden or conditional surfaces involved: `SYSTEM_ADMIN` chip suppression, invalid page self-correction, and role-change busy/disabled state.
+- Trigger sources: Click an allowed role chip; attempt to switch to an unavailable role; navigate to a page that is illegal for the current role.
+- Atomic user actions: Switch role; retry after a failed switch; click a disabled role chip; navigate into an illegal page and let the router correct it.
+- Hidden, hover-only, or keyboard-only actions: Role chips use the shared button primitive and remain keyboard-focusable; no hidden alternate role selector exists.
+- Automatic or system actions: Verify the target role is in the current session's available grants; update `sessions.activeRoleGrantId`; refresh session cookies and CSRF; clear route history; reset the page to the new role home; snap illegal role/page combinations back to the valid home page.
+- API and backend calls: `POST /api/session/role-context`.
+- State dependencies: `allowedRoles`, `role`, `initialRole`, `page`, `roleChangeBusy`, `roleChangeError`.
+- Persistence dependencies: Session row active role grant, refreshed session cookie, refreshed CSRF cookie.
+- Restore behavior: Switching roles reuses the existing session and only changes the active grant; it does not mint a new grant or portal session.
+- Permissions and scope logic: Only active grants already present in the session can be selected; the academic UI trims `SYSTEM_ADMIN` from the visible switcher.
+- State transitions: Allowed chip click -> busy -> new active grant -> role home reset; illegal route -> corrected home; failed switch -> error with old role preserved.
+- Empty, loading, stale, disabled, locked, conflict, and error states: No chips when `allowedRoles` is empty; busy state disables switching; failed remote switches keep the current role while showing an error.
+- Success path: The selected role becomes active, the route resets to that role's home, and downstream page gates recompute against the new role.
+- Failure and recovery paths: A failed remote switch leaves the current role intact; the user can retry the chip click after the error clears.
+- Data read: Active grants, visible `allowedRoles`, current role, current page.
+- Data written: `sessions.activeRoleGrantId`, route history, local UI state, telemetry.
+- Telemetry, analytics, or audit-trail side effects: Role-switch attempts are observable through the session layer and downstream audit trails.
+- Downstream effects: Changes the sidebar/nav surface, the set of supervised offerings or mentees, and the backend scope checks that the workspace will hit next.
+- Hidden couplings: The academic UI derives visible roles from the proof-scoped bootstrap snapshot, while the session source of truth keeps the broader grant set.
+- Expected behavior: Allowed role clicks move the user into that role and back to the role home page; illegal page/role combinations self-correct; invalid clicks do nothing.
+- Implemented behavior: The topbar sends a session role-context mutation, updates the active grant, and resets the workspace page if needed.
+- Tested behavior: [`air-mentor-api/tests/session.test.ts`](../../air-mentor-api/tests/session.test.ts), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts).
+- Live behavior notes: Backend tests confirm role switching is session-backed; the visible academic switcher excludes `SYSTEM_ADMIN`, which can create role drift when proof scope hides a still-active grant.
+- Known mismatches: None confirmed in this pass; the role-drift condition is an intentional consequence of proof-scoped visibility.
+- Tests covering it: [`air-mentor-api/tests/session.test.ts`](../../air-mentor-api/tests/session.test.ts), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts).
+- Known gaps: The live impact of proof-scoped bootstrap filtering on switchable grants is only partially verified.
+- Open questions: None.
+- Confidence level: High

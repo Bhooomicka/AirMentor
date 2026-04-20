@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: System-admin history archive and recycle-bin restore
+- Parent domain: System-admin history surface
+- Feature scope boundary: The archive section, recycle bin, restore actions, and recent-audit routes. Excludes proof playback and hierarchy editing.
+- Roles and role-specific variants: SYSTEM_ADMIN primary.
+- Product or user intent: Let the admin review archived or deleted state, restore items from the recycle bin, and jump to recent audits without losing context.
+- Source files: [`src/system-admin-history-workspace.tsx`](../../src/system-admin-history-workspace.tsx), [`src/system-admin-live-app.tsx`](../../src/system-admin-live-app.tsx)
+- Entry points: `SystemAdminHistoryWorkspace`, archive rows, recycle-bin rows, restore buttons, and recent-audit open-route buttons.
+- Routes, deep links, query params, and restore entry states: Admin `history` route state inside the live workspace; recycle-bin restore actions happen from the same route.
+- Preconditions and guard conditions: SYSTEM_ADMIN access is required; the archive or recycle-bin item must still exist in the current snapshot.
+- Visible surfaces involved: Archive section, recycle-bin section, restore buttons, and recent-audit open-route buttons.
+- Hidden or conditional surfaces involved: Recycle-bin items that have a 60-day restore window and archive rows that may already be deleted.
+- Trigger sources: Open history, click restore, or jump from a recent audit row.
+- Atomic user actions: Restore an item from the recycle bin or open a recent audit route.
+- Hidden, hover-only, or keyboard-only actions: Buttons and rows are keyboard reachable; no hidden restore context menu exists beyond the row controls.
+- Automatic or system actions: Keep archive and recycle-bin state in sync with the live admin snapshot and enforce the restore window.
+- API and backend calls: Live admin history state and any restore endpoints surfaced through the admin workspace.
+- State dependencies: Archive rows, recycle-bin rows, audit rows, and restore-window metadata.
+- Persistence dependencies: Live admin snapshot state and backend archive/recycle-bin records.
+- Restore behavior: Restoring an item should move it back into the live admin snapshot while preserving the audit trace.
+- Permissions and scope logic: Only SYSTEM_ADMIN can reach the archive and recycle-bin restore controls.
+- State transitions: Active item -> archived/deleted -> recycle bin -> restore.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Empty archive or recycle-bin lists are possible; expired items should remain non-restorable when the window closes.
+- Success path: The admin restores the desired item or opens the recent audit route and continues triage.
+- Failure and recovery paths: If the item is outside the restore window or missing from the current snapshot, the admin must keep it archived and use the audit route instead.
+- Data read: Archive records, recycle-bin records, restore-window metadata, and recent-audit rows.
+- Data written: Restore mutations and any admin route state used to open the recent audit target.
+- Telemetry, analytics, or audit-trail side effects: Archive and restore actions remain part of the admin audit trail.
+- Downstream effects: Restored items re-enter the live admin workspace and may reappear in top-tab or queue views.
+- Hidden couplings: The recycle-bin window is tied to the same live snapshot and route-persistence model used by the rest of the admin shell.
+- Expected behavior: The archive should allow review, the recycle bin should support restore within the window, and recent-audit links should keep the admin oriented.
+- Implemented behavior: `SystemAdminHistoryWorkspace` exposes archive rows, recycle-bin restore, and recent-audit links.
+- Tested behavior: [`tests/system-admin-live-detail.test.tsx`](../../tests/system-admin-live-detail.test.tsx), [`tests/system-admin-live-data.test.ts`](../../tests/system-admin-live-data.test.ts), [`tests/system-admin-ui.test.tsx`](../../tests/system-admin-ui.test.tsx).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/system-admin-live-detail.test.tsx`](../../tests/system-admin-live-detail.test.tsx), [`tests/system-admin-live-data.test.ts`](../../tests/system-admin-live-data.test.ts), [`tests/system-admin-ui.test.tsx`](../../tests/system-admin-ui.test.tsx).
+- Known gaps: No live browser pass confirmed the 60-day restore window copy.
+- Open questions: Should the recycle-bin view show the exact expiration date more prominently?
+- Confidence level: Medium-high

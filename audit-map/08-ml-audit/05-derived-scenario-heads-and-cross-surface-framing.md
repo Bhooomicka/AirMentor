@@ -1,0 +1,53 @@
+# Derived Scenario Heads And Cross-Surface Framing
+
+- Component name: Derived scenario heads and role-facing explanation layer
+- Type: Heuristic derivation plus UI explanation and suppression logic
+- Intent: Translate proof-risk output into role-facing scenario narratives while distinguishing trained heads from advisory derived heads and policy-derived status
+- Source files: `air-mentor-api/src/lib/proof-control-plane-tail-service.ts`, `air-mentor-api/src/modules/academic.ts`, `src/pages/risk-explorer.tsx`, `src/pages/student-shell.tsx`, `src/pages/hod-pages.tsx`, `src/system-admin-proof-dashboard-workspace.tsx`, `src/academic-proof-summary-strip.tsx`
+- Inputs:
+  - Trained or fallback overall course risk
+  - Backlog, CGPA, transfer-gap, and CO-pressure signals
+  - Head display metadata and support warnings
+  - Role-specific page context
+- Transformations:
+  - `deriveScenarioRiskHeads()` computes advisory heads for SGPA drop, CGPA drop, and elective mismatch from overall risk and pressure terms
+  - `loadProofRiskInferenceContext()` re-scores rows with active artifacts when possible and can fall back to artifact-level head display defaults
+  - Frontend surfaces choose whether to show probabilities, band-only chips, support warnings, disclaimers, and comparison framing
+- Outputs:
+  - Derived advisory heads
+  - Surface disclaimers and helper text
+  - Probability or band-only presentation
+  - Role-facing chips for evidence mode and calibration/support state
+- Thresholds and gates:
+  - Scenario heads are not independently trained and inherit advisory framing
+  - Probability display for trained heads is blocked by the calibration/support gates defined in `proof-risk-model.ts`
+  - Student shell explicitly states the surface cannot change institutional records
+- Calibration or provenance:
+  - Derived scenario heads have no independent calibration
+  - Risk explorer explicitly states that trained heads are simulation-calibrated and advisory, and that derived scenario heads are not separate trained models
+  - Academic surfaces reuse the active model through `computeRiskFromActiveModelOrPolicy()`
+- Fallback path:
+  - If inference context is sparse, surfaces can still render band-only output, fallback provenance, or artifact-level head display defaults
+  - Cross-course drivers can disappear on academic routes because those paths do not pass the same source-ref context as the proof tail service
+- Persistence and artifacts:
+  - Derived heads are runtime-only presentation outputs
+  - Underlying assessed risk rows come from `riskAssessments`
+- UI presentation surfaces:
+  - `src/pages/risk-explorer.tsx`
+  - `src/pages/student-shell.tsx`
+  - `src/pages/hod-pages.tsx`
+  - `src/system-admin-proof-dashboard-workspace.tsx`
+  - `src/academic-proof-summary-strip.tsx`
+- Evaluation evidence:
+  - Backend surface coverage in `air-mentor-api/tests/risk-explorer.test.ts`, `air-mentor-api/tests/student-agent-shell.test.ts`, and `air-mentor-api/tests/hod-proof-analytics.test.ts`
+  - Frontend rendering coverage in `tests/risk-explorer.test.tsx`, `tests/student-shell.test.tsx`, `tests/student-shell-loading.test.tsx`, `tests/hod-pages.test.ts`, and `tests/academic-proof-summary-strip.test.tsx`
+  - Backend route-level tests were blocked in this sandbox by `listen EPERM` and did not complete end-to-end
+- Reproducibility status: Medium. Local rendering logic is reproducible, but full route-level verification depends on a less restricted environment
+- Failure or misleading modes:
+  - Users can confuse derived scenario heads with independently trained outputs if they miss the disclaimer text
+  - Different role surfaces can expose different explanation depth for the same student truth
+  - Policy-derived status and simulated proof-risk framing can diverge in the user's mental model
+- Risks:
+  - Cross-surface semantic parity is not fully proven yet
+  - Dense explanation surfaces increase the chance that support warnings and advisory disclaimers are overlooked
+- Confidence: High on source-backed classification, medium on deployed parity across roles

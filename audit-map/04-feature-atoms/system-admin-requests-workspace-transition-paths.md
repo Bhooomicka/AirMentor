@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: System-admin requests workspace transition paths
+- Parent domain: System-admin requests surface
+- Feature scope boundary: The admin request list/detail workspace and the visible transition buttons for request progression. Excludes academic unlock-review and the proof dashboard.
+- Roles and role-specific variants: SYSTEM_ADMIN primary.
+- Product or user intent: Let the admin move a request through its lifecycle while keeping the request detail and note history visible.
+- Source files: [`src/system-admin-request-workspace.tsx`](../../src/system-admin-request-workspace.tsx), [`src/system-admin-live-app.tsx`](../../src/system-admin-live-app.tsx), [`air-mentor-api/src/modules/admin-requests.ts`](../../air-mentor-api/src/modules/admin-requests.ts)
+- Entry points: `SystemAdminRequestWorkspace`, the request row click handler, and the advance-request action path.
+- Routes, deep links, query params, and restore entry states: Admin `requests` route state inside the live workspace; the selected request detail is preserved inside the current snapshot.
+- Preconditions and guard conditions: SYSTEM_ADMIN access is required; a request must be selected before the transition buttons appear.
+- Visible surfaces involved: Request list, request detail, status chips, note history, and the visible status-driven buttons.
+- Hidden or conditional surfaces involved: Hidden backend states and transitions for `Needs Info` and `Rejected` that are not exposed as direct buttons in the current UI.
+- Trigger sources: Open a request row, click the visible transition button, or add a note in the request detail.
+- Atomic user actions: Take review, approve, mark implemented, close, and inspect note history.
+- Hidden, hover-only, or keyboard-only actions: Buttons and rows are keyboard reachable; no hidden admin menu exposes the missing transitions.
+- Automatic or system actions: Advance the request through the current status-driven path and keep the detail pane synchronized with the selection.
+- API and backend calls: Admin request list/detail/advance routes and note helpers from `air-mentor-api/src/modules/admin-requests.ts`.
+- State dependencies: Selected request, request status, request version, note history, and the current admin workspace snapshot.
+- Persistence dependencies: Backend request state and any session-backed admin snapshot storage.
+- Restore behavior: Returning to the requests route restores the selected request detail if the workspace snapshot still matches.
+- Permissions and scope logic: The workspace only renders for SYSTEM_ADMIN; request mutations require the selected request version to remain current.
+- State transitions: New -> In Review -> Approved -> Implemented -> Closed in the visible UI; backend also supports New/In Review/Needs Info/Rejected/Approved/Implemented/Closed.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Empty request lists can occur; stale version or locked state should block mutation; `Needs Info` and `Rejected` are backend-capable but currently not direct UI targets.
+- Success path: The admin opens a request, advances it through the visible path, and closes it when complete.
+- Failure and recovery paths: If the request version is stale or the selected row changes, the user must reload the row before mutating again.
+- Data read: Request list, request detail, status, note history, and version metadata.
+- Data written: Request status, notes, and audit metadata on each transition.
+- Telemetry, analytics, or audit-trail side effects: Request lifecycle transitions are recorded in the admin audit trail.
+- Downstream effects: Request transitions can expose the implemented change, close the request, or leave it waiting for additional evidence.
+- Hidden couplings: The UI-path mismatch for `Needs Info` and `Rejected` is already recorded in `C-006`; the backend and live workspace do not currently expose the same transition surface.
+- Expected behavior: The request workspace should let the admin move requests through their lifecycle and should make every backend-supported transition reachable.
+- Implemented behavior: The current UI exposes `Take Review` / `Approve` / `Mark Implemented` / `Close`, while the backend keeps the broader status machine.
+- Tested behavior: [`tests/system-admin-live-data.test.ts`](../../tests/system-admin-live-data.test.ts), [`tests/system-admin-live-form-submit.test.tsx`](../../tests/system-admin-live-form-submit.test.tsx), [`air-mentor-api/tests/admin-foundation.test.ts`](../../air-mentor-api/tests/admin-foundation.test.ts), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts).
+- Live behavior notes: The UI/backend transition mismatch is still live and recorded as `C-006`.
+- Known mismatches: `C-006` is still open; the visible sysadmin request workspace omits `Needs Info` and `Rejected` buttons even though the backend accepts those transitions.
+- Tests covering it: [`tests/system-admin-live-data.test.ts`](../../tests/system-admin-live-data.test.ts), [`tests/system-admin-live-form-submit.test.tsx`](../../tests/system-admin-live-form-submit.test.tsx), [`air-mentor-api/tests/admin-foundation.test.ts`](../../air-mentor-api/tests/admin-foundation.test.ts), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts).
+- Known gaps: No browser pass in this run confirmed whether the missing transition buttons are intentional simplifications or accidental omissions.
+- Open questions: Should the workspace surface `Needs Info` and `Rejected` as explicit transition buttons, or keep them hidden behind a different admin action?
+- Confidence level: High

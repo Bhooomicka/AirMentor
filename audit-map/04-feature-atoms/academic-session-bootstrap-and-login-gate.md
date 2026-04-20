@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Academic session bootstrap and login gate
+- Parent domain: Bootstrap / academic portal
+- Feature scope boundary: Session restore, login, logout, and workspace gating before academic content renders. Excludes page-specific academic workspace interactions.
+- Roles and role-specific variants: Public user sees restore/login; Course Leader, Mentor, and HoD see the same gate but different post-login workspaces.
+- Product or user intent: Restore an existing academic session when possible, otherwise present a live login surface, and only render the workspace after the session and bootstrap snapshot are both ready.
+- Source files: [`src/App.tsx`](../../src/App.tsx), [`src/academic-session-shell.tsx`](../../src/academic-session-shell.tsx), [`src/api/client.ts`](../../src/api/client.ts), [`air-mentor-api/src/modules/session.ts`](../../air-mentor-api/src/modules/session.ts)
+- Entry points: `OperationalApp`, `AcademicSessionBoundary`, `restoreRemoteSession()`, `loginRemoteSession()`, `listAcademicLoginFaculty()`
+- Routes, deep links, query params, and restore entry states: `#/app` and the internal academic workspace pages that mount after auth; no dedicated query restore state on the gate itself.
+- Preconditions and guard conditions: `VITE_AIRMENTOR_API_BASE_URL` must be configured for live backend access; a valid faculty session is required before the workspace is revealed.
+- Visible surfaces involved: Restoring-session fallback, backend-unavailable card, academic login form, inline error notices.
+- Hidden or conditional surfaces involved: Selected-faculty preview in the login page, session restore spinner/fallback, and the post-login workspace gate.
+- Trigger sources: Academic-portal mount, session restoration completion, login submit, retry after failure, and logout.
+- Atomic user actions: Open the academic portal; wait for restore; enter credentials; retry after a failed login; sign out.
+- Hidden, hover-only, or keyboard-only actions: Standard form focus/submit works; no extra hidden controls beyond the shared button/input primitives.
+- Automatic or system actions: Fetch public faculty options and restore the session in parallel; hydrate the login selector; restore cookies and CSRF tokens; fetch the bootstrap snapshot after a valid session; keep the workspace hidden until both session and bootstrap are ready; emit auth/session telemetry.
+- API and backend calls: `GET /api/academic/public/faculty`, `GET /api/session`, `POST /api/session/login`, `DELETE /api/session`.
+- State dependencies: `apiBaseUrl`, `remoteSessionRepositories`, `booting`, `authBusy`, `authError`, `remoteSession`, `workspaceProjection`.
+- Persistence dependencies: Session cookie, CSRF cookie, UI theme preference, selected-faculty identity in local storage.
+- Restore behavior: Session restore can preserve cookies and a cached remote session, but the workspace remains hidden until the bootstrap fetch succeeds.
+- Permissions and scope logic: The academic workspace stays locked until the backend is reachable, a faculty session exists, and the restored role maps to a known academic role.
+- State transitions: Booting -> unavailable, login, or workspace; failed login -> inline error; logout -> gate; bootstrap failure -> hidden workspace with cached session retained.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Backend-unavailable state when `VITE_AIRMENTOR_API_BASE_URL` is absent; restoring fallback while session loads; inline login validation; external error text when restore or bootstrap fails.
+- Success path: Restore or login succeeds, bootstrap resolves, and the academic workspace mounts.
+- Failure and recovery paths: Login failure leaves the gate open with an error; bootstrap failure blocks the workspace but can be retried manually; logout clears the session.
+- Data read: Public faculty list, session cookie, active role grant, proof-playback selection, theme preference.
+- Data written: Session cookie/CSRF, remote session state, auth telemetry, proof-playback notice, login faculty cache.
+- Telemetry, analytics, or audit-trail side effects: Auth restore, login, and failure events are emitted by the session layer.
+- Downstream effects: Seeds `workspaceProjection`, unlocks `OperationalWorkspace`, and supplies the faculty list used by the login selector.
+- Hidden couplings: Session restore is coupled to a successful bootstrap fetch; if bootstrap fails, the restored session can remain cached while the workspace stays hidden.
+- Expected behavior: Missing backend config shows the unavailable state; no session shows the login form; restore or login leads to the workspace only after bootstrap data is available.
+- Implemented behavior: The gate fetches faculty and session together, restores cookies/CSRF, and blocks the workspace until the academic bootstrap resolves.
+- Tested behavior: [`air-mentor-api/tests/session.test.ts`](../../air-mentor-api/tests/session.test.ts), [`air-mentor-api/tests/http-smoke.test.ts`](../../air-mentor-api/tests/http-smoke.test.ts), [`air-mentor-api/tests/academic-bootstrap-routes.test.ts`](../../air-mentor-api/tests/academic-bootstrap-routes.test.ts).
+- Live behavior notes: The Pages root is reachable, but the Railway `/health` drift recorded in `C-001` means the live backend gate was not browser-replayed in this pass.
+- Known mismatches: None confirmed beyond the existing live backend drift.
+- Tests covering it: [`air-mentor-api/tests/session.test.ts`](../../air-mentor-api/tests/session.test.ts), [`air-mentor-api/tests/http-smoke.test.ts`](../../air-mentor-api/tests/http-smoke.test.ts), [`air-mentor-api/tests/academic-bootstrap-routes.test.ts`](../../air-mentor-api/tests/academic-bootstrap-routes.test.ts).
+- Known gaps: No single browser E2E currently exercises restore -> login -> bootstrap -> workspace render in one flow.
+- Open questions: Should repeated bootstrap failures force a logout, or should the restored session remain cached for manual retry?
+- Confidence level: High

@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Mentee detail history and contact actions
+- Parent domain: Academic mentor surface
+- Feature scope boundary: The student detail page opened from mentor, HoD, or queue surfaces, including contact actions and the student history view. Excludes the mentor queue and queue-history list themselves.
+- Roles and role-specific variants: Mentor primary, with HoD and course-leader drilldowns allowed when their scope rules permit access.
+- Product or user intent: Let the user inspect one student's risk history, contact information, and intervention timeline without leaving the proof-backed student context.
+- Source files: [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`air-mentor-api/src/modules/academic-proof-routes.ts`](../../air-mentor-api/src/modules/academic-proof-routes.ts), [`air-mentor-api/src/modules/academic.ts`](../../air-mentor-api/src/modules/academic.ts)
+- Entry points: `MenteeDetailPage` and the student detail navigation handlers.
+- Routes, deep links, query params, and restore entry states: Student detail route inside the academic workspace; history and shell drilldowns can be reopened from mentor or queue history.
+- Preconditions and guard conditions: A student must be in scope for the active role and proof run.
+- Visible surfaces involved: No-history empty state, copy-phone action, View Student History, Risk Explorer, Student Shell, risk cards, CGPA cards, and intervention timeline.
+- Hidden or conditional surfaces involved: Empty-history fallback, timeline items that only appear once the student has persisted history, and contact actions that may be unavailable if the row is missing contact data.
+- Trigger sources: Open a student from the mentor queue, queue history, or a related drilldown surface.
+- Atomic user actions: Copy a phone number, open student history, open risk explorer, open the student shell, and inspect the intervention timeline.
+- Hidden, hover-only, or keyboard-only actions: The contact and drilldown buttons are keyboard reachable; no hidden edit surface is exposed here.
+- Automatic or system actions: Load the student's proof-backed history, risk summary, and intervention timeline for the active role scope.
+- API and backend calls: Academic proof routes for student history and shell context, plus the shared academic client.
+- State dependencies: Selected student ID, active proof run, contact history, risk summary, and intervention records.
+- Persistence dependencies: None beyond route state and shared academic client caches.
+- Restore behavior: Reopening the page through a drilldown restores the same student context if the active proof run still matches the selected student.
+- Permissions and scope logic: Access is limited by the same proof-backed role-scope checks that govern mentor and HoD drilldowns.
+- State transitions: Student selected -> history/contact view -> risk or shell drilldown -> return.
+- Empty, loading, stale, disabled, locked, conflict, and error states: The no-history empty state is explicit; other load failures are inherited from the shared academic route gate.
+- Success path: The user inspects the student's history and launches the desired follow-on surface or contact action.
+- Failure and recovery paths: Missing student history keeps the page in the empty-state shell; drilldown access failures should fall back through the parent scope gate.
+- Data read: Student identity, contact data, risk history, intervention timeline, and proof-backed summary cards.
+- Data written: Clipboard writes for copied phone numbers and route state for drilldown navigation.
+- Telemetry, analytics, or audit-trail side effects: Student drilldowns continue through the shared academic audit trail.
+- Downstream effects: Opens the risk explorer or student shell for the same student context.
+- Hidden couplings: The history/timeline view is coupled to the same active proof run and student-scope checks used by the mentor queue and HoD analytics.
+- Expected behavior: A scoped student should show history, contact, and follow-on drilldowns without requiring the user to leave the student page.
+- Implemented behavior: `MenteeDetailPage` renders the history empty state, contact action, and drilldown links.
+- Tested behavior: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/risk-explorer.test.tsx`](../../tests/risk-explorer.test.tsx), [`tests/student-shell.test.tsx`](../../tests/student-shell.test.tsx), [`air-mentor-api/tests/academic-proof-routes.test.ts`](../../air-mentor-api/tests/academic-proof-routes.test.ts).
+- Live behavior notes: Not browser-replayed in this pass; access is inferred from the current frontend and backend proof-route coverage.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/risk-explorer.test.tsx`](../../tests/risk-explorer.test.tsx), [`tests/student-shell.test.tsx`](../../tests/student-shell.test.tsx), [`air-mentor-api/tests/academic-proof-routes.test.ts`](../../air-mentor-api/tests/academic-proof-routes.test.ts).
+- Known gaps: No live browser pass confirmed the copy-phone action or the exact no-history messaging.
+- Open questions: Should the student-history page expose a stronger breadcrumb back to the originating queue item?
+- Confidence level: High

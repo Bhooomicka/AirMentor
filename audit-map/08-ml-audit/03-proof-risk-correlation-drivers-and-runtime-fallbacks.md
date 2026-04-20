@@ -1,0 +1,52 @@
+# Proof Risk Correlation Drivers And Runtime Fallbacks
+
+- Component name: Correlation-driver augmentation and fallback-simulated provenance path
+- Type: Deterministic correlation artifact plus runtime fallback synthesis
+- Intent: Add cross-course explanatory cues to proof-risk output and preserve serving when stage evidence, graph history, or governed source refs are missing
+- Source files: `air-mentor-api/src/lib/proof-risk-model.ts`, `air-mentor-api/src/lib/msruas-proof-control-plane.ts`, `air-mentor-api/src/lib/proof-control-plane-runtime-service.ts`, `air-mentor-api/src/lib/proof-control-plane-tail-service.ts`
+- Inputs:
+  - Governed training rows with prerequisite and weak-outcome evidence
+  - Runtime checkpoint or active-run source refs
+  - Course prerequisite summary and graph/history completeness indicators
+- Transformations:
+  - `buildObservableRiskCorrelations()` builds artifact `observable-risk-correlations-v4` from train rows only
+  - Correlation extraction keeps weak CO and weak question associations plus top prerequisite edges with support `>=25`
+  - `crossCourseDriversFromCorrelations()` emits explanatory strings only when the current course has a mapped weak prerequisite
+  - `recomputeActiveProofAssessmentsForBatch()` synthesizes `fallbackSourceRefs` with `coEvidenceMode: fallback-simulated` when stage evidence is missing and still scores through the active artifact path
+- Outputs:
+  - `crossCourseDrivers`
+  - `sourceRefs` with provenance chips such as `fallback-simulated`, `synthetic-blueprint`, `rubric-derived`
+  - Feature completeness and provenance summaries for prerequisite context
+- Thresholds and gates:
+  - Correlation edges require support `>=25`
+  - Top 16 prerequisite correlations retained
+  - Emission is gated by current-course weak prerequisite presence
+  - Runtime fallback synthesis occurs when stage evidence or graph-aware history cannot be loaded
+- Calibration or provenance:
+  - Not a trained predictive model; this is deterministic artifact extraction from the governed corpus
+  - Provenance quality is explicitly tracked through `sourceRefs`, `featureCompleteness`, and `featureProvenance`
+- Fallback path:
+  - If runtime evidence is incomplete, fallback source refs are synthesized instead of aborting scoring
+  - Academic surfaces can score with active production artifact but without `sourceRefs` and correlation context, which removes cross-course driver output
+- Persistence and artifacts:
+  - Correlation artifact stored in `riskModelArtifacts`
+  - Snapshot provenance stored in `riskEvidenceSnapshots`
+  - Served assessments persisted in `riskAssessments`
+- UI presentation surfaces:
+  - `src/system-admin-proof-dashboard-workspace.tsx`
+  - `src/pages/risk-explorer.tsx`
+  - `src/pages/student-shell.tsx`
+  - `src/pages/hod-pages.tsx`
+  - `src/system-admin-faculties-workspace.tsx`
+- Evaluation evidence:
+  - Logic covered indirectly by `air-mentor-api/tests/proof-risk-model.test.ts` and `air-mentor-api/tests/proof-control-plane-dashboard-service.test.ts`
+  - UI provenance rendering covered by `tests/system-admin-proof-dashboard-workspace.test.tsx`, `tests/risk-explorer.test.tsx`, `tests/student-shell.test.tsx`, and `tests/faculty-profile-proof.test.tsx`
+- Reproducibility status: Medium. Code paths are stable, but fresh active recompute and live fallback-frequency measurements were not reproduced in this pass
+- Failure or misleading modes:
+  - Rows can look model-backed while the underlying source provenance is `fallback-simulated`
+  - Cross-course drivers are explanatory associations, not causal proof
+  - Different surfaces can present the same student truth with different explanation richness because some paths omit source refs and correlations
+- Risks:
+  - Hidden provenance downgrades can weaken semantic trust while preserving a confident-looking UI
+  - Same-student cross-surface divergence remains a high-priority live-verification target
+- Confidence: High on implementation behavior, medium on live frequency and user interpretation

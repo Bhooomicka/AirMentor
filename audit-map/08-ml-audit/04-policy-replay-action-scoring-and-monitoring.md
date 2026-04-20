@@ -1,0 +1,57 @@
+# Policy Replay Action Scoring And Monitoring
+
+- Component name: Policy phenotypes, action scoring, queue governance, and monitoring rules
+- Type: Deterministic heuristics and ranking
+- Intent: Convert assessed risk into action recommendations, counterfactual comparisons, queue ordering, and follow-up monitoring without claiming separate trained models
+- Source files: `air-mentor-api/src/lib/proof-control-plane-playback-service.ts`, `air-mentor-api/src/lib/proof-queue-governance.ts`, `air-mentor-api/src/lib/monitoring-engine.ts`, `air-mentor-api/src/lib/proof-control-plane-policy-service.ts`
+- Inputs:
+  - Current assessed risk band and drivers
+  - No-action comparison state
+  - Stage information, faculty budget, section caps, and open/watch eligibility
+  - Outcome and replay support counts
+- Transformations:
+  - `classifyPolicyPhenotype()` assigns one phenotype from deterministic rules
+  - `buildActionPolicyComparison()` scores actions by handcrafted utility, benefit, penalty, and capacity costs
+  - `buildNoActionSnapshot()` computes a deterministic counterfactual path
+  - `rankProofQueueCandidates()` lexicographically ranks candidates by band weight, utility, lift, risk, and capacity
+  - `buildMonitoringDecision()` sets alert/watch/suppress states with due dates and cooldowns
+  - `proof-control-plane-policy-service.ts` suppresses efficacy claims when replay support is too sparse
+- Outputs:
+  - Action ranking and recommended action
+  - No-action comparator
+  - Queue priority ordering
+  - Monitoring state and follow-up timing
+  - Support warnings for sparse replay evidence
+- Thresholds and gates:
+  - Medium-risk actionable lift must be `>=5`
+  - High-risk actionable lift must be `>=2`
+  - `pre-tt1` stage is observation-only
+  - `post-see` permits a higher cap
+  - Monitoring defaults: high `alert` due `+3d` cooldown `+7d`, medium `watch` due `+7d` cooldown `+10d`, low `suppress` due `+14d` cooldown `+14d`
+- Calibration or provenance: No learned calibration. Utility weights, phenotypes, lift gates, and cooldowns are deterministic policy heuristics
+- Fallback path:
+  - When replay support is sparse, policy notes suppress teacher-facing efficacy claims rather than fabricating confidence
+  - Queue governance can still rank by deterministic criteria even if richer replay semantics are weak
+- Persistence and artifacts:
+  - Produced through proof-control-plane runtime and dashboard payloads
+  - No separate trained artifact family
+  - Diagnostics are attached to proof-risk evaluation JSON and dashboard outputs
+- UI presentation surfaces:
+  - `src/system-admin-proof-dashboard-workspace.tsx`
+  - `src/pages/student-shell.tsx`
+  - `src/pages/hod-pages.tsx`
+  - `src/pages/risk-explorer.tsx`
+- Evaluation evidence:
+  - `air-mentor-api/tests/policy-phenotypes.test.ts`
+  - `air-mentor-api/tests/proof-queue-governance.test.ts`
+  - `air-mentor-api/tests/proof-control-plane-dashboard-service.test.ts`
+  - `tests/student-shell.test.tsx`, `tests/hod-pages.test.ts`, `tests/risk-explorer.test.tsx`
+- Reproducibility status: High for code-path reproduction, medium for semantic validity because utility and phenotype policies are hand-authored and only partially tied to explicit held-out replay evidence
+- Failure or misleading modes:
+  - Ranked actions can be mistaken for model recommendations rather than policy heuristics
+  - Sparse replay evidence can still leave a strong-looking queue order if support notes are missed
+  - Counterfactual no-action snapshots are simulated, not observed outcomes
+- Risks:
+  - Heuristic action ranking may appear more statistically grounded than it is
+  - Section and faculty budget gates can dominate queue output and obscure underlying risk semantics
+- Confidence: High on code behavior and rule classification

@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: System-admin action queue hide, restore, and reminder controls
+- Parent domain: System-admin shell
+- Feature scope boundary: The admin action queue and its hidden-item controls, restore-all action, and quick reminder entry. Excludes the request workspace and proof dashboard.
+- Roles and role-specific variants: SYSTEM_ADMIN primary.
+- Product or user intent: Let the admin triage queue items, hide the ones that are not immediately useful, and restore them when the queue should be reconsidered.
+- Source files: [`src/system-admin-live-app.tsx`](../../src/system-admin-live-app.tsx), [`src/system-admin-ui.tsx`](../../src/system-admin-ui.tsx)
+- Entry points: Queue-item row controls, restore-all hidden items control, and quick-add reminder action.
+- Routes, deep links, query params, and restore entry states: Admin queue state inside the live app; hidden items are restored inside the same workspace session.
+- Preconditions and guard conditions: The admin shell must be active and the queue must contain at least one item.
+- Visible surfaces involved: Queue rows, hide/dismiss controls, restore-all control, and quick reminder affordance.
+- Hidden or conditional surfaces involved: Hidden queue items, badge counts, and reminder rows that appear only after the quick-add action.
+- Trigger sources: Dismiss a queue row, restore all hidden rows, or add a reminder from the queue.
+- Atomic user actions: Hide a queue item, restore hidden items, or add a reminder.
+- Hidden, hover-only, or keyboard-only actions: Queue buttons are keyboard reachable; the hide/restore behavior follows the shared button primitive.
+- Automatic or system actions: Remove dismissed items from the visible queue, preserve them in a hidden state, and rehydrate them when restore-all is clicked.
+- API and backend calls: Admin queue state is managed through the live admin workspace and its shared backend state.
+- State dependencies: Queue items, hidden queue items, reminder rows, and badge counts.
+- Persistence dependencies: Live admin workspace state and any session-backed queue storage.
+- Restore behavior: Restore-all should bring hidden items back into the visible queue without losing their row identity.
+- Permissions and scope logic: Only the SYSTEM_ADMIN workspace should expose these controls.
+- State transitions: Visible row -> hidden state -> restored row; quick reminder -> reminder row.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Empty queue and empty reminder sets are possible; hidden-state controls should be disabled only when there is nothing to restore.
+- Success path: The admin hides noisy queue items, restores them when needed, and optionally seeds a reminder.
+- Failure and recovery paths: If a row cannot be restored, the queue should keep the row hidden rather than corrupting the visible list.
+- Data read: Queue items, hidden-item list, reminder state, and badge counts.
+- Data written: Queue visibility state and reminder rows.
+- Telemetry, analytics, or audit-trail side effects: Queue actions remain part of the admin audit trail.
+- Downstream effects: Queue hygiene affects what is visible in the admin overview and proof-related triage surfaces.
+- Hidden couplings: Queue restore depends on the same session-backed state model as admin search and route persistence.
+- Expected behavior: Hidden queue items should stay out of the way until the admin restores them, and reminders should remain visible as separate triage items.
+- Implemented behavior: The live admin shell exposes dismiss, restore-all, and quick-reminder behavior in the queue surface.
+- Tested behavior: [`tests/system-admin-action-queue.test.ts`](../../tests/system-admin-action-queue.test.ts), [`tests/system-admin-live-data.test.ts`](../../tests/system-admin-live-data.test.ts), [`tests/system-admin-live-acceptance.mjs`](../../tests/system-admin-live-acceptance.mjs).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/system-admin-action-queue.test.ts`](../../tests/system-admin-action-queue.test.ts), [`tests/system-admin-live-data.test.ts`](../../tests/system-admin-live-data.test.ts), [`tests/system-admin-live-acceptance.mjs`](../../tests/system-admin-live-acceptance.mjs).
+- Known gaps: No live browser pass confirmed the restore-all and reminder sequences.
+- Open questions: Should hidden queue items carry a distinct archived label rather than reusing the generic hidden state?
+- Confidence level: Medium-high

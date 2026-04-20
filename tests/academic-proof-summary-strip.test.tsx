@@ -5,7 +5,7 @@ import type { ApiAcademicFacultyProfile } from '../src/api/types'
 import { AcademicProofSummaryStrip } from '../src/academic-proof-summary-strip'
 
 describe('AcademicProofSummaryStrip', () => {
-  it('renders proof-semester wording and model usefulness guidance for proof scopes', () => {
+  it('renders checkpoint wording and plain-language proof guidance for proof scopes', () => {
     const markup = renderToStaticMarkup(createElement(AcademicProofSummaryStrip, {
       profile: {
         proofOperations: {
@@ -71,11 +71,12 @@ describe('AcademicProofSummaryStrip', () => {
     expect(markup).toContain('data-proof-summary-mode="proof"')
     expect(markup).toContain('data-proof-launcher="floating"')
     expect(markup).toContain('data-proof-launcher-mode="popup-capable"')
-    expect(markup).toContain('Proof Semester')
-    expect(markup).toContain('Model usefulness')
-    expect(markup).toContain('policy-derived status, no-action comparator, and simulated intervention / realized path')
-    expect(markup).toMatch(/data-proof-summary-value="proof-semester"[^>]*>Semester 6<\/div>/)
-    expect(markup).not.toMatch(/data-proof-summary-value="proof-semester"[^>]*>Semester 5<\/div>/)
+    expect(markup).toContain('Selected Checkpoint')
+    expect(markup).toContain('Preview data')
+    expect(markup).toContain('You are viewing a saved preview checkpoint')
+    expect(markup).toContain('Every number on this page is fixed to this point in time')
+    expect(markup).toMatch(/data-proof-summary-value="selected-checkpoint"[^>]*>Semester 6 · Semester Close<\/div>/)
+    expect(markup).not.toMatch(/data-proof-summary-value="selected-checkpoint"[^>]*>Semester 5<\/div>/)
   })
 
   it('shows an explicit unavailable state instead of hiding the strip when proof context is missing', () => {
@@ -86,6 +87,6 @@ describe('AcademicProofSummaryStrip', () => {
     }))
 
     expect(markup).toContain('Proof context unavailable')
-    expect(markup).toContain('This summary stays empty instead of inventing queue counts')
+    expect(markup).toContain('The summary stays empty instead of guessing queue counts')
   })
 })

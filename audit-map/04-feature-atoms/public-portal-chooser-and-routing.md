@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Public portal chooser and hash routing
+- Parent domain: Bootstrap / portal entry
+- Feature scope boundary: Root chooser, portal hash normalization, theme persistence, and workspace-hint clearing only. Excludes authenticated workspace behavior after entry.
+- Roles and role-specific variants: Public visitor chooses a portal; returning academic or sysadmin users may land here on exit or manual navigation.
+- Product or user intent: Split the app into academic and system-admin portals from a neutral entry point and keep the selection stable across reloads and exits.
+- Source files: [`src/App.tsx`](../../src/App.tsx), [`src/portal-entry.tsx`](../../src/portal-entry.tsx), [`src/portal-routing.ts`](../../src/portal-routing.ts)
+- Entry points: `PortalRouterApp`, `PortalEntryScreen`, `resolvePortalRoute()`, `navigateToPortal()`, `clearPortalWorkspaceHints()`
+- Routes, deep links, query params, and restore entry states: `#/`, `#/app`, `#/admin`; no query-driven restore state on this screen.
+- Preconditions and guard conditions: `window` must exist for live hash/theme persistence; the chooser is shown before any portal-specific auth boundary.
+- Visible surfaces involved: Academic portal card, system-admin portal card, theme toggle.
+- Hidden or conditional surfaces involved: Portal-hint clearing on exit, hash normalization on mount, and default-theme fallback when `window` is unavailable.
+- Trigger sources: Initial load, hash change, portal-card click, theme-toggle click, and portal exit from either workspace.
+- Atomic user actions: Open the root chooser; switch theme; choose academic; choose sysadmin.
+- Hidden, hover-only, or keyboard-only actions: Card focus/hover states follow the shared button primitive; no special hidden control is exposed here.
+- Automatic or system actions: Normalize the current hash into `home`, `app`, or `admin`; persist theme mode; clear remembered workspace hints; mount the matching portal shell.
+- API and backend calls: None.
+- State dependencies: `window.location.hash`, local theme mode, and remembered workspace hint keys.
+- Persistence dependencies: `AIRMENTOR_STORAGE_KEYS.themeMode`, `AIRMENTOR_STORAGE_KEYS.currentFacultyId`, `AIRMENTOR_STORAGE_KEYS.currentAdminFacultyId`.
+- Restore behavior: Reloading at `#/app` or `#/admin` re-enters the same portal bucket; leaving a portal clears the opposite portal's remembered workspace hint.
+- Permissions and scope logic: None at chooser level; the selected portal determines the next auth boundary.
+- State transitions: `#/` -> portal chooser; chooser -> academic/admin shell; portal exit -> chooser with stale hints cleared.
+- Empty, loading, stale, disabled, locked, conflict, and error states: No remote loading state; SSR or `window` absence falls back to normalized theme defaults; no explicit chooser error UI.
+- Success path: Visitor chooses a portal and lands in the matching shell with the remembered workspace hints cleared.
+- Failure and recovery paths: If the hash is malformed, route normalization falls back to the nearest valid portal bucket; there is no remote retry path here.
+- Data read: Hash route, theme mode, portal-hint keys.
+- Data written: Hash route, theme mode, cleared workspace hints.
+- Telemetry, analytics, or audit-trail side effects: No dedicated telemetry in this surface.
+- Downstream effects: Enters `OperationalApp` or `SystemAdminApp` and prevents stale faculty identifiers from leaking across portal boundaries.
+- Hidden couplings: Portal exit and workspace reset both depend on the shared localStorage keys in `repositories`.
+- Expected behavior: The chooser always renders both portal cards; `#/app` resolves to the academic shell; `#/admin` resolves to the sysadmin shell.
+- Implemented behavior: The chooser normalizes the hash, persists the theme, and clears cross-portal workspace hints before navigation.
+- Tested behavior: [`tests/portal-routing.test.ts`](../../tests/portal-routing.test.ts).
+- Live behavior notes: The Pages root is live and this is the first split before any backend auth; card-click behavior was not browser-replayed in this pass.
+- Known mismatches: None confirmed for this atom in this pass.
+- Tests covering it: [`tests/portal-routing.test.ts`](../../tests/portal-routing.test.ts).
+- Known gaps: No dedicated browser E2E yet exercises the actual card clicks or theme persistence.
+- Open questions: None.
+- Confidence level: High

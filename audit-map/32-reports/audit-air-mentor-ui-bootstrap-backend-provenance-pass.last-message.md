@@ -1,0 +1,13 @@
+The `backend-provenance-pass` is persisted and locally closed in [backend-provenance-map.md](/home/raed/projects/air-mentor-ui/audit-map/13-backend-provenance/backend-provenance-map.md), with matching updates in [data-flow-map.md](/home/raed/projects/air-mentor-ui/audit-map/15-final-maps/data-flow-map.md), [state-flow-map.md](/home/raed/projects/air-mentor-ui/audit-map/15-final-maps/state-flow-map.md), [dependency-graph.md](/home/raed/projects/air-mentor-ui/audit-map/15-final-maps/dependency-graph.md), [master-system-map.md](/home/raed/projects/air-mentor-ui/audit-map/15-final-maps/master-system-map.md), [coverage-ledger.md](/home/raed/projects/air-mentor-ui/audit-map/23-coverage/coverage-ledger.md), and the pass status/checkpoint/last-message artifacts.
+
+Key local findings:
+- `seedIntoDatabase(...)` is a destructive reset-and-replay boundary, not an additive seed path.
+- Proof-run completion lineage is now explicit: queued `simulation_runs` row -> lease claim/heartbeat -> `startProofSimulationRun(...)` -> seeded/live finalization -> optional activation -> `publishOperationalProjection(...)`.
+- No separate out-of-process worker or cron consumer was found locally; remaining uncertainty is deployed worker liveness, not local ownership.
+- `rebuildSimulationStagePlayback(...)` resets only checkpoint-scoped artifacts, while `recomputeObservedOnlyRisk(...)` can fall back to `fallback-simulated` evidence when checkpoint-stage evidence is incomplete.
+- `rebuildProofRiskArtifacts(...)` is batch-scoped governed-corpus regeneration, not per-run-only retraining.
+- Faculty, HoD, and student proof slices can be checkpoint-backed while still labeled `countSource=proof-run` when activated-semester context diverges or active-risk rows are absent.
+
+I also reconciled stale audit memory: [known-facts.md](/home/raed/projects/air-mentor-ui/audit-map/24-agent-memory/known-facts.md), [known-ambiguities.md](/home/raed/projects/air-mentor-ui/audit-map/24-agent-memory/known-ambiguities.md), [stale-findings-watchlist.md](/home/raed/projects/air-mentor-ui/audit-map/24-agent-memory/stale-findings-watchlist.md), and [reconciliation-log.md](/home/raed/projects/air-mentor-ui/audit-map/14-reconciliation/reconciliation-log.md). No new contradiction was added, so `contradiction-matrix.md` was not changed. No live verification or tests ran in this pass.
+
+Next pass should be `same-student-cross-surface-parity-pass`, then credentialed `live-behavior-pass`.
