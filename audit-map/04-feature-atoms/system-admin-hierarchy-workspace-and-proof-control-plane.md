@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: System-admin hierarchy workspace and proof control plane
+- Parent domain: System-admin hierarchy surface
+- Feature scope boundary: The faculty/department/branch/batch/course hierarchy navigator, edit forms, curriculum bindings, and proof-control-plane provenance banners. Excludes the standalone proof dashboard and history workspace.
+- Roles and role-specific variants: SYSTEM_ADMIN primary.
+- Product or user intent: Let the admin navigate the institutional hierarchy, edit controlled entities, and bind curriculum/proof metadata without losing the current rail context.
+- Source files: [`src/system-admin-faculties-workspace.tsx`](../../src/system-admin-faculties-workspace.tsx), [`src/system-admin-live-app.tsx`](../../src/system-admin-live-app.tsx), [`air-mentor-api/src/modules/admin-control-plane.ts`](../../air-mentor-api/src/modules/admin-control-plane.ts)
+- Entry points: `SystemAdminFacultiesWorkspace`, hierarchy navigator handlers, add/edit modal handlers, and curriculum-binding controls.
+- Routes, deep links, query params, and restore entry states: Admin `faculties` route state inside the live workspace; selected hierarchy context is preserved in the current snapshot.
+- Preconditions and guard conditions: SYSTEM_ADMIN access is required; the selected faculty/department/branch/batch/course must exist in the current snapshot.
+- Visible surfaces involved: Restore notice, sticky tabs, proof-dashboard card, canonical proof batch banner, hierarchy navigator, add faculty/department/branch/batch forms, edit entity buttons, curriculum model inputs, linkage review, batch policy inputs, save-binding control, and open-canonical-proof-batch action.
+- Hidden or conditional surfaces involved: Select-a-branch empty state, focused edit modals, and hierarchy-layer-specific enablement rules.
+- Trigger sources: Open the hierarchy workspace, add or edit an entity, review linkage, save a binding, or open the canonical proof batch.
+- Atomic user actions: Navigate the hierarchy, add or edit controlled entities, review linkage, save curriculum bindings, and jump to the canonical proof batch.
+- Hidden, hover-only, or keyboard-only actions: Tabs and buttons are keyboard reachable; the hierarchy rail and edit modals rely on the shared primitive set.
+- Automatic or system actions: Keep the hierarchy rail stable when edit modals open; preserve the current branch/batch context while the user edits a focused entity; proof run archive/activate now invalidates branch-scoped faculty sessions before new proof context goes live.
+- API and backend calls: Admin hierarchy and control-plane routes through `air-mentor-api/src/modules/admin-control-plane.ts`.
+- State dependencies: Selected faculty, department, branch, batch, course, proof-batch provenance, and curriculum-binding state.
+- Persistence dependencies: Live admin snapshot state and backend hierarchy records.
+- Restore behavior: Returning to the hierarchy workspace restores the current rail and selected entity if the admin snapshot still matches.
+- Permissions and scope logic: Only SYSTEM_ADMIN can mutate hierarchy or curriculum bindings, and the selected entity must remain in-scope for the current rail.
+- State transitions: Faculty -> department -> branch -> batch -> course; add/edit modal -> saved entity -> same rail preserved.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Empty branch selection blocks course edits; edit modals can become disabled when no entity is selected; no dedicated conflict resolver appears inline.
+- Success path: The admin edits the desired entity, saves the binding, and keeps the hierarchy rail intact.
+- Failure and recovery paths: If a branch is not selected or the snapshot is stale, the user must select the correct rail node before mutating again.
+- Data read: Hierarchy records, batch provenance, curriculum models, linkage review state, and proof-control-plane banners.
+- Data written: Entity edits, curriculum bindings, linkage decisions, and modal state.
+- Telemetry, analytics, or audit-trail side effects: Hierarchy and curriculum actions remain part of the admin audit trail.
+- Downstream effects: Changes here affect the proof dashboard, timetable planning, the academic hierarchy visible to other role surfaces, and branch-scoped faculty session continuity whenever proof runs are archived or activated.
+- Hidden couplings: The canonical proof batch and proof-pilot scope banners tie this workspace to the proof control plane; archive/activate operations now depend on `batch.branchId -> roleGrants.scopeId -> facultyProfiles.userId -> sessions` session invalidation coupling outside the visible hierarchy form controls.
+- Expected behavior: The hierarchy rail should remain stable while the admin edits controlled entities and binds curriculum data.
+- Implemented behavior: `SystemAdminFacultiesWorkspace` renders the hierarchy navigator, edit controls, linkage review, and binding flow.
+- Tested behavior: [`tests/system-admin-faculties-workspace.test.tsx`](../../tests/system-admin-faculties-workspace.test.tsx), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts), [`air-mentor-api/tests/admin-curriculum-feature-config.test.ts`](../../air-mentor-api/tests/admin-curriculum-feature-config.test.ts).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/system-admin-faculties-workspace.test.tsx`](../../tests/system-admin-faculties-workspace.test.tsx), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts), [`air-mentor-api/tests/admin-curriculum-feature-config.test.ts`](../../air-mentor-api/tests/admin-curriculum-feature-config.test.ts).
+- Known gaps: No live browser pass confirmed the modal edit/save loop or the canonical-proof-batch banner.
+- Open questions: Should the proof-dashboard card remain visible while the user edits a nested hierarchy entity?
+- Confidence level: High

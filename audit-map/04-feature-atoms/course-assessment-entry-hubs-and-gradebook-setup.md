@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Course assessment entry hubs and gradebook setup
+- Parent domain: Academic course leader surface
+- Feature scope boundary: Attendance entry, TT blueprinting, quiz and assignment entry, CO attainment, and gradebook/SEE setup. Excludes the overview and risk tabs.
+- Roles and role-specific variants: Course Leader primary; the assessment hubs are shared across the same active course scope and stage rules.
+- Product or user intent: Push the course leader from high-level course inspection into the dedicated marking and gradebook entry flows without leaving the course workspace.
+- Source files: [`src/pages/course-pages.tsx`](../../src/pages/course-pages.tsx), [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`air-mentor-api/src/modules/academic.ts`](../../air-mentor-api/src/modules/academic.ts)
+- Entry points: `AttendanceTab`, `TTTab`, `QuizzesTab`, `AssignmentsTab`, `COTab`, `GradeBookTab`.
+- Routes, deep links, query params, and restore entry states: Course-detail tab state and the downstream entry-hub routes it opens; no dedicated query restore state is used here.
+- Preconditions and guard conditions: The course offering must exist; persisted assessment-scheme state must exist or be seeded by proof activation for stage eligibility to pass; stage and lock rules must permit the target entry hub; existing scores or active locks can freeze TT blueprint edits.
+- Visible surfaces involved: Attendance register, data-entry hub CTA, TT blueprint editor, add-question/add-part/remove controls, quizzes and assignments entry cards, CO attainment table, gradebook readiness banner, scheme setup CTA, and SEE entry CTA.
+- Hidden or conditional surfaces involved: Frozen blueprint state, scheme-unavailable state, score-exists lock, and row-action guards.
+- Trigger sources: Click attendance/TT/quiz/assignment/gradebook controls, proceed into an entry hub, or open a student drawer from a row.
+- Atomic user actions: Enter attendance; add or remove TT blueprint parts; proceed to TTn entry; open quiz or assignment entry; inspect CO attainment; open scheme setup; proceed to SEE entry.
+- Hidden, hover-only, or keyboard-only actions: Standard button and row interactions are keyboard accessible; the TT editor also exposes add/remove controls that follow the shared button primitive.
+- Automatic or system actions: Freeze TT blueprint edits when scores already exist or a lock is active; validate that raw TT marks total 25; enforce stage-order lock rules before future-stage evidence can be committed; route the user into the correct downstream entry hub; keep scheme-readiness banners in sync with the active persisted scheme state.
+- API and backend calls: Academic entry and scheme routes via the shared academic client and route modules; the page mostly navigates into dedicated entry workflows rather than mutating everything inline.
+- State dependencies: Offering stage, current scheme, score existence, lock flags, and the selected tab/entry hub.
+- Persistence dependencies: Local tab state; downstream entry-hub state persists in the dedicated route or store for that flow.
+- Restore behavior: Returning to the course page restores the last opened assessment family if the workspace route stays mounted; otherwise the default tab is shown again.
+- Permissions and scope logic: Only the current course scope can be edited; freeze rules prevent blueprint mutation once the scoring stage or lock state is active.
+- State transitions: Course detail -> assessment tab -> entry hub -> saved/frozen state -> return to course.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Attendance and assessment tables can be empty; TT editing can be frozen; gradebook setup can be unavailable until the scheme is ready; no dedicated conflict resolver appears inline.
+- Success path: The course leader advances from the course page into the relevant entry hub and saves or reviews the assessment state.
+- Failure and recovery paths: Locked or frozen TT edits stay read-only; future-stage lock attempts are rejected even if proof projection already seeded later scores; missing scheme readiness keeps the gradebook CTA as a gating step rather than a direct entry; HoD clear-lock now clears the authoritative DB lock column so a teacher can resubmit after unlock approval.
+- Data read: Attendance rows, TT blueprint rows, quiz and assignment entry state, CO attainment rows, and scheme-readiness metadata.
+- Data written: Assessment-entry navigation state, TT blueprint mutations, scheme/gradebook setup state, downstream hub state, and `sectionOfferings.[kind]Locked` through commit/clear-lock flows.
+- Telemetry, analytics, or audit-trail side effects: Assessment entry and blueprint actions remain part of the academic audit trail via the shared route/state model.
+- Downstream effects: TT edits affect entry readiness, gradebook setup, and later proof-backed assessment views.
+- Hidden couplings: The TT lock rule is coupled to score existence and stage state elsewhere in the academic model; the gradebook banner depends on the same scheme state as the SEE entry CTA; proof activation now seeds missing `offeringAssessmentSchemes` rows so stage eligibility is not blocked purely by absent DB scheme state.
+- Expected behavior: Each assessment hub should either open the dedicated entry workflow or keep the user read-only when locks, future-stage gating, or missing scheme readiness block the path.
+- Implemented behavior: The page exposes attendance, TT, quiz, assignment, CO, and gradebook controls with persisted-scheme-aware, stage-aware, and lock-aware gating.
+- Tested behavior: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts), [`air-mentor-api/tests/academic-runtime-narrow-routes.test.ts`](../../air-mentor-api/tests/academic-runtime-narrow-routes.test.ts), [`air-mentor-api/tests/gap-closure-intent.test.ts`](../../air-mentor-api/tests/gap-closure-intent.test.ts).
+- Live behavior notes: Not browser-replayed in this pass; lock behavior is inferred from the current frontend and parity coverage.
+- Known mismatches: None confirmed locally after gap-closure reconciliation; live browser confirmation is still outstanding.
+- Tests covering it: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts), [`air-mentor-api/tests/academic-runtime-narrow-routes.test.ts`](../../air-mentor-api/tests/academic-runtime-narrow-routes.test.ts).
+- Known gaps: No browser proof was re-run for the raw-mark total validation or the scheme-setup handoff in this pass.
+- Open questions: Should the TT editor surface the 25-mark rule with stronger inline affordance than a validation error?
+- Confidence level: High

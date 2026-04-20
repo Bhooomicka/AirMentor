@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Unlock review decision flow
+- Parent domain: HoD surface
+- Feature scope boundary: The dedicated unlock-review page, its decision transitions, and the HOD reset path that now clears the authoritative assessment lock. Excludes the sysadmin admin-request queue and the mentor queue-history page.
+- Roles and role-specific variants: HoD only in the current route helper and academic page flow; no mentor or course-leader route grants this page directly.
+- Product or user intent: Let the user resolve a student unlock task with a bounded decision, then keep the task state and history visible.
+- Source files: [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`src/App.tsx`](../../src/App.tsx), [`src/api/client.ts`](../../src/api/client.ts), [`src/repositories.ts`](../../src/repositories.ts), [`air-mentor-api/src/modules/academic.ts`](../../air-mentor-api/src/modules/academic.ts), [`air-mentor-api/src/modules/academic-runtime-routes.ts`](../../air-mentor-api/src/modules/academic-runtime-routes.ts)
+- Entry points: `UnlockReviewPage` and the approve/reject/reset handlers.
+- Routes, deep links, query params, and restore entry states: Academic `unlock-review` route state inside the workspace; no special query restore state is used.
+- Preconditions and guard conditions: A pending unlock task must exist, the current role must be HoD, and the current academic scope must permit the review.
+- Visible surfaces involved: Pending/Approved/Rejected/Reset Completed status chips, approve/reject/reset controls, and transition history.
+- Hidden or conditional surfaces involved: The task becomes read-only after completion, and the completed state is shown via the status chips.
+- Trigger sources: Open an unlock task, approve it, reject it, or reset and unlock it.
+- Atomic user actions: Approve, reject, reset, or read the transition history.
+- Hidden, hover-only, or keyboard-only actions: Standard button controls only; no hidden override surface is exposed.
+- Automatic or system actions: Persist the chosen unlock decision, call the HOD-only `clear-lock` backend route during reset/unlock completion, clear both runtime and DB lock state, and update the task's completed state.
+- API and backend calls: Academic unlock-review routes through the shared client and backend academic module.
+- State dependencies: Unlock task object, status, transition history, and current academic scope.
+- Persistence dependencies: Backend task state and any shared proof/history store backing the page.
+- Restore behavior: Reopening the route restores the completed decision and transition history for the task if it still exists in scope.
+- Permissions and scope logic: Only the scoped academic reviewer can act on the task; completed states should prevent duplicate mutation.
+- State transitions: Pending -> Approved/Rejected/Reset Completed; reset can return a task to an unlocked state for follow-up.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Completed tasks become effectively locked; the page can show a read-only status once the decision is done.
+- Success path: The reviewer chooses a bounded decision and the task records the new state with history.
+- Failure and recovery paths: Invalid or missing tasks should fall back to the parent academic scope gate; the user can reopen the task after the scope is refreshed.
+- Data read: Unlock task details, current status, and transition history.
+- Data written: Unlock decision state, transition history, runtime lock state, and `sectionOfferings.[kind]Locked` through the `clear-lock` route.
+- Telemetry, analytics, or audit-trail side effects: The decision is part of the academic audit trail.
+- Downstream effects: Unlock decisions can affect course or student progression, can unfreeze subsequent queue/state flows, and now restore teacher resubmission by clearing the authoritative DB lock column rather than only local/runtime state.
+- Hidden couplings: The unlock-review page is separate from the sysadmin request queue even though both use status transitions.
+- Expected behavior: The page should expose approve/reject/reset controls, preserve the completed status and history, and when reset/unlock is chosen it must clear the authoritative lock so the teacher can submit again.
+- Implemented behavior: `UnlockReviewPage` renders the decision controls and transition history, while the reset/unlock completion path now calls `clearOfferingAssessmentLock(...)` before mutating local state.
+- Tested behavior: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`air-mentor-api/tests/academic-proof-routes.test.ts`](../../air-mentor-api/tests/academic-proof-routes.test.ts), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts), [`air-mentor-api/tests/gap-closure-intent.test.ts`](../../air-mentor-api/tests/gap-closure-intent.test.ts).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`air-mentor-api/tests/academic-proof-routes.test.ts`](../../air-mentor-api/tests/academic-proof-routes.test.ts), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts).
+- Known gaps: No live browser pass confirmed the full approve -> reset cycle.
+- Open questions: Should the reset path expose a clearer audit label than the generic reset action?
+- Confidence level: Medium-high

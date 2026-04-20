@@ -31,15 +31,40 @@ Current closure truth now differs from the original draft scope.
 Stable push should not wait for long ML experimentation.
 Commit/push non-deferred closure set first, then continue ML optimization in background lane with durable artifacts.
 
+### 2026-04-20 Validation And Reconciliation Reality
+
+1. Frontend proof-date surfaces now have direct test backing: `tests/domain.test.ts`, `tests/calendar-utils.test.ts`, and `tests/academic-session-shell.test.tsx` pass after adding explicit virtual-date anchor assertions.
+2. Backend bootstrap gate coverage is locally runnable and currently passes through `air-mentor-api/tests/academic-bootstrap-routes.test.ts` plus the GAP-5 subset of `air-mentor-api/tests/gap-closure-intent.test.ts`.
+3. The full backend integration portion of `air-mentor-api/tests/gap-closure-intent.test.ts` remains sandbox-blocked by `listen EPERM: operation not permitted 127.0.0.1` from embedded Postgres. Treat those assertions as code-backed plus sandbox-blocked test-backed until they are rerun in a listener-permitted environment.
+4. Audit reconciliation must target canonical current paths:
+   - feature atoms: `audit-map/04-feature-atoms/`
+   - dependencies: `audit-map/05-dependencies/`
+   - ML audit: `audit-map/08-ml-audit/`
+   The older `08-feature-atoms` / `09-dependency` / `12-ml` path wording is stale prompt prose, not current audit-OS truth.
+
 ## Current Critical Status
 
-The audit corpus is strong, but it is not yet deterministic enough to support a claim that every meaningful line, interaction, and cross-surface truth is fully mapped.
+Gap-closure Track A is now locally stable, but not globally complete.
 
-The remaining high-risk closure blockers are:
+Closed and locally preserved now:
 
-1. standalone per-flow data-flow corpus
-2. proof-refresh completion ownership
-3. full long-tail frontend interaction coverage
+1. GAP-1
+2. GAP-2
+3. GAP-3
+4. GAP-4
+5. GAP-5
+6. GAP-7
+
+Still intentionally not closed:
+
+1. GAP-6 (deferred design/config track)
+2. GAP-8 (known low-priority mismatch)
+
+The remaining high-risk blockers for this track are verification and deployment residuals, not missing local code-path fixes:
+
+1. full backend integration rerun of `gap-closure-intent.test.ts` outside the current `listen EPERM` sandbox
+2. security-boundary expansion for `invalidateProofBatchSessions`
+3. stable push + CI/deploy observation
 4. credentialed live same-student / proof / role parity verification
 
 ## Critical Analysis
@@ -49,12 +74,15 @@ The remaining high-risk closure blockers are:
 - broad architecture, route, role, feature, dependency, state, ML, workflow, and backend provenance coverage
 - contradiction and ambiguity ledgers
 - strong local code/test-backed system maps
+- standalone data-flow corpus backing
+- local proof-refresh completion ownership
+- local gap-closure code paths and focused listener-free tests
 
 ### What is still too weak for a deterministic claim
 
-- data flow is still overlay-only
-- worker completion ownership is still not explicit enough
-- frontend long tail is still clustered, not exhaustive
+- backend listener-dependent gap-closure integration reruns are blocked in this shell
+- `invalidateProofBatchSessions` still lacks full boundary-guard coverage
+- frontend long tail is still clustered, not exhaustive for the broader closure campaign
 - live credentialed parity is still blocked
 
 ### What this means

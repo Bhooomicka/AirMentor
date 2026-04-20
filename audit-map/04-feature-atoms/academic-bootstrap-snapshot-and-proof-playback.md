@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Academic bootstrap snapshot and proof playback
+- Parent domain: Bootstrap / academic proof data
+- Feature scope boundary: The academic bootstrap payload, proof-playback checkpoint restore, and checkpoint invalidation path. Excludes later page interactions inside the workspace.
+- Roles and role-specific variants: Course Leader, Mentor, and HoD all consume the same snapshot; the selected checkpoint can change the visible proof window.
+- Product or user intent: Return the live academic parity snapshot for the active role and optionally restore the workspace to a specific proof checkpoint.
+- Source files: [`air-mentor-api/src/modules/academic-bootstrap-routes.ts`](../../air-mentor-api/src/modules/academic-bootstrap-routes.ts), [`src/App.tsx`](../../src/App.tsx), [`src/api/client.ts`](../../src/api/client.ts), [`src/repositories.ts`](../../src/repositories.ts)
+- Entry points: `GET /api/academic/bootstrap`, `fetchAcademicBootstrap()`, `restrictAcademicBootstrap()`, `hydrateAcademicData()`
+- Routes, deep links, query params, and restore entry states: `GET /api/academic/bootstrap`, optionally with `simulationStageCheckpointId`; workspace restore can enter through a saved proof checkpoint.
+- Preconditions and guard conditions: Academic session and role must already exist; an active simulation run must exist before bootstrap hydration proceeds; checkpoint lookup must match the checkpoint's simulation run.
+- Visible surfaces involved: Proof-playback notice, workspace loading refresh behavior, login faculty cache.
+- Hidden or conditional surfaces involved: Saved checkpoint badge, invalid-checkpoint fallback, and proof-context filtering on the client.
+- Trigger sources: Open the academic portal with a saved proof checkpoint; open it without a checkpoint; reset playback selection; re-enter after a checkpoint becomes invalid.
+- Atomic user actions: Choose a saved checkpoint, clear the selection, or retry after invalidation.
+- Hidden, hover-only, or keyboard-only actions: No special hidden playback control is exposed beyond the shared restore/reset surfaces.
+- Automatic or system actions: Validate that an active simulation run exists before bootstrap hydration; validate the requested checkpoint against its simulation run; derive `proofPlayback.currentDateISO` from the checkpoint timestamp for proof playback views; build the full bootstrap snapshot; sort and trim visible faculty for the login selector; hydrate client repositories; restore or invalidate the saved playback selection; filter the snapshot to visible faculty and teachers on the client.
+- API and backend calls: `GET /api/academic/bootstrap` with optional `simulationStageCheckpointId`.
+- State dependencies: Proof-playback selection storage, `playbackCheckpointId`, `proofPlayback.currentDateISO`, `remoteSession`, `workspaceProjection`.
+- Persistence dependencies: Proof-playback selection local storage, client repository snapshots.
+- Restore behavior: A saved checkpoint is restored only if it is still reachable in the active proof run; otherwise the client clears playback and refetches the active view. If no active run exists at all, bootstrap returns `NO_ACTIVE_PROOF_RUN` and the academic session shell shows a gate page instead of hydrating stale workspace state.
+- Permissions and scope logic: Academic roles only; forbidden or missing checkpoint selections fall back to the active proof-run view.
+- State transitions: Saved checkpoint -> snapshot hydration -> restored proof view; invalid checkpoint -> cleared selection -> active proof run; bootstrap failure -> blocked refresh.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Missing checkpoints return not found; forbidden or inaccessible checkpoints invalidate the saved selection; `403 NO_ACTIVE_PROOF_RUN` short-circuits hydration and renders an explicit gate page; bootstrap load failures emit error telemetry and block a fresh workspace refresh.
+- Success path: The snapshot returns the active academic dataset and proof metadata, and the client seeds its workspace from that response.
+- Failure and recovery paths: Invalid checkpoints clear playback and refetch the active view; load failures remain retryable once the backend is available.
+- Data read: Session faculty/role, active simulation-run state, checkpoint row, master data, proof-playback selection.
+- Data written: Proof-playback notice, `proofPlayback.currentDateISO` in the bootstrap payload, client repository cache, login faculty cache, telemetry events.
+- Telemetry, analytics, or audit-trail side effects: Bootstrap load and checkpoint validation events are emitted through the academic client and backend.
+- Downstream effects: Determines the visible teaching dataset, the proof playback context, the proof-virtual-date anchor used for due-label rendering, and the role-scoped login selector; also feeds downstream student-shell and risk-explorer proof context.
+- Hidden couplings: Admin master-data edits are reflected in the next bootstrap fetch, so the bootstrap is a live projection rather than a static fixture.
+- Expected behavior: The bootstrap returns the current academic dataset only when an active proof run exists; a valid saved checkpoint restores the proof view and its virtual date anchor; an invalid checkpoint clears selection and falls back cleanly.
+- Implemented behavior: The API hard-gates bootstrap on active proof-run existence, validates checkpoints against their runs, returns the live snapshot with `proofPlayback.currentDateISO`, and the client hydrates its repositories from that payload.
+- Tested behavior: [`air-mentor-api/tests/academic-bootstrap-routes.test.ts`](../../air-mentor-api/tests/academic-bootstrap-routes.test.ts), [`air-mentor-api/tests/gap-closure-intent.test.ts`](../../air-mentor-api/tests/gap-closure-intent.test.ts), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts), [`air-mentor-api/tests/academic-runtime-narrow-routes.test.ts`](../../air-mentor-api/tests/academic-runtime-narrow-routes.test.ts), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts), [`tests/academic-session-shell.test.tsx`](../../tests/academic-session-shell.test.tsx), [`tests/domain.test.ts`](../../tests/domain.test.ts).
+- Live behavior notes: Tests cover checkpoint validation, proof-scoped faculty filtering, and timetable parity; live backend verification is still constrained by the Railway drift recorded in `C-001`.
+- Known mismatches: None confirmed locally after the gap-closure reconciliation refresh.
+- Tests covering it: [`air-mentor-api/tests/academic-bootstrap-routes.test.ts`](../../air-mentor-api/tests/academic-bootstrap-routes.test.ts), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts), [`air-mentor-api/tests/academic-runtime-narrow-routes.test.ts`](../../air-mentor-api/tests/academic-runtime-narrow-routes.test.ts), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts).
+- Known gaps: No live end-to-end proof-playback restore was re-run during this pass.
+- Open questions: Should the client keep a restored session when bootstrap fails, or force a logout after repeated bootstrap errors?
+- Confidence level: Medium-high

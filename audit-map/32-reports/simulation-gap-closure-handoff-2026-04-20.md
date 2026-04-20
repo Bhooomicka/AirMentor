@@ -96,9 +96,9 @@ Intent: 確定性閉合所有模擬流程缺口，使演示完整可運行。
 
 ---
 
-**GAP-4: 重置不刪除教師/學生帳號 — 憑證洩漏**
+**GAP-4（舊草案殘留風險，非本輪已閉合 GAP-4 定義）: 重置不刪除教師/學生帳號 — 憑證洩漏**
 
-- 根因：`restoreProofSimulationSnapshot`（`proof-control-plane-runtime-service.ts:187`）調用 `startProofSimulationRun` 建立新運行，但不刪除舊的 sim-scoped 用戶帳號（`users`、`facultyProfiles`、`studentProfiles`、`roleGrants`）。
+- 說明：此段描述的是較早草案中的 restore/account-lifecycle 風險，與本輪 Track A 已閉合的 GAP-4（archive/activate 後 branch-scoped faculty session invalidation）不是同一件事。當前閉合的是 session invalidation；full account reaping 仍屬後續設計風險。
 - 現象：重置後舊教師 session 仍有效，舊憑證仍可登入。
 - **修法**：在 `restoreProofSimulationSnapshot` 調用 `startProofSimulationRun` 之前：
   1. 查詢 `simulationRuns.simulationRunId = input.simulationRunId` 的所有 proof-scoped `userAccounts`（通過 `facultyProfiles.proofSimulationRunId` 或類似欄位）
@@ -300,7 +300,7 @@ npm run dev:live
 
 | 項目 | 風險 | 遞延原因 |
 |------|------|---------|
-| GAP-4 憑證生命週期 | 高：重置後舊帳號仍有效 | 需 migration + user scoping 設計 |
+| GAP-4 舊草案殘留風險：憑證生命週期 | 高：重置後舊帳號仍有效 | 與本輪已閉合 GAP-4 不同；需 migration + user scoping 設計 |
 | GAP-6 slider config UI | 中：演示環境固定 env params | 需完整前端表單 + DB 遷移 |
 | Circular import（scheme defaults） | 低：已用硬編碼繞過 | 未來提取至 lib/scheme-defaults.ts |
 
