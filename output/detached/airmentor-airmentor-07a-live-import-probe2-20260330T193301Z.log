@@ -1,0 +1,17 @@
+[2026-03-30T19:33:03Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:33:03Z] command=zsh -lc export\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\;\ node\ --input-type=module\ -e\ \"const\ api=process.env.PLAYWRIGHT_API_URL\;\ const\ app=process.env.PLAYWRIGHT_APP_URL\;\ const\ batch=\'batch_branch_mnc_btech_2023\'\;\ const\ origin=new\ URL\(app\).origin\;\ const\ login=await\ fetch\(new\ URL\(/api/session/login\,api\)\,\{method:\'POST\'\,headers:\{origin\,\'content-type\':\'application/json\'\}\,body:JSON.stringify\(\{identifier:process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER\,password:process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD\}\)\}\)\;\ console.log\(\'login\'\,\ login.status\)\;\ const\ cookie=login.headers.get\(\'set-cookie\'\)\;\ if\(\!login.ok\|\|\!cookie\)\{console.error\(await\ login.text\(\)\)\;\ process.exit\(1\)\;\}\ const\ headers=\{origin\,cookie\,\'content-type\':\'application/json\'\}\;\ const\ dashboard=await\ fetch\(new\ URL\(/api/admin/batches/+batch+/proof-dashboard\,api\)\,\{headers\}\)\;\ console.log\(\'dashboard\'\,\ dashboard.status\)\;\ console.log\(\(await\ dashboard.text\(\)\).slice\(0\,600\)\)\;\ const\ importResponse=await\ fetch\(new\ URL\(/api/admin/batches/+batch+/proof-imports\,api\)\,\{method:\'POST\'\,headers\,body:\'\{\}\'\}\)\;\ console.log\(\'import\'\,\ importResponse.status\)\;\ console.log\(\(await\ importResponse.text\(\)\).slice\(0\,1200\)\)\;\" 
+file:///home/raed/projects/air-mentor-ui/[eval1]:1
+const api=process.env.PLAYWRIGHT_API_URL; const app=process.env.PLAYWRIGHT_APP_URL; const batch='batch_branch_mnc_btech_2023'; const origin=new URL(app).origin; const login=await fetch(new URL(/api/session/login,api),{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify({identifier:process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER,password:process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD})}); console.log('login', login.status); const cookie=login.headers.get('set-cookie'); if(!login.ok||!cookie){console.error(await login.text()); process.exit(1);} const headers={origin,cookie,'content-type':'application/json'}; const dashboard=await fetch(new URL(/api/admin/batches/+batch+/proof-dashboard,api),{headers}); console.log('dashboard', dashboard.status); console.log((await dashboard.text()).slice(0,600)); const importResponse=await fetch(new URL(/api/admin/batches/+batch+/proof-imports,api),{method:'POST',headers,body:'{}'}); console.log('import', importResponse.status); console.log((await importResponse.text()).slice(0,1200));
+                                                                                                                                                                                                 ^
+
+SyntaxError: Invalid regular expression flags
+    at compileSourceTextModule (node:internal/modules/esm/utils:318:16)
+    at ModuleLoader.createModuleWrap (node:internal/modules/esm/loader:253:12)
+    at ModuleLoader.eval (node:internal/modules/esm/loader:292:23)
+    at node:internal/process/execution:77:24
+    at asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:11)
+    at Object.runEntryPointWithESMLoader (node:internal/modules/run_main:123:19)
+    at evalModuleEntryPoint (node:internal/process/execution:76:47)
+    at node:internal/main/eval_string:37:3
+
+Node.js v24.13.0

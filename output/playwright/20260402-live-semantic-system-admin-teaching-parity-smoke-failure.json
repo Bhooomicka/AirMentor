@@ -1,0 +1,54 @@
+{
+  "failedAt": "2026-04-02T12:43:20.235Z",
+  "appUrl": "https://raed2180416.github.io/AirMentor/",
+  "apiUrl": "https://api-production-ab72.up.railway.app",
+  "pageUrl": "https://raed2180416.github.io/AirMentor/#/app",
+  "error": {
+    "name": "TimeoutError",
+    "message": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-proof-surface=\"academic-proof-summary\"][data-proof-scope=\"queue-history\"]').first() to be visible\u001b[22m\n"
+  },
+  "pageErrors": [],
+  "consoleMessages": [
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.diagnostic\",\"level\":\"info\",\"timestamp\":\"2026-04-02T12:42:43.803Z\",\"details\":{\"workspace\":\"system-admin\",\"level\":\"info\",\"code\":\"FRONTEND_STARTUP_MODE\",\"message\":\"Running with production-like frontend origin expectations.\"}}"
+    },
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.ready\",\"level\":\"info\",\"timestamp\":\"2026-04-02T12:42:43.803Z\",\"details\":{\"workspace\":\"system-admin\",\"apiBaseUrl\":\"https://api-production-ab72.up.railway.app\",\"telemetrySinkConfigured\":false,\"diagnosticCount\":1,\"errorCount\":0}}"
+    },
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.diagnostic\",\"level\":\"info\",\"timestamp\":\"2026-04-02T12:42:53.481Z\",\"details\":{\"workspace\":\"academic\",\"level\":\"info\",\"code\":\"FRONTEND_STARTUP_MODE\",\"message\":\"Running with production-like frontend origin expectations.\"}}"
+    },
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.ready\",\"level\":\"info\",\"timestamp\":\"2026-04-02T12:42:53.481Z\",\"details\":{\"workspace\":\"academic\",\"apiBaseUrl\":\"https://api-production-ab72.up.railway.app\",\"telemetrySinkConfigured\":false,\"diagnosticCount\":1,\"errorCount\":0}}"
+    }
+  ],
+  "navState": [
+    {
+      "label": "My Mentees",
+      "active": true,
+      "visible": true
+    },
+    {
+      "label": "Queue History",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "Calendar / Timetable",
+      "active": false,
+      "visible": true
+    }
+  ],
+  "proofSurfaces": [
+    {
+      "surface": "academic-proof-summary",
+      "scope": "mentor-view",
+      "visible": true,
+      "label": "Proof SummaryMentor View2023 ProofProof modeAuthoritative mentor view proof context. Use these checkpoint-bound counts and scope labels when comparing teacher, "
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+[2026-04-01T15:01:15Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T15:01:15Z] command=env AIRMENTOR_PROOF_SEMESTER_TARGETS=4\,5\,6 AIRMENTOR_PROOF_ARTIFACT_PREFIX=07c-local npm run playwright:admin-live:proof-risk 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:proof-risk
+> bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running system admin proof-risk smoke...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:33235
+Backend log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-backend.log
+Preview log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-preview.log
+Running system admin proof-risk smoke for semester 4...
+[smoke] step: login-system-admin
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=missing
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T15:02:00.984Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T15:02:00.984Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-response] 401 http://127.0.0.1:4173/api/session set-cookie=missing body={"error":"UNAUTHORIZED","message":"Authentication required"}
+[smoke:session-request] POST http://127.0.0.1:4173/api/session/login cookie=missing
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session/login set-cookie=present
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[smoke] cookies after login: [{"name":"airmentor_session","value":"session_e3274bfd-d033-4614-8768-2e0ed359bfa9","domain":"127.0.0.1","path":"/","expires":1775660521.462,"httpOnly":true,"secure":false,"sameSite":"Lax"},{"name":"airmentor_csrf","value":"4PdmlucRu1I2Wo42zH8XEkaL96SwdvsGb-SRjBVInUk","domain":"127.0.0.1","path":"/","expires":1775660521.462,"httpOnly":false,"secure":false,"sameSite":"Lax"}]
+[smoke] step: activate-proof-semester
+[smoke] current step: activate-proof-semester
+[smoke] failure url: http://127.0.0.1:4173/#/admin
+Failure HTML: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html
+System admin proof-risk smoke failed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png
+Trace: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip
+Semester-scoped failure artifact copies:
+- html: /home/raed/projects/air-mentor-ui/output/playwright/07c-local-semester-4-system-admin-proof-risk-smoke-failure.html
+- screenshot: /home/raed/projects/air-mentor-ui/output/playwright/07c-local-semester-4-system-admin-proof-risk-smoke-failure.png
+- trace: /home/raed/projects/air-mentor-ui/output/playwright/07c-local-semester-4-system-admin-proof-risk-smoke-failure.zip
+[browser] page closed unexpectedly
+[browser] browser disconnected unexpectedly
+file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:374
+    throw new Error(`Admin API ${apiPath} failed with ${payload.status}: ${payload.text.slice(0, 800)}`)
+          ^
+
+Error: Admin API /api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard failed with 401: {"error":"UNAUTHORIZED","message":"Authentication required"}
+    at adminApiRequest (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:374:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ensureProofRunReady (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:476:19)
+    at async activateProofSemesterForContract (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:557:27)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:865:3
+
+Node.js v24.13.0

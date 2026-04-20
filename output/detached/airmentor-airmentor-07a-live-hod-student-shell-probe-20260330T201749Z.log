@@ -1,0 +1,25 @@
+[2026-03-30T20:17:49Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:17:49Z] command=zsh -lc $'export PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_TEACHER_IDENTIFIER=kavitha.rao\nnode --input-type=module <<\'NODE\'\nimport assert from "node:assert/strict"\n\nconst api = process.env.PLAYWRIGHT_API_URL\nconst app = process.env.PLAYWRIGHT_APP_URL\nconst origin = new URL(app).origin\nconst checkpointId = "stage_checkpoint_654335929a345857eab259b0"\nconst teacherIdentifier = process.env.AIRMENTOR_LIVE_TEACHER_IDENTIFIER?.trim() || "kavitha.rao"\nconst passwordCandidates = ["faculty1234", "1234"]\n\nasync function login(identifier, password) {\n  return fetch(new URL("/api/session/login", api), {\n    method: "POST",\n    headers: { origin, "content-type": "application/json" },\n    body: JSON.stringify({ identifier, password }),\n  })\n}\n\nlet loginResponse = null\nlet teachingPassword = null\nfor (const password of passwordCandidates) {\n  const response = await login(teacherIdentifier, password)\n  if (response.ok) {\n    loginResponse = response\n    teachingPassword = password\n    break\n  }\n}\nassert(loginResponse, `could not log in as ${teacherIdentifier}`)\nconst cookie = loginResponse.headers.get("set-cookie")\nassert(cookie, "expected teacher login to set cookie")\nconsole.log("teacher-login", loginResponse.status, teacherIdentifier, teachingPassword)\n\nconst sessionResponse = await fetch(new URL("/api/session", api), { headers: { origin, cookie } })\nassert.equal(sessionResponse.status, 200, "session should be readable after teacher login")\nconst session = await sessionResponse.json()\nconst hodGrantId = session?.availableRoleGrants?.find(grant => grant?.roleCode === "HOD")?.grantId\nassert.equal(typeof hodGrantId, "string", "expected HOD grant id in academic session")\nconsole.log("hod-grant", hodGrantId)\n\nconst roleResponse = await fetch(new URL("/api/session/role-context", api), {\n  method: "POST",\n  headers: { origin, cookie, "content-type": "application/json" },\n  body: JSON.stringify({ roleGrantId: hodGrantId }),\n})\nconst roleBody = await roleResponse.text()\nconsole.log("role-context-status", roleResponse.status)\nconsole.log("role-context-body", roleBody.slice(0, 400))\nassert.equal(roleResponse.status, 200, "expected HOD role switch to succeed")\n\nconst proofStudentsUrl = new URL("/api/academic/hod/proof-students", api)\nproofStudentsUrl.searchParams.set("simulationStageCheckpointId", checkpointId)\nconst proofStudentsResponse = await fetch(proofStudentsUrl, { headers: { origin, cookie } })\nconst proofStudents = await proofStudentsResponse.json()\nconsole.log("proof-students-status", proofStudentsResponse.status)\nconsole.log("proof-students-count", proofStudents?.items?.length ?? null)\nassert.equal(proofStudentsResponse.status, 200, "HOD proof students should load for the checkpoint")\nassert((proofStudents?.items?.length ?? 0) > 0, "expected at least one HOD proof student for the checkpoint")\nconst studentId = proofStudents.items[0].studentId\nconsole.log("probe-student", studentId)\n\nfor (const [label, pathname] of [\n  ["student-shell-card", `/api/academic/student-shell/students/${encodeURIComponent(studentId)}/card`],\n  ["student-shell-timeline", `/api/academic/student-shell/students/${encodeURIComponent(studentId)}/timeline`],\n  ["risk-explorer", `/api/academic/students/${encodeURIComponent(studentId)}/risk-explorer`],\n]) {\n  const url = new URL(pathname, api)\n  url.searchParams.set("simulationStageCheckpointId", checkpointId)\n  const response = await fetch(url, { headers: { origin, cookie } })\n  const body = await response.text()\n  console.log(`${label}-status`, response.status)\n  console.log(`${label}-body`, body.slice(0, 500))\n  assert.equal(response.status, 200, `${label} should accept the checkpoint-backed HOD request`)\n}\n\nconsole.log("probe-ok", JSON.stringify({ checkpointId, studentId }))\nNODE' 
+teacher-login 200 kavitha.rao 1234
+hod-grant grant_t1_hod
+role-context-status 403
+role-context-body {"error":"FORBIDDEN_CSRF","message":"Authenticated write requests must include a valid CSRF token."}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: expected HOD role switch to succeed
+
+403 !== 200
+
+    at file:///home/raed/projects/air-mentor-ui/[eval1]:48:8
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 403,
+  expected: 200,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.13.0

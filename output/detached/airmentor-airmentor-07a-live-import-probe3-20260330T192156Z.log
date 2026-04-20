@@ -1,0 +1,18 @@
+[2026-03-30T19:21:56Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:21:56Z] command=zsh -lc $'\nset -euo pipefail\ncookie=$(mktemp)\ntrap "rm -f $cookie" EXIT\napi=https://api-production-ab72.up.railway.app\norigin=https://raed2180416.github.io\nlogin_payload=$(printf "{\\"identifier\\":\\"%s\\",\\"password\\":\\"%s\\"}" "${AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER:-sysadmin}" "${AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD:-admin1234}")\nlogin_response=$(curl -sS -c "$cookie" -H "origin: $origin" -H "content-type: application/json" -X POST "$api/api/auth/login" -d "$login_payload")\nprintf "login-response\\n%s\\n" "$login_response"\ncsrf=$(printf "%s" "$login_response" | jq -r ".csrfToken")\nprintf "csrf=%s\\n" "$csrf"\npost_status=$(curl -sS -o /tmp/airmentor-07a-live-import-probe3.body -w "%{http_code}" -b "$cookie" -H "x-csrf-token: $csrf" -H "origin: $origin" -H "content-type: application/json" -X POST "$api/api/admin/batches/batch_branch_mnc_btech_2023/proof-imports" -d "{}")\nprintf "post-response\\nstatus=%s\\n" "$post_status"\ncat /tmp/airmentor-07a-live-import-probe3.body\nprintf "\\ndashboard-after\\n"\ncurl -sS -b "$cookie" -H "origin: $origin" "$api/api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard" | jq "{imports: (.imports|length), latestImport: (.latestImport.curriculumImportVersionId // null), latestImportStatus: (.latestImportStatus // null), runs: (.proofRuns|length), activeRun: (.activeRunDetail.simulationRunId // null), checkpoints: (.activeRunDetail.checkpoints|length // null)}"\nrm -f /tmp/airmentor-07a-live-import-probe3.body\n' 
+login-response
+{"message":"Route POST:/api/auth/login not found","error":"Not Found","statusCode":404}
+csrf=null
+post-response
+status=401
+{"error":"UNAUTHORIZED","message":"Authentication required"}
+dashboard-after
+{
+  "imports": 0,
+  "latestImport": null,
+  "latestImportStatus": null,
+  "runs": 0,
+  "activeRun": null,
+  "checkpoints": 0
+}
+[2026-03-30T19:21:58Z] exit=0

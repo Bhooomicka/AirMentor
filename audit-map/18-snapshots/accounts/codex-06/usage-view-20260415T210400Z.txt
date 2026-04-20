@@ -1,0 +1,15 @@
+/usage
+Fetching usage...
+╭────────────────────────────────────────────────────────────────────────────────────────────────╮
+│  Usage summary · 2026-04-15T21:04:13.427Z                                                      │
+│                                                                                                │
+│  Visit https://chatgpt.com/codex/settings/usage for up-to-date                                 │
+│  information on rate limits and credits                                                        │
+│                                                                                                │
+│  Codex (plan: team)                                                                            │
+│    Access  : allowed                                                                           │
+│    Credits : not included with this plan                                                       │
+│    Limits                                                                                      │
+│      Primary   100 [████████████████████]  ·  resets in 5h 0m (2026-04-16T02:04:13.000Z)       │
+│      Secondary 44 [█████████░░░░░░░░░░░]  ·  resets in 70h 53m (2026-04-18T19:57:38.000Z)      │
+╰────────────────────────────────────────────────────────────────────────────────────────────────╯

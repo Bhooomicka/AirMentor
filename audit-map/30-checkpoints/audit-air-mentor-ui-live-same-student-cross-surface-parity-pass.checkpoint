@@ -1,0 +1,23 @@
+pass_name=same-student-cross-surface-parity-pass
+context=live
+session_name=audit-air-mentor-ui-live-same-student-cross-surface-parity-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+scope='local same-student parity matrix plus live blocker carry-forward'
+files_touched='audit-map/32-reports/same-student-cross-surface-parity-report.md,audit-map/32-reports/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.last-message.md,audit-map/10-live-behavior/live-same-student-parity.md,audit-map/15-final-maps/role-feature-matrix.md,audit-map/15-final-maps/live-vs-local-master-diff.md,audit-map/23-coverage/coverage-ledger.md,audit-map/24-agent-memory/working-knowledge.md,audit-map/24-agent-memory/known-ambiguities.md,audit-map/14-reconciliation/contradiction-matrix.md,audit-map/14-reconciliation/reconciliation-log.md,audit-map/29-status/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.status,audit-map/30-checkpoints/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.checkpoint,audit-map/32-reports/closure-readiness-verdict.md,audit-map/32-reports/operator-dashboard.md'
+next_unresolved_question='Can a credentialed, read-only live observer capture one shared student tuple across sysadmin, course leader, mentor, HoD, and student shell, and does that live evidence expose the run-labeled checkpoint fallback seen locally as C-021?'
+evidence_paths='audit-map/32-reports/same-student-cross-surface-parity-report.md,audit-map/32-reports/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.last-message.md,air-mentor-api/scripts/generate-academic-parity-seed.ts,air-mentor-api/src/modules/academic.ts,air-mentor-api/src/modules/academic-proof-routes.ts,air-mentor-api/src/lib/proof-control-plane-tail-service.ts,air-mentor-api/src/lib/proof-control-plane-hod-service.ts,air-mentor-api/src/lib/proof-control-plane-batch-service.ts,air-mentor-api/tests/academic-parity.test.ts,air-mentor-api/tests/academic-proof-routes.test.ts,air-mentor-api/tests/hod-proof-analytics.test.ts,air-mentor-api/tests/student-agent-shell.test.ts,tests/faculty-profile-proof.test.tsx,tests/hod-pages.test.ts,tests/risk-explorer.test.tsx,tests/student-shell.test.tsx,tests/system-admin-proof-dashboard-workspace.test.tsx'
+manual_action_required=1
+manual_action_reason='Live same-target parity is still blocked by missing safe read-only proof observation and the documented Railway session-contract failure; backend DB-backed parity rerun is also blocked in this sandbox by listen EPERM.'
+resume_point='Verify the live session contract on a credentialed environment, then run or build a read-only proof observer before attempting same-target parity capture.'
+resume_command='cd /home/raed/projects/air-mentor-ui/air-mentor-api && RAILWAY_PUBLIC_API_URL=https://api-production-ab72.up.railway.app EXPECTED_FRONTEND_ORIGIN=https://raed2180416.github.io AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> npm run verify:live-session-contract'
+remaining_uncovered_scope='live shared student tuple capture, live proof/playback/risk parity across sysadmin/course leader/mentor/hod/student shell, direct backend rerun in a listener-capable sandbox, and closure of C-021 if the fallback labeling is intentional rather than contradictory'
+current_provider=native-codex
+current_account=native-codex-session
+current_model=gpt-5.4
+current_slot=''
+route_attempt=1
+execution_supervisor_pid=''
+last_event=completed
+last_checkpoint_at=2026-04-16T18:23:14Z

@@ -1,0 +1,18 @@
+[2026-04-01T17:32:54Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T17:32:54Z] command=env AIRMENTOR_PROOF_ARTIFACT_PREFIX=08a-local-proof npm run verify:proof-closure:proof-rc 
+
+> air-mentor-ui@0.0.0 verify:proof-closure:proof-rc
+> npm run verify:proof-closure && npm --workspace air-mentor-api run test:proof-rc
+
+
+> air-mentor-ui@0.0.0 verify:proof-closure
+> npm --workspace air-mentor-api run build && npm run build && npm --workspace air-mentor-api test -- --reporter=dot && npm test -- --reporter=dot && bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+
+> air-mentor-api@0.1.0 build
+> tsc -p tsconfig.build.json
+
+
+> air-mentor-ui@0.0.0 build
+> tsc -b && vite build
+

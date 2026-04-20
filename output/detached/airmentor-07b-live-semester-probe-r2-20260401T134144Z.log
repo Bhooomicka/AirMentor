@@ -1,0 +1,8 @@
+[2026-04-01T13:41:45Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T13:41:45Z] command=env PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 AIRMENTOR_PROOF_SEMESTER_TARGETS=1\,2\,3 AIRMENTOR_PROOF_ARTIFACT_PREFIX=07b-live-probe node scripts/proof-risk-semester-walk-probe.mjs 
+Semester-walk probe passed.
+Probe artifact: output/playwright/07b-live-probe-semester-probe.json
+- semester 1: stage_checkpoint_78ee47d5a45be74db6419d24
+- semester 2: stage_checkpoint_d6aa3455a8cf8433f94ab773
+- semester 3: stage_checkpoint_6452ecb8ca56b5b88168e2da
+[2026-04-01T13:42:15Z] exit=0

@@ -1,0 +1,13 @@
+[2026-04-01T15:07:39Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T15:07:39Z] command=env AIRMENTOR_PROOF_SEMESTER_TARGETS=4\,5\,6 AIRMENTOR_PROOF_ARTIFACT_PREFIX=07c-local npm run playwright:admin-live:proof-risk 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:proof-risk
+> bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Another proof smoke run is already active (pid 2624851).

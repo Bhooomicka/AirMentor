@@ -1,0 +1,831 @@
+[2026-04-01T19:22:10Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T19:22:10Z] command=npm run verify:final-closeout 
+
+> air-mentor-ui@0.0.0 verify:final-closeout
+> bash scripts/verify-final-closeout.sh
+
+
+> air-mentor-ui@0.0.0 lint
+> eslint .
+
+
+> air-mentor-ui@0.0.0 inventory:compat-routes
+> node scripts/report-compat-route-callers.mjs --assert-runtime-clean
+
+# Academic Compatibility Route Inventory
+
+Generated: 2026-04-01T19:22:26.238Z
+
+## /api/academic/runtime/:stateKey
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:544
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:555
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:30
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:376
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:423
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:433
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:448
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:547
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:553
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:561
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:71
+  - audit/08-state-management-and-client-logic-audit.md:22
+  - audit/15-issue-catalog-prioritized.md:169
+  - audit/22-evidence-appendix-by-issue.md:47
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/25-implementation-spec-AM-003.md:18
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:165
+  - audit/42-audit-navigation-and-document-status.md:55
+  - audit/43-manual-closeout-checklist.md:62
+  - audit/44-final-closeout-evidence-2026-03-28.md:87
+
+## /api/academic/tasks/sync
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:104
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:633
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:643
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:40
+  - air-mentor-api/tests/academic-parity.test.ts:544
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:253
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:264
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:400
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:408
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:72
+  - audit/15-issue-catalog-prioritized.md:170
+  - audit/21-feature-inventory-and-traceability-matrix.md:32
+  - audit/22-evidence-appendix-by-issue.md:47
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:166
+  - audit/43-manual-closeout-checklist.md:63
+  - audit/44-final-closeout-evidence-2026-03-28.md:88
+
+## /api/academic/task-placements/sync
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:105
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:691
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:701
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:37
+  - air-mentor-api/tests/academic-parity.test.ts:552
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:277
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:73
+  - audit/15-issue-catalog-prioritized.md:171
+  - audit/21-feature-inventory-and-traceability-matrix.md:33
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:167
+  - audit/43-manual-closeout-checklist.md:64
+  - audit/44-final-closeout-evidence-2026-03-28.md:89
+
+## /api/academic/calendar-audit/sync
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:106
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:771
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:780
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:8
+  - air-mentor-api/tests/academic-parity.test.ts:573
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:292
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:74
+  - audit/15-issue-catalog-prioritized.md:172
+  - audit/21-feature-inventory-and-traceability-matrix.md:33
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:168
+  - audit/43-manual-closeout-checklist.md:65
+  - audit/44-final-closeout-evidence-2026-03-28.md:90
+
+
+> air-mentor-ui@0.0.0 verify:proof-closure:proof-rc
+> npm run verify:proof-closure && npm --workspace air-mentor-api run test:proof-rc
+
+
+> air-mentor-ui@0.0.0 verify:proof-closure
+> npm --workspace air-mentor-api run build && npm run build && npm --workspace air-mentor-api test -- --reporter=dot && npm test -- --reporter=dot && bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+
+> air-mentor-api@0.1.0 build
+> tsc -p tsconfig.build.json
+
+
+> air-mentor-ui@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 2189 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                           0.79 kB │ gzip:  0.38 kB
+dist/assets/index-BFfuiCzL.css           10.12 kB │ gzip:  2.50 kB
+dist/assets/icons-vendor-CepHMY_q.js      8.25 kB │ gzip:  3.20 kB
+dist/assets/risk-explorer-DWIr6AEE.js    22.02 kB │ gzip:  5.53 kB
+dist/assets/student-shell-Cb3lMHoX.js    25.19 kB │ gzip:  5.90 kB
+dist/assets/hod-pages-BfGrCHn6.js        31.10 kB │ gzip:  6.91 kB
+dist/assets/course-pages-lKJ_bL6Z.js     34.76 kB │ gzip:  7.97 kB
+dist/assets/workflow-pages-B3ZTHDBA.js   35.30 kB │ gzip:  8.30 kB
+dist/assets/calendar-pages-Chadpkpz.js   59.61 kB │ gzip: 13.94 kB
+dist/assets/app-shared-C50_NFWi.js      108.00 kB │ gzip: 30.20 kB
+dist/assets/motion-vendor-CvHdYO5Q.js   123.99 kB │ gzip: 40.77 kB
+dist/assets/react-vendor-Ah1pgjPn.js    192.35 kB │ gzip: 60.21 kB
+dist/assets/index-CITX0gQD.js           203.71 kB │ gzip: 51.34 kB
+✓ built in 1.94s
+
+> air-mentor-api@0.1.0 test
+> node scripts/run-vitest-suite.mjs --reporter=dot
+
+[air-mentor-api] Running fast backend suite across 28 test files.
+
+[air-mentor-api] -> tests/academic-access.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+·····
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  00:52:43
+   Duration  130ms (transform 27ms, setup 0ms, import 37ms, tests 4ms, environment 0ms)
+
+[air-mentor-api] <- tests/academic-access.test.ts in 362ms
+
+[air-mentor-api] -> tests/academic-bootstrap-routes.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+·
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  00:52:43
+   Duration  638ms (transform 92ms, setup 0ms, import 467ms, tests 72ms, environment 0ms)
+
+[air-mentor-api] <- tests/academic-bootstrap-routes.test.ts in 866ms
+
+[air-mentor-api] -> tests/academic-parity.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+········
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  00:52:44
+   Duration  135.79s (transform 715ms, setup 0ms, import 1.12s, tests 134.58s, environment 0ms)
+
+[air-mentor-api] <- tests/academic-parity.test.ts in 136.15s
+
+[air-mentor-api] -> tests/academic-proof-routes.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+··
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  00:55:00
+   Duration  706ms (transform 120ms, setup 0ms, import 493ms, tests 116ms, environment 0ms)
+
+[air-mentor-api] <- tests/academic-proof-routes.test.ts in 952ms
+
+[air-mentor-api] -> tests/academic-runtime-narrow-routes.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+······
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  00:55:01
+   Duration  31.06s (transform 791ms, setup 0ms, import 1.19s, tests 29.78s, environment 0ms)
+
+[air-mentor-api] <- tests/academic-runtime-narrow-routes.test.ts in 31.34s
+
+[air-mentor-api] -> tests/admin-control-plane.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+····-··--····---
+
+ Test Files  1 passed (1)
+      Tests  10 passed | 6 skipped (16)
+   Start at  00:55:32
+   Duration  111.68s (transform 770ms, setup 0ms, import 1.15s, tests 110.44s, environment 0ms)
+
+[air-mentor-api] <- tests/admin-control-plane.test.ts in 112.01s
+
+[air-mentor-api] -> tests/admin-curriculum-feature-config.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+··
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  00:57:25
+   Duration  14.40s (transform 739ms, setup 0ms, import 1.22s, tests 13.09s, environment 0ms)
+
+[air-mentor-api] <- tests/admin-curriculum-feature-config.test.ts in 14.74s
+
+[air-mentor-api] -> tests/admin-foundation.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+··
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  00:57:39
+   Duration  11.13s (transform 846ms, setup 0ms, import 1.44s, tests 9.57s, environment 0ms)
+
+[air-mentor-api] <- tests/admin-foundation.test.ts in 11.45s
+
+[air-mentor-api] -> tests/admin-hierarchy.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+·······
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  00:57:51
+   Duration  31.35s (transform 839ms, setup 0ms, import 1.31s, tests 29.93s, environment 0ms)
+
+[air-mentor-api] <- tests/admin-hierarchy.test.ts in 31.69s
+
+[air-mentor-api] -> tests/admin-proof-observability.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+·
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  00:58:22
+   Duration  5.44s (transform 735ms, setup 0ms, import 1.15s, tests 4.20s, environment 0ms)
+
+[air-mentor-api] <- tests/admin-proof-observability.test.ts in 5.69s
+
+[air-mentor-api] -> tests/client-telemetry.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+··
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  00:58:28
+   Duration  8.86s (transform 730ms, setup 0ms, import 1.10s, tests 7.67s, environment 0ms)
+
+[air-mentor-api] <- tests/client-telemetry.test.ts in 9.11s
+
+[air-mentor-api] -> tests/config.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+···
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  00:58:37
+   Duration  124ms (transform 23ms, setup 0ms, import 32ms, tests 2ms, environment 0ms)
+
+[air-mentor-api] <- tests/config.test.ts in 363ms
+
+[air-mentor-api] -> tests/evaluate-proof-risk-model.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+··
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  00:58:38
+   Duration  1.19s (transform 558ms, setup 0ms, import 1.10s, tests 4ms, environment 0ms)
+
+[air-mentor-api] <- tests/evaluate-proof-risk-model.test.ts in 1.44s
+
+[air-mentor-api] -> tests/http-smoke.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+·
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  00:58:39
+   Duration  5.48s (transform 706ms, setup 0ms, import 1.12s, tests 4.27s, environment 0ms)
+
+[air-mentor-api] <- tests/http-smoke.test.ts in 5.74s
+
+[air-mentor-api] -> tests/msruas-curriculum-compiler.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+·
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  00:58:45
+   Duration  290ms (transform 49ms, setup 0ms, import 182ms, tests 7ms, environment 0ms)
+
+[air-mentor-api] <- tests/msruas-curriculum-compiler.test.ts in 537ms
+
+[air-mentor-api] -> tests/msruas-proof-engines.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+····
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  00:58:45
+   Duration  1.23s (transform 541ms, setup 0ms, import 1.11s, tests 6ms, environment 0ms)
+
+[air-mentor-api] <- tests/msruas-proof-engines.test.ts in 1.50s
+
+[air-mentor-api] -> tests/msruas-proof-sandbox.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+···
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  00:58:47
+   Duration  10.11s (transform 567ms, setup 0ms, import 1.19s, tests 8.81s, environment 0ms)
+
+[air-mentor-api] <- tests/msruas-proof-sandbox.test.ts in 10.40s
+
+[air-mentor-api] -> tests/openapi.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+··
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  00:58:57
+   Duration  10.02s (transform 802ms, setup 0ms, import 1.27s, tests 8.65s, environment 0ms)
+
+[air-mentor-api] <- tests/openapi.test.ts in 10.32s
+
+[air-mentor-api] -> tests/policy-phenotypes.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+···
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  00:59:07
+   Duration  1.03s (transform 479ms, setup 0ms, import 933ms, tests 10ms, environment 0ms)
+
+[air-mentor-api] <- tests/policy-phenotypes.test.ts in 1.27s
+
+[air-mentor-api] -> tests/proof-control-plane-access.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+··
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  00:59:09
+   Duration  122ms (transform 21ms, setup 0ms, import 30ms, tests 2ms, environment 0ms)
+
+[air-mentor-api] <- tests/proof-control-plane-access.test.ts in 362ms
+
+[air-mentor-api] -> tests/proof-control-plane-activation-service.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+···
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  00:59:09
+   Duration  439ms (transform 77ms, setup 0ms, import 340ms, tests 7ms, environment 0ms)
+
+[air-mentor-api] <- tests/proof-control-plane-activation-service.test.ts in 666ms
+
+[air-mentor-api] -> tests/proof-control-plane-dashboard-service.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+··
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  00:59:10
+   Duration  131ms (transform 27ms, setup 0ms, import 37ms, tests 3ms, environment 0ms)
+
+[air-mentor-api] <- tests/proof-control-plane-dashboard-service.test.ts in 379ms
+
+[air-mentor-api] -> tests/proof-queue-governance.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+···
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  00:59:10
+   Duration  138ms (transform 33ms, setup 0ms, import 42ms, tests 5ms, environment 0ms)
+
+[air-mentor-api] <- tests/proof-queue-governance.test.ts in 373ms
+
+[air-mentor-api] -> tests/proof-risk-model.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+··
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  00:59:11
+   Duration  1.08s (transform 468ms, setup 0ms, import 942ms, tests 37ms, environment 0ms)
+
+[air-mentor-api] <- tests/proof-risk-model.test.ts in 1.30s
+
+[air-mentor-api] -> tests/session.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+·········
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  00:59:12
+   Duration  34.54s (transform 765ms, setup 0ms, import 1.14s, tests 33.31s, environment 0ms)
+
+[air-mentor-api] <- tests/session.test.ts in 34.79s
+
+[air-mentor-api] -> tests/startup-diagnostics.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+·····
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  00:59:47
+   Duration  151ms (transform 31ms, setup 0ms, import 42ms, tests 5ms, environment 0ms)
+
+[air-mentor-api] <- tests/startup-diagnostics.test.ts in 393ms
+
+[air-mentor-api] -> tests/telemetry-sink.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+·
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  00:59:47
+   Duration  137ms (transform 32ms, setup 0ms, import 41ms, tests 4ms, environment 0ms)
+
+[air-mentor-api] <- tests/telemetry-sink.test.ts in 380ms
+
+[air-mentor-api] -> tests/telemetry.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+····stdout | tests/telemetry.test.ts > backend telemetry > persists backend telemetry when the app configures local retention
+{"type":"airmentor-operational-event","name":"startup.ready","level":"info","timestamp":"2026-03-29T00:00:00.000Z","details":{"host":"0.0.0.0"}}
+
+···
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  00:59:47
+   Duration  12.98s (transform 729ms, setup 0ms, import 1.09s, tests 11.80s, environment 0ms)
+
+[air-mentor-api] <- tests/telemetry.test.ts in 13.22s
+
+[air-mentor-api] Per-file timings
+- tests/academic-parity.test.ts :: 136.15s
+- tests/admin-control-plane.test.ts :: 112.01s
+- tests/session.test.ts :: 34.79s
+- tests/admin-hierarchy.test.ts :: 31.69s
+- tests/academic-runtime-narrow-routes.test.ts :: 31.34s
+- tests/admin-curriculum-feature-config.test.ts :: 14.74s
+- tests/telemetry.test.ts :: 13.22s
+- tests/admin-foundation.test.ts :: 11.45s
+- tests/msruas-proof-sandbox.test.ts :: 10.40s
+- tests/openapi.test.ts :: 10.32s
+- tests/client-telemetry.test.ts :: 9.11s
+- tests/http-smoke.test.ts :: 5.74s
+- tests/admin-proof-observability.test.ts :: 5.69s
+- tests/msruas-proof-engines.test.ts :: 1.50s
+- tests/evaluate-proof-risk-model.test.ts :: 1.44s
+- tests/proof-risk-model.test.ts :: 1.30s
+- tests/policy-phenotypes.test.ts :: 1.27s
+- tests/academic-proof-routes.test.ts :: 952ms
+- tests/academic-bootstrap-routes.test.ts :: 866ms
+- tests/proof-control-plane-activation-service.test.ts :: 666ms
+- tests/msruas-curriculum-compiler.test.ts :: 537ms
+- tests/startup-diagnostics.test.ts :: 393ms
+- tests/telemetry-sink.test.ts :: 380ms
+- tests/proof-control-plane-dashboard-service.test.ts :: 379ms
+- tests/proof-queue-governance.test.ts :: 373ms
+- tests/config.test.ts :: 363ms
+- tests/academic-access.test.ts :: 362ms
+- tests/proof-control-plane-access.test.ts :: 362ms
+
+> air-mentor-ui@0.0.0 test
+> vitest run --reporter=dot
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+······································································································································································
+
+ Test Files  34 passed (34)
+      Tests  166 passed (166)
+   Start at  01:00:01
+   Duration  8.03s (transform 5.44s, setup 0ms, import 12.03s, tests 13.18s, environment 5.28s)
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running system admin proof-risk smoke...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:44825
+Backend log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-backend.log
+Preview log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-preview.log
+[smoke] step: login-system-admin
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=missing
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T19:30:31.521Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T19:30:31.522Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-response] 401 http://127.0.0.1:4173/api/session set-cookie=missing body={"error":"UNAUTHORIZED","message":"Authentication required"}
+[smoke:session-request] POST http://127.0.0.1:4173/api/session/login cookie=missing
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session/login set-cookie=present
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[smoke] cookies after login: [{"name":"airmentor_session","value":"session_85f9aab2-1340-469a-8f29-adba53685a7f","domain":"127.0.0.1","path":"/","expires":1775676631.994,"httpOnly":true,"secure":false,"sameSite":"Lax"},{"name":"airmentor_csrf","value":"CPFFyxYR1x0R-fw55WxJJJ4gTa9U7vVmYwGzw3qJWoo","domain":"127.0.0.1","path":"/","expires":1775676631.994,"httpOnly":false,"secure":false,"sameSite":"Lax"}]
+[smoke] step: activate-proof-semester
+[smoke] proof dashboard before prewarm: imports=1 activeRun=sim_mnc_2023_first6_v1 checkpoints=0
+[smoke] prewarming proof lifecycle through admin endpoints
+[smoke] proof dashboard after import approval: status=approved checkpoints=0
+[smoke] active proof run sim_mnc_2023_first6_v1 is missing checkpoints, recomputing seeded baseline risk artifacts
+[smoke] recompute-risk prewarm: activeRun=sim_mnc_2023_first6_v1 status=active checkpoints=30
+[smoke] proof dashboard after seeded baseline recompute: activeRun=sim_mnc_2023_first6_v1 checkpoints=30
+[smoke] activated proof operational semester 4 for run sim_mnc_2023_first6_v1 (previous=6)
+[smoke] activation request artifact: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-local-request.json
+[smoke] activation response artifact: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-local-response.json
+[smoke] step: open-seeded-proof-route
+[smoke] opening seeded proof route: http://127.0.0.1:4173/#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023
+[browser:info] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"info","timestamp":"2026-04-01T19:31:31.094Z","details":{"workspace":"system-admin","simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_e22816d896f73351902c3e1e","stageLabel":"Pre TT1","playbackAccessible":true,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":true,"canPlayToEnd":false}}
+[smoke] step: select-target-checkpoint
+[browser:warning] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"warn","timestamp":"2026-04-01T19:31:32.067Z","details":{"workspace":"system-admin","simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","stageLabel":"Post SEE","playbackAccessible":false,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":false,"canPlayToEnd":false}}
+[smoke] stored playback selection: {"simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","updatedAt":"2026-04-01T19:31:32.067Z"}
+[smoke] selected checkpoint banner: Selected checkpoint: semester 6 · Post SEE · Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.. Playback progression is blocked until all queue items at this checkpoint are resolved.
+[smoke] step: reload-system-admin-proof-route
+[smoke] refreshing seeded proof route: http://127.0.0.1:4173/?proof-reload=1775071892241#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T19:31:32.342Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T19:31:32.342Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[browser:info] {"type":"airmentor-client-event","name":"auth.session.restored","level":"info","timestamp":"2026-04-01T19:31:32.373Z","details":{"workspace":"system-admin","sessionId":"session_85f9aab2-1340-469a-8f29-adba53685a7f","facultyId":"fac_sysadmin","activeRole":"SYSTEM_ADMIN"}}
+[smoke] step: reopen-seeded-proof-route-after-reload
+[smoke] opening seeded proof route: http://127.0.0.1:4173/#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T19:31:33.884Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T19:31:33.884Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[browser:info] {"type":"airmentor-client-event","name":"auth.session.restored","level":"info","timestamp":"2026-04-01T19:31:34.910Z","details":{"workspace":"system-admin","sessionId":"session_85f9aab2-1340-469a-8f29-adba53685a7f","facultyId":"fac_sysadmin","activeRole":"SYSTEM_ADMIN"}}
+[smoke] opening seeded proof batch overview tab
+[smoke] checkpoint playback missing, verifying proof controls and prewarming through admin endpoints
+[browser:warning] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"warn","timestamp":"2026-04-01T19:31:39.540Z","details":{"workspace":"system-admin","simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","stageLabel":"Post SEE","playbackAccessible":false,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":false,"canPlayToEnd":false}}
+[smoke] proof dashboard before prewarm: imports=1 activeRun=sim_mnc_2023_first6_v1 checkpoints=30
+[smoke] reopening seeded proof route after server-side prewarm: http://127.0.0.1:4173/?proof-reload=1775071900051#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T19:31:40.131Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T19:31:40.131Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[browser:info] {"type":"airmentor-client-event","name":"auth.session.restored","level":"info","timestamp":"2026-04-01T19:31:40.142Z","details":{"workspace":"system-admin","sessionId":"session_85f9aab2-1340-469a-8f29-adba53685a7f","facultyId":"fac_sysadmin","activeRole":"SYSTEM_ADMIN"}}
+[browser:warning] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"warn","timestamp":"2026-04-01T19:31:43.818Z","details":{"workspace":"system-admin","simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","stageLabel":"Post SEE","playbackAccessible":false,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":false,"canPlayToEnd":false}}
+[smoke] stored playback selection: {"simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","updatedAt":"2026-04-01T19:31:32.067Z"}
+[smoke] selected checkpoint banner: Selected checkpoint: semester 6 · Post SEE · Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.. Playback progression is blocked until all queue items at this checkpoint are resolved.
+[smoke] step: restore-proof-semester
+[smoke] restored proof operational semester 6 for run sim_mnc_2023_first6_v1
+[smoke] step: logout-system-admin
+[smoke:session-request] DELETE http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[smoke] step: login-academic-portal
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T19:31:46.559Z","details":{"workspace":"academic","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T19:31:46.560Z","details":{"workspace":"academic","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=missing
+[smoke:session-response] 401 http://127.0.0.1:4173/api/session set-cookie=missing body={"error":"UNAUTHORIZED","message":"Authentication required"}
+[smoke:session-request] POST http://127.0.0.1:4173/api/session/login cookie=missing
+[smoke] step: switch-to-course-leader
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session/login set-cookie=present
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[smoke:academic-request] GET http://127.0.0.1:4173/api/academic/bootstrap?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+[smoke:academic-response] 200 http://127.0.0.1:4173/api/academic/bootstrap?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+[browser:info] {"type":"airmentor-client-event","name":"proof.playback.restored","level":"info","timestamp":"2026-04-01T19:31:47.400Z","details":{"workspace":"academic","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","semesterLabel":"Semester 6","stageLabel":"Post SEE"}}
+[smoke] step: open-faculty-proof-panel
+[smoke] step: open-teacher-risk-explorer
+[smoke] step: open-teacher-partial-profile
+[smoke] step: assert-teacher-risk-explorer
+[smoke] step: return-from-teacher-risk-explorer
+[smoke] step: open-teacher-student-shell
+[smoke] step: assert-student-shell
+[smoke] step: return-from-student-shell
+[smoke] step: switch-to-hod
+[smoke:session-request] POST http://127.0.0.1:4173/api/session/role-context cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session/role-context set-cookie=present
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[smoke:academic-request] GET http://127.0.0.1:4173/api/academic/bootstrap?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+[smoke:academic-request] GET http://127.0.0.1:4173/api/academic/hod/proof-bundle?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+[smoke:academic-response] 200 http://127.0.0.1:4173/api/academic/bootstrap?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+[browser:info] {"type":"airmentor-client-event","name":"proof.playback.restored","level":"info","timestamp":"2026-04-01T19:31:53.322Z","details":{"workspace":"academic","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","semesterLabel":"Semester 6","stageLabel":"Post SEE"}}
+[smoke:academic-response] 200 http://127.0.0.1:4173/api/academic/hod/proof-bundle?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+[smoke] step: assert-hod-proof-analytics
+[smoke] step: open-hod-student-shell
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_002_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_002_mnc_s6_amc_s6_31_a","updatedAt":1775071942882}}}
+[pageerror] Stale updatedAt for academic task placement
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_004_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_004_mnc_s6_amc_s6_31_a","updatedAt":1775071942889}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_003_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_003_mnc_s6_amc_s6_31_a","updatedAt":1775071942885}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_006_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_006_mnc_s6_amc_s6_31_a","updatedAt":1775071942890}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_007_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_007_mnc_s6_amc_s6_31_a","updatedAt":1775071942895}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_010_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_010_mnc_s6_amc_s6_31_a","updatedAt":1775071942896}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_011_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_011_mnc_s6_amc_s6_31_a","updatedAt":1775071942897}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_015_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_015_mnc_s6_amc_s6_31_a","updatedAt":1775071942901}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_019_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_019_mnc_s6_amc_s6_31_a","updatedAt":1775071942911}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_013_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_013_mnc_s6_amc_s6_31_a","updatedAt":1775071942902}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_017_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_017_mnc_s6_amc_s6_31_a","updatedAt":1775071942908}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_020_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_020_mnc_s6_amc_s6_31_a","updatedAt":1775071942912}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_021_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_021_mnc_s6_amc_s6_31_a","updatedAt":1775071942915}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_029_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_029_mnc_s6_amc_s6_31_a","updatedAt":1775071942916}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_027_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_027_mnc_s6_amc_s6_31_a","updatedAt":1775071942916}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_031_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_031_mnc_s6_amc_s6_31_a","updatedAt":1775071942920}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_033_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_033_mnc_s6_amc_s6_31_a","updatedAt":1775071942928}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_032_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_032_mnc_s6_amc_s6_31_a","updatedAt":1775071942928}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_036_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_036_mnc_s6_amc_s6_31_a","updatedAt":1775071942930}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_038_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_038_mnc_s6_amc_s6_31_a","updatedAt":1775071942932}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_039_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_039_mnc_s6_amc_s6_31_a","updatedAt":1775071942932}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_040_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_040_mnc_s6_amc_s6_31_a","updatedAt":1775071942934}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_042_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_042_mnc_s6_amc_s6_31_a","updatedAt":1775071942946}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_041_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_041_mnc_s6_amc_s6_31_a","updatedAt":1775071942945}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_043_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_043_mnc_s6_amc_s6_31_a","updatedAt":1775071942946}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_046_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_046_mnc_s6_amc_s6_31_a","updatedAt":1775071942949}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_044_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_044_mnc_s6_amc_s6_31_a","updatedAt":1775071942948}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_053_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_053_mnc_s6_amc_s6_31_a","updatedAt":1775071942961}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_049_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_049_mnc_s6_amc_s6_31_a","updatedAt":1775071942959}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_045_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_045_mnc_s6_amc_s6_31_a","updatedAt":1775071942948}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_048_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_048_mnc_s6_amc_s6_31_a","updatedAt":1775071942959}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_051_mnc_s6_amc_s6_31_a?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_051_mnc_s6_amc_s6_31_a","updatedAt":1775071942960}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_067_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_067_mnc_s6_amc_s6_35_b","updatedAt":1775071942973}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_063_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_063_mnc_s6_amc_s6_35_b","updatedAt":1775071942962}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_066_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_066_mnc_s6_amc_s6_35_b","updatedAt":1775071942974}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_062_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_062_mnc_s6_amc_s6_35_b","updatedAt":1775071942962}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_064_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_064_mnc_s6_amc_s6_35_b","updatedAt":1775071942972}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_070_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_070_mnc_s6_amc_s6_35_b","updatedAt":1775071942976}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_071_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_071_mnc_s6_amc_s6_35_b","updatedAt":1775071942978}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_074_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_074_mnc_s6_amc_s6_35_b","updatedAt":1775071942988}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_072_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_072_mnc_s6_amc_s6_35_b","updatedAt":1775071942977}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_077_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_077_mnc_s6_amc_s6_35_b","updatedAt":1775071942993}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_076_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_076_mnc_s6_amc_s6_35_b","updatedAt":1775071942992}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_075_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_075_mnc_s6_amc_s6_35_b","updatedAt":1775071942991}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_083_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_083_mnc_s6_amc_s6_35_b","updatedAt":1775071942993}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_080_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_080_mnc_s6_amc_s6_35_b","updatedAt":1775071942994}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_084_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_084_mnc_s6_amc_s6_35_b","updatedAt":1775071943007}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_081_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_081_mnc_s6_amc_s6_35_b","updatedAt":1775071943000}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_085_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_085_mnc_s6_amc_s6_35_b","updatedAt":1775071943008}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_086_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_086_mnc_s6_amc_s6_35_b","updatedAt":1775071943007}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_090_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_090_mnc_s6_amc_s6_35_b","updatedAt":1775071943016}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_088_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_088_mnc_s6_amc_s6_35_b","updatedAt":1775071943010}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_089_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_089_mnc_s6_amc_s6_35_b","updatedAt":1775071943009}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_091_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_091_mnc_s6_amc_s6_35_b","updatedAt":1775071943023}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_095_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_095_mnc_s6_amc_s6_35_b","updatedAt":1775071943025}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_092_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_092_mnc_s6_amc_s6_35_b","updatedAt":1775071943023}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_096_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_096_mnc_s6_amc_s6_35_b","updatedAt":1775071943025}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_099_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_099_mnc_s6_amc_s6_35_b","updatedAt":1775071943027}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_100_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_100_mnc_s6_amc_s6_35_b","updatedAt":1775071943034}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_101_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_101_mnc_s6_amc_s6_35_b","updatedAt":1775071943036}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_103_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_103_mnc_s6_amc_s6_35_b","updatedAt":1775071943041}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_102_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_102_mnc_s6_amc_s6_35_b","updatedAt":1775071943038}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_104_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_104_mnc_s6_amc_s6_35_b","updatedAt":1775071943041}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_107_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_107_mnc_s6_amc_s6_35_b","updatedAt":1775071943051}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_105_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_105_mnc_s6_amc_s6_35_b","updatedAt":1775071943040}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_106_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_106_mnc_s6_amc_s6_35_b","updatedAt":1775071943048}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_109_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_109_mnc_s6_amc_s6_35_b","updatedAt":1775071943054}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_108_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_108_mnc_s6_amc_s6_35_b","updatedAt":1775071943052}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_110_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_110_mnc_s6_amc_s6_35_b","updatedAt":1775071943055}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_111_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_111_mnc_s6_amc_s6_35_b","updatedAt":1775071943056}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_114_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_114_mnc_s6_amc_s6_35_b","updatedAt":1775071943062}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_116_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_116_mnc_s6_amc_s6_35_b","updatedAt":1775071943064}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_117_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_117_mnc_s6_amc_s6_35_b","updatedAt":1775071943066}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_119_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_119_mnc_s6_amc_s6_35_b","updatedAt":1775071943066}}}
+[smoke:academic-response] 409 http://127.0.0.1:4173/api/academic/task-placements/task_mnc_student_120_mnc_s6_amc_s6_35_b?expectedUpdatedAt=1773619200000 body={"error":"CONFLICT","message":"Stale updatedAt for academic task placement","details":{"current":{"taskId":"task_mnc_student_120_mnc_s6_amc_s6_35_b","updatedAt":1775071943068}}}
+[smoke] step: assert-hod-student-shell
+[smoke] step: return-from-hod-student-shell
+[smoke] step: open-hod-risk-explorer
+[smoke] step: assert-hod-risk-explorer
+System admin proof-risk smoke passed.
+Screenshots:
+- systemAdmin: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-control-plane.png
+- teacher: /home/raed/projects/air-mentor-ui/output/playwright/teacher-proof-panel.png
+- teacherRiskExplorer: /home/raed/projects/air-mentor-ui/output/playwright/teacher-risk-explorer-proof.png
+- hod: /home/raed/projects/air-mentor-ui/output/playwright/hod-proof-analytics.png
+- hodRiskExplorer: /home/raed/projects/air-mentor-ui/output/playwright/hod-risk-explorer-proof.png
+- studentShell: /home/raed/projects/air-mentor-ui/output/playwright/student-shell-proof.png
+Semester activation artifacts:
+- request: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-local-request.json
+- response: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-local-response.json
+[browser] page closed unexpectedly
+[browser] browser disconnected unexpectedly
+
+> air-mentor-api@0.1.0 test:proof-rc
+> AIRMENTOR_BACKEND_SUITE=proof-rc node scripts/run-vitest-suite.mjs
+
+[air-mentor-api] Running proof-rc backend suite across 31 test files.
+
+[air-mentor-api] -> tests/academic-access.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  01:02:26
+   Duration  134ms (transform 29ms, setup 0ms, import 39ms, tests 3ms, environment 0ms)
+
+[air-mentor-api] <- tests/academic-access.test.ts in 394ms
+
+[air-mentor-api] -> tests/academic-bootstrap-routes.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  01:02:27
+   Duration  563ms (transform 87ms, setup 0ms, import 406ms, tests 63ms, environment 0ms)
+
+[air-mentor-api] <- tests/academic-bootstrap-routes.test.ts in 773ms
+
+[air-mentor-api] -> tests/academic-parity.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  01:02:28
+   Duration  136.33s (transform 765ms, setup 0ms, import 1.15s, tests 135.09s, environment 0ms)
+
+[air-mentor-api] <- tests/academic-parity.test.ts in 136.68s
+
+[air-mentor-api] -> tests/academic-proof-routes.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  01:04:44
+   Duration  613ms (transform 103ms, setup 0ms, import 443ms, tests 81ms, environment 0ms)
+
+[air-mentor-api] <- tests/academic-proof-routes.test.ts in 829ms
+
+[air-mentor-api] -> tests/academic-runtime-narrow-routes.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  01:04:45
+   Duration  31.63s (transform 780ms, setup 0ms, import 1.19s, tests 30.35s, environment 0ms)
+
+[air-mentor-api] <- tests/academic-runtime-narrow-routes.test.ts in 31.93s
+
+[air-mentor-api] -> tests/admin-control-plane.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+

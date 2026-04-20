@@ -1,0 +1,6 @@
+pass_name=smoke-job
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-smoke-job
+workdir=/home/raed/projects/air-mentor-ui
+last_event=completed
+last_checkpoint_at=2026-04-14T22:34:51Z

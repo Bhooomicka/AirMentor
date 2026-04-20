@@ -1,0 +1,77 @@
+[2026-03-30T09:13:46Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T09:13:46Z] command=env AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 AIRMENTOR_LIVE_TEACHER_IDENTIFIER=devika.shetty PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run verify:proof-closure:live 
+
+> air-mentor-ui@0.0.0 verify:proof-closure:live
+> AIRMENTOR_LIVE_STACK=1 bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running system admin proof-risk smoke...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+[smoke] step: login-system-admin
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T09:14:12.552Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T09:14:12.552Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=missing
+[smoke:session-response] 401 https://api-production-ab72.up.railway.app/api/session set-cookie=missing body={"error":"UNAUTHORIZED","message":"Authentication required"}
+[smoke:session-request] POST https://api-production-ab72.up.railway.app/api/session/login cookie=missing
+[smoke:session-response] 200 https://api-production-ab72.up.railway.app/api/session/login set-cookie=present
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=present
+[smoke:session-response] 200 https://api-production-ab72.up.railway.app/api/session set-cookie=present
+[smoke] cookies after login: [{"name":"airmentor_session","value":"session_e0d40ef2-44f1-423d-811a-9543d4747ba7","domain":"api-production-ab72.up.railway.app","path":"/","expires":1775466853.508,"httpOnly":true,"secure":true,"sameSite":"None"},{"name":"airmentor_csrf","value":"20skQnryTNLOdrURrwQSeLjjqOhQo6K9Wk4ybMHLOKo","domain":"api-production-ab72.up.railway.app","path":"/","expires":1775466853.508,"httpOnly":false,"secure":true,"sameSite":"None"}]
+[smoke] live proof route discovered: faculty=Engineering and Technology department=Computer Science and Engineering branch=Mathematics and Computing batch=2022 checkpoints=5
+[smoke] step: open-seeded-proof-route
+[smoke] opening seeded proof route: https://raed2180416.github.io/AirMentor/#/admin/faculties/academic_faculty_45de4e3f-7a8c-4841-81cb-6e61073a8727/departments/department_45b837f5-273d-4efb-953d-dc00087f6df3/branches/branch_5741716d-3500-404b-8578-1dd136bdd3c9/batches/batch_6238cb50-7d0f-471c-97fb-3061b1f48a2c
+[browser:info] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"info","timestamp":"2026-03-30T09:14:20.274Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_bd42d066caf1fdbda3a3ee5a","stageLabel":"Pre TT1","playbackAccessible":true,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":true,"canPlayToEnd":false}}
+[smoke] step: select-s6-semester-close
+[browser:warning] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"warn","timestamp":"2026-03-30T09:14:20.514Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_1c95a10012cbb14075051da1","stageLabel":"Post SEE","playbackAccessible":false,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":false,"canPlayToEnd":false}}
+[smoke] stored playback selection: {"simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_1c95a10012cbb14075051da1","updatedAt":"2026-03-30T09:14:20.515Z"}
+[smoke] selected checkpoint banner: Selected checkpoint: semester 1 · Post SEE · Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.. Playback progression is blocked until all queue items at this checkpoint are resolved.
+[smoke] step: reload-system-admin-proof-route
+[smoke] refreshing seeded proof route: https://raed2180416.github.io/AirMentor/?proof-reload=1774862060609#/admin/faculties/academic_faculty_45de4e3f-7a8c-4841-81cb-6e61073a8727/departments/department_45b837f5-273d-4efb-953d-dc00087f6df3/branches/branch_5741716d-3500-404b-8578-1dd136bdd3c9/batches/batch_6238cb50-7d0f-471c-97fb-3061b1f48a2c
+[browser:warning] {"type":"airmentor-client-event","name":"proof.checkpoint.detail_load_failed","level":"warn","timestamp":"2026-03-30T09:14:20.616Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_1c95a10012cbb14075051da1","error":{"name":"AbortError","message":"The operation was aborted. "}}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T09:14:20.710Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T09:14:20.710Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=present
+[smoke:session-response] 200 https://api-production-ab72.up.railway.app/api/session set-cookie=present
+[browser:info] {"type":"airmentor-client-event","name":"auth.session.restored","level":"info","timestamp":"2026-03-30T09:14:20.815Z","details":{"workspace":"system-admin","sessionId":"session_e0d40ef2-44f1-423d-811a-9543d4747ba7","facultyId":"fac_sysadmin","activeRole":"SYSTEM_ADMIN"}}
+[smoke] step: reopen-seeded-proof-route-after-reload
+[smoke] opening seeded proof route: https://raed2180416.github.io/AirMentor/#/admin/faculties/academic_faculty_45de4e3f-7a8c-4841-81cb-6e61073a8727/departments/department_45b837f5-273d-4efb-953d-dc00087f6df3/branches/branch_5741716d-3500-404b-8578-1dd136bdd3c9/batches/batch_6238cb50-7d0f-471c-97fb-3061b1f48a2c
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T09:14:22.185Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T09:14:22.185Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=present
+[smoke:session-response] 200 https://api-production-ab72.up.railway.app/api/session set-cookie=present
+[browser:info] {"type":"airmentor-client-event","name":"auth.session.restored","level":"info","timestamp":"2026-03-30T09:14:22.633Z","details":{"workspace":"system-admin","sessionId":"session_e0d40ef2-44f1-423d-811a-9543d4747ba7","facultyId":"fac_sysadmin","activeRole":"SYSTEM_ADMIN"}}
+[smoke] opening seeded proof batch overview tab
+[browser:warning] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"warn","timestamp":"2026-03-30T09:14:24.586Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_1c95a10012cbb14075051da1","stageLabel":"Post SEE","playbackAccessible":false,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":false,"canPlayToEnd":false}}
+[smoke] stored playback selection: {"simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_1c95a10012cbb14075051da1","updatedAt":"2026-03-30T09:14:20.515Z"}
+[smoke] selected checkpoint banner: Selected checkpoint: semester 1 · Post SEE · Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.. Playback progression is blocked until all queue items at this checkpoint are resolved.
+[smoke] step: logout-system-admin
+[smoke:session-request] DELETE https://api-production-ab72.up.railway.app/api/session cookie=present
+[smoke:session-response] 200 https://api-production-ab72.up.railway.app/api/session set-cookie=present
+[smoke] step: login-academic-portal
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T09:14:25.876Z","details":{"workspace":"academic","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T09:14:25.876Z","details":{"workspace":"academic","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=missing
+[smoke:session-response] 401 https://api-production-ab72.up.railway.app/api/session set-cookie=missing body={"error":"UNAUTHORIZED","message":"Authentication required"}
+[smoke] current step: login-academic-portal
+[smoke] failure url: https://raed2180416.github.io/AirMentor/#/app
+Failure HTML: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html
+System admin proof-risk smoke failed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png
+Trace: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip
+[browser] page closed unexpectedly
+[browser] browser disconnected unexpectedly
+file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:117
+  throw new Error(`Could not resolve a working teaching password for ${username}`)
+        ^
+
+Error: Could not resolve a working teaching password for devika.shetty
+    at resolveTeachingPassword (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:117:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async loginToAcademicPortal (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:632:28)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:666:3
+
+Node.js v24.13.0

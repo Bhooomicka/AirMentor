@@ -1,0 +1,40 @@
+[2026-03-30T19:20:16Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:20:16Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/msruas-proof-sandbox.test.ts\ tests/proof-control-plane-activation-service.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > bootstraps the proof branch, batch, import, and run when the proof sandbox is missing 2786ms
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > does not duplicate proof seed records when recovery runs twice 3470ms
+ × tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > rebuilds the canonical proof batch shell when the proof cohort already exists 4377ms
+   → expected [ { …(24) } ] to have a length of 2 but got 1
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > updates the active operational semester, publishes the active projection, and emits audit payload details 5ms
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > does not republish projections when the target proof run is inactive 1ms
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > rejects semesters outside the proof run range before mutating state or audit 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > rebuilds the canonical proof batch shell when the proof cohort already exists
+AssertionError: expected [ { …(24) } ] to have a length of 2 but got 1
+
+- Expected
++ Received
+
+- 2
++ 1
+
+ ❯ tests/msruas-proof-sandbox.test.ts:248:24
+    246|       status: 'active',
+    247|     })
+    248|     expect(importRows).toHaveLength(2)
+       |                        ^
+    249|     expect(importRows.some(row => row.curriculumImportVersionId === MS…
+    250|     expect(importRows.some(row => row.curriculumImportVersionId === re…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 5 passed (6)
+   Start at  00:50:18
+   Duration  12.63s (transform 639ms, setup 0ms, import 1.79s, tests 10.64s, environment 0ms)
+

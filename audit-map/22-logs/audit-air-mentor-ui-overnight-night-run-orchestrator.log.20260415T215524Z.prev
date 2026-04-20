@@ -1,0 +1,12 @@
+[2026-04-15T21:25:45Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-15T21:25:45Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+[2026-04-15T21:25:46Z] COST WARNING: No native Codex spend API is wired into this audit OS; using class-based guardrails plus observed route health.
+session=audit-air-mentor-ui-bootstrap-claim-verification-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-claim-verification-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-claim-verification-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-claim-verification-pass.checkpoint
+[2026-04-15T21:52:10Z] COST WARNING: No native Codex spend API is wired into this audit OS; using class-based guardrails plus observed route health.
+session=audit-air-mentor-ui-bootstrap-unknown-omission-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unknown-omission-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-unknown-omission-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint

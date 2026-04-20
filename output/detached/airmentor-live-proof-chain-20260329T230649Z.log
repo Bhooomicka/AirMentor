@@ -1,0 +1,59 @@
+[2026-03-29T23:06:49Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T23:06:49Z] command=bash -lc PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ npm\ run\ verify:proof-closure:live\ \&\&\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ npm\ run\ playwright:admin-live:teaching-parity\ \&\&\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ npm\ run\ playwright:admin-live:acceptance 
+
+> air-mentor-ui@0.0.0 verify:proof-closure:live
+> AIRMENTOR_LIVE_STACK=1 bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running system admin proof-risk smoke...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+[smoke] step: login-system-admin
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-29T23:07:10.550Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-29T23:07:10.551Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=missing
+[smoke:session-response] 401 https://api-production-ab72.up.railway.app/api/session set-cookie=missing body={"error":"UNAUTHORIZED","message":"Authentication required"}
+[smoke:session-request] POST https://api-production-ab72.up.railway.app/api/session/login cookie=missing
+[smoke:session-response] 429 https://api-production-ab72.up.railway.app/api/session/login set-cookie=missing body={"error":"TOO_MANY_REQUESTS","message":"Too many login attempts. Please wait and try again."}
+[smoke] cookies after login: []
+[smoke] current step: login-system-admin
+[smoke] failure url: https://raed2180416.github.io/AirMentor/#/admin
+Failure HTML: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html
+System admin proof-risk smoke failed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png
+Trace: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip
+[browser] page closed unexpectedly
+[browser] browser disconnected unexpectedly
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+[AggregateError: All promises were rejected] {
+  [errors]: [
+    locator.waitFor: Timeout 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Logout', exact: true }) to be visible[22m
+    
+        at expectVisible (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:97:17)
+        at waitForSystemAdminShellReady (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:491:5)
+        at loginAsSystemAdmin (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:511:9)
+        at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:611:3 {
+      name: 'TimeoutError'
+    },
+    locator.waitFor: Timeout 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Operations Dashboard', { exact: true }).first() to be visible[22m
+    
+        at expectVisible (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:97:17)
+        at waitForSystemAdminShellReady (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:492:5)
+        at loginAsSystemAdmin (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:511:9)
+        at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:611:3 {
+      name: 'TimeoutError'
+    }
+  ]
+}
+
+Node.js v24.13.0

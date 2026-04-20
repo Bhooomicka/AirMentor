@@ -1,0 +1,14 @@
+pass_name=ml-optimal-model-deep-tune-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-ml-optimal-model-deep-tune-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=1
+caveman_mode=full
+last_event=running
+current_provider=google
+current_account=google-main
+current_model=gemini-3.1-pro-preview
+current_slot=google-main
+route_attempt=1
+last_checkpoint_at=2026-04-20T02:06:00Z
+execution_supervisor_pid=2104593

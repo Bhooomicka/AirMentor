@@ -1,0 +1,13 @@
+[2026-04-01T15:10:00Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T15:10:00Z] command=env AIRMENTOR_KEYBOARD_ARTIFACT_PREFIX=07c-local npm run playwright:admin-live:keyboard-regression 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:keyboard-regression
+> bash scripts/playwright-admin-live-keyboard-regression.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Another keyboard regression run is already active (pid 2665497).

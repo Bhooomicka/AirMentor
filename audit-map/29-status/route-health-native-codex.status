@@ -1,0 +1,5 @@
+cooldown_state=cooling-down
+cooldown_reason=Observed\ native\ Codex\ usage-limit\ reset\ hint:\ 10:29\ AM.
+cooldown_next_eligible_at=2026-04-20T04:59:00Z
+cooldown_source=native-log-hint
+cooldown_updated_at=2026-04-20T02:02:42Z

@@ -1,0 +1,16 @@
+[2026-03-30T17:02:39Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T17:02:39Z] command=npm test -- --run tests/system-admin-proof-dashboard-workspace.test.tsx tests/api-client.test.ts tests/proof-playback.test.ts 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/system-admin-proof-dashboard-workspace.test.tsx tests/api-client.test.ts tests/proof-playback.test.ts
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+
+ Test Files  3 passed (3)
+      Tests  13 passed (13)
+   Start at  22:32:39
+   Duration  450ms (transform 251ms, setup 0ms, import 455ms, tests 62ms, environment 0ms)
+
+[2026-03-30T17:02:40Z] exit=0

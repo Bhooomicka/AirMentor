@@ -1,0 +1,28 @@
+{
+  "totalSessions": 0,
+  "totalTokens": 0,
+  "totalCost": 0,
+  "activeDays": 0,
+  "longestStreak": 0,
+  "currentStreak": 0,
+  "longestSession": 0,
+  "peakHour": 12,
+  "modelUsage": {},
+  "dailyActivity": {},
+  "dailyCost": {},
+  "hourlyActivity": {},
+  "tokenBreakdown": {
+    "input": 0,
+    "output": 0,
+    "cacheRead": 0,
+    "cacheWrite": 0
+  },
+  "costBreakdown": {
+    "input": 0,
+    "output": 0,
+    "cacheRead": 0,
+    "cacheWrite": 0
+  },
+  "costPerDay": 0,
+  "costPerSession": 0
+}

@@ -1,0 +1,128 @@
+{
+  "findings": [
+    {
+      "finding_id": "P11-F01",
+      "prompt_id": "P11",
+      "check_id": "P11-C04",
+      "severity": "high",
+      "status": "closed",
+      "confidence": "high",
+      "adversarial_hypothesis": "Partial failure during academic repository writes causes phantom success UI because local cache is mutated before API call succeeds.",
+      "verification_sequence_executed": [
+        "Inspect src/repositories.ts",
+        "Write test tests/cross-flow-recovery.test.ts",
+        "Run test to confirm phantom success",
+        "Fix src/repositories.ts to revert cache on error",
+        "Run test to confirm fix"
+      ],
+      "repro_script_id": "tests/cross-flow-recovery.test.ts",
+      "expected_behavior": "If an API call fails during saveTasks, saveTimetableTemplates, saveTaskPlacements, or saveCalendarAudit, the local cache should not retain the failed mutation.",
+      "observed_behavior": "The local cache was mutated before the API call, and not reverted on failure, causing the UI to show the mutation as successful until the next full reload.",
+      "evidence_files": [
+        "src/repositories.ts",
+        "tests/cross-flow-recovery.test.ts"
+      ],
+      "evidence_commands": [
+        "npx vitest run tests/cross-flow-recovery.test.ts"
+      ],
+      "artifacts": [
+        "audit-map/17-artifacts/local/2026-04-18T070237Z--cross-flow-recovery--local--test-evidence.md"
+      ],
+      "race_condition_assessment": "This is a deterministic failure recovery bug, not a race condition.",
+      "security_impact": "Low security impact, but high data integrity impact.",
+      "user_impact": "Users believe their changes are saved, but they are lost on reload.",
+      "root_cause": "Optimistic cache mutation without rollback on API failure.",
+      "truth_drift_assessment": {
+        "drift_detected": true,
+        "drift_type": "code-vs-test",
+        "drift_evidence": [
+          "tests/cross-flow-recovery.test.ts"
+        ],
+        "drift_resolution_state": "resolved"
+      },
+      "intent_integrity_block": {
+        "feature_intent": "Academic repository writes should be durable and reflect backend state.",
+        "intent_source_refs": [
+          "src/repositories.ts"
+        ],
+        "intent_match": "mismatch",
+        "intent_gap": "Phantom success UI on network failure."
+      },
+      "logic_integrity_block": {
+        "preconditions": [
+          "Network failure during saveTasks"
+        ],
+        "decision_points": [
+          "API call fails"
+        ],
+        "failure_modes": [
+          "Local cache retains failed mutation"
+        ],
+        "fallacy_check": "fail",
+        "fallacy_notes": "Optimistic update without rollback."
+      },
+      "ux_integrity_block": {
+        "primary_user_journey": "Saving a task or timetable template.",
+        "friction_points": [
+          "Data loss on reload"
+        ],
+        "cognitive_load_risk": "high",
+        "accessibility_impact": "none"
+      },
+      "recovery_integrity_block": {
+        "degrade_behavior": "Show error message and revert UI state.",
+        "retry_or_rollback_strategy": "Rollback local cache on API failure.",
+        "user_safe_state": "UI reflects actual backend state.",
+        "observability_hook": "API error thrown and caught by caller."
+      },
+      "fix_recommendation": "Wrap API calls in try/catch and revert local cache on error.",
+      "regression_tests": [
+        "tests/cross-flow-recovery.test.ts"
+      ],
+      "closure_criteria": [
+        "Test passes with empty snapshot on failure"
+      ]
+    }
+  ],
+  "required_test_output": {
+    "coverage_rule": "One-to-one mapping: every open or blocked high/critical finding must have at least one test spec",
+    "high_critical_test_specs": [
+      {
+        "test_spec_id": "TS-P11-01",
+        "finding_id": "P11-F01",
+        "prompt_id": "P11",
+        "test_layer": "integration",
+        "test_type": "resilience",
+        "target_files": [
+          "src/repositories.ts"
+        ],
+        "seed_requirements": [
+          "baseline-seed.json"
+        ],
+        "preconditions": [
+          "Mock API client to reject saveAcademicTask"
+        ],
+        "steps": [
+          "Call repositories.tasks.saveTasks with a new task"
+        ],
+        "assertions": [
+          "Expect saveTasks to throw",
+          "Expect repositories.tasks.getTasksSnapshot to not contain the new task"
+        ],
+        "flake_controls": [
+          "Deterministic mock"
+        ],
+        "expected_result": "Local cache is reverted on API failure",
+        "failure_signature": "Snapshot contains the new task"
+      }
+    ],
+    "test_stub_snippets": [
+      {
+        "test_spec_id": "TS-P11-01",
+        "language": "typescript",
+        "framework": "vitest",
+        "snippet": "import { describe, it, expect, vi } from 'vitest'\nimport { createAirMentorRepositories } from '../src/repositories'\nimport type { AirMentorApiClientLike } from '../src/api/client'\nimport type { SharedTask } from '../src/domain'\n\ndescribe('Cross-Flow Recovery Pass', () => {\n  it('P11-C04: Partial failure recovery without phantom success UI (saveTasks)', async () => {\n    const mockClient = {\n      saveAcademicTask: vi.fn().mockRejectedValue(new Error('Network error')),\n    } as unknown as AirMentorApiClientLike\n\n    const repositories = createAirMentorRepositories({\n      repositoryMode: 'http',\n      apiClient: mockClient,\n      academicBootstrap: { /* ... */ },\n    })\n\n    const newTask: SharedTask = { /* ... */ }\n\n    await expect(repositories.tasks.saveTasks([newTask])).rejects.toThrow('Network error')\n\n    const snapshot = repositories.tasks.getTasksSnapshot(() => [])\n    expect(snapshot).toHaveLength(0)\n  })\n})"
+      }
+    ]
+  }
+}

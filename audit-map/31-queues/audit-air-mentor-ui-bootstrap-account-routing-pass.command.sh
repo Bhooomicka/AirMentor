@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/raed/projects/air-mentor-ui
+bash /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh --pass account-routing-pass --context bootstrap --prompt-bundle /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-account-routing-pass.prompt.md --last-message-file /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-account-routing-pass.last-message.md --provider native-codex --account native-codex-session --model gpt-5.4 --reasoning-effort xhigh --search 1 --provider-mode auto --wait-timeout-seconds 1800 --wait-poll-seconds 60 --status-file /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-account-routing-pass.status --checkpoint-file /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-account-routing-pass.checkpoint

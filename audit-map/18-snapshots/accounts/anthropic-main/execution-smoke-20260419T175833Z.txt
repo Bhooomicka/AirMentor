@@ -1,0 +1,62 @@
+++ local slot=anthropic-main
+++ shift
+++ ensure_arctic_slot_dirs anthropic-main
+++ local slot=anthropic-main
++++ arctic_slot_data_home anthropic-main
++++ local slot
+++++ arctic_slot_slug anthropic-main
+++++ local slot=anthropic-main
+++++ slugify anthropic-main
+++++ local input=anthropic-main
+++++ printf %s anthropic-main
+++++ tr '[:upper:]' '[:lower:]'
+++++ tr -cs a-z0-9 -
++++ slot=anthropic-main
++++ printf '%s/%s/data\n' /home/raed/.local/share/air-mentor-audit/arctic-slots anthropic-main
++++ arctic_slot_config_home anthropic-main
++++ local slot
+++++ arctic_slot_slug anthropic-main
+++++ local slot=anthropic-main
+++++ slugify anthropic-main
+++++ local input=anthropic-main
+++++ printf %s anthropic-main
+++++ tr '[:upper:]' '[:lower:]'
+++++ tr -cs a-z0-9 -
++++ slot=anthropic-main
++++ printf '%s/%s/config\n' /home/raed/.config/air-mentor-audit/arctic-slots anthropic-main
+++ mkdir -p /home/raed/.local/share/air-mentor-audit/arctic-slots/anthropic-main/data /home/raed/.config/air-mentor-audit/arctic-slots/anthropic-main/config
++++ arctic_slot_data_home anthropic-main
++++ local slot
+++++ arctic_slot_slug anthropic-main
+++++ local slot=anthropic-main
+++++ slugify anthropic-main
+++++ local input=anthropic-main
+++++ printf %s anthropic-main
+++++ tr '[:upper:]' '[:lower:]'
+++++ tr -cs a-z0-9 -
++++ slot=anthropic-main
++++ printf '%s/%s/data\n' /home/raed/.local/share/air-mentor-audit/arctic-slots anthropic-main
+++ XDG_DATA_HOME=/home/raed/.local/share/air-mentor-audit/arctic-slots/anthropic-main/data
++++ arctic_slot_config_home anthropic-main
++++ local slot
+++++ arctic_slot_slug anthropic-main
+++++ local slot=anthropic-main
+++++ slugify anthropic-main
+++++ local input=anthropic-main
+++++ printf %s anthropic-main
+++++ tr '[:upper:]' '[:lower:]'
+++++ tr -cs a-z0-9 -
++++ slot=anthropic-main
++++ printf '%s/%s/config\n' /home/raed/.config/air-mentor-audit/arctic-slots anthropic-main
+++ XDG_CONFIG_HOME=/home/raed/.config/air-mentor-audit/arctic-slots/anthropic-main/config
++++ arctic_slot_slug anthropic-main
++++ local slot=anthropic-main
++++ slugify anthropic-main
++++ local input=anthropic-main
++++ printf %s anthropic-main
++++ tr '[:upper:]' '[:lower:]'
++++ tr -cs a-z0-9 -
+++ ARCTIC_SLOT_ID=anthropic-main
+++ arctic run --format json --model anthropic/claude-3-7-sonnet-20250219 'Reply with exactly: execution-ok slot=anthropic-main model=claude-3-7-sonnet-20250219'
+[94m⠋ Working...[0m[94m⠙ Working...[0m[94m⠹ Working...[0m[94m⠸ Working...[0m[94m⠼ Working...[0m[94m⠴ Working...[0m[94m⠦ Working...[0m{"type":"error","timestamp":1776621514369,"sessionID":"ses_2591b1483ffebe9LT2ffHmkg97","error":{"name":"APIError","data":{"message":"model: claude-3-7-sonnet-20250219","statusCode":404,"isRetryable":false,"responseHeaders":{"anthropic-organization-id":"c6cb4546-f02c-44be-8176-45ae188f31d1","cf-cache-status":"DYNAMIC","cf-ray":"9eedcc4d3a7c3c01-BLR","connection":"keep-alive","content-encoding":"gzip","content-security-policy":"default-src 'none'; frame-ancestors 'none'","content-type":"application/json","date":"Sun, 19 Apr 2026 17:58:34 GMT","request-id":"req_011CaDZfPArESV493vGCuSqU","server":"cloudflare","server-timing":"x-originResponse;dur=117","strict-transport-security":"max-age=31536000; includeSubDomains; preload","transfer-encoding":"chunked","vary":"Accept-Encoding","x-envoy-upstream-service-time":"113","x-robots-tag":"none","x-should-retry":"false"},"responseBody":"{\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-3-7-sonnet-20250219\"},\"request_id\":\"req_011CaDZfPArESV493vGCuSqU\"}"}}}
+                                                  

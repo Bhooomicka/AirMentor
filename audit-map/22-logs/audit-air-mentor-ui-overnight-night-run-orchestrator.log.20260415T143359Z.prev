@@ -1,0 +1,10 @@
+[2026-04-15T14:31:56Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-15T14:31:56Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+[2026-04-15T14:31:56Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-15T14:55:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-data-flow-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-data-flow-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-data-flow-pass.checkpoint
+/home/raed/projects/air-mentor-ui/audit-map/16-scripts/run-audit-pass.sh: line 188: route_reason: unbound variable
+Overnight run stopped before data-flow-pass could launch. Queue entry retained.
+[2026-04-15T14:31:56Z] exit_code=65

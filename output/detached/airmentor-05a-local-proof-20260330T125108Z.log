@@ -1,0 +1,16 @@
+[2026-03-30T12:51:08Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T12:51:08Z] command=npm test -- --run tests/proof-surface-shell.test.tsx tests/system-admin-accessibility-contracts.test.tsx tests/system-admin-proof-dashboard-workspace.test.tsx tests/faculty-profile-proof.test.tsx tests/hod-pages.test.ts tests/risk-explorer.test.tsx tests/student-shell.test.tsx 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/proof-surface-shell.test.tsx tests/system-admin-accessibility-contracts.test.tsx tests/system-admin-proof-dashboard-workspace.test.tsx tests/faculty-profile-proof.test.tsx tests/hod-pages.test.ts tests/risk-explorer.test.tsx tests/student-shell.test.tsx
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+
+ Test Files  7 passed (7)
+      Tests  20 passed (20)
+   Start at  18:21:09
+   Duration  1.58s (transform 2.22s, setup 0ms, import 4.37s, tests 803ms, environment 1.57s)
+
+[2026-03-30T12:51:10Z] exit=0

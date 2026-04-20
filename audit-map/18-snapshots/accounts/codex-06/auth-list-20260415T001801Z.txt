@@ -1,0 +1,3 @@
+┌  Credentials [90m~/.local/share/air-mentor-audit/arctic-slots/codex-06/data/arctic/auth.json
+│
+└  0 credentials

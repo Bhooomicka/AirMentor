@@ -1,0 +1,4 @@
+[2026-04-14T22:34:51Z] session=audit-air-mentor-ui-bootstrap-smoke-job
+[2026-04-14T22:34:51Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-smoke-job.command.sh
+smoke-from-tmux
+[2026-04-14T22:34:51Z] exit_code=0

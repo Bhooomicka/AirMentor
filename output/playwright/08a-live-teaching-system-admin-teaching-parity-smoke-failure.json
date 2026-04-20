@@ -1,0 +1,21 @@
+{
+  "failedAt": "2026-04-01T18:31:52.906Z",
+  "appUrl": "https://raed2180416.github.io/AirMentor/",
+  "apiUrl": "https://api-production-ab72.up.railway.app/",
+  "pageUrl": "https://raed2180416.github.io/AirMentor/#/admin/faculty-members/t1",
+  "error": {
+    "name": "TimeoutError",
+    "message": "page.waitForFunction: Timeout 30000ms exceeded."
+  },
+  "pageErrors": [],
+  "consoleMessages": [
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.diagnostic\",\"level\":\"info\",\"timestamp\":\"2026-04-01T18:31:09.500Z\",\"details\":{\"workspace\":\"system-admin\",\"level\":\"info\",\"code\":\"FRONTEND_STARTUP_MODE\",\"message\":\"Running with production-like frontend origin expectations.\"}}"
+    },
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.ready\",\"level\":\"info\",\"timestamp\":\"2026-04-01T18:31:09.501Z\",\"details\":{\"workspace\":\"system-admin\",\"apiBaseUrl\":\"https://api-production-ab72.up.railway.app\",\"telemetrySinkConfigured\":false,\"diagnosticCount\":1,\"errorCount\":0}}"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+[2026-04-01T19:41:42Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T19:41:42Z] command=bash -lc log=\"/home/raed/projects/air-mentor-ui/output/detached/airmentor-08c-local-closeout-20260401T193930Z.log\"\;\ while\ true\;\ do\ if\ \[\ -f\ \"\$log\"\ \]\ \&\&\ tail\ -n\ 1\ \"\$log\"\ \|\ grep\ -q\ \"exit=\"\;\ then\ break\;\ fi\;\ sleep\ 15\;\ done\;\ if\ tail\ -n\ 1\ \"\$log\"\ \|\ grep\ -q\ \"exit=0\$\"\;\ then\ node\ scripts/snapshot-final-closeout-artifacts.mjs\ local\ 08c-local\;\ else\ echo\ \"08c\ local\ closeout\ failed\"\ \>\&2\;\ exit\ 1\;\ fi 

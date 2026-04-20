@@ -1,0 +1,24 @@
+[2026-04-15T20:46:04Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-15T20:46:04Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+[2026-04-15T20:46:04Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-15T21:23:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-claim-verification-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-claim-verification-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-claim-verification-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-claim-verification-pass.checkpoint
+[2026-04-15T20:46:37Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-15T21:23:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-unknown-omission-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unknown-omission-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-unknown-omission-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint
+[2026-04-15T20:47:40Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-15T21:23:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-residual-gap-closure-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.checkpoint
+[2026-04-15T20:48:43Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-15T21:23:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-closure-readiness-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-closure-readiness-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-closure-readiness-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-closure-readiness-pass.checkpoint
+Overnight queue complete.
+[2026-04-15T20:49:45Z] exit_code=0

@@ -1,0 +1,6 @@
+[2026-03-30T19:04:29Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:04:29Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ npx\ vitest\ run\ --reporter=verbose\ tests/openapi.test.ts\ tests/proof-control-plane-activation-service.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/openapi.test.ts > openapi > publishes the implemented route surface 5435ms

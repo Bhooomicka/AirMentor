@@ -1,0 +1,205 @@
+{
+  "stageId": "08C",
+  "scope": "local",
+  "prefix": "08c-local",
+  "copiedArtifacts": [
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-PROOF",
+      "surface": "system-admin-proof-control-plane",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-control-plane.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-proof-control-plane.png",
+      "copiedAt": "2026-04-01T21:21:47.433Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-PROOF",
+      "surface": "teacher-proof-panel",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/teacher-proof-panel.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-teacher-proof-panel.png",
+      "copiedAt": "2026-04-01T21:21:47.434Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-PROOF",
+      "surface": "teacher-risk-explorer",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/teacher-risk-explorer-proof.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-teacher-risk-explorer-proof.png",
+      "copiedAt": "2026-04-01T21:21:47.434Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-PROOF",
+      "surface": "hod-proof-analytics",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/hod-proof-analytics.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-hod-proof-analytics.png",
+      "copiedAt": "2026-04-01T21:21:47.435Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-PROOF",
+      "surface": "hod-risk-explorer",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/hod-risk-explorer-proof.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-hod-risk-explorer-proof.png",
+      "copiedAt": "2026-04-01T21:21:47.436Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-PROOF",
+      "surface": "student-shell",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/student-shell-proof.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-student-shell-proof.png",
+      "copiedAt": "2026-04-01T21:21:47.436Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-PROOF",
+      "surface": "proof-semester-activation-request-local",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-local-request.json",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-proof-semester-activation-local-request.json",
+      "copiedAt": "2026-04-01T21:21:47.436Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-PROOF",
+      "surface": "proof-semester-activation-response-local",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-local-response.json",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-proof-semester-activation-local-response.json",
+      "copiedAt": "2026-04-01T21:21:47.437Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-ACCEPTANCE",
+      "surface": "system-admin-live-acceptance-report",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance-report.json",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-live-acceptance-report.json",
+      "copiedAt": "2026-04-01T21:21:47.437Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-ACCEPTANCE",
+      "surface": "system-admin-live-acceptance",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-live-acceptance.png",
+      "copiedAt": "2026-04-01T21:21:47.437Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-REQUEST-FLOW",
+      "surface": "system-admin-live-request-flow-report",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-report.json",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-live-request-flow-report.json",
+      "copiedAt": "2026-04-01T21:21:47.438Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-REQUEST-FLOW",
+      "surface": "system-admin-live-request-flow",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-live-request-flow.png",
+      "copiedAt": "2026-04-01T21:21:47.438Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-TEACHING",
+      "surface": "system-admin-teaching-parity-smoke",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-teaching-parity-smoke.png",
+      "copiedAt": "2026-04-01T21:21:47.439Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-TEACHING",
+      "surface": "course-leader-dashboard-proof",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/course-leader-dashboard-proof.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-course-leader-dashboard-proof.png",
+      "copiedAt": "2026-04-01T21:21:47.440Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-TEACHING",
+      "surface": "mentor-view-proof",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/mentor-view-proof.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-mentor-view-proof.png",
+      "copiedAt": "2026-04-01T21:21:47.440Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-TEACHING",
+      "surface": "queue-history-proof",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/queue-history-proof.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-queue-history-proof.png",
+      "copiedAt": "2026-04-01T21:21:47.441Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-A11Y",
+      "surface": "system-admin-live-accessibility-report",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-report.json",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-live-accessibility-report.json",
+      "copiedAt": "2026-04-01T21:21:47.442Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-A11Y",
+      "surface": "system-admin-live-screen-reader-preflight",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-screen-reader-preflight.md",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-live-screen-reader-preflight.md",
+      "copiedAt": "2026-04-01T21:21:47.442Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-A11Y",
+      "surface": "system-admin-live-accessibility-regression",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-regression.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-live-accessibility-regression.png",
+      "copiedAt": "2026-04-01T21:21:47.442Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-KEYBOARD",
+      "surface": "system-admin-live-keyboard-regression-report",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-report.json",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-live-keyboard-regression-report.json",
+      "copiedAt": "2026-04-01T21:21:47.443Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-KEYBOARD",
+      "surface": "system-admin-live-keyboard-regression",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression.png",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-live-keyboard-regression.png",
+      "copiedAt": "2026-04-01T21:21:47.443Z"
+    },
+    {
+      "stageId": "08C",
+      "scope": "local",
+      "command": "CLOSEOUT-SESSION",
+      "surface": "system-admin-live-session-security-report",
+      "source": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-session-security-report.json",
+      "destination": "/home/raed/projects/air-mentor-ui/output/playwright/08c-local-system-admin-live-session-security-report.json",
+      "copiedAt": "2026-04-01T21:21:47.445Z"
+    }
+  ]
+}

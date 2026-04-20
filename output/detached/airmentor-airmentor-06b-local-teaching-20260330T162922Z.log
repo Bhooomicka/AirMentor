@@ -1,0 +1,32 @@
+[2026-03-30T16:29:22Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T16:29:22Z] command=npm run playwright:admin-live:teaching-parity 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:teaching-parity
+> bash scripts/playwright-admin-live-teaching-parity.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running sysadmin -> teaching parity smoke...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:38273
+Backend log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-backend.log
+Preview log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-teaching-preview.log
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForTimeout: Target page, context or browser has been closed
+    at clickAndSettle (/home/raed/projects/air-mentor-ui/scripts/system-admin-teaching-parity-smoke.mjs:64:14)
+    at async openNavItem (/home/raed/projects/air-mentor-ui/scripts/system-admin-teaching-parity-smoke.mjs:74:3)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-teaching-parity-smoke.mjs:187:3
+
+Node.js v24.13.0

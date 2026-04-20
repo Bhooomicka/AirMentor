@@ -1,0 +1,14 @@
+pass_name=proof-refresh-completion-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+current_provider=codex
+current_account=codex-02
+current_model=gpt-5.3-codex
+current_slot=codex-02
+route_attempt=1
+execution_supervisor_pid=4139339
+last_event=completed
+last_checkpoint_at=2026-04-15T23:45:37Z

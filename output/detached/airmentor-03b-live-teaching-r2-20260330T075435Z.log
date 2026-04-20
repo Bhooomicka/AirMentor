@@ -1,0 +1,18 @@
+[2026-03-30T07:54:37Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:54:37Z] command=zsh -lc AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\ npm\ run\ playwright:admin-live:teaching-parity 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:teaching-parity
+> bash scripts/playwright-admin-live-teaching-parity.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+error (ignored): SQLite database '/home/raed/.cache/nix/eval-cache-v6/9efa12214d74b63b1d4363aa6d7375f3072ea1597eff1e4c0570fa195870870f.sqlite' is busy
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running sysadmin -> teaching parity smoke...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+System admin -> teaching parity smoke passed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke.png
+[2026-03-30T07:55:03Z] exit=0

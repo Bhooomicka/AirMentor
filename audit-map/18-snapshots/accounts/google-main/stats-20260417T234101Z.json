@@ -1,0 +1,65 @@
+{
+  "totalSessions": 45,
+  "totalTokens": 445194,
+  "totalCost": 0.66841025,
+  "activeDays": 2,
+  "longestStreak": 2,
+  "currentStreak": 2,
+  "longestSession": 293118,
+  "peakHour": 23,
+  "modelUsage": {
+    "gemini-3-pro-preview": {
+      "count": 39,
+      "tokens": 0,
+      "cost": 0
+    },
+    "gemini-2.5-pro": {
+      "count": 1,
+      "tokens": 9883,
+      "cost": 0.01373625
+    },
+    "gemini-3.1-pro-preview": {
+      "count": 21,
+      "tokens": 435311,
+      "cost": 0.654674
+    }
+  },
+  "dailyActivity": {
+    "2026-04-16": 0,
+    "2026-04-15": 445194
+  },
+  "dailyCost": {
+    "2026-04-16": 0,
+    "2026-04-15": 0.66841025
+  },
+  "hourlyActivity": {
+    "0": 4,
+    "1": 3,
+    "2": 8,
+    "3": 1,
+    "4": 2,
+    "6": 1,
+    "15": 1,
+    "16": 1,
+    "18": 1,
+    "19": 4,
+    "20": 6,
+    "21": 2,
+    "22": 1,
+    "23": 10
+  },
+  "tokenBreakdown": {
+    "input": 293556,
+    "output": 7409,
+    "cacheRead": 144229,
+    "cacheWrite": 0
+  },
+  "costBreakdown": {
+    "input": 0.5798182500000001,
+    "output": 0.088592,
+    "cacheRead": 0,
+    "cacheWrite": 0
+  },
+  "costPerDay": 0.334205125,
+  "costPerSession": 0.014853561111111111
+}

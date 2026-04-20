@@ -1,0 +1,38 @@
+[2026-03-30T20:10:10Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:10:10Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/academic-bootstrap-routes.test.ts\ tests/academic-proof-routes.test.ts\ tests/academic-parity.test.ts\ -t\ \"validates\ a\ requested\ playback\ checkpoint\ against\ the\ checkpoint\ run\ instead\ of\ the\ first\ active\ run\ row\|passes\ checkpoint-backed\ student\ shell\ requests\ through\ the\ checkpoint-aware\ run\ resolver\|validates\ checkpoint\ session\ messages\ against\ the\ session\ run\ instead\ of\ an\ arbitrary\ active\ run\ row\|keeps\ academic\ playback\ checkpoints\ available\ when\ another\ proof\ run\ is\ also\ active\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof context and linked proof drilldowns aligned for the active teaching role
+ ↓ tests/academic-parity.test.ts > academic bootstrap > exposes non-overlapping faculty timetable blocks in the proof bootstrap for course-leader playback
+ ↓ tests/academic-parity.test.ts > academic bootstrap > ignores legacy academic asset snapshots and derives the live view from admin-owned records
+ ↓ tests/academic-parity.test.ts > academic bootstrap > reflects admin master-data changes into the academic bootstrap on the next fetch
+ ↓ tests/academic-parity.test.ts > academic bootstrap > persists resolved course outcomes, offering schemes, and question papers through backend-owned routes
+ ↓ tests/academic-parity.test.ts > academic bootstrap > persists authoritative queue, calendar workspace, attendance, and TT1 entry state through the teaching routes
+ ↓ tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof payloads and student drilldowns scoped for course leaders and mentors
+ ✓ tests/academic-parity.test.ts > academic bootstrap > keeps academic playback checkpoints available when another proof run is also active 58151ms
+ ✓ tests/academic-bootstrap-routes.test.ts > academic bootstrap routes > validates a requested playback checkpoint against the checkpoint run instead of the first active run row 112ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/academic-proof-routes.test.ts [ tests/academic-proof-routes.test.ts ]
+Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+ ❯ src/modules/academic-proof-routes.ts:16:1
+     14| import { badRequest, notFound } from '../lib/http-errors.js'
+     15| import { parseJson, stringifyJson } from '../lib/json.js'
+     16| import {
+       | ^
+     17|   buildHodProofAnalytics,
+     18|   buildStudentAgentCard,
+
+Caused by: ReferenceError: Cannot access 'buildHodProofAnalytics' before initialization
+ ❯ tests/academic-proof-routes.test.ts:13:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  2 passed | 7 skipped (9)
+   Start at  01:40:11
+   Duration  60.58s (transform 815ms, setup 0ms, import 1.55s, tests 58.27s, environment 0ms)
+

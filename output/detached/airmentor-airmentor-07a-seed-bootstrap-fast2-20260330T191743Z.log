@@ -1,0 +1,15 @@
+[2026-03-30T19:17:43Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:17:43Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ npx\ vitest\ run\ --reporter=verbose\ --maxWorkers=1\ tests/msruas-proof-sandbox.test.ts\ tests/msruas-curriculum-compiler.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > bootstraps the proof branch, batch, import, and run when the proof sandbox is missing 2752ms
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > does not duplicate proof seed records when recovery runs twice 2760ms
+ ✓ tests/msruas-curriculum-compiler.test.ts > msruas curriculum compiler > compiles the embedded MNC manifest when no workbook file is available 4ms
+
+ Test Files  2 passed (2)
+      Tests  3 passed (3)
+   Start at  00:47:45
+   Duration  7.02s (transform 600ms, setup 0ms, import 1.28s, tests 5.52s, environment 0ms)
+
+[2026-03-30T19:17:52Z] exit=0

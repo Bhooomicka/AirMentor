@@ -1,0 +1,23 @@
+[2026-03-30T20:40:25Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:40:25Z] command=zsh -lc $'export PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\nnode --input-type=module <<\'NODE\'\nimport assert from "node:assert/strict"\nconst api = process.env.PLAYWRIGHT_API_URL\nconst origin = new URL(process.env.PLAYWRIGHT_APP_URL).origin\nconst loginResponse = await fetch(new URL("/api/session/login", api), { method: "POST", headers: { origin, "content-type": "application/json" }, body: JSON.stringify({ identifier: process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER, password: process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD }) })\nconst loginBody = await loginResponse.json()\nconst setCookies = typeof loginResponse.headers.getSetCookie === "function" ? loginResponse.headers.getSetCookie() : [loginResponse.headers.get("set-cookie")].filter(Boolean)\nconst cookieHeader = setCookies.map(v => v.split(";", 1)[0]).join("; ")\nconst headers = { origin, cookie: cookieHeader, "content-type": "application/json", "x-airmentor-csrf": loginBody.csrfToken }\nconst dash = await fetch(new URL("/api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard", api), { headers: { origin, cookie: cookieHeader } }).then(async r => ({ status: r.status, body: await r.json() }))\nconst runId = dash.body.activeRunDetail.simulationRunId\nconsole.log("before", JSON.stringify({ dashboardStatus: dash.status, runId, activeOperationalSemester: dash.body.activeRunDetail.activeOperationalSemester }))\nfor (const semesterNumber of [4, 6]) {\n  const response = await fetch(new URL(`/api/admin/proof-runs/${encodeURIComponent(runId)}/activate-semester`, api), { method: "POST", headers, body: JSON.stringify({ semesterNumber }) })\n  const text = await response.text()\n  console.log("activate", semesterNumber, response.status, text.slice(0, 1200))\n  assert.equal(response.status, 200, `activate ${semesterNumber} failed`)\n}\nNODE' 
+before {"dashboardStatus":200,"runId":"sim_mnc_2023_first6_v1","activeOperationalSemester":4}
+activate 4 500 {"error":"INTERNAL_SERVER_ERROR","message":"Unexpected server error"}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: activate 4 failed
+
+500 !== 200
+
+    at file:///home/raed/projects/air-mentor-ui/[eval1]:16:10
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 500,
+  expected: 200,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.13.0

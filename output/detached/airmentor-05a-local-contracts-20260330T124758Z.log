@@ -1,0 +1,45 @@
+[2026-03-30T12:48:00Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T12:48:00Z] command=npm test -- --run tests/system-admin-accessibility-contracts.test.tsx tests/proof-surface-shell.test.tsx tests/system-admin-proof-dashboard-workspace.test.tsx tests/faculty-profile-proof.test.tsx tests/hod-pages.test.ts tests/risk-explorer.test.tsx tests/student-shell.test.tsx 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/system-admin-accessibility-contracts.test.tsx tests/proof-surface-shell.test.tsx tests/system-admin-proof-dashboard-workspace.test.tsx tests/faculty-profile-proof.test.tsx tests/hod-pages.test.ts tests/risk-explorer.test.tsx tests/student-shell.test.tsx
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+ ❯ tests/proof-surface-shell.test.tsx (2 tests | 2 failed) 5ms
+     × renders the shared proof shell owner and floating launcher contract 3ms
+     × renders the shared tablist and active panel contract 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/proof-surface-shell.test.tsx > ProofSurfaceShell > renders the shared proof shell owner and floating launcher contract
+ReferenceError: React is not defined
+ ❯ tests/proof-surface-shell.test.tsx:55:7
+     53|   it('renders the shared proof shell owner and floating launcher contr…
+     54|     render(
+     55|       <ProofSurfaceHero
+       |       ^
+     56|         surface="proof-shell-test"
+     57|         eyebrow="Proof Shell"
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/proof-surface-shell.test.tsx > ProofSurfaceShell > renders the shared tablist and active panel contract
+ReferenceError: React is not defined
+ ❯ tests/proof-surface-shell.test.tsx:77:12
+     75|
+     76|   it('renders the shared tablist and active panel contract', () => {
+     77|     render(<ProofTabsHarness />)
+       |            ^
+     78|
+     79|     const tablist = screen.getByRole('tablist', { name: 'Shared proof …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 6 passed (7)
+      Tests  2 failed | 18 passed (20)
+   Start at  18:18:00
+   Duration  2.03s (transform 2.42s, setup 0ms, import 5.14s, tests 688ms, environment 2.07s)
+

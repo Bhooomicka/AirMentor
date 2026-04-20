@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-04-01T13:42:15.384Z",
+  "stack": "live",
+  "appUrl": "https://raed2180416.github.io/AirMentor/",
+  "apiUrl": "https://api-production-ab72.up.railway.app/",
+  "batchId": "batch_branch_mnc_btech_2023",
+  "routeHash": "#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+  "simulationRunId": "sim_mnc_2023_first6_v1",
+  "previousOperationalSemester": 3,
+  "availableOperationalSemesters": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "semesterTargets": [
+    1,
+    2,
+    3
+  ],
+  "restoreResponse": null,
+  "summaries": [
+    {
+      "semesterNumber": 1,
+      "activationRequest": {
+        "semesterNumber": 1
+      },
+      "activationResponse": {
+        "ok": true,
+        "simulationRunId": "sim_mnc_2023_first6_v1",
+        "batchId": "batch_branch_mnc_btech_2023",
+        "activeOperationalSemester": 1,
+        "previousOperationalSemester": 6
+      },
+      "selectedCheckpoint": {
+        "simulationStageCheckpointId": "stage_checkpoint_78ee47d5a45be74db6419d24",
+        "semesterNumber": 1,
+        "stageKey": "post-see",
+        "stageLabel": "Post SEE",
+        "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+        "stageOrder": 5
+      }
+    },
+    {
+      "semesterNumber": 2,
+      "activationRequest": {
+        "semesterNumber": 2
+      },
+      "activationResponse": {
+        "ok": true,
+        "simulationRunId": "sim_mnc_2023_first6_v1",
+        "batchId": "batch_branch_mnc_btech_2023",
+        "activeOperationalSemester": 2,
+        "previousOperationalSemester": 1
+      },
+      "selectedCheckpoint": {
+        "simulationStageCheckpointId": "stage_checkpoint_d6aa3455a8cf8433f94ab773",
+        "semesterNumber": 2,
+        "stageKey": "post-see",
+        "stageLabel": "Post SEE",
+        "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+        "stageOrder": 5
+      }
+    },
+    {
+      "semesterNumber": 3,
+      "activationRequest": {
+        "semesterNumber": 3
+      },
+      "activationResponse": {
+        "ok": true,
+        "simulationRunId": "sim_mnc_2023_first6_v1",
+        "batchId": "batch_branch_mnc_btech_2023",
+        "activeOperationalSemester": 3,
+        "previousOperationalSemester": 2
+      },
+      "selectedCheckpoint": {
+        "simulationStageCheckpointId": "stage_checkpoint_6452ecb8ca56b5b88168e2da",
+        "semesterNumber": 3,
+        "stageKey": "post-see",
+        "stageLabel": "Post SEE",
+        "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+        "stageOrder": 5
+      }
+    }
+  ]
+}

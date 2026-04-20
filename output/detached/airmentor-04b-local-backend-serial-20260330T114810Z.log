@@ -1,0 +1,35 @@
+[2026-03-30T11:48:11Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T11:48:11Z] command=bash -lc cd\ air-mentor-api\ \&\&\ timeout\ 900s\ npx\ vitest\ run\ --maxWorkers=1\ --reporter=verbose\ tests/hod-proof-analytics.test.ts\ tests/risk-explorer.test.ts\ tests/student-agent-shell.test.ts\ tests/academic-access.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/risk-explorer.test.ts > student risk explorer > returns checkpoint-bound proof analysis for an in-scope course leader and matches shell evidence 59631ms
+ ✓ tests/risk-explorer.test.ts > student risk explorer > enforces scoped access and lets sysadmin inspect an archived run explicitly 3933ms
+ ✓ tests/risk-explorer.test.ts > student risk explorer > uses the activated proof semester for the default risk explorer while keeping checkpoint playback separate 66091ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > serves live in-scope HoD analytics and reconciles with dashboard and faculty profile 4733ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps a department-scoped HoD in scope even when the active proof batch is on a sibling branch 3989ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps an in-scope HoD role grant authoritative when faculty appointments drift out of scope 4074ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps HoD analytics in scope when another active HoD grant matches the proof department 5752ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > returns an empty view for HODs outside the active proof department scope 7973ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > supports deterministic filtering for section, risk band, and reassessment status 7350ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > projects checkpoint-scoped HoD analytics without exposing no-action comparator fields 161489ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps explicit checkpoint playback available even if the run active flag drifts off 123639ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > does not expose inactive runs in the HoD summary 3986ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > uses the activated proof semester as the default HoD slice while keeping checkpoint playback separate 83649ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > returns a deterministic card and bounded replies for in-scope course leaders 61210ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > enforces mentor and HoD scope and allows system admin archived-run inspection 3979ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > allows HOD student shell access when the active role grant remains in scope after appointment drift 3729ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > allows HOD student shell access when a second active HoD grant matches the proof department 3714ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > uses the activated proof semester for the default student shell while keeping checkpoint playback separate 62883ms
+ ✓ tests/academic-access.test.ts > academic access decisions > rejects non-admin proof run selection with a stable access code 2ms
+ ✓ tests/academic-access.test.ts > academic access decisions > allows system admin to inspect inactive proof runs 0ms
+ ✓ tests/academic-access.test.ts > academic access decisions > requires faculty context for academic roles 0ms
+ ✓ tests/academic-access.test.ts > academic access decisions > rejects mentor access to offering-owned config 0ms
+ ✓ tests/academic-access.test.ts > academic access decisions > rejects student shell session messages outside the viewer scope 0ms
+
+ Test Files  4 passed (4)
+      Tests  23 passed (23)
+   Start at  17:18:12
+   Duration  675.53s (transform 1.13s, setup 0ms, import 3.10s, tests 671.81s, environment 0ms)
+
+[2026-03-30T11:59:28Z] exit=0

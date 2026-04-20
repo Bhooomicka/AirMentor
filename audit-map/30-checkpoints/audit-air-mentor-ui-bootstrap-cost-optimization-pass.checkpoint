@@ -1,0 +1,17 @@
+pass_name=cost-optimization-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-cost-optimization-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=1
+caveman_mode=full
+stop_reason=No\ progress\ signal\ observed\ for\ 1200s.
+runtime_failure_class=stalled-no-progress
+runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-cost-optimization-pass.attempt-1.yEn1E9.log
+current_provider=github-copilot
+current_account=copilot-accneww432
+current_model=gpt-5.3-codex
+current_slot=copilot-accneww432
+route_attempt=2
+execution_supervisor_pid=3080595
+last_event=completed
+last_checkpoint_at=2026-04-18T03:17:40Z

@@ -1,0 +1,48 @@
+{
+  "mode": "preflight",
+  "generatedAt": "2026-04-17T20:44:59.033Z",
+  "railwayService": "api",
+  "railwayEnvironment": "production",
+  "expectedFrontendOrigin": "https://raed2180416.github.io",
+  "status": "failed",
+  "checks": {
+    "csrfSecretPresent": true,
+    "corsAllowedOrigins": "https://raed2180416.github.io,http://127.0.0.1:5173,http://localhost:5173,http://127.0.0.1:4173,http://localhost:4173",
+    "sessionCookieSecure": "true",
+    "sessionCookieSameSite": "none",
+    "telemetrySinkConfigured": false,
+    "databaseUrlConfigured": true,
+    "host": "0.0.0.0",
+    "railwayServiceInspection": {
+      "environment": "production",
+      "postgresServices": [
+        {
+          "serviceName": "Postgres-N4K8",
+          "status": "FAILED",
+          "sleepApplication": false,
+          "configErrors": [
+            "Free plan deployments must be serverless. Please go to your service settings and turn on the serverless flag."
+          ]
+        },
+        {
+          "serviceName": "Postgres",
+          "status": "FAILED",
+          "sleepApplication": false,
+          "configErrors": [
+            "Free plan deployments must be serverless. Please go to your service settings and turn on the serverless flag."
+          ]
+        }
+      ]
+    }
+  },
+  "syncedUpdates": [],
+  "bootSmoke": null,
+  "deployPathSmoke": null,
+  "issues": [
+    "Railway database service 'Postgres-N4K8' reports config error: Free plan deployments must be serverless. Please go to your service settings and turn on the serverless flag.",
+    "Railway database service 'Postgres' reports config error: Free plan deployments must be serverless. Please go to your service settings and turn on the serverless flag."
+  ],
+  "warnings": [
+    "AIRMENTOR_TELEMETRY_SINK_URL is not configured; external telemetry forwarding will remain disabled."
+  ]
+}

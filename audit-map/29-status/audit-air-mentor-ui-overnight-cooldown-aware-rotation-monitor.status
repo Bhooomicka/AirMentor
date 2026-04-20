@@ -1,0 +1,15 @@
+started_at=2026-04-18T00:40:27Z
+last_check=2026-04-20T01:42:35Z
+rotation_attempts=0
+finished_at=2026-04-20T01:47:58Z
+tmux_visibility=missing
+session_name=audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor
+pass_name=cooldown-aware-rotation-monitor
+context=overnight
+workdir=/home/raed/projects/air-mentor-ui
+state=completed
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor.checkpoint
+created_at=2026-04-18T00:40:42Z
+updated_at=2026-04-20T02:03:35Z

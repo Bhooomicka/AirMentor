@@ -1,0 +1,9 @@
+{
+  "browser": {
+    "browserName": "firefox",
+    "launchOptions": {
+      "executablePath": "/etc/profiles/per-user/raed/bin/zen-browser",
+      "headless": true
+    }
+  }
+}

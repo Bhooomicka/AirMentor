@@ -1,0 +1,2 @@
+[92m[1mModels cache refreshed[0m
+[91m[1mError: [0mProvider not found: anthropic

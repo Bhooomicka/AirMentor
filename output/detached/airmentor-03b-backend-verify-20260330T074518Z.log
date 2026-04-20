@@ -1,0 +1,40 @@
+[2026-03-30T07:45:18Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:45:18Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ npx\ vitest\ run\ tests/admin-hierarchy.test.ts\ tests/academic-access.test.ts\ tests/academic-parity.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ❯ tests/admin-hierarchy.test.ts (7 tests | 1 failed) 34294ms
+     × returns labeled appointments, grants, and provenance in the faculty admin list 4081ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/admin-hierarchy.test.ts > admin hierarchy routes > returns labeled appointments, grants, and provenance in the faculty admin list
+AssertionError: expected { kind: 'policy-override', …(3) } to match object { kind: 'default-policy', …(1) }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "kind": "default-policy",
+-   "scopeType": "section",
++   "kind": "policy-override",
++   "scopeType": "institution",
+  }
+
+ ❯ tests/admin-hierarchy.test.ts:753:40
+    751|       sectionCode: 'A',
+    752|     })
+    753|     expect(listedFaculty.resolvedFrom).toBeTruthy()
+       |                                        ^
+    754|     expect(['default-policy', 'policy-override']).toContain(listedFacu…
+    755|     expect(listedFaculty.resolvedFrom.label).toBeTruthy()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 16 passed (17)
+   Start at  13:15:20
+   Duration  60.49s (transform 910ms, setup 0ms, import 2.02s, tests 58.16s, environment 0ms)
+

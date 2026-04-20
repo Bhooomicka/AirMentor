@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-03-28T18:01:04.915Z",
+  "appUrl": "https://raed2180416.github.io/AirMentor/",
+  "apiUrl": "https://api-production-ab72.up.railway.app",
+  "allowedOrigin": "https://raed2180416.github.io",
+  "checks": [],
+  "error": {
+    "message": "expected response csrfToken\n+ actual - expected\n\n+ 'undefined'\n- 'string'\n",
+    "stack": "AssertionError [ERR_ASSERTION]: expected response csrfToken\n+ actual - expected\n\n+ 'undefined'\n- 'string'\n\n    at file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-session-security.mjs:89:10\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)"
+  }
+}

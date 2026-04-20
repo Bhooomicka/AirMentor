@@ -1,0 +1,17 @@
+[2026-04-01T19:17:33Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T19:17:33Z] command=env AIRMENTOR_DENIED_ARTIFACT_PREFIX=08b-live-denied AIRMENTOR_LIVE_STACK=1 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 node scripts/hod-proof-invalid-checkpoint-probe.mjs 
+[denied] login system admin
+[denied] POST /api/session/login
+[denied] read seeded proof dashboard
+[denied] GET /api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard
+[denied] resolve seeded HoD password
+[denied] POST /api/session/login
+[denied] POST /api/session/login
+[denied] login HoD and switch role if needed
+[denied] POST /api/session/login
+[denied] POST /api/session/role-context
+[denied] request invalid checkpoint risk explorer
+[denied] GET /api/academic/students/student_675135a6-1349-4658-85d5-1b1b07258a1c/risk-explorer?simulationStageCheckpointId=stage_checkpoint_invalid_08b_live
+HoD invalid-checkpoint probe passed. Report: output/playwright/hod-proof-invalid-checkpoint-live.json
+Prefixed denied-path report: output/playwright/08b-live-denied-hod-proof-invalid-checkpoint-live.json
+[2026-04-01T19:17:38Z] exit=0

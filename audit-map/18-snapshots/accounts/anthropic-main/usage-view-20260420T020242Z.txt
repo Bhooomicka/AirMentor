@@ -1,0 +1,11 @@
+/usage
+Fetching usage...
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│  Usage summary · 2026-04-20T02:02:45.924Z                                                             │
+│                                                                                                       │
+│  Visit https://chatgpt.com/codex/settings/usage for up-to-date                                        │
+│  information on rate limits and credits                                                               │
+│                                                                                                       │
+│  Anthropic                                                                                            │
+│    Error   : Failed to refresh Anthropic token. Run `arctic auth login` to reconnect your account.    │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯

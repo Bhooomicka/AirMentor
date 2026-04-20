@@ -1,0 +1,379 @@
+{
+  "prompt_id": "P9",
+  "schema_version": "1.1",
+  "captured_at": "2026-04-18T00:45:56Z",
+  "gate_result": "PASS",
+  "findings": [
+    {
+      "finding_id": "P9-F01",
+      "prompt_id": "P9",
+      "check_id": "P9-C03",
+      "severity": "high",
+      "status": "closed",
+      "confidence": "high",
+      "adversarial_hypothesis": "Operator-facing summary artifacts can lag a later control-plane rerun and mislead resume decisions about queue head, active session, and tmux visibility.",
+      "verification_sequence_executed": [
+        "Read audit-map/32-reports/current-run-status.md",
+        "Read audit-map/32-reports/operator-dashboard.md",
+        "Read audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status",
+        "Read audit-map/29-status/audit-air-mentor-ui-overnight-night-run-orchestrator.status",
+        "Read audit-map/29-status/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.status",
+        "Read audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint",
+        "Captured audit-map/18-snapshots/repo/2026-04-18T004556Z--truth-drift-control-plane-snapshot.txt",
+        "Ran direct tmux ls / tmux has-session probes",
+        "Ran bash audit-map/16-scripts/tmux-job-status.sh truth-drift-reconciliation-pass bootstrap"
+      ],
+      "repro_script_id": "P9-R04",
+      "expected_behavior": "Current operator summaries should track the newest queue/status/checkpoint/log truth and should not overstate tmux presence when direct tmux access is denied in the current shell.",
+      "observed_behavior": "After the 2026-04-18T00:40Z control-plane rerun, current-run-status still described the earlier 00:23Z snapshot and operator-dashboard still showed tmux present even though direct tmux probes from this shell returned Operation not permitted.",
+      "evidence_files": [
+        "audit-map/18-snapshots/repo/2026-04-18T004556Z--truth-drift-control-plane-snapshot.txt",
+        "audit-map/32-reports/current-run-status.md",
+        "audit-map/32-reports/operator-dashboard.md",
+        "audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status",
+        "audit-map/29-status/audit-air-mentor-ui-overnight-night-run-orchestrator.status",
+        "audit-map/29-status/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.status"
+      ],
+      "evidence_commands": [
+        "tmux ls",
+        "tmux has-session -t audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass",
+        "bash audit-map/16-scripts/tmux-job-status.sh truth-drift-reconciliation-pass bootstrap"
+      ],
+      "artifacts": [
+        "audit-map/18-snapshots/repo/2026-04-18T004556Z--truth-drift-control-plane-snapshot.txt",
+        "audit-map/32-reports/current-run-status.md",
+        "audit-map/32-reports/operator-dashboard.md"
+      ],
+      "race_condition_assessment": "A second control-plane wave restarted orchestrator sessions after the earlier 00:23Z refresh, so point-in-time summary artifacts drifted until regenerated.",
+      "security_impact": "low direct security impact; high control-plane integrity impact for recovery decisions",
+      "user_impact": "Operators can target the wrong active session or assume tmux visibility that the current shell does not have.",
+      "root_cause": "Summary reports were not refreshed after later status churn, and tmux visibility changed relative to the earlier dashboard generation context.",
+      "truth_drift_assessment": {
+        "drift_detected": true,
+        "drift_type": "status-vs-reality",
+        "drift_evidence": [
+          "audit-map/18-snapshots/repo/2026-04-18T004556Z--truth-drift-control-plane-snapshot.txt",
+          "audit-map/32-reports/current-run-status.md",
+          "audit-map/32-reports/operator-dashboard.md"
+        ],
+        "drift_resolution_state": "resolved"
+      },
+      "intent_integrity_block": {
+        "feature_intent": "Operator summaries should be the latest human-readable view of the audit control plane.",
+        "intent_source_refs": [
+          "audit-map/32-reports/current-run-status.md",
+          "audit-map/16-scripts/operator-dashboard.py",
+          "audit-map/00-governance/future-agent-operating-manual.md"
+        ],
+        "intent_match": "partial",
+        "intent_gap": "Artifacts lagged a later rerun until explicitly refreshed."
+      },
+      "logic_integrity_block": {
+        "preconditions": [
+          "Queue state mutates after summary generation",
+          "Status/checkpoint files are newer than summary markdown",
+          "Current shell may lack tmux access"
+        ],
+        "decision_points": [
+          "Which session is active",
+          "Whether tmux visibility can be trusted from the current shell",
+          "Which artifact wins when report prose and live control files disagree"
+        ],
+        "failure_modes": [
+          "Wrong resume point",
+          "False tmux-presence assumption",
+          "Operator acts on stale queue head"
+        ],
+        "fallacy_check": "pass",
+        "fallacy_notes": "Status/checkpoint/log precedence repaired the stale report state."
+      },
+      "ux_integrity_block": {
+        "primary_user_journey": "Operator checks current run state and chooses the next pass or recovery action.",
+        "friction_points": [
+          "current-run-status lagged the latest rerun",
+          "operator-dashboard overstated tmux visibility for this shell"
+        ],
+        "cognitive_load_risk": "high",
+        "accessibility_impact": "minor"
+      },
+      "recovery_integrity_block": {
+        "degrade_behavior": "When tmux is inaccessible, summaries must degrade to status/checkpoint/log truth instead of direct tmux claims.",
+        "retry_or_rollback_strategy": "Freeze a new snapshot, regenerate the dashboard, and rewrite current-run-status.",
+        "user_safe_state": "Use live .status + .checkpoint + .log files as the authoritative triad.",
+        "observability_hook": "audit-map/18-snapshots/repo/2026-04-18T004556Z--truth-drift-control-plane-snapshot.txt"
+      },
+      "fix_recommendation": "Regenerate operator summaries whenever a later control-plane rerun supersedes the previous snapshot and explicitly record tmux inaccessibility when present.",
+      "regression_tests": [
+        "P9-T01",
+        "P9-T02"
+      ],
+      "closure_criteria": [
+        "current-run-status reflects the latest 29-status/30-checkpoints truth",
+        "operator-dashboard reflects direct tmux probe result from the current shell",
+        "new snapshot captures pre-fix evidence"
+      ]
+    },
+    {
+      "finding_id": "P9-F02",
+      "prompt_id": "P9",
+      "check_id": "P9-C04",
+      "severity": "high",
+      "status": "closed",
+      "confidence": "high",
+      "adversarial_hypothesis": "Coverage can claim a pass is complete even when its declared report/findings artifacts are missing from disk.",
+      "verification_sequence_executed": [
+        "Read audit-map/23-coverage/coverage-ledger.md row 40",
+        "Checked existence of truth-drift report, findings JSON, and last-message files",
+        "Read audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.prompt.md",
+        "Wrote repaired report/findings/last-message bundle",
+        "Updated coverage, contradictions, and memory references"
+      ],
+      "repro_script_id": "P9-R03",
+      "expected_behavior": "A completed truth-drift pass row should only cite artifacts that exist on disk and match the current pass bundle.",
+      "observed_behavior": "Coverage cited truth-drift report and findings paths that did not exist, and the pass last-message file was also absent.",
+      "evidence_files": [
+        "audit-map/23-coverage/coverage-ledger.md",
+        "audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.prompt.md",
+        "audit-map/32-reports/truth-drift-reconciliation-report.md",
+        "audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md",
+        "audit-map/17-artifacts/local/2026-04-18T004556Z--truth-drift-reconciliation--local--findings.json"
+      ],
+      "evidence_commands": [
+        "test -e audit-map/32-reports/truth-drift-reconciliation-report.md",
+        "test -e audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md",
+        "test -e audit-map/17-artifacts/local/2026-04-18T004556Z--truth-drift-reconciliation--local--findings.json"
+      ],
+      "artifacts": [
+        "audit-map/32-reports/truth-drift-reconciliation-report.md",
+        "audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md",
+        "audit-map/17-artifacts/local/2026-04-18T004556Z--truth-drift-reconciliation--local--findings.json"
+      ],
+      "race_condition_assessment": "Coverage row was updated before the pass-scoped artifact bundle was actually persisted, so readers could trust a non-existent bundle.",
+      "security_impact": "low direct security impact; high evidence-integrity impact",
+      "user_impact": "Future agents can assume evidence exists, skip rechecking, and propagate false confidence.",
+      "root_cause": "Coverage ledger was advanced without verifying that the declared truth-drift report/findings files were present.",
+      "truth_drift_assessment": {
+        "drift_detected": true,
+        "drift_type": "artifact-vs-claim",
+        "drift_evidence": [
+          "audit-map/23-coverage/coverage-ledger.md",
+          "audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.prompt.md"
+        ],
+        "drift_resolution_state": "resolved"
+      },
+      "intent_integrity_block": {
+        "feature_intent": "Coverage rows should point future agents to the exact durable bundle produced by the pass.",
+        "intent_source_refs": [
+          "audit-map/README.md",
+          "audit-map/00-governance/analysis-rules.md",
+          "audit-map/23-coverage/coverage-ledger.md"
+        ],
+        "intent_match": "partial",
+        "intent_gap": "Completion was claimed before the report/findings/last-message bundle was actually present."
+      },
+      "logic_integrity_block": {
+        "preconditions": [
+          "Coverage row marks pass completed",
+          "Declared evidence paths should be checked on disk"
+        ],
+        "decision_points": [
+          "Does each cited artifact exist",
+          "Does the pass have a report, findings bundle, and last-message"
+        ],
+        "failure_modes": [
+          "False completion confidence",
+          "Broken evidence links",
+          "Later passes inherit missing artifacts as facts"
+        ],
+        "fallacy_check": "pass",
+        "fallacy_notes": "Repair required creating the missing bundle, not changing the pass scope."
+      },
+      "ux_integrity_block": {
+        "primary_user_journey": "Future operator opens coverage row and follows evidence links.",
+        "friction_points": [
+          "Broken path targets",
+          "Coverage row overclaims proof of completion"
+        ],
+        "cognitive_load_risk": "high",
+        "accessibility_impact": "minor"
+      },
+      "recovery_integrity_block": {
+        "degrade_behavior": "When declared artifacts are missing, treat the coverage row as non-creditable until the bundle exists.",
+        "retry_or_rollback_strategy": "Create the missing bundle, then refresh coverage and reconciliation references.",
+        "user_safe_state": "Follow on-disk artifacts only; do not trust unmatched coverage prose.",
+        "observability_hook": "audit-map/23-coverage/coverage-ledger.md row 40 plus the new findings/report files"
+      },
+      "fix_recommendation": "Require an existence check for every cited artifact before closing a truth-drift row in coverage.",
+      "regression_tests": [
+        "P9-T03",
+        "P9-T04"
+      ],
+      "closure_criteria": [
+        "truth-drift report exists on disk",
+        "truth-drift findings JSON exists on disk",
+        "truth-drift pass last-message exists on disk",
+        "coverage row cites the repaired bundle"
+      ]
+    }
+  ],
+  "required_test_output": {
+    "coverage_rule": "One-to-one mapping: every open or blocked high/critical finding must have at least one test spec",
+    "high_critical_test_specs": [
+      {
+        "test_spec_id": "P9-T01",
+        "finding_id": "P9-F01",
+        "prompt_id": "P9",
+        "test_layer": "contract",
+        "test_type": "regression",
+        "target_files": [
+          "audit-map/32-reports/current-run-status.md",
+          "audit-map/31-queues/pending.queue",
+          "audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status"
+        ],
+        "seed_requirements": [
+          "Later .status timestamps than current-run-status snapshot"
+        ],
+        "preconditions": [
+          "pending.queue exists",
+          "truth-drift status file exists"
+        ],
+        "steps": [
+          "Capture latest truth-drift/nightrun/usage-refresh status start times",
+          "Parse current-run-status.md",
+          "Assert summary timestamps are not older than controlling status timestamps"
+        ],
+        "assertions": [
+          "current-run-status active pass start time matches latest truth-drift status start time",
+          "night-run status text reflects the latest recorded state, not an older snapshot"
+        ],
+        "flake_controls": [
+          "Freeze a snapshot file before assertions",
+          "Compare against exact ISO timestamps"
+        ],
+        "expected_result": "Summary markdown matches latest control-plane timestamps.",
+        "failure_signature": "current-run-status references older run start times or stale night-run/usage-refresh states"
+      },
+      {
+        "test_spec_id": "P9-T02",
+        "finding_id": "P9-F01",
+        "prompt_id": "P9",
+        "test_layer": "contract",
+        "test_type": "race",
+        "target_files": [
+          "audit-map/16-scripts/operator-dashboard.py",
+          "audit-map/16-scripts/tmux-job-status.sh"
+        ],
+        "seed_requirements": [
+          "Current shell without tmux socket access"
+        ],
+        "preconditions": [
+          "tmux has-session returns permission-denied"
+        ],
+        "steps": [
+          "Run direct tmux has-session probe and capture stderr",
+          "Regenerate operator-dashboard",
+          "Assert dashboard tmux field is inaccessible/unknown, not present"
+        ],
+        "assertions": [
+          "dashboard active pass tmux field does not claim present when direct tmux probe is permission-denied",
+          "tmux-job-status reports tmux_present=unknown for the same shell"
+        ],
+        "flake_controls": [
+          "Use direct shell probe output as oracle",
+          "Run immediately after snapshot"
+        ],
+        "expected_result": "Dashboard and helper scripts degrade to inaccessible/unknown when tmux access is denied.",
+        "failure_signature": "dashboard or helper still reports tmux present/running while direct probe returns Operation not permitted"
+      },
+      {
+        "test_spec_id": "P9-T03",
+        "finding_id": "P9-F02",
+        "prompt_id": "P9",
+        "test_layer": "contract",
+        "test_type": "regression",
+        "target_files": [
+          "audit-map/23-coverage/coverage-ledger.md",
+          "audit-map/32-reports/truth-drift-reconciliation-report.md",
+          "audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md",
+          "audit-map/17-artifacts/local/2026-04-18T004556Z--truth-drift-reconciliation--local--findings.json"
+        ],
+        "seed_requirements": [
+          "Coverage row 40 present"
+        ],
+        "preconditions": [
+          "Coverage ledger row exists"
+        ],
+        "steps": [
+          "Extract all truth-drift evidence paths from coverage row 40",
+          "Assert each path exists on disk"
+        ],
+        "assertions": [
+          "No truth-drift evidence path in coverage row 40 is missing"
+        ],
+        "flake_controls": [
+          "Use exact path strings from coverage row"
+        ],
+        "expected_result": "Coverage row only names real files.",
+        "failure_signature": "One or more cited truth-drift artifacts are missing"
+      },
+      {
+        "test_spec_id": "P9-T04",
+        "finding_id": "P9-F02",
+        "prompt_id": "P9",
+        "test_layer": "integration",
+        "test_type": "parity",
+        "target_files": [
+          "audit-map/23-coverage/coverage-ledger.md",
+          "audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md",
+          "audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status"
+        ],
+        "seed_requirements": [
+          "Pass status file with last-message path in original command"
+        ],
+        "preconditions": [
+          "truth-drift status file exists"
+        ],
+        "steps": [
+          "Read truth-drift status file and confirm it names a last-message path",
+          "Assert pass last-message exists",
+          "Assert coverage row cites the same pass bundle family"
+        ],
+        "assertions": [
+          "Pass last-message exists whenever the status command names --last-message-file",
+          "Coverage row and pass bundle are consistent"
+        ],
+        "flake_controls": [
+          "Use status file as source of truth for expected pass bundle"
+        ],
+        "expected_result": "Pass bundle completeness is internally coherent across status and coverage.",
+        "failure_signature": "Status names a last-message file or coverage names a report/findings file that is absent"
+      }
+    ],
+    "test_stub_snippets": [
+      {
+        "test_spec_id": "P9-T01",
+        "language": "bash",
+        "framework": "shell",
+        "snippet": "python3 - <<'PY'\nfrom pathlib import Path\nimport re\nstatus = Path('audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status').read_text()\nsummary = Path('audit-map/32-reports/current-run-status.md').read_text()\nstart = re.search(r'^started_at=(.+)$', status, re.M).group(1)\nassert start in summary, f'missing latest start time {start} in current-run-status.md'\nPY"
+      },
+      {
+        "test_spec_id": "P9-T02",
+        "language": "bash",
+        "framework": "shell",
+        "snippet": "tmux has-session -t audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass 2>tmux.err || true\nbash audit-map/16-scripts/operator-dashboard.sh --write-only --no-ansi >/dev/null\nif grep -q 'Operation not permitted' tmux.err; then\n  rg -n 'tmux: `inaccessible`|tmux: `unknown`' audit-map/32-reports/operator-dashboard.md >/dev/null\nfi"
+      },
+      {
+        "test_spec_id": "P9-T03",
+        "language": "bash",
+        "framework": "shell",
+        "snippet": "python3 - <<'PY'\nfrom pathlib import Path\nrow = next(l for l in Path('audit-map/23-coverage/coverage-ledger.md').read_text().splitlines() if l.startswith('| Truth-drift reconciliation pass |'))\npaths = [p.strip(' `') for p in row.split('|')[3].split(',')]\nmissing = [p for p in paths if p and p.startswith('audit-map/') and not Path(p).exists()]\nassert not missing, missing\nPY"
+      },
+      {
+        "test_spec_id": "P9-T04",
+        "language": "bash",
+        "framework": "shell",
+        "snippet": "status='audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status'\nmsg='audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md'\nrg -n -- '--last-message-file' \"$status\" >/dev/null || true\ntest -f \"$msg\""
+      }
+    ]
+  }
+}

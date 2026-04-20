@@ -1,0 +1,8 @@
+pass_name=route-map-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-route-map-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+last_event=completed
+last_checkpoint_at=2026-04-15T09:52:54Z

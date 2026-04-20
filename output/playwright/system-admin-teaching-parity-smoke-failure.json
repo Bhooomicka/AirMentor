@@ -1,0 +1,104 @@
+{
+  "failedAt": "2026-04-16T10:16:00.333Z",
+  "appUrl": "http://127.0.0.1:4174",
+  "apiUrl": "http://127.0.0.1:34479",
+  "pageUrl": "http://127.0.0.1:4174/#/admin/faculty-members/mnc_t6",
+  "error": {
+    "name": "TimeoutError",
+    "message": "page.waitForFunction: Timeout 5000ms exceeded."
+  },
+  "pageErrors": [],
+  "consoleMessages": [
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.diagnostic\",\"level\":\"info\",\"timestamp\":\"2026-04-16T10:15:42.498Z\",\"details\":{\"workspace\":\"system-admin\",\"level\":\"info\",\"code\":\"FRONTEND_STARTUP_MODE\",\"message\":\"Running with local-first frontend origin expectations.\"}}"
+    },
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.ready\",\"level\":\"info\",\"timestamp\":\"2026-04-16T10:15:42.498Z\",\"details\":{\"workspace\":\"system-admin\",\"apiBaseUrl\":\"/\",\"telemetrySinkConfigured\":false,\"diagnosticCount\":1,\"errorCount\":0}}"
+    }
+  ],
+  "navState": [
+    {
+      "label": "Overview",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "Proof",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "Faculties",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "Students",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "Faculty Members",
+      "active": true,
+      "visible": true
+    },
+    {
+      "label": "Requests",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "DADr. Abhinav RaoMNC-T006 · Computer Science and EngineeringHas PermissionsCOURSE_LEADERMENTORAssistant Professor · abhinav.rao@msruas.ac.in",
+      "active": true,
+      "visible": true
+    },
+    {
+      "label": "DDDr. Devika ShettyMNC-T001 · Computer Science and EngineeringHas PermissionsHODCOURSE_LEADERMENTORProfessor & Programme Lead · devika.shetty@msruas.ac.in",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "DHDr. Harish BhatMNC-T008 · Computer Science and EngineeringHas PermissionsMENTORAssistant Professor · harish.bhat@msruas.ac.in",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "DKDr. Karan NaiduMNC-T004 · Computer Science and EngineeringHas PermissionsCOURSE_LEADERMENTORAssistant Professor · karan.naidu@msruas.ac.in",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "DNDr. Namrata ShahMNC-T009 · Computer Science and EngineeringHas PermissionsMENTORAssistant Professor · namrata.shah@msruas.ac.in",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "DNDr. Neha IyengarMNC-T007 · Computer Science and EngineeringHas PermissionsCOURSE_LEADERMENTORAssistant Professor · neha.iyengar@msruas.ac.in",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "DPDr. Priya RamanMNC-T003 · Computer Science and EngineeringHas PermissionsCOURSE_LEADERMENTORAssociate Professor · priya.raman@msruas.ac.in",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "DRDr. Rohit MenonMNC-T002 · Computer Science and EngineeringHas PermissionsCOURSE_LEADERMENTORAssociate Professor · rohit.menon@msruas.ac.in",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "DSDr. Sowmya KrishnanMNC-T005 · Computer Science and EngineeringHas PermissionsCOURSE_LEADERMENTORAssistant Professor · sowmya.krishnan@msruas.ac.in",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "DVDr. Vivek KumarMNC-T010 · Computer Science and EngineeringHas PermissionsMENTORAssistant Professor · vivek.kumar@msruas.ac.in",
+      "active": false,
+      "visible": true
+    }
+  ],
+  "proofSurfaces": []
+}

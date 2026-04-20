@@ -1,0 +1,129 @@
+{
+  "generatedAt": "2026-04-18T23:18:28.984Z",
+  "appUrl": "http://127.0.0.1:4173",
+  "artifacts": {
+    "successScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance.png",
+    "successReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance-report.json",
+    "failureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance-failure.png",
+    "failureReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance-failure.json",
+    "prefixedSuccessScreenshot": null,
+    "prefixedSuccessReport": null,
+    "prefixedFailureScreenshot": null,
+    "prefixedFailureReport": null
+  },
+  "checks": [
+    {
+      "name": "portal-entry",
+      "status": "passed"
+    },
+    {
+      "name": "system-admin-login",
+      "status": "passed"
+    },
+    {
+      "name": "hierarchy-selectors-visible",
+      "status": "passed"
+    },
+    {
+      "name": "hierarchy-selected",
+      "status": "passed",
+      "selectedHierarchy": {
+        "faculty": "Engineering and Technology",
+        "department": "Computer Science and Engineering",
+        "branch": "B.Tech CSE",
+        "year": "1st Year · 2025"
+      },
+      "scopedFacultiesUrl": "http://127.0.0.1:4173/#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_cse_btech/batches/batch_branch_cse_btech_2025"
+    },
+    {
+      "name": "workspace-overview",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-bands",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-ce-see",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-cgpa-formula",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-stage-gates",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-courses",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-provision",
+      "status": "passed"
+    },
+    {
+      "name": "hierarchy-tabs",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-reset-after-refresh",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-overview-refresh",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-bands",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-ce-see",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-cgpa-formula",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-stage-gates",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-courses",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-provision",
+      "status": "passed"
+    },
+    {
+      "name": "hierarchy-refresh",
+      "status": "passed"
+    },
+    {
+      "name": "overview-search-ready",
+      "status": "passed"
+    }
+  ],
+  "runtime": {
+    "pageErrors": [],
+    "consoleMessages": [
+      {
+        "type": "info",
+        "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.diagnostic\",\"level\":\"info\",\"timestamp\":\"2026-04-18T23:18:31.990Z\",\"details\":{\"workspace\":\"system-admin\",\"level\":\"info\",\"code\":\"FRONTEND_STARTUP_MODE\",\"message\":\"Running with local-first frontend origin expectations.\"}}"
+      },
+      {
+        "type": "info",
+        "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.ready\",\"level\":\"info\",\"timestamp\":\"2026-04-18T23:18:31.991Z\",\"details\":{\"workspace\":\"system-admin\",\"apiBaseUrl\":\"http://127.0.0.1:4173\",\"configuredPrimaryApiBaseUrl\":\"/\",\"activeApiSource\":\"primary\",\"usingApiFallback\":false,\"telemetrySinkConfigured\":false,\"diagnosticCount\":1,\"errorCount\":0}}"
+      }
+    ]
+  },
+  "failedAt": "2026-04-18T23:19:19.250Z",
+  "error": {
+    "name": "TimeoutError",
+    "message": "page.waitForFunction: Timeout 30000ms exceeded."
+  }
+}

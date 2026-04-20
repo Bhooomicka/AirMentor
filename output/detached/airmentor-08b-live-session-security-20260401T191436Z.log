@@ -1,0 +1,12 @@
+[2026-04-01T19:14:36Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T19:14:36Z] command=env AIRMENTOR_SESSION_SECURITY_ARTIFACT_PREFIX=08b-live-session-security AIRMENTOR_LIVE_STACK=1 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 npm run playwright:admin-live:session-security 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:session-security
+> bash scripts/playwright-admin-live-session-security.sh
+
+Running session security smoke...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+Session security smoke passed. Report: output/playwright/system-admin-live-session-security-report.json
+Prefixed session-security report: output/playwright/08b-live-session-security-system-admin-live-session-security-report.json
+[2026-04-01T19:14:39Z] exit=0

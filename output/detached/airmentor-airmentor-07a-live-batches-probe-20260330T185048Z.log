@@ -1,0 +1,58 @@
+[2026-03-30T18:50:50Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T18:50:50Z] command=bash /tmp/airmentor-live-batches-probe.sh 
+{
+  "count": 44,
+  "hasProofBatch": false,
+  "proofBatch": null,
+  "sample": [
+    {
+      "batchId": "batch_0f90ee40-f0fe-41e8-8d7a-90c73a60e1fd",
+      "branchId": "branch_42ff97c3-162c-4fbe-97e6-46574a0467b2",
+      "batchLabel": "2028-A",
+      "currentSemester": 6
+    },
+    {
+      "batchId": "batch_8906e113-562a-461a-890d-84f7600a6952",
+      "branchId": "branch_e7fc8044-7c30-49d0-b1d9-60319af76c80",
+      "batchLabel": "2028",
+      "currentSemester": 5
+    },
+    {
+      "batchId": "batch_9197487d-f40f-4720-8501-a6417700a65f",
+      "branchId": "branch_e44ea038-a306-4279-a91a-514a939b9a28",
+      "batchLabel": "2028",
+      "currentSemester": 5
+    },
+    {
+      "batchId": "batch_d4daba5b-82ae-48c8-9ef8-8c1f2e88e7d5",
+      "branchId": "branch_cc055ed8-cd20-4623-9fa8-f4f841224975",
+      "batchLabel": "2028",
+      "currentSemester": 5
+    },
+    {
+      "batchId": "batch_7eaef035-6e20-44d8-98a0-31fd4461f47c",
+      "branchId": "branch_3adbaf37-704e-42e8-81e7-ca3d685e186a",
+      "batchLabel": "2028",
+      "currentSemester": 5
+    },
+    {
+      "batchId": "batch_f3aec6bc-5615-4af6-a516-ab46cf91fdcb",
+      "branchId": "branch_c671f736-a723-471c-98d5-0f58eb5deca9",
+      "batchLabel": "2028",
+      "currentSemester": 5
+    },
+    {
+      "batchId": "batch_cb0d407d-4956-49ce-9ec9-a226af946ef6",
+      "branchId": "branch_358b92d4-f077-4356-b1a0-3784fb0a2dd6",
+      "batchLabel": "2028",
+      "currentSemester": 5
+    },
+    {
+      "batchId": "batch_fcbdb8c3-1014-4b66-a2bf-135ee7c37a59",
+      "branchId": "branch_cf4dfbe9-d71d-449a-b00c-cbffca9f9f84",
+      "batchLabel": "2028-A",
+      "currentSemester": 6
+    }
+  ]
+}
+[2026-03-30T18:50:50Z] exit=0

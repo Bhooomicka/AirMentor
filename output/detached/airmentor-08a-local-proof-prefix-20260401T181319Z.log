@@ -1,0 +1,99 @@
+[2026-04-01T18:13:20Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T18:13:20Z] command=env AIRMENTOR_PROOF_ARTIFACT_PREFIX=08a-local npm run playwright:admin-live:proof-risk 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:proof-risk
+> bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running system admin proof-risk smoke...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:42661
+Backend log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-backend.log
+Preview log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-preview.log
+[smoke] step: login-system-admin
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T18:13:40.457Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T18:13:40.457Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=missing
+[smoke:session-response] 401 http://127.0.0.1:4173/api/session set-cookie=missing body={"error":"UNAUTHORIZED","message":"Authentication required"}
+[smoke:session-request] POST http://127.0.0.1:4173/api/session/login cookie=missing
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session/login set-cookie=present
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[smoke] cookies after login: [{"name":"airmentor_session","value":"session_80cb5bec-b026-494e-9159-f47b197f629e","domain":"127.0.0.1","path":"/","expires":1775672020.915,"httpOnly":true,"secure":false,"sameSite":"Lax"},{"name":"airmentor_csrf","value":"oqKA-q0WdQYHx0bBB2XTraj8tbDLhgWtO84eRaw6eH4","domain":"127.0.0.1","path":"/","expires":1775672020.915,"httpOnly":false,"secure":false,"sameSite":"Lax"}]
+[smoke] step: activate-proof-semester
+[smoke] proof dashboard before prewarm: imports=1 activeRun=sim_mnc_2023_first6_v1 checkpoints=0
+[smoke] prewarming proof lifecycle through admin endpoints
+[smoke] proof dashboard after import approval: status=approved checkpoints=0
+[smoke] active proof run sim_mnc_2023_first6_v1 is missing checkpoints, recomputing seeded baseline risk artifacts
+[smoke] recompute-risk prewarm: activeRun=sim_mnc_2023_first6_v1 status=active checkpoints=30
+[smoke] proof dashboard after seeded baseline recompute: activeRun=sim_mnc_2023_first6_v1 checkpoints=30
+[smoke] activated proof operational semester 4 for run sim_mnc_2023_first6_v1 (previous=6)
+[smoke] activation request artifact: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-local-request.json
+[smoke] activation response artifact: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-local-response.json
+[smoke] step: open-seeded-proof-route
+[smoke] opening seeded proof route: http://127.0.0.1:4173/#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023
+[browser:info] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"info","timestamp":"2026-04-01T18:14:41.111Z","details":{"workspace":"system-admin","simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_e22816d896f73351902c3e1e","stageLabel":"Pre TT1","playbackAccessible":true,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":true,"canPlayToEnd":false}}
+[smoke] step: select-target-checkpoint
+[browser:warning] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"warn","timestamp":"2026-04-01T18:14:42.140Z","details":{"workspace":"system-admin","simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","stageLabel":"Post SEE","playbackAccessible":false,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":false,"canPlayToEnd":false}}
+[smoke] stored playback selection: {"simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","updatedAt":"2026-04-01T18:14:42.141Z"}
+[smoke] selected checkpoint banner: Selected checkpoint: semester 6 · Post SEE · Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.. Playback progression is blocked until all queue items at this checkpoint are resolved.
+[smoke] step: reload-system-admin-proof-route
+[smoke] refreshing seeded proof route: http://127.0.0.1:4173/?proof-reload=1775067282286#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T18:14:42.378Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T18:14:42.378Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[browser:info] {"type":"airmentor-client-event","name":"auth.session.restored","level":"info","timestamp":"2026-04-01T18:14:42.389Z","details":{"workspace":"system-admin","sessionId":"session_80cb5bec-b026-494e-9159-f47b197f629e","facultyId":"fac_sysadmin","activeRole":"SYSTEM_ADMIN"}}
+[smoke] step: reopen-seeded-proof-route-after-reload
+[smoke] opening seeded proof route: http://127.0.0.1:4173/#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T18:14:43.939Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T18:14:43.939Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[browser:info] {"type":"airmentor-client-event","name":"auth.session.restored","level":"info","timestamp":"2026-04-01T18:14:45.233Z","details":{"workspace":"system-admin","sessionId":"session_80cb5bec-b026-494e-9159-f47b197f629e","facultyId":"fac_sysadmin","activeRole":"SYSTEM_ADMIN"}}
+[smoke] opening seeded proof batch overview tab
+[browser:warning] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"warn","timestamp":"2026-04-01T18:14:50.103Z","details":{"workspace":"system-admin","simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","stageLabel":"Post SEE","playbackAccessible":false,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":false,"canPlayToEnd":false}}
+[smoke] stored playback selection: {"simulationRunId":"sim_mnc_2023_first6_v1","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","updatedAt":"2026-04-01T18:14:42.141Z"}
+[smoke] selected checkpoint banner: Selected checkpoint: semester 6 · Post SEE · Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.. Playback progression is blocked until all queue items at this checkpoint are resolved.
+[smoke] step: restore-proof-semester
+[smoke] restored proof operational semester 6 for run sim_mnc_2023_first6_v1
+[smoke] step: logout-system-admin
+[smoke:session-request] DELETE http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[smoke] step: login-academic-portal
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T18:14:52.481Z","details":{"workspace":"academic","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T18:14:52.481Z","details":{"workspace":"academic","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=missing
+[smoke:session-response] 401 http://127.0.0.1:4173/api/session set-cookie=missing body={"error":"UNAUTHORIZED","message":"Authentication required"}
+[smoke:session-request] POST http://127.0.0.1:4173/api/session/login cookie=missing
+[smoke] step: switch-to-course-leader
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session/login set-cookie=present
+[smoke:session-request] GET http://127.0.0.1:4173/api/session cookie=present
+[smoke:session-response] 200 http://127.0.0.1:4173/api/session set-cookie=present
+[smoke:academic-request] GET http://127.0.0.1:4173/api/academic/bootstrap?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+[smoke:academic-response] 200 http://127.0.0.1:4173/api/academic/bootstrap?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+[browser:info] {"type":"airmentor-client-event","name":"proof.playback.restored","level":"info","timestamp":"2026-04-01T18:14:53.335Z","details":{"workspace":"academic","simulationStageCheckpointId":"stage_checkpoint_654335929a345857eab259b0","semesterLabel":"Semester 6","stageLabel":"Post SEE"}}
+Terminated                 "$@"
+[browser] page closed unexpectedly
+[browser] browser disconnected unexpectedly
+[smoke] current step: switch-to-course-leader
+[smoke] failure url: http://127.0.0.1:4173/#/app
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.isVisible: Target page, context or browser has been closed
+    at expectVisible (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:132:24)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:979:3
+
+Node.js v24.13.0

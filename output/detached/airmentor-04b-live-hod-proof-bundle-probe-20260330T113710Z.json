@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-03-30T11:37:34.620Z",
+  "checkpointId": "stage_checkpoint_1c95a10012cbb14075051da1",
+  "grants": [
+    {
+      "roleGrantId": "grant_t1_hod",
+      "scopeType": "department",
+      "scopeId": "dept_cse",
+      "switchStatus": 200,
+      "sessionRoleAfterSwitch": "HOD",
+      "sessionScopeAfterSwitch": "dept_cse",
+      "bundleStatus": 200,
+      "activeRunContext": {
+        "simulationRunId": "simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed",
+        "batchId": "batch_6238cb50-7d0f-471c-97fb-3061b1f48a2c",
+        "batchLabel": "2022",
+        "branchName": "Mathematics and Computing",
+        "runLabel": "Live batch proof run 80973",
+        "status": "completed",
+        "seed": 80973,
+        "createdAt": "2026-03-26T17:03:00.966Z",
+        "sourceLabel": "Live proof records",
+        "checkpointContext": {
+          "simulationStageCheckpointId": "stage_checkpoint_1c95a10012cbb14075051da1",
+          "simulationRunId": "simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed",
+          "semesterNumber": 1,
+          "stageKey": "post-see",
+          "stageLabel": "Post SEE",
+          "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+          "stageOrder": 5,
+          "previousCheckpointId": "stage_checkpoint_4ca3cff11c81bc78a6d1f312",
+          "nextCheckpointId": null,
+          "totalStudentProjectionCount": 720,
+          "studentCount": 120,
+          "offeringCount": 12,
+          "highRiskCount": 720,
+          "mediumRiskCount": 0,
+          "lowRiskCount": 0,
+          "openQueueCount": 0,
+          "watchQueueCount": 720,
+          "watchStudentCount": 120,
+          "resolvedQueueCount": 0,
+          "noActionHighRiskCount": 720,
+          "electiveVisibleCount": 0,
+          "averageRiskDeltaScaled": 7,
+          "averageRiskChangeFromPreviousCheckpointScaled": 7,
+          "averageCounterfactualLiftScaled": 0,
+          "stageAdvanceBlocked": false,
+          "blockingQueueItemCount": 0,
+          "playbackAccessible": false,
+          "blockedByCheckpointId": "stage_checkpoint_a42a1716cfe51f06a5debd2b",
+          "blockedProgressionReason": "Playback is blocked until all queue items for checkpoint stage_checkpoint_a42a1716cfe51f06a5debd2b are resolved."
+        }
+      },
+      "totals": {
+        "studentsCovered": 120,
+        "highRiskCount": 720,
+        "mediumRiskCount": 0,
+        "averageQueueAgeHours": 0,
+        "manualOverrideCount": 0,
+        "unresolvedAlertCount": 0,
+        "resolvedAlertCount": 0
+      },
+      "scope": {
+        "departmentNames": [
+          "Computer Science and Engineering",
+          "Electronics and Communication Engineering"
+        ],
+        "branchNames": [
+          "B.Tech ECE"
+        ]
+      }
+    },
+    {
+      "roleGrantId": "grant_f984831f-3d7d-4f0c-a580-e1d0aec2a9dc",
+      "scopeType": "department",
+      "scopeId": "department_45b837f5-273d-4efb-953d-dc00087f6df3",
+      "switchStatus": 200,
+      "sessionRoleAfterSwitch": "HOD",
+      "sessionScopeAfterSwitch": "department_45b837f5-273d-4efb-953d-dc00087f6df3",
+      "bundleStatus": 200,
+      "activeRunContext": {
+        "simulationRunId": "simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed",
+        "batchId": "batch_6238cb50-7d0f-471c-97fb-3061b1f48a2c",
+        "batchLabel": "2022",
+        "branchName": "Mathematics and Computing",
+        "runLabel": "Live batch proof run 80973",
+        "status": "completed",
+        "seed": 80973,
+        "createdAt": "2026-03-26T17:03:00.966Z",
+        "sourceLabel": "Live proof records",
+        "checkpointContext": {
+          "simulationStageCheckpointId": "stage_checkpoint_1c95a10012cbb14075051da1",
+          "simulationRunId": "simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed",
+          "semesterNumber": 1,
+          "stageKey": "post-see",
+          "stageLabel": "Post SEE",
+          "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+          "stageOrder": 5,
+          "previousCheckpointId": "stage_checkpoint_4ca3cff11c81bc78a6d1f312",
+          "nextCheckpointId": null,
+          "totalStudentProjectionCount": 720,
+          "studentCount": 120,
+          "offeringCount": 12,
+          "highRiskCount": 720,
+          "mediumRiskCount": 0,
+          "lowRiskCount": 0,
+          "openQueueCount": 0,
+          "watchQueueCount": 720,
+          "watchStudentCount": 120,
+          "resolvedQueueCount": 0,
+          "noActionHighRiskCount": 720,
+          "electiveVisibleCount": 0,
+          "averageRiskDeltaScaled": 7,
+          "averageRiskChangeFromPreviousCheckpointScaled": 7,
+          "averageCounterfactualLiftScaled": 0,
+          "stageAdvanceBlocked": false,
+          "blockingQueueItemCount": 0,
+          "playbackAccessible": false,
+          "blockedByCheckpointId": "stage_checkpoint_a42a1716cfe51f06a5debd2b",
+          "blockedProgressionReason": "Playback is blocked until all queue items for checkpoint stage_checkpoint_a42a1716cfe51f06a5debd2b are resolved."
+        }
+      },
+      "totals": {
+        "studentsCovered": 120,
+        "highRiskCount": 720,
+        "mediumRiskCount": 0,
+        "averageQueueAgeHours": 0,
+        "manualOverrideCount": 0,
+        "unresolvedAlertCount": 0,
+        "resolvedAlertCount": 0
+      },
+      "scope": {
+        "departmentNames": [
+          "Computer Science and Engineering",
+          "Electronics and Communication Engineering"
+        ],
+        "branchNames": [
+          "B.Tech ECE"
+        ]
+      }
+    }
+  ]
+}

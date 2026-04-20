@@ -1,0 +1,3 @@
+[2026-03-30T08:46:17Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T08:46:17Z] command=zsh -lc node\ --check\ scripts/system-admin-teaching-parity-smoke.mjs\ \&\&\ node\ --check\ scripts/system-admin-proof-risk-smoke.mjs 
+[2026-03-30T08:46:19Z] exit=0

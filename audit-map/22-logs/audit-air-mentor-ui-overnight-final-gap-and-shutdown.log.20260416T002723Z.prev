@@ -1,0 +1,20 @@
+[2026-04-15T23:39:05Z] session=audit-air-mentor-ui-overnight-final-gap-and-shutdown
+[2026-04-15T23:39:05Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-final-gap-and-shutdown.command.sh
+[2026-04-15T23:39:05Z] launching proof-refresh-completion-pass
+[2026-04-15T23:39:05Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-16T01:16:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass.checkpoint
+[2026-04-15T23:46:08Z] launching frontend-long-tail-pass
+[2026-04-15T23:46:08Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-16T01:16:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-frontend-long-tail-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.checkpoint
+[2026-04-15T23:51:16Z] launching closure-readiness-pass
+[2026-04-15T23:51:16Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-16T01:16:00Z; route selection should prefer a verified alternate provider.
+Pass closure-readiness-pass ended in state=manual_action_required
+/home/raed/projects/air-mentor-ui/audit-map/16-scripts/final-gap-and-shutdown.sh: line 40: printf: - : invalid option
+printf: usage: printf [-v var] format [arguments]
+[2026-04-15T23:51:17Z] exit_code=2

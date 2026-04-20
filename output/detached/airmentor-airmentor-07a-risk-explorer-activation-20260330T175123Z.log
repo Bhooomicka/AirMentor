@@ -1,0 +1,15 @@
+[2026-03-30T17:51:24Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T17:51:24Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ NODE_OPTIONS=--max-old-space-size=6144\ npx\ vitest\ run\ --maxWorkers=1\ --reporter=verbose\ tests/risk-explorer.test.ts\ -t\ \"uses\ the\ activated\ proof\ semester\ for\ the\ default\ risk\ explorer\ while\ keeping\ checkpoint\ playback\ separate\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/risk-explorer.test.ts > student risk explorer > returns checkpoint-bound proof analysis for an in-scope course leader and matches shell evidence
+ ↓ tests/risk-explorer.test.ts > student risk explorer > enforces scoped access and lets sysadmin inspect an archived run explicitly
+ ✓ tests/risk-explorer.test.ts > student risk explorer > uses the activated proof semester for the default risk explorer while keeping checkpoint playback separate 56507ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 2 skipped (3)
+   Start at  23:21:26
+   Duration  57.77s (transform 751ms, setup 0ms, import 1.17s, tests 56.51s, environment 0ms)
+
+[2026-03-30T17:52:24Z] exit=0

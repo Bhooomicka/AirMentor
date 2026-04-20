@@ -1,0 +1,39 @@
+[2026-03-30T15:30:31Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T15:30:31Z] command=npm run verify:proof-closure:proof-rc 
+
+> air-mentor-ui@0.0.0 verify:proof-closure:proof-rc
+> npm run verify:proof-closure && npm --workspace air-mentor-api run test:proof-rc
+
+
+> air-mentor-ui@0.0.0 verify:proof-closure
+> npm --workspace air-mentor-api run build && npm run build && npm --workspace air-mentor-api test -- --reporter=dot && npm test -- --reporter=dot && bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+
+> air-mentor-api@0.1.0 build
+> tsc -p tsconfig.build.json
+
+src/modules/students.ts(543,52): error TS2345: Argument of type '(this: undefined, student: { currentCgpa: number; activeAcademicContext: { enrollmentId: string; branchId: string; branchName: string; departmentId: string | null; departmentName: string | null; termId: string; ... 6 more ...; academicStatus: string; } | null; ... 14 more ...; admissionDate: string; }) => { ...; }[]...' is not assignable to parameter of type '(this: undefined, value: { currentCgpa: number; activeAcademicContext: { enrollmentId: string; branchId: string; branchName: string; departmentId: string | null; departmentName: string | null; termId: string; ... 6 more ...; academicStatus: string; } | null; ... 14 more ...; admissionDate: string; }, index: number, ...'.
+  Type '{ studentId: string; studentName: string; usn: string; sectionCode: string | null; currentMentorFacultyId: null; currentMentorAssignmentId: null; action: "assign"; actionReason: string; }[] | { ...; }[] | { ...; }[]' is not assignable to type '{ studentId: string; studentName: string; usn: string; sectionCode: string | null; currentMentorFacultyId: null; currentMentorAssignmentId: null; action: "assign"; actionReason: string; } | readonly { ...; }[]'.
+    Type '{ studentId: string; studentName: string; usn: string; sectionCode: string | null; currentMentorFacultyId: string; currentMentorAssignmentId: string; action: "keep"; actionReason: string; }[]' is not assignable to type '{ studentId: string; studentName: string; usn: string; sectionCode: string | null; currentMentorFacultyId: null; currentMentorAssignmentId: null; action: "assign"; actionReason: string; } | readonly { ...; }[]'.
+      Type '{ studentId: string; studentName: string; usn: string; sectionCode: string | null; currentMentorFacultyId: string; currentMentorAssignmentId: string; action: "keep"; actionReason: string; }[]' is not assignable to type 'readonly { studentId: string; studentName: string; usn: string; sectionCode: string | null; currentMentorFacultyId: null; currentMentorAssignmentId: null; action: "assign"; actionReason: string; }[]'.
+        Type '{ studentId: string; studentName: string; usn: string; sectionCode: string | null; currentMentorFacultyId: string; currentMentorAssignmentId: string; action: "keep"; actionReason: string; }' is not assignable to type '{ studentId: string; studentName: string; usn: string; sectionCode: string | null; currentMentorFacultyId: null; currentMentorAssignmentId: null; action: "assign"; actionReason: string; }'.
+          Types of property 'currentMentorFacultyId' are incompatible.
+            Type 'string' is not assignable to type 'null'.
+src/modules/students.ts(596,84): error TS18046: 'student' is of type 'unknown'.
+src/modules/students.ts(615,59): error TS18046: 'student' is of type 'unknown'.
+src/modules/students.ts(616,65): error TS18046: 'student' is of type 'unknown'.
+src/modules/students.ts(617,67): error TS18046: 'student' is of type 'unknown'.
+src/modules/students.ts(640,11): error TS18046: 'previewStudent' is of type 'unknown'.
+src/modules/students.ts(640,51): error TS18046: 'previewStudent' is of type 'unknown'.
+src/modules/students.ts(641,57): error TS18046: 'previewStudent' is of type 'unknown'.
+src/modules/students.ts(679,11): error TS18046: 'previewStudent' is of type 'unknown'.
+src/modules/students.ts(682,20): error TS18046: 'previewStudent' is of type 'unknown'.
+src/modules/students.ts(703,32): error TS18046: 'previewStudent' is of type 'unknown'.
+src/modules/students.ts(726,61): error TS18046: 'student' is of type 'unknown'.
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path /home/raed/projects/air-mentor-ui/air-mentor-api
+npm error workspace air-mentor-api@0.1.0
+npm error location /home/raed/projects/air-mentor-ui/air-mentor-api
+npm error command failed
+npm error command sh -c tsc -p tsconfig.build.json

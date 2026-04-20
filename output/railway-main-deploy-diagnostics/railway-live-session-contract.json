@@ -1,0 +1,21 @@
+{
+  "mode": "session-contract",
+  "generatedAt": "2026-03-29T22:54:01.425Z",
+  "apiBaseUrl": "https://api-production-ab72.up.railway.app",
+  "expectedFrontendOrigin": "https://raed2180416.github.io",
+  "identifier": "sysadmin",
+  "status": "failed",
+  "response": {
+    "status": 401,
+    "hasCsrfToken": false,
+    "hasSessionCookie": false,
+    "hasCsrfCookie": false,
+    "restoreStatus": null
+  },
+  "issues": [
+    "login returned 401 instead of 200",
+    "login body is missing csrfToken",
+    "login response did not set airmentor_session",
+    "login response did not set airmentor_csrf"
+  ]
+}

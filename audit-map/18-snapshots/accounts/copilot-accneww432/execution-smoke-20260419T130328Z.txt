@@ -1,0 +1,4 @@
+[94m⠋ Working...[0m[94m⠙ Working...[0m[94m⠹ Working...[0m[94m⠸ Working...[0m[94m⠼ Working...[0m[94m⠴ Working...[0m[94m⠦ Working...[0m[94m⠧ Working...[0m[94m⠇ Working...[0m[94m⠏ Working...[0m[94m⠋ Working...[0m[94m⠙ Working...[0m[94m⠹ Working...[0m[94m⠸ Working...[0m[94m⠼ Working...[0m[94m⠴ Working...[0m[94m⠦ Working...[0m[94m⠧ Working...[0m[91m[1mError: [0mThe requested model is not supported.
+
+Make sure the model is enabled in your copilot settings: https://github.com/settings/copilot/features
+                                                  

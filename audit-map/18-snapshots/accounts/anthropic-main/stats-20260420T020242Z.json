@@ -1,0 +1,83 @@
+{
+  "totalSessions": 193,
+  "totalTokens": 0,
+  "totalCost": 0,
+  "activeDays": 1,
+  "longestStreak": 1,
+  "currentStreak": 1,
+  "longestSession": 1127,
+  "peakHour": 23,
+  "modelUsage": {
+    "claude-3-7-sonnet-20250219": {
+      "count": 21,
+      "tokens": 0,
+      "cost": 0
+    },
+    "claude-opus-4-1": {
+      "count": 15,
+      "tokens": 0,
+      "cost": 0
+    },
+    "claude-opus-4-5": {
+      "count": 17,
+      "tokens": 0,
+      "cost": 0
+    },
+    "claude-opus-4-6": {
+      "count": 16,
+      "tokens": 0,
+      "cost": 0
+    },
+    "claude-sonnet-4-6": {
+      "count": 16,
+      "tokens": 0,
+      "cost": 0
+    },
+    "claude-sonnet-4-5": {
+      "count": 19,
+      "tokens": 0,
+      "cost": 0
+    },
+    "claude-haiku-4-5": {
+      "count": 16,
+      "tokens": 0,
+      "cost": 0
+    },
+    "claude-3-5-sonnet-20241022": {
+      "count": 3,
+      "tokens": 0,
+      "cost": 0
+    },
+    "claude-3-5-haiku-20241022": {
+      "count": 1,
+      "tokens": 0,
+      "cost": 0
+    }
+  },
+  "dailyActivity": {
+    "2026-04-19": 0
+  },
+  "dailyCost": {
+    "2026-04-19": 0
+  },
+  "hourlyActivity": {
+    "0": 38,
+    "1": 14,
+    "18": 47,
+    "23": 94
+  },
+  "tokenBreakdown": {
+    "input": 0,
+    "output": 0,
+    "cacheRead": 0,
+    "cacheWrite": 0
+  },
+  "costBreakdown": {
+    "input": 0,
+    "output": 0,
+    "cacheRead": 0,
+    "cacheWrite": 0
+  },
+  "costPerDay": 0,
+  "costPerSession": 0
+}

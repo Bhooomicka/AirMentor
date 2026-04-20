@@ -1,0 +1,26 @@
+[2026-03-30T20:24:46Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:24:46Z] command=zsh -lc $'export PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\nnode --input-type=module <<\'NODE\'\nconst api = process.env.PLAYWRIGHT_API_URL\nconst origin = new URL(process.env.PLAYWRIGHT_APP_URL).origin\nconst loginResponse = await fetch(new URL("/api/session/login", api), { method: "POST", headers: { origin, "content-type": "application/json" }, body: JSON.stringify({ identifier: process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER, password: process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD }) })\nconst body = await loginResponse.json()\nconst setCookies = typeof loginResponse.headers.getSetCookie === "function" ? loginResponse.headers.getSetCookie() : [loginResponse.headers.get("set-cookie")].filter(Boolean)\nconst cookieHeader = setCookies.map(value => value.split(";", 1)[0]).join("; ")\nconst headers = { origin, cookie: cookieHeader, "content-type": "application/json", "x-airmentor-csrf": body.csrfToken }\nconst dash1 = await fetch(new URL("/api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard", api), { headers: { origin, cookie: cookieHeader } }).then(r => r.json())\nconst runId = dash1.activeRunDetail.simulationRunId\nconst activeSem = dash1.activeRunDetail.activeOperationalSemester\nconst targetSem = activeSem === 6 ? 4 : 6\nconst response = await fetch(new URL(`/api/admin/proof-runs/${encodeURIComponent(runId)}/activate-semester`, api), { method: "POST", headers, body: JSON.stringify({ semesterNumber: targetSem }) })\nconsole.log("activation", JSON.stringify({ from: activeSem, to: targetSem, status: response.status, body: await response.text() }))\nconst dash2 = await fetch(new URL("/api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard", api), { headers: { origin, cookie: cookieHeader } }).then(r => r.json())\nconsole.log("current-semester", dash2.activeRunDetail.activeOperationalSemester)\nconsole.log("recent-errors", JSON.stringify(dash2.recentOperationalEvents.filter(event => event.name === "request.error").slice(0, 5), null, 2))\nNODE' 
+activation {"from":4,"to":6,"status":500,"body":"{\"error\":\"INTERNAL_SERVER_ERROR\",\"message\":\"Unexpected server error\"}"}
+current-semester 6
+recent-errors [
+  {
+    "operationalTelemetryEventId": "ops_evt_15f4968d-9c70-4c8c-9317-2e5b66a3f23c",
+    "source": "backend",
+    "name": "request.error",
+    "level": "warn",
+    "timestamp": "2026-03-30T20:20:04.387Z",
+    "details": {
+      "method": "POST",
+      "route": "/api/session/login",
+      "statusCode": 401,
+      "code": "UNAUTHORIZED",
+      "error": {
+        "name": "Error",
+        "message": "Invalid credentials",
+        "code": "UNAUTHORIZED"
+      }
+    },
+    "createdAt": "2026-03-30T20:20:04.387Z"
+  }
+]
+[2026-03-30T20:24:53Z] exit=0

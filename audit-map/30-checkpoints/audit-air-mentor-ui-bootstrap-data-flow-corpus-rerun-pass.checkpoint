@@ -1,0 +1,14 @@
+pass_name=data-flow-corpus-rerun-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+current_provider=codex
+current_account=codex-01
+current_model=gpt-5.3-codex
+current_slot=codex-01
+route_attempt=1
+execution_supervisor_pid=3750439
+last_event=completed
+last_checkpoint_at=2026-04-15T23:29:55Z

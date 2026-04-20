@@ -1,0 +1,27 @@
+[2026-04-01T18:33:08Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T18:33:08Z] command=env AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 AIRMENTOR_TEACHING_PARITY_ARTIFACT_PREFIX=08a-live-teaching npm run playwright:admin-live:teaching-parity 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:teaching-parity
+> bash scripts/playwright-admin-live-teaching-parity.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running sysadmin -> teaching parity smoke...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+System admin -> teaching parity smoke passed.
+Screenshots:
+- faculty profile: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke.png
+- course leader dashboard: /home/raed/projects/air-mentor-ui/output/playwright/course-leader-dashboard-proof.png
+- mentor view: /home/raed/projects/air-mentor-ui/output/playwright/mentor-view-proof.png
+- queue history: /home/raed/projects/air-mentor-ui/output/playwright/queue-history-proof.png
+Prefixed teaching-parity artifacts:
+- faculty profile: /home/raed/projects/air-mentor-ui/output/playwright/08a-live-teaching-system-admin-teaching-parity-smoke.png
+- course leader dashboard: /home/raed/projects/air-mentor-ui/output/playwright/08a-live-teaching-course-leader-dashboard-proof.png
+- mentor view: /home/raed/projects/air-mentor-ui/output/playwright/08a-live-teaching-mentor-view-proof.png
+- queue history: /home/raed/projects/air-mentor-ui/output/playwright/08a-live-teaching-queue-history-proof.png
+[2026-04-01T18:33:38Z] exit=0

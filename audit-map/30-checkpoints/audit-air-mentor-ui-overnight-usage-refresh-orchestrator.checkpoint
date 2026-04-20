@@ -1,0 +1,9 @@
+pass_name=usage-refresh-orchestrator
+context=overnight
+session_name=audit-air-mentor-ui-overnight-usage-refresh-orchestrator
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+next_refresh_in_seconds=900
+last_event=stale
+last_checkpoint_at=2026-04-18T08:24:40Z

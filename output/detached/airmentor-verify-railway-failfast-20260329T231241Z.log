@@ -1,0 +1,16 @@
+[2026-03-29T23:12:41Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T23:12:41Z] command=bash -lc npm\ test\ --\ --run\ tests/railway-deploy-readiness.test.ts\ tests/verify-final-closeout-live.test.ts 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/railway-deploy-readiness.test.ts tests/verify-final-closeout-live.test.ts
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+
+ Test Files  2 passed (2)
+      Tests  11 passed (11)
+   Start at  04:42:41
+   Duration  7.87s (transform 61ms, setup 0ms, import 84ms, tests 8.30s, environment 0ms)
+
+[2026-03-29T23:12:49Z] exit=0

@@ -1,0 +1,47 @@
+[2026-03-29T23:00:46Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T23:00:46Z] command=bash -lc npm\ test\ --\ --run\ tests/railway-deploy-readiness.test.ts\ tests/verify-final-closeout-live.test.ts 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/railway-deploy-readiness.test.ts tests/verify-final-closeout-live.test.ts
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+ ❯ tests/railway-deploy-readiness.test.ts (6 tests | 2 failed) 12595ms
+     × retries the live session contract until login settles after deploy 5169ms
+     × fails the live session contract after exhausting the retry window 5181ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/railway-deploy-readiness.test.ts > Railway deploy readiness script > retries the live session contract until login settles after deploy
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/railway-deploy-readiness.test.ts:251:3
+    249|     expect(result.status).toBe(1)
+    250|     expect(result.stderr).toContain('AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENT…
+    251|   })
+       |   ^
+    252|
+    253|   it('retries the live session contract until login settles after depl…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/railway-deploy-readiness.test.ts > Railway deploy readiness script > fails the live session contract after exhausting the retry window
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/railway-deploy-readiness.test.ts:283:3
+    281|     expect(report.attempts[0].status).toBe(401)
+    282|     expect(report.attempts[1].status).toBe(200)
+    283|   })
+       |   ^
+    284|
+    285|   it('fails the live session contract after exhausting the retry windo…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 8 passed (10)
+   Start at  04:30:46
+   Duration  12.74s (transform 73ms, setup 0ms, import 96ms, tests 13.15s, environment 0ms)
+

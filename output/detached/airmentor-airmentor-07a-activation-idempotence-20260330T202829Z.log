@@ -1,0 +1,14 @@
+[2026-03-30T20:28:29Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:28:29Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/proof-control-plane-activation-service.test.ts\ tests/admin-control-plane.test.ts\ tests/risk-explorer.test.ts\ tests/student-agent-shell.test.ts\ tests/hod-proof-analytics.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/admin-control-plane.test.ts > admin control plane routes > rejects assigning a second active owner to the same offering 4526ms
+ ✓ tests/admin-control-plane.test.ts > admin control plane routes > limits HoD faculty profile access to supervised departments and branches 4072ms
+ ✓ tests/admin-control-plane.test.ts > admin control plane routes > propagates admin-created faculty records into teaching login, bootstrap, and faculty profile 8838ms
+ ✓ tests/admin-control-plane.test.ts > admin control plane routes > previews and bulk-applies mentor assignment changes with confirmation, audit detail, and mentor-surface parity 7945ms
+ ✓ tests/admin-control-plane.test.ts > admin control plane routes > runs the proof control plane end to end and exposes proof operations on the faculty profile 165625ms
+ ✓ tests/admin-control-plane.test.ts > admin control plane routes > activates a proof operational semester without mutating checkpoint playback state 72692ms
+ ✓ tests/admin-control-plane.test.ts > admin control plane routes > re-activates proof semesters without duplicating the published operational projection 8833ms
+ ✓ tests/admin-control-plane.test.ts > admin control plane routes > re-seeds proof batch routes after the canonical batch disappears 9249ms
+ ✓ tests/admin-control-plane.test.ts > admin control plane routes > recomputes the seeded baseline active proof run when it starts without checkpoints 83773ms

@@ -1,0 +1,14 @@
+{
+  "simulationRunId": "sim_mnc_2023_first6_v1",
+  "batchId": "batch_branch_mnc_btech_2023",
+  "availableSemesters": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "previousOperationalSemester": 4,
+  "semesterNumber": 4
+}

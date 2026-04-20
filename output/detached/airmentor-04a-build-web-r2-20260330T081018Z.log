@@ -1,0 +1,8 @@
+[2026-03-30T08:10:18Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T08:10:18Z] command=npm run build 
+
+> air-mentor-ui@0.0.0 build
+> tsc -b && vite build
+
+src/App.tsx(125,10): error TS2300: Duplicate identifier 'FacultyProfilePage'.
+src/App.tsx(279,10): error TS2300: Duplicate identifier 'FacultyProfilePage'.

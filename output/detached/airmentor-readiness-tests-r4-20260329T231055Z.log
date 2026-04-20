@@ -1,0 +1,33 @@
+[2026-03-29T23:10:56Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T23:10:56Z] command=bash -lc npm\ test\ --\ --run\ tests/railway-deploy-readiness.test.ts\ tests/verify-final-closeout-live.test.ts 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/railway-deploy-readiness.test.ts tests/verify-final-closeout-live.test.ts
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+ ❯ tests/railway-deploy-readiness.test.ts (7 tests | 1 failed) 32807ms
+     × fails fast on explicit invalid credentials to avoid tripping the rate limiter 20210ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/railway-deploy-readiness.test.ts > Railway deploy readiness script > fails fast on explicit invalid credentials to avoid tripping the rate limiter
+Error: Test timed out in 15000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/railway-deploy-readiness.test.ts:333:3
+    331|   })
+    332|
+    333|   it('fails fast on explicit invalid credentials to avoid tripping the…
+       |   ^
+    334|     const outputDir = await makeOutputDir()
+    335|     const appDir = await makeBootSmokeAppDir()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 10 passed (11)
+   Start at  04:40:57
+   Duration  32.94s (transform 58ms, setup 0ms, import 80ms, tests 33.37s, environment 0ms)
+

@@ -1,0 +1,102 @@
+[2026-04-01T19:19:14Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T19:19:14Z] command=npm run inventory:compat-routes -- --assert-runtime-clean 
+
+> air-mentor-ui@0.0.0 inventory:compat-routes
+> node scripts/report-compat-route-callers.mjs --assert-runtime-clean
+
+# Academic Compatibility Route Inventory
+
+Generated: 2026-04-01T19:19:14.750Z
+
+## /api/academic/runtime/:stateKey
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:544
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:555
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:30
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:376
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:423
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:433
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:448
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:547
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:553
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:561
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:71
+  - audit/08-state-management-and-client-logic-audit.md:22
+  - audit/15-issue-catalog-prioritized.md:169
+  - audit/22-evidence-appendix-by-issue.md:47
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/25-implementation-spec-AM-003.md:18
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:165
+  - audit/42-audit-navigation-and-document-status.md:55
+  - audit/43-manual-closeout-checklist.md:62
+  - audit/44-final-closeout-evidence-2026-03-28.md:87
+
+## /api/academic/tasks/sync
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:104
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:633
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:643
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:40
+  - air-mentor-api/tests/academic-parity.test.ts:544
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:253
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:264
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:400
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:408
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:72
+  - audit/15-issue-catalog-prioritized.md:170
+  - audit/21-feature-inventory-and-traceability-matrix.md:32
+  - audit/22-evidence-appendix-by-issue.md:47
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:166
+  - audit/43-manual-closeout-checklist.md:63
+  - audit/44-final-closeout-evidence-2026-03-28.md:88
+
+## /api/academic/task-placements/sync
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:105
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:691
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:701
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:37
+  - air-mentor-api/tests/academic-parity.test.ts:552
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:277
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:73
+  - audit/15-issue-catalog-prioritized.md:171
+  - audit/21-feature-inventory-and-traceability-matrix.md:33
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:167
+  - audit/43-manual-closeout-checklist.md:64
+  - audit/44-final-closeout-evidence-2026-03-28.md:89
+
+## /api/academic/calendar-audit/sync
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:106
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:771
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:780
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:8
+  - air-mentor-api/tests/academic-parity.test.ts:573
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:292
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:74
+  - audit/15-issue-catalog-prioritized.md:172
+  - audit/21-feature-inventory-and-traceability-matrix.md:33
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:168
+  - audit/43-manual-closeout-checklist.md:65
+  - audit/44-final-closeout-evidence-2026-03-28.md:90
+
+[2026-04-01T19:19:14Z] exit=0

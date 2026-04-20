@@ -1,0 +1,19 @@
+task_class=structured
+original_command=codex\ exec\ -C\ /home/raed/projects/air-mentor-ui\ -m\ gpt-5.4-mini\ -c\ model_reasoning_effort=\\\"medium\\\"\ -o\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-inventory-pass.last-message.md\ --full-auto\ -\ \<\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-inventory-pass.prompt.md
+started_at=2026-04-14T22:50:14Z
+pid=2267471
+exit_code=0
+finished_at=2026-04-14T22:53:24Z
+session_name=audit-air-mentor-ui-bootstrap-inventory-pass
+pass_name=inventory-pass
+context=bootstrap
+workdir=/home/raed/projects/air-mentor-ui
+state=completed
+model=gpt-5.4-mini
+provider=native-codex
+account=chatgpt
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-inventory-pass.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-inventory-pass.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-inventory-pass.checkpoint
+created_at=2026-04-14T22:50:12Z
+updated_at=2026-04-14T22:53:24Z

@@ -1,0 +1,81 @@
+{
+  "generatedAt": "2026-04-01T18:41:39.809Z",
+  "appUrl": "https://raed2180416.github.io/AirMentor/",
+  "apiUrl": "https://api-production-ab72.up.railway.app/",
+  "liveStack": true,
+  "proofRoute": {
+    "routeHash": "#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+    "batchId": "batch_branch_mnc_btech_2023",
+    "pinnedSeededBatch": true,
+    "batchLabel": "2023"
+  },
+  "requestRoute": {
+    "id": "request_001",
+    "summary": "Grant additional mentor mapping coverage",
+    "status": "Closed"
+  },
+  "lateCheckpointWalk": {
+    "availableOperationalSemesters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "checkpoint": {
+      "simulationStageCheckpointId": "stage_checkpoint_654335929a345857eab259b0",
+      "semesterNumber": 6,
+      "stageKey": "post-see",
+      "stageLabel": "Post SEE",
+      "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+      "stageOrder": 5,
+      "stageAdvanceBlocked": true,
+      "playbackAccessible": false,
+      "blockedByCheckpointId": "stage_checkpoint_182e4d047d959f28a86c6b39",
+      "blockedProgressionReason": "Playback is blocked until all queue items for checkpoint stage_checkpoint_182e4d047d959f28a86c6b39 are resolved.",
+      "surfaceLabel": "Sem 6 · Post SEE",
+      "bannerLabel": "semester 6 · Post SEE"
+    }
+  },
+  "artifacts": {
+    "successScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression.png",
+    "successReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-report.json",
+    "failureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.png",
+    "failureTrace": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.zip",
+    "failureHtml": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.html",
+    "failureReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.json",
+    "prefixedSuccessScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/08b-live-keyboard-system-admin-live-keyboard-regression.png",
+    "prefixedSuccessReport": "/home/raed/projects/air-mentor-ui/output/playwright/08b-live-keyboard-system-admin-live-keyboard-regression-report.json",
+    "prefixedFailureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/08b-live-keyboard-system-admin-live-keyboard-regression-failure.png",
+    "prefixedFailureTrace": "/home/raed/projects/air-mentor-ui/output/playwright/08b-live-keyboard-system-admin-live-keyboard-regression-failure.zip",
+    "prefixedFailureHtml": "/home/raed/projects/air-mentor-ui/output/playwright/08b-live-keyboard-system-admin-live-keyboard-regression-failure.html",
+    "prefixedFailureReport": "/home/raed/projects/air-mentor-ui/output/playwright/08b-live-keyboard-system-admin-live-keyboard-regression-failure.json"
+  },
+  "checks": [
+    {
+      "name": "request_flow_keyboard_navigation",
+      "status": "passed"
+    },
+    {
+      "name": "modal_focus_trap_and_restore",
+      "status": "passed"
+    },
+    {
+      "name": "proof_dashboard_checkpoint_keyboard_controls",
+      "status": "passed"
+    },
+    {
+      "name": "portal_role_switch_keyboard_navigation",
+      "status": "passed"
+    },
+    {
+      "name": "teacher_proof_surface_keyboard_navigation",
+      "status": "passed"
+    },
+    {
+      "name": "proof_playback_restore_reset_keyboard_path",
+      "status": "passed"
+    }
+  ]
+}

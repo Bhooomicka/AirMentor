@@ -1,0 +1,12 @@
+[2026-03-30T16:24:14Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T16:24:14Z] command=env -C air-mentor-api npx vitest run tests/admin-control-plane.test.ts tests/admin-foundation.test.ts tests/openapi.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  3 passed (3)
+      Tests  12 passed | 5 skipped (17)
+   Start at  21:54:15
+   Duration  114.68s (transform 801ms, setup 0ms, import 2.28s, tests 112.12s, environment 0ms)
+
+[2026-03-30T16:26:09Z] exit=0

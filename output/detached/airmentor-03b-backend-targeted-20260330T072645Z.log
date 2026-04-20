@@ -1,0 +1,26 @@
+[2026-03-30T07:26:45Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:26:45Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ npx\ vitest\ run\ tests/admin-hierarchy.test.ts\ tests/academic-access.test.ts\ tests/academic-parity.test.ts 
+
+[1m[46m RUN [49m[22m [36mv4.1.0 [39m[90m/home/raed/projects/air-mentor-ui/air-mentor-api[39m
+
+ [32m✓[39m tests/academic-parity.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 21847[2mms[22m[39m
+     [33m[2m✓[22m[39m exposes non-overlapping faculty timetable blocks in the proof bootstrap for course-leader playback [33m 4602[2mms[22m[39m
+     [33m[2m✓[22m[39m ignores legacy academic asset snapshots and derives the live view from admin-owned records [33m 4317[2mms[22m[39m
+     [33m[2m✓[22m[39m reflects admin master-data changes into the academic bootstrap on the next fetch [33m 4401[2mms[22m[39m
+     [33m[2m✓[22m[39m persists resolved course outcomes, offering schemes, and question papers through backend-owned routes [33m 4329[2mms[22m[39m
+     [33m[2m✓[22m[39m persists authoritative queue, calendar workspace, attendance, and TT1 entry state through the teaching routes [33m 4198[2mms[22m[39m
+ [32m✓[39m tests/admin-hierarchy.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 23485[2mms[22m[39m
+     [33m[2m✓[22m[39m supports academic faculties, batches, curriculum, and resolved policy inheritance [33m 4273[2mms[22m[39m
+     [33m[2m✓[22m[39m resolves section policy overrides after batch overrides and rejects invalid section scope ids [33m 3901[2mms[22m[39m
+     [33m[2m✓[22m[39m resolves section stage policy overrides after batch overrides and rolls back to batch policy [33m 3876[2mms[22m[39m
+     [33m[2m✓[22m[39m returns current cgpa and active academic context in the student admin list [33m 3754[2mms[22m[39m
+     [33m[2m✓[22m[39m allows archiving an academic faculty without moving its departments first [33m 3718[2mms[22m[39m
+     [33m[2m✓[22m[39m cascade deletes nested academic records when an academic faculty is deleted [33m 3962[2mms[22m[39m
+ [32m✓[39m tests/academic-access.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+[2m      Tests [22m [1m[32m16 passed[39m[22m[90m (16)[39m
+[2m   Start at [22m 12:56:47
+[2m   Duration [22m 47.32s[2m (transform 768ms, setup 0ms, import 1.71s, tests 45.34s, environment 0ms)[22m
+
+[2026-03-30T07:27:34Z] exit=0

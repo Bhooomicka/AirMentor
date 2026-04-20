@@ -1,0 +1,27 @@
+# Inventory is already seeded. Re-run inventory-pass only if coverage marks it stale.
+route-map-pass	bootstrap		
+role-surface-pass	bootstrap		
+feature-atom-pass	bootstrap		
+dependency-pass	bootstrap		
+data-flow-pass	bootstrap		
+state-flow-pass	bootstrap		
+ml-audit-pass	bootstrap		
+test-gap-pass	bootstrap		
+ux-friction-pass	bootstrap		
+truth-drift-reconciliation-pass	bootstrap		
+feature-intent-integrity-pass	bootstrap		
+cross-flow-recovery-pass	bootstrap		
+fault-tolerance-degradation-pass	bootstrap		
+memory-lifecycle-cleanup-pass	bootstrap		
+ux-consistency-cohesion-pass	bootstrap		
+live-behavior-pass	live		
+account-routing-pass	bootstrap		
+claim-verification-pass	bootstrap		
+unknown-omission-pass	bootstrap		
+residual-gap-closure-pass	bootstrap		
+closure-readiness-pass	bootstrap		
+cost-optimization-pass	bootstrap		
+prompt-self-improvement-pass	bootstrap		
+unattended-run-pass	bootstrap		
+audit-the-audit-pass	bootstrap		
+synthesis-pass	bootstrap		

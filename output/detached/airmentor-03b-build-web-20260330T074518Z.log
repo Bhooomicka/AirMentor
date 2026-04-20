@@ -1,0 +1,20 @@
+[2026-03-30T07:45:18Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:45:18Z] command=npm run build 
+
+> air-mentor-ui@0.0.0 build
+> tsc -b && vite build
+
+src/system-admin-live-app.tsx(395,33): error TS2345: Argument of type 'LiveAdminProofProvenance' is not assignable to parameter of type 'ProofProvenanceLike'.
+  The types of 'scopeDescriptor.scopeType' are incompatible between these types.
+    Type 'string' is not assignable to type '"section" | "institution" | "academic-faculty" | "department" | "branch" | "batch" | "proof" | "student"'.
+src/system-admin-live-app.tsx(396,31): error TS2345: Argument of type 'LiveAdminProofProvenance' is not assignable to parameter of type 'ProofProvenanceLike'.
+  The types of 'scopeDescriptor.scopeType' are incompatible between these types.
+    Type 'string' is not assignable to type '"section" | "institution" | "academic-faculty" | "department" | "branch" | "batch" | "proof" | "student"'.
+src/system-admin-live-app.tsx(5134,9): error TS6133: 'selectedStudentProvenanceSummary' is declared but its value is never read.
+src/system-admin-live-app.tsx(5134,96): error TS2345: Argument of type 'LiveAdminProofProvenance' is not assignable to parameter of type 'ProofProvenanceLike'.
+  The types of 'scopeDescriptor.scopeType' are incompatible between these types.
+    Type 'string' is not assignable to type '"section" | "institution" | "academic-faculty" | "department" | "branch" | "batch" | "proof" | "student"'.
+src/system-admin-live-app.tsx(5310,9): error TS6133: 'selectedFacultyProvenanceSummary' is declared but its value is never read.
+src/system-admin-live-app.tsx(5310,96): error TS2345: Argument of type 'LiveAdminProofProvenance' is not assignable to parameter of type 'ProofProvenanceLike'.
+  The types of 'scopeDescriptor.scopeType' are incompatible between these types.
+    Type 'string' is not assignable to type '"section" | "institution" | "academic-faculty" | "department" | "branch" | "batch" | "proof" | "student"'.

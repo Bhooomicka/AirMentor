@@ -1,0 +1,24 @@
+[2026-04-01T13:39:32Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T13:39:32Z] command=env AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 AIRMENTOR_PROOF_SEMESTER_TARGETS=1\,2\,3 AIRMENTOR_PROOF_ARTIFACT_PREFIX=07b-live-probe bash scripts/playwright-proof-risk-semester-walk-probe.sh 
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running proof risk semester-walk probe...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+[probe] opening https://raed2180416.github.io/AirMentor/
+[probe] system admin browser session is ready
+[probe] reading proof dashboard for batch_branch_mnc_btech_2023
+[probe] activating semester 1
+[probe] activating semester 2
+[probe] activating semester 3
+[probe] restoring semester 6
+Semester-walk probe passed.
+Probe artifact: /home/raed/projects/air-mentor-ui/output/playwright/07b-live-probe-semester-probe.json
+- semester 1: stage_checkpoint_78ee47d5a45be74db6419d24
+- semester 2: stage_checkpoint_d6aa3455a8cf8433f94ab773
+- semester 3: stage_checkpoint_6452ecb8ca56b5b88168e2da
+[2026-04-01T13:40:39Z] exit=0

@@ -1,0 +1,18 @@
+[2026-03-30T16:41:02Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T16:41:02Z] command=zsh -lc export\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\;\ npm\ run\ playwright:admin-live:acceptance 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:acceptance
+> bash scripts/playwright-admin-live-acceptance.sh
+
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running system admin live acceptance flow...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+Playwright root: /nix/store/w94nd74jw950wlwm06f51n62d0sb5yp0-playwright-test-1.57.0
+Browsers path: /nix/store/bas6dg486nm7lc5b9529da43418mymbz-playwright-browsers
+System admin live acceptance flow passed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance.png
+[2026-03-30T16:41:43Z] exit=0

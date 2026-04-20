@@ -1,0 +1,16 @@
+pass_name=closure-readiness-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-closure-readiness-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+runtime_failure_class=quota-or-rate-limit
+runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-closure-readiness-pass.attempt-1.3we3pP.log
+current_provider=github-copilot
+current_account=copilot-accneww432
+current_model=gpt-5.3-codex
+current_slot=copilot-accneww432
+route_attempt=2
+execution_supervisor_pid=2067242
+last_event=completed
+last_checkpoint_at=2026-04-16T18:41:55Z

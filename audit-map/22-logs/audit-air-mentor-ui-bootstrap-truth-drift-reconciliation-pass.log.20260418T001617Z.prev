@@ -1,0 +1,2075 @@
+[2026-04-18T00:00:30Z] session=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+[2026-04-18T00:00:30Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.command.sh
+[2026-04-18T00:00:30Z] execution-attempt=1 provider=native-codex slot=native account=native-codex-session model=gpt-5.4
+OpenAI Codex v0.115.0 (research preview)
+--------
+workdir: /home/raed/projects/air-mentor-ui
+model: gpt-5.4
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR, /home/raed/.codex/memories]
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 019d9de3-969a-77c1-9f9b-46dc8260d143
+--------
+user
+AirMentor audit OS pass: truth-drift-reconciliation-pass
+
+Read these files first:
+- audit-map/index.md
+- audit-map/24-agent-memory/known-facts.md
+- audit-map/14-reconciliation/contradiction-matrix.md
+- audit-map/23-coverage/coverage-ledger.md
+
+Pass context:
+- context: bootstrap
+- task class: high-stakes
+- risk class: high
+- model: gpt-5.4
+- reasoning effort: xhigh
+
+- execution provider: native-codex
+- execution account: native-codex-session
+- execution account label: n/a
+- execution slot: native
+
+Always persist important results into audit-map files before ending.
+
+# Main Analysis Agent Bootstrap Prompt
+
+Version: `v2.1`
+
+You are the primary forensic analysis agent for the AirMentor project.
+
+You are operating inside a prebuilt automation and audit environment.
+Your job is to use that environment to perform a near-lossless deconstruction of the entire AirMentor system.
+
+This is not a summary task.
+This is not a lightweight code review.
+This is not just documentation.
+This is a full-system forensic audit.
+
+## Primary Mission
+
+Map, with evidence:
+
+- every feature
+- every sub-feature
+- every micro-action
+- every role-based behavior
+- every screen, panel, tab, modal, card, table, filter, drilldown, and workflow
+- every hidden state interaction
+- every dependency
+- every state flow
+- every data flow
+- every ML, heuristic, inference, scoring, and fallback component
+- every test and verification gap
+- every UX friction point
+- every live-vs-local mismatch
+- every mismatch between product intent, expected behavior, implemented behavior, tested behavior, and live behavior
+
+The final result must let a human answer:
+
+- what exists
+- why it exists
+- how it works
+- what it depends on
+- what it changes
+- what is supposed to happen
+- what actually happens
+- what breaks trust
+- what breaks correctness
+- what breaks maintainability
+
+## Project Focus
+
+Treat these as first-class audit targets:
+
+- sysadmin portal
+- teaching portfolio
+- HoD surfaces
+- mentor surfaces
+- course leader surfaces
+- course management features
+- proof, playback, risk, ML, and inference features
+- current testing and validation posture
+- live deployed behavior on GitHub Pages and Railway
+- current UX complexity and unnecessary friction
+
+Known high-risk concerns already on record and not optional to investigate:
+
+- semantic closeout is not fully proven
+- local or script-level success can diverge from live semantic truth
+- live proof behavior may be fallback-heavy
+- mentor, course leader, HoD, and sysadmin surfaces may diverge incorrectly on the same student truth
+- proof lifecycle may be under-explained
+- active run, checkpoint, and semester coherence may be fragile
+- ML evaluation artifacts may be missing, stale, or not reproducibly regenerated
+- deterministic metrics may be under-explained in the UI
+- tests appear stronger on operability than on cross-surface semantic truth
+- UI and UX may be overly dense and cognitively expensive
+
+## Required Files To Read First
+
+Before doing substantive work, read and internalize these files:
+
+1. `audit-map/README.md`
+2. `audit-map/index.md`
+3. `audit-map/00-governance/mission.md`
+4. `audit-map/00-governance/analysis-rules.md`
+5. `audit-map/00-governance/future-agent-operating-manual.md`
+6. `audit-map/00-governance/decision-log.md`
+7. `audit-map/00-governance/model-routing-policy.md`
+8. `audit-map/00-governance/provider-switching-policy.md`
+9. `audit-map/00-governance/account-switching-policy.md`
+10. `audit-map/00-governance/context-compaction-policy.md`
+11. `audit-map/00-governance/prompt-caching-policy.md`
+12. `audit-map/00-governance/caveman-safety-policy.md`
+13. `audit-map/00-governance/background-execution-policy.md`
+14. `audit-map/00-governance/stop-conditions-policy.md`
+15. `audit-map/00-governance/manual-escalation-policy.md`
+16. `audit-map/23-coverage/coverage-ledger.md`
+17. `audit-map/23-coverage/unreviewed-surface-list.md`
+18. `audit-map/23-coverage/review-status-by-path.md`
+19. `audit-map/24-agent-memory/working-knowledge.md`
+20. `audit-map/24-agent-memory/known-facts.md`
+21. `audit-map/24-agent-memory/known-ambiguities.md`
+22. `audit-map/24-agent-memory/stale-findings-watchlist.md`
+23. `audit-map/14-reconciliation/reconciliation-log.md`
+24. `audit-map/14-reconciliation/contradiction-matrix.md`
+25. `audit-map/24-agent-memory/checkpointing-policy.md`
+26. `audit-map/19-runbooks/local-analysis-runbook.md`
+27. `audit-map/19-runbooks/environment-setup-runbook.md`
+28. `audit-map/19-runbooks/troubleshooting-runbook.md`
+29. `audit-map/19-runbooks/live-verification-runbook.md`
+30. `audit-map/19-runbooks/github-pages-verification-runbook.md`
+31. `audit-map/19-runbooks/railway-verification-runbook.md`
+32. `audit-map/19-runbooks/live-vs-local-comparison-runbook.md`
+33. `audit-map/19-runbooks/caveman-integration-runbook.md`
+34. `audit-map/19-runbooks/arctic-integration-runbook.md`
+35. `audit-map/19-runbooks/arctic-vscode-on-nixos-runbook.md`
+36. `audit-map/19-runbooks/arctic-account-switching-runbook.md`
+37. `audit-map/19-runbooks/nixos-vscode-strategy.md`
+38. `audit-map/19-runbooks/nixos-dev-environment-strategy.md`
+39. `audit-map/19-runbooks/nixos-extension-compatibility-notes.md`
+40. `audit-map/20-prompts/prompt-index.md`
+41. `audit-map/20-prompts/prompt-version-history.md`
+42. `audit-map/20-prompts/templates/feature-template.md`
+43. `audit-map/20-prompts/templates/role-surface-template.md`
+44. `audit-map/20-prompts/templates/dependency-template.md`
+45. `audit-map/20-prompts/templates/data-flow-template.md`
+46. `audit-map/20-prompts/templates/state-flow-template.md`
+47. `audit-map/20-prompts/templates/ml-component-template.md`
+48. `audit-map/20-prompts/templates/test-gap-template.md`
+49. `audit-map/20-prompts/templates/live-behavior-template.md`
+50. `audit-map/20-prompts/templates/ux-friction-template.md`
+51. `audit-map/20-prompts/templates/final-synthesis-template.md`
+52. `audit-map/25-accounts-routing/current-model-availability.md`
+53. `audit-map/25-accounts-routing/account-status.md`
+54. `audit-map/25-accounts-routing/provider-status.md`
+55. `audit-map/25-accounts-routing/provider-model-preferences.md`
+56. `audit-map/25-accounts-routing/desired-provider-account-plan.md`
+57. `audit-map/25-accounts-routing/manual-action-required.md`
+58. `audit-map/29-status/` current files
+59. `audit-map/30-checkpoints/` current files
+60. `audit-map/31-queues/pending.queue` if it exists
+
+Do not begin deeper mapping until you understand the audit environment itself.
+
+Before substantive work, run an environment drift check between prompt assumptions and current status artifacts. If drift exists, record it and continue from status-file truth.
+
+## Non-Negotiable Rules
+
+1. Do not be shallow.
+2. Do not summarize when mapping is required.
+3. Do not skip small interactions.
+4. Do not assume obvious behavior is correct.
+5. Do not trust green scripts by themselves.
+6. Do not trust local code by itself.
+7. Do not leave important findings only in chat output.
+8. Every major finding must update the audit environment files.
+9. Every major claim must be anchored to evidence paths.
+10. Every contradiction must be recorded.
+11. Every pass must update working knowledge and coverage.
+12. If uncertainty remains, log it explicitly.
+13. If a prior assumption is invalidated, update the reconciliation log and stale-findings watchlist.
+14. If the workflow itself is insufficient, improve it explicitly rather than working around it silently.
+15. Never claim completeness until you have run an audit-the-audit pass.
+
+## Mandatory Source Hierarchy
+
+Use evidence in this order while reconciling differences:
+
+1. actual code
+2. tests and scripts
+3. configs and deployment files
+4. runbooks and audit environment files
+5. internal docs, closeout docs, and prior audits
+6. live GitHub Pages behavior
+7. live Railway behavior
+
+Never let a doc override code or runtime without checking.
+Never let local code override live truth without checking.
+Never let live behavior override repo intent without documenting the drift.
+
+## Model, Account, Provider, and Cost Policy
+
+Follow `audit-map/00-governance/model-routing-policy.md` and current local availability, not stale examples.
+
+Current local truth must be read from status artifacts at runtime, not copied from this prompt text:
+
+- treat these files as authoritative before routing decisions:
+  - `audit-map/29-status/route-health-*.status`
+  - `audit-map/29-status/arctic-slot-*.status`
+  - `audit-map/18-snapshots/accounts/*/execution-smoke-*.txt`
+  - `audit-map/25-accounts-routing/account-status.md`
+  - `audit-map/25-accounts-routing/provider-status.md`
+  - `audit-map/25-accounts-routing/current-model-availability.md`
+- if this prompt text conflicts with current status files, status files win and the drift must be recorded in reconciliation or working knowledge
+- slot IDs are authoritative; account labels are metadata only
+
+Cost rules:
+
+1. reuse file-based memory instead of resending giant context
+2. prefer stable prompt prefixes and versioned prompt files
+3. use checkpoint files aggressively
+4. escalate model, provider, or account only when the current tier is insufficient
+5. never silently switch providers in a high-risk phase without recording it
+6. if safe automatic switching is unavailable, stop deterministically and emit the exact manual resume point
+7. if the current route is unavailable, use bounded wait, then stop cleanly with explicit resume instructions
+
+## Caveman Policy
+
+If Caveman is enabled and verified, use it only for low-risk repetitive output-heavy tasks.
+Never use Caveman when nuance loss could hide a correctness issue.
+If in doubt, do not use it.
+
+## TMUX and Unattended Execution Policy
+
+All long-running or unattended work must run through the detached tmux framework.
+
+Rules:
+
+1. Every substantial pass should have a named tmux job if it may run long or unattended.
+2. Every job must write logs, status, and checkpoints.
+3. Every job must be resumable.
+4. If a task requires manual action, stop cleanly and emit exact instructions into the status and checkpoint system.
+5. Do not run fragile long tasks in a transient shell if they should survive editor or terminal closure.
+
+## Top-Level Execution Order
+
+Work in disciplined passes and do not collapse them:
+
+0. audit-the-audit-environment
+1. refresh-inventory
+2. top-level-architecture-map
+3. role-surface-mapping
+4. feature-atom-mapping
+5. dependency-graph
+6. data-flow-and-state-flow
+7. ml-heuristic-risk-audit
+8. test-script-verification-audit
+9. ux-product-complexity-audit
+10. live-deployment-audit
+11. reconciliation
+12. master-map-update
+13. audit-the-audit
+14. final-synthesis
+
+In the actual queue this maps to:
+
+1. `route-map-pass`
+2. `role-surface-pass`
+3. `feature-atom-pass`
+4. `dependency-pass`
+5. `data-flow-pass`
+6. `state-flow-pass`
+7. `ml-audit-pass`
+8. `test-gap-pass`
+9. `ux-friction-pass`
+10. `live-behavior-pass`
+11. `account-routing-pass`
+12. `audit-the-audit-pass`
+13. `synthesis-pass`
+
+Support passes:
+
+- `cost-optimization-pass`
+- `prompt-self-improvement-pass`
+- `unattended-run-pass`
+
+## Exhaustiveness Gate
+
+A pass is not complete just because you found some examples.
+
+You must keep expanding the current scope until one of these is true:
+
+- no new routes, roles, features, dependency edges, state families, data families, test families, or live evidence families are being discovered in the scoped surface
+- or a blocker has been recorded with exact reason, exact manual action, exact resume command, and exact remaining uncovered scope
+
+For every pass, perform a final completeness check against:
+
+- repo inventory
+- current coverage ledger
+- current review-status-by-path
+- route, role, feature, dependency, data, state, ML, test, UX, and live evidence families already known
+
+Do not mark a pass complete unless the coverage delta for the scoped surface is zero, or you explicitly write why it is not zero.
+
+## Required Output At End Of Every Major Pass
+
+Report into files:
+
+1. what was covered
+2. what files were updated
+3. what remains uncovered
+4. contradictions found
+5. risks discovered
+6. whether model, provider, or account routing changed
+7. whether Caveman was used
+8. whether live verification was performed
+9. what next pass should run
+10. whether any manual checkpoint is required
+
+Minimum required file updates after each meaningful pass:
+
+- `audit-map/23-coverage/coverage-ledger.md`
+- `audit-map/24-agent-memory/working-knowledge.md`
+- `audit-map/14-reconciliation/contradiction-matrix.md` if new mismatches are found
+- scoped output files in the relevant map directories
+
+## Stop Conditions
+
+Stop and emit a deterministic manual-action-required checkpoint if:
+
+- login or account verification is required
+- provider, account, or model switching is needed and cannot be safely automated
+- live verification is blocked by credentials or environment
+- a required tool or integration is unavailable
+- a long-running pass cannot safely continue
+- the environment is insufficient and must be repaired first
+- the current route is exhausted or unavailable after bounded wait
+- model or provider exhaustion occurs without a verified safe fallback
+
+When stopping, write:
+
+- exact reason
+- exact manual action needed
+- exact resume point
+- exact next command or prompt
+- exact uncovered scope left behind
+
+## Absolute Quality Bar
+
+You are not done because some scripts passed.
+You are not done because you produced a readable summary.
+You are not done because you covered the main screens.
+You are not done until `audit-map/` contains a genuinely usable, evidence-backed, cross-linked system map of AirMentor that makes omission unlikely.
+
+This is a forensic task.
+Act like it.
+
+
+# Exhaustive Closure Campaign Prompt
+
+Version: `v3.2`
+
+You are the closure-phase forensic analysis agent for the AirMentor project.
+
+You are not starting from zero.
+You are entering an existing audit operating system with substantial prior evidence, partial maps, uncovered-surface ledgers, and active contradiction memory.
+
+Your job is not to produce a fresh broad summary.
+Your job is to drive the audit from "strong partial understanding" to "near-lossless deterministic understanding" with omission pressure kept as low as practically possible.
+
+This is a closure campaign.
+Treat every uncovered surface, every thin area, every stale assumption, every route-to-component gap, and every live-vs-local ambiguity as unfinished forensic work.
+
+## Closure Mission
+
+You must continue until the audit environment makes it extremely difficult for a future human or agent to miss:
+
+- any feature
+- any sub-feature
+- any micro-interaction
+- any visible or hidden role difference
+- any route family
+- any internal page-state family
+- any panel, tab, modal, card, table, filter, button, toggle, drilldown, empty state, loading state, error state, retry state, restore state, replay state, pagination state, comparison state, or keyboard affordance
+- any important dependency or hidden coupling
+- any state source, restore mechanism, replay mechanism, cache layer, shadow state, or duplication boundary
+- any ML, heuristic, deterministic, calibrated, ranked, scored, gated, or fallback behavior
+- any test blind spot
+- any UX friction or cognitive-load hotspot
+- any live-vs-local drift
+- any contradiction between product intent, expected behavior, implemented behavior, tested behavior, and live observed behavior
+
+The target is not just "good coverage."
+The target is deterministic carry-forward knowledge with low omission risk.
+
+Critically: the currently known uncovered surfaces are not the full universe of omissions.
+They are only the currently observed blocker set.
+You must actively search for unknown unknowns and treat any fixed blocker list as incomplete until proven otherwise by evidence-backed completeness checks.
+
+## Current Campaign Context
+
+The following broad families already have substantial pass outputs and must be treated as existing evidence, not ignored:
+
+- route map
+- role-surface map
+- feature-atom families
+- dependency map
+- data-flow and state-flow map
+- ML audit
+- test-gap audit
+- UX friction audit
+- partial live-behavior audit
+
+However, the audit is not complete.
+Do not confuse completed pass labels with closure.
+You must read the current coverage and memory files to understand what is still missing.
+
+Also do not assume the current ledgers have already found every missing area.
+Part of this campaign is to discover omissions in the audit itself.
+
+## Files You Must Read Before Continuing
+
+Read these first, in addition to the standard bootstrap files:
+
+1. `audit-map/23-coverage/coverage-ledger.md`
+2. `audit-map/23-coverage/unreviewed-surface-list.md`
+3. `audit-map/23-coverage/review-status-by-path.md`
+4. `audit-map/24-agent-memory/working-knowledge.md`
+5. `audit-map/24-agent-memory/known-facts.md`
+6. `audit-map/24-agent-memory/known-ambiguities.md`
+7. `audit-map/24-agent-memory/stale-findings-watchlist.md`
+8. `audit-map/14-reconciliation/reconciliation-log.md`
+9. `audit-map/14-reconciliation/contradiction-matrix.md`
+10. `audit-map/15-final-maps/master-system-map.md`
+11. `audit-map/15-final-maps/role-feature-matrix.md`
+12. `audit-map/15-final-maps/feature-registry.md`
+13. `audit-map/15-final-maps/dependency-graph.md`
+14. `audit-map/15-final-maps/data-flow-map.md`
+15. `audit-map/15-final-maps/state-flow-map.md`
+16. `audit-map/15-final-maps/ml-system-map.md`
+17. `audit-map/15-final-maps/live-vs-local-master-diff.md`
+18. `audit-map/10-live-behavior/*`
+19. `audit-map/08-ml-audit/*`
+20. `audit-map/11-ux-audit/*`
+21. `audit-map/23-coverage/test-gap-ledger.md`
+22. `audit-map/31-queues/pending.queue`
+23. `audit-map/29-status/` current files
+24. `audit-map/30-checkpoints/` current files
+
+Do not start closure work until you understand:
+
+- what has already been mapped deeply
+- what remains only seeded or partial
+- what is blocked by environment or credentials
+- what is still missing at micro-interaction resolution
+
+## Non-Negotiable Closure Rules
+
+1. Do not restart loosely from scratch. Continue from the current knowledge base.
+2. Do not overwrite prior findings silently. Supersede them explicitly when needed.
+3. Do not summarize an area that still needs decomposition.
+4. Do not accept family-level mapping where component-level interaction mapping is still required.
+5. Do not accept route-level mapping where internal state-family or restore behavior is still missing.
+6. Do not accept backend topology mapping where provenance, worker completion, or migration lineage is still unresolved.
+7. Do not accept live shell reachability as proof of live semantic parity.
+8. Every important finding must land in a durable file.
+9. Every major claim must point to evidence paths.
+10. Every unresolved ambiguity must be logged.
+11. Every contradiction must update the contradiction matrix or reconciliation log.
+12. Every closure step must update coverage memory.
+13. If a current prompt, template, ledger, or automation rule is insufficient, improve it explicitly.
+14. Never claim closure until an audit-the-audit pass is rerun after the deep closure work.
+15. Treat every "known remaining gap" list as seed evidence, not as an exhaustive boundary.
+16. Before accepting any subsystem as complete, cross-check it against repo inventory, runtime evidence, tests, configs, scripts, and live surfaces to detect omissions not previously logged.
+
+## Unknown-Omission Discovery Rules
+
+You are required to search for missing work beyond the current blocker list.
+
+Do this systematically, not impressionistically.
+
+For every major subsystem, compare:
+
+- repo tree paths
+- route inventory
+- component inventory
+- hook/context/store inventory
+- endpoint inventory
+- schema and migration inventory
+- worker and queue inventory
+- script inventory
+- workflow inventory
+- deployment/config inventory
+- test inventory
+- existing audit-map coverage artifacts
+
+If any path family, execution family, or interaction family exists in code or runtime but is absent, thinly represented, or only family-level summarized in the audit outputs, treat that as a newly discovered closure blocker and record it.
+
+Never allow a prompt's currently listed blockers to suppress discovery of:
+
+- overlooked component clusters
+- helper modules with behavior implications
+- implicit state machines
+- restore or replay logic
+- role-conditional rendering paths
+- empty/loading/error edge states
+- env-conditional runtime branches
+- script-only semantic transformations
+- workflow-only deployment or verification behavior
+- undocumented fallback paths
+- same-entity truth divergences across surfaces
+
+If you cannot prove a subsystem is covered to the required depth, it is not complete.
+
+## Completeness Verification Standard
+
+Before any pass or subsystem can be considered closure-ready, verify all of the following:
+
+1. Inventory coverage:
+   - the subsystem's files and execution entrypoints are represented in coverage ledgers
+2. Interaction depth:
+   - important user-visible or system-visible actions are decomposed below family-level summaries
+3. State depth:
+   - restore, replay, caching, shadow state, and error/retry behavior are captured where applicable
+4. Dependency depth:
+   - upstream and downstream consequences are traced beyond local component boundaries
+5. Role depth:
+   - role-conditional differences and same-truth expectations are documented
+6. Runtime depth:
+   - tests, scripts, config, and live/runtime behavior are reconciled where relevant
+7. Evidence quality:
+   - claims point to concrete code paths, artifacts, logs, or observations
+
+If any one of those is weak, mark the subsystem as partial and continue closure work.
+
+## Stale-Assumption Reconciliation Rule
+
+Before each closure phase, compare prompt-stated environment assumptions against:
+
+- `audit-map/29-status/*.status`
+- `audit-map/30-checkpoints/*.checkpoint`
+- `audit-map/22-logs/*.log` for the current pass family
+
+If any assumption is stale (for example, provider execution capability, routing constraints, or blocker state), record supersession in `working-knowledge.md` and continue with artifact truth rather than prompt prose.
+
+## Continuity And Handoff Rules
+
+Assume multiple agents may touch this campaign over time.
+
+You must preserve continuity by:
+
+- treating `audit-map/` as the canonical working memory
+- reading the latest ledgers before acting
+- updating `working-knowledge.md`, `known-facts.md`, `known-ambiguities.md`, and coverage ledgers at the end of each substantial pass
+- recording supersession when an earlier assumption or finding is replaced
+- writing deterministic stop points if you cannot continue safely
+
+Never rely on ephemeral conversation memory as the authoritative source of progress.
+
+## Current Highest-Priority Remaining Gaps
+
+Treat the following as currently known closure-critical blockers until proven otherwise.
+This list is explicitly non-exhaustive.
+You must add to it whenever new omission evidence is discovered:
+
+- `src/` component-by-component interaction mapping
+- `src/data.old.ts` archival status and call-site inventory
+- `air-mentor-api/src/db/` migration lineage and seed provenance
+- proof-refresh worker or cron consumer completion path after queueing
+- fresh proof-risk evaluation artifact regeneration in a less restricted environment
+- live proof-risk artifact availability, fallback frequency, and same-student cross-surface parity
+- current deployment dependency posture for Python NLP, `sentence-transformers`, and optional Ollama curriculum-linkage assist
+- `.github/workflows/` workflow-by-workflow behavior mapping
+- live authenticated admin flows
+- live teacher, HoD, mentor, and student flows
+- deployment automation edge cases and stale artifact detection
+- seed-data-to-live parity
+
+These are not suggestions.
+These are closure blockers until resolved or explicitly blocked with evidence.
+But they are also not the whole space of blockers.
+Your job includes finding the blockers that are not on this list yet.
+
+## Required Closure Campaign Order
+
+Continue in disciplined closure phases.
+Do not jump straight to synthesis.
+
+### Phase A — Finish Current Queued Core Passes
+
+Ensure the late-stage queued passes are truly complete, not just marked complete:
+
+1. `live-behavior-pass`
+2. `account-routing-pass`
+3. `cost-optimization-pass`
+4. `prompt-self-improvement-pass`
+5. `unattended-run-pass`
+
+If any of those are thin, rerun or deepen them before moving on.
+
+### Phase B — Run Missing Deep Local Passes
+
+You must perform or drive these deeper closure passes:
+
+1. `frontend-microinteraction-pass`
+2. `backend-provenance-pass`
+3. `workflow-automation-pass`
+4. `script-behavior-pass`
+5. `same-student-cross-surface-parity-pass`
+
+These are closure passes, not light supplements.
+
+### Phase C — Perform Live Authenticated Closure
+
+When credentials and environment allow, close live evidence gaps for:
+
+- sysadmin
+- HoD
+- mentor
+- course leader
+- student
+
+For each live role family, capture:
+
+- entry flow
+- visible surfaces
+- request/proof/playback/risk behavior
+- session or origin behavior
+- missing artifact or fallback behavior
+- live-vs-local drift
+
+### Phase D — Re-run Audit-The-Audit
+
+After the deep closure passes and live-authenticated checks, rerun `audit-the-audit-pass`.
+
+This rerun must compare:
+
+- repo tree
+- route registry
+- feature registry
+- component inventory
+- backend modules
+- DB lineage
+- scripts
+- workflows
+- live evidence
+- role parity evidence
+
+Anything still thin must either be requeued or explicitly accepted as blocked.
+
+This rerun must also produce newly discovered blocker entries if it finds paths, components, flows, helpers, or runtime branches that were never captured in earlier ledgers.
+
+### Phase E — Final Synthesis
+
+Only after the closure phases above are done, produce the final synthesis.
+
+## Deep-Pass Expectations
+
+### Frontend Microinteraction Pass
+
+Map actual component-level and stateful UI behavior across `src/`, not just routed page families.
+
+For each important interactive component or cluster, record:
+
+- where it appears
+- which role sees it
+- what exact interactions exist
+- what local state changes
+- what persistent state changes
+- what API or backend consequence fires
+- what downstream UI surfaces should update
+- what restore/re-entry behavior exists
+- what empty/loading/error/retry states exist
+- what hidden coupling exists
+
+### Backend Provenance Pass
+
+Trace:
+
+- migrations
+- seeds
+- artifact tables
+- proof runs
+- checkpoint lineage
+- semester lineage
+- worker completion paths
+- refresh consumers
+- provenance assumptions
+
+For each important record family, answer:
+
+- origin
+- transforms
+- persistence
+- authoritative source
+- replay or restore path
+- stale or drift risk
+
+### Workflow Automation Pass
+
+Map every workflow in `.github/workflows/` as an execution system, not just a file list.
+
+For each workflow:
+
+- trigger
+- branch or event scope
+- secrets and environment assumptions
+- artifacts produced
+- deployment or verification effect
+- blind spots
+- mismatch risk with local assumptions
+
+### Script Behavior Pass
+
+Map the long-tail helper scripts in `scripts/` and `air-mentor-api/scripts/`.
+
+For each important script:
+
+- purpose
+- real invocation path
+- assumptions
+- files touched
+- services touched
+- semantic guarantee level
+- false-confidence risk
+- known failure modes
+
+### Same-Student Cross-Surface Parity Pass
+
+This is a closure-critical semantic pass.
+
+Pick the same student or student-equivalent truth slice and compare it across:
+
+- sysadmin
+- HoD
+- mentor
+- course leader
+- student
+
+For each field or conceptual truth:
+
+- what should remain invariant
+- what may legitimately differ by scope
+- what actually differs in code, test, or live behavior
+- what is still unverified
+
+## Output Rules For Every Closure Pass
+
+At the end of each major closure pass, you must report in files:
+
+1. what exact scope was covered
+2. what files were updated
+3. what remains uncovered
+4. contradictions found
+5. risks discovered
+6. whether routing or provider behavior changed
+7. whether Caveman was used
+8. whether live verification was performed
+9. what next pass should run
+10. whether manual checkpoint is required
+
+Do not leave this only in chat output.
+
+## Stop Conditions
+
+Stop and emit a deterministic manual-action-required checkpoint if:
+
+- authenticated live verification is required but credentials are missing
+- provider or account switching cannot continue safely
+- a long-running pass cannot safely recover
+- a workflow or environment blocker prevents trustworthy continuation
+- fresh proof-risk artifact regeneration needs a less restricted environment
+
+When stopping, write:
+
+- exact reason
+- exact manual action needed
+- exact resume point
+- exact next command or prompt
+- exact uncovered scope left behind
+
+## Absolute Completion Standard
+
+You are not done because many passes are marked complete.
+You are not done because the maps are readable.
+You are not done because the main screens are known.
+You are not done until the remaining uncovered list is near-empty, or every remaining item is explicitly blocked with evidence and resume conditions.
+
+Specifically, do not allow final closure until:
+
+- the component-level interaction gaps in `src/` are materially reduced
+- DB provenance and worker completion lineage are known
+- workflow and helper-script behavior are mapped
+- same-student cross-surface parity is explicitly audited
+- live authenticated flows are directly observed or deterministically blocked
+- proof-risk artifact freshness and fallback posture are rechecked
+- a final audit-the-audit rerun has happened after closure work
+
+This is a forensic closure campaign.
+Act like the next person reading `audit-map/` must be able to reconstruct the system with minimal hidden assumptions.
+
+
+# Absolute Forensic Closure Campaign Prompt
+
+Version: `v5.0`
+
+You are the final forensic closure agent for AirMentor.
+
+This prompt is for the endgame where the requirement is not "strong coverage" but "deterministic closure pressure" across code, runtime, workflow, scripts, and live semantics.
+
+Treat every prior audit artifact as a claim that must be re-validated or explicitly bounded.
+
+You are not allowed to declare completion merely because:
+- a queue is empty
+- passes are marked complete
+- maps exist
+- summaries look comprehensive
+
+Completion is evidence-only.
+
+## Absolute Mission
+
+Drive the audit corpus to the maximum practical closure state by making omission unlikely across:
+
+1. every code path family
+2. every route and route-state family
+3. every role-conditioned behavior
+4. every meaningful micro-interaction family
+5. every backend lineage and state transform boundary
+6. every dependency and workflow edge that can alter runtime truth
+7. every ML/heuristic/fallback decision family
+8. every live-vs-local semantic parity claim
+
+If any area cannot be fully proven, you must precisely bound the uncertainty and prove why it is blocked.
+
+## Zero-Trust Principles
+
+1. Treat all prior findings as hypotheses until re-confirmed with evidence.
+2. Treat pass completion metadata as non-authoritative if artifact quality is weak.
+3. Treat family-level descriptions as insufficient where component- or flow-level detail is required.
+4. Do not inherit confidence from prior prose.
+5. If evidence is stale, downgrade confidence immediately.
+6. If two artifacts disagree, prefer code/runtime/log truth and record the contradiction.
+
+## Mandatory Inputs
+
+Read these before acting:
+
+1. `audit-map/index.md`
+2. `audit-map/23-coverage/coverage-ledger.md`
+3. `audit-map/23-coverage/unreviewed-surface-list.md`
+4. `audit-map/23-coverage/review-status-by-path.md`
+5. `audit-map/23-coverage/test-gap-ledger.md`
+6. `audit-map/24-agent-memory/working-knowledge.md`
+7. `audit-map/24-agent-memory/known-facts.md`
+8. `audit-map/24-agent-memory/known-ambiguities.md`
+9. `audit-map/24-agent-memory/stale-findings-watchlist.md`
+10. `audit-map/14-reconciliation/contradiction-matrix.md`
+11. `audit-map/14-reconciliation/reconciliation-log.md`
+12. `audit-map/15-final-maps/master-system-map.md`
+13. `audit-map/15-final-maps/role-feature-matrix.md`
+14. `audit-map/15-final-maps/feature-registry.md`
+15. `audit-map/15-final-maps/dependency-graph.md`
+16. `audit-map/15-final-maps/data-flow-map.md`
+17. `audit-map/15-final-maps/state-flow-map.md`
+18. `audit-map/15-final-maps/ml-system-map.md`
+19. `audit-map/15-final-maps/live-vs-local-master-diff.md`
+20. `audit-map/32-reports/claim-verification-matrix.md`
+21. `audit-map/32-reports/unknown-omission-ledger.md`
+22. `audit-map/32-reports/residual-gap-closure-report.md`
+23. `audit-map/32-reports/closure-readiness-verdict.md`
+24. `audit-map/32-reports/final-gap-and-shutdown-overnight.md`
+25. latest relevant pass logs in `audit-map/22-logs/`
+26. latest status/checkpoint files in `audit-map/29-status/` and `audit-map/30-checkpoints/`
+
+## Required Discovery Procedure
+
+Perform this as a hard check, not advisory:
+
+1. Build current inventory from repository truth:
+   - code tree
+   - routes
+   - components
+   - hooks/contexts/stores
+   - APIs/endpoints
+   - schemas/migrations
+   - background jobs/workers
+   - scripts
+   - workflows
+   - test suites
+2. Cross-diff that inventory against audit-map coverage artifacts.
+3. Every missing or under-represented family becomes a closure blocker entry.
+4. Every blocker must include:
+   - exact path(s)
+   - expected semantic claim
+   - current evidence state
+   - closure action required
+   - confidence level
+
+## Evidence Buckets (Required Per Claim)
+
+For each high-impact claim, label one or more:
+- `code-backed`
+- `test-backed`
+- `config-backed`
+- `artifact-backed`
+- `live-observed`
+- `inferred`
+- `blocked`
+- `contradicted`
+
+Any claim lacking at least one non-`inferred` evidence bucket must be downgraded.
+
+## Closure Gates (All Must Pass)
+
+Gate A: Coverage Integrity
+- No strategically important path family remains only `seeded` or vague.
+- Unreviewed list is near-empty or each remainder is explicitly blocked.
+
+Gate B: Interaction Integrity
+- Long-tail UI interactions are represented beyond high-density clusters.
+- Hidden/restore/replay/error/loading/empty states are covered where relevant.
+
+Gate C: Data & Provenance Integrity
+- Data-flow corpus exists at per-flow granularity for critical entities.
+- Proof-refresh ownership and completion lineage are explicit end-to-end.
+
+Gate D: Runtime Integrity
+- Deployment/workflow/script behavior that changes truth is mapped and reconciled.
+- Contradictions are current and actively linked to evidence.
+
+Gate E: Live Semantic Integrity
+- Credentialed live same-entity parity is directly observed OR blocked with precise manual prerequisites.
+- Any blocked live proof must include deterministic resume instructions.
+
+If any gate fails, final closure claim is disallowed.
+
+## Non-Negotiable Output Updates
+
+You must update all relevant files, not just one report.
+
+Minimum required updates when running this prompt:
+1. `audit-map/23-coverage/coverage-ledger.md`
+2. `audit-map/23-coverage/unreviewed-surface-list.md`
+3. `audit-map/23-coverage/review-status-by-path.md`
+4. `audit-map/14-reconciliation/contradiction-matrix.md` (if any contradiction changes)
+5. `audit-map/24-agent-memory/working-knowledge.md`
+6. `audit-map/32-reports/closure-readiness-verdict.md`
+7. new campaign report: `audit-map/32-reports/absolute-forensic-closure-report.md`
+
+## Required Final Report Shape
+
+`absolute-forensic-closure-report.md` must include:
+
+1. exact scope audited this run
+2. inventory-vs-coverage diff findings
+3. newly discovered omissions (if any)
+4. downgraded or invalidated prior claims
+5. strengthened claims with new evidence
+6. gate-by-gate pass/fail with reasons
+7. remaining blockers with deterministic resume commands
+8. explicit closure verdict:
+   - `closure-achieved`
+   - `closure-partial`
+   - `closure-blocked`
+9. confidence rationale and residual risk profile
+
+## Manual-Action Checkpoint Rule
+
+Emit manual-action-required and stop if any required live/credential/runtime condition is unavailable.
+
+When stopping, provide:
+- exact blocker
+- exact manual step
+- exact file or pass to resume
+- exact next command
+
+## Hard Prohibition
+
+Do not produce a “done” claim without gate evidence.
+
+If uncertainty remains, name it.
+If blocked, stop cleanly with deterministic next action.
+If complete, prove it.
+
+
+
+# Truth Drift Reconciliation Pass
+
+Version: `v1.0`
+Date: `2026-04-18`
+Related orchestrator prompt: `P9`
+
+## Objective
+
+Detect and close truth drift across contradiction, coverage, status/checkpoint, and report artifacts.
+Treat every claim as false until verified by current evidence.
+
+## Read First
+
+1. `audit-map/20-prompts/adversarial-master-orchestrator-suite.md`
+2. `audit-map/14-reconciliation/contradiction-matrix.md`
+3. `audit-map/23-coverage/coverage-ledger.md`
+4. `audit-map/24-agent-memory/known-facts.md`
+5. `audit-map/24-agent-memory/working-knowledge.md`
+6. `audit-map/29-status/`
+7. `audit-map/30-checkpoints/`
+8. `audit-map/32-reports/`
+
+## Mandatory Evidence Targets
+
+- `audit-map/14-reconciliation/contradiction-matrix.md`
+- `audit-map/23-coverage/coverage-ledger.md`
+- `audit-map/24-agent-memory/known-facts.md`
+- `audit-map/24-agent-memory/working-knowledge.md`
+- `audit-map/20-prompts/prompt-index.md`
+- `audit-map/20-prompts/prompt-version-history.md`
+- `audit-map/20-prompts/prompt-change-log.md`
+- `audit-map/16-scripts/tmux-list-jobs.sh`
+- `audit-map/16-scripts/tmux-job-status.sh`
+- `audit-map/16-scripts/tmux-tail-job-log.sh`
+
+## Mandatory Checks
+
+- `P9-C01`: Every open contradiction has expected, implemented, tested/live evidence references.
+- `P9-C02`: Contradiction status labels match newest artifacts.
+- `P9-C03`: Status/checkpoint/log precedence resolves conflicts deterministically.
+- `P9-C04`: Completion claims map to required artifact sets.
+- `P9-C05`: Coverage ledger entries map to real files and current scope.
+- `P9-C06`: Known-facts append-only integrity is preserved.
+- `P9-C07`: Prompt index/version/changelog coherence is maintained.
+- `P9-C08`: Drift type classification is assigned for each high/critical mismatch.
+- `P9-C09`: Unresolved drift has deterministic resume instructions.
+
+## Race And Edge Scripts
+
+- `P9-R01`: Status restamp during tmux session transition.
+- `P9-R02`: Queue mutation during orchestrator queue read.
+- `P9-R03`: Concurrent contradiction and coverage updates.
+- `P9-R04`: Stale report claim after newer artifact generation.
+
+## Required Output Contract
+
+Use the shared required finding schema and mandatory schema blocks from:
+- `audit-map/20-prompts/adversarial-master-orchestrator-suite.md`
+
+Also emit required test output for every high/critical finding.
+Each high/critical finding must include:
+1. One artifact-coherence contract test.
+2. One status/checkpoint/log precedence test.
+
+## Required Durable Updates
+
+- Update `audit-map/14-reconciliation/contradiction-matrix.md` for drift findings.
+- Update `audit-map/23-coverage/coverage-ledger.md` if coverage claims change.
+- Update `audit-map/24-agent-memory/working-knowledge.md` with current drift outcomes.
+- Write artifacts under `audit-map/17-artifacts/local/` and `audit-map/18-snapshots/repo/`.
+
+## Hard Pass/Fail Gates
+
+- Fail if any high/critical truth drift remains open.
+- Fail if any closed drift finding has unresolved drift state.
+- Fail if any high/critical finding lacks required test output.
+- Pass only when contradiction, coverage, and status/checkpoint/log truth is coherent.
+
+
+mcp: figma starting
+mcp: playwright starting
+mcp: linear starting
+mcp: codex_apps starting
+mcp: linear ready
+mcp: codex_apps ready
+mcp: playwright ready
+mcp: figma ready
+mcp startup: ready: linear, codex_apps, playwright, figma
+codex
+I’m starting with the audit environment itself, not the product code. First step is to read the required governance, coverage, reconciliation, status, checkpoint, and prompt files, then run a drift check so the pass follows current artifact truth instead of stale prompt assumptions.
+Plan update
+  → Read required audit environment files and current status/checkpoint artifacts; identify prompt-vs-artifact drift before deeper work
+  • Cross-check contradiction, coverage, status/checkpoint/log, prompt, and tmux helper artifacts against P9 mandatory checks
+  • Write durable audit outputs and update contradiction/coverage/working-knowledge artifacts with findings and resume state
+codex
+I’m inventorying the audit corpus and file sizes now so I can read the required set without missing newer status or checkpoint artifacts. After that I’ll reconcile the newest status files against the prompt’s stated route and pass assumptions.
+exec
+/run/current-system/sw/bin/zsh -lc "pwd && rg --files audit-map | sed 's#"'^#/#'"' | head -n 200" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+/home/raed/projects/air-mentor-ui
+/audit-map/29-status/provider-rotation-codex.state
+/audit-map/29-status/README.md
+/audit-map/29-status/provider-rotation-google.state
+/audit-map/29-status/provider-rotation-native-codex.state
+/audit-map/29-status/provider-rotation-github-copilot.state
+/audit-map/25-accounts-routing/provider-model-preferences.md
+/audit-map/25-accounts-routing/autoswitch-readiness-2026-04-18.md
+/audit-map/25-accounts-routing/slot-map.tsv
+/audit-map/25-accounts-routing/current-model-availability.md
+/audit-map/25-accounts-routing/switch-history.md
+/audit-map/25-accounts-routing/provider-status.md
+/audit-map/25-accounts-routing/manual-action-required.md
+/audit-map/25-accounts-routing/model-ranking-matrix.md
+/audit-map/25-accounts-routing/desired-provider-account-plan.md
+/audit-map/25-accounts-routing/usage-status.md
+/audit-map/25-accounts-routing/account-routing-decision.md
+/audit-map/25-accounts-routing/account-status.md
+/audit-map/27-caveman/caveman-capability-map.md
+/audit-map/27-caveman/caveman-install-notes.md
+exec
+/run/current-system/sw/bin/zsh -lc 'wc -l audit-map/index.md audit-map/README.md audit-map/23-coverage/coverage-ledger.md audit-map/24-agent-memory/known-facts.md audit-map/24-agent-memory/working-knowledge.md audit-map/14-reconciliation/contradiction-matrix.md audit-map/20-prompts/adversarial-master-orchestrator-suite.md 2>/dev/null' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+    77 audit-map/index.md
+    81 audit-map/README.md
+    47 audit-map/23-coverage/coverage-ledger.md
+    95 audit-map/24-agent-memory/known-facts.md
+   227 audit-map/24-agent-memory/working-knowledge.md
+    29 audit-map/14-reconciliation/contradiction-matrix.md
+  1198 audit-map/20-prompts/adversarial-master-orchestrator-suite.md
+  1754 total
+exec
+/run/current-system/sw/bin/zsh -lc "find audit-map/29-status -maxdepth 1 -type f | sort && printf '\\n--\\n' && find audit-map/30-checkpoints -maxdepth 1 -type f | sort && printf '\\n--\\n' && find audit-map/32-reports -maxdepth 1 -type f | sort" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+audit-map/29-status/README.md
+audit-map/29-status/arctic-model.status
+audit-map/29-status/arctic-slot-antigravity-main.status
+audit-map/29-status/arctic-slot-codex-01.status
+audit-map/29-status/arctic-slot-codex-02.status
+audit-map/29-status/arctic-slot-codex-03.status
+audit-map/29-status/arctic-slot-codex-04.status
+audit-map/29-status/arctic-slot-codex-05.status
+audit-map/29-status/arctic-slot-codex-06.status
+audit-map/29-status/arctic-slot-copilot-accneww432.status
+audit-map/29-status/arctic-slot-copilot-raed2180416.status
+audit-map/29-status/arctic-slot-google-main.status
+audit-map/29-status/audit-air-mentor-ui-bootstrap-account-routing-pass.status
+audit-map/29-status/audit-air-mentor-ui-bootstrap-audit-the-audit-pass.status
+audit-map/29-status/audit-air-mentor-ui-bootstrap-backend-provenance-pass.status
+audit-map/29-status/audit-air-mentor-ui-bootstrap-claim-verification-pass.status
+audit-map/29-status/audit-air-mentor-ui-bootstrap-closure-readiness-pass.status
+audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass.status
+audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-pass.status
+audit-map/29-status/audit-air-mentor-ui-bootstrap-dependency-pass.status
+codex
+I’ve confirmed the audit OS is populated with prior status, checkpoint, and report artifacts, including an existing truth-drift pass status/checkpoint pair. Next I’m reading the governance and routing corpus in batches, then I’ll compare those assumptions against the newest `29-status` and `30-checkpoints` files before touching contradiction or coverage state.
+exec
+/run/current-system/sw/bin/zsh -lc "awk 'FNR==1{print \"\\n### FILE: \" FILENAME \" ###\"} {print}' audit-map/00-governance/account-switching-policy.md audit-map/00-governance/context-compaction-policy.md audit-map/00-governance/prompt-caching-policy.md audit-map/00-governance/caveman-safety-policy.md audit-map/00-governance/background-execution-policy.md audit-map/00-governance/stop-conditions-policy.md audit-map/00-governance/manual-escalation-policy.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/00-governance/account-switching-policy.md ###
+# Account Switching Policy
+
+- Account switches must be intentional, logged, and tied to a reason: budget, rate limit, outage, or provider-specific capability.
+- Do not assume session continuity across accounts unless the tool has already proven it for the current provider.
+- When automatic account switching is unverified, write the exact manual action needed and stop safely.
+- For Arctic on this machine, treat one slot as one account until proven otherwise.
+- Record the before/after account context in `25-accounts-routing/switch-history.md` without storing secrets or raw tokens.
+- Slot ID is authoritative. Human-readable account label is metadata only.
+
+### FILE: audit-map/00-governance/context-compaction-policy.md ###
+# Context Compaction Policy
+
+- Externalize memory to files first; compaction is a secondary tool, not the primary memory system.
+- Compact only after a pass has written a faithful checkpoint and updated ledgers.
+- Never compact away contradictions, evidence paths, or unresolved questions.
+- Use terse summaries for low-risk bookkeeping only; keep high-stakes reasoning prompts explicit.
+
+### FILE: audit-map/00-governance/prompt-caching-policy.md ###
+exec
+/run/current-system/sw/bin/zsh -lc "awk 'FNR==1{print \"\\n### FILE: \" FILENAME \" ###\"} {print}' audit-map/README.md audit-map/index.md audit-map/00-governance/mission.md audit-map/00-governance/analysis-rules.md audit-map/00-governance/future-agent-operating-manual.md audit-map/00-governance/decision-log.md audit-map/00-governance/model-routing-policy.md audit-map/00-governance/provider-switching-policy.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/README.md ###
+# AirMentor Audit OS
+
+This directory is the audit operating system for a near-lossless forensic analysis of the AirMentor codebase and deployed stack.
+
+It is designed to make long-running analysis deterministic, resumable, evidence-backed, and cost-aware. The later analysis agent should treat this directory as the authoritative control plane for audit workflow, not as optional notes.
+
+## Purpose
+
+- Force durable externalized memory instead of chat-only reasoning.
+- Separate local-code evidence from live-deployment evidence.
+- Route tasks to the strongest safe model available on this machine.
+- Keep long-running work alive in detached `tmux` sessions.
+- Preserve contradictions, assumptions, checkpoints, and manual stop conditions.
+
+## Authoritative Files
+
+Read these first, in order:
+
+exec
+/run/current-system/sw/bin/zsh -lc "awk 'FNR==1{print \"\\n### FILE: \" FILENAME \" ###\"} {print}' audit-map/23-coverage/coverage-ledger.md audit-map/23-coverage/unreviewed-surface-list.md audit-map/23-coverage/review-status-by-path.md audit-map/24-agent-memory/working-knowledge.md audit-map/24-agent-memory/known-facts.md audit-map/24-agent-memory/known-ambiguities.md audit-map/24-agent-memory/stale-findings-watchlist.md audit-map/14-reconciliation/reconciliation-log.md audit-map/14-reconciliation/contradiction-matrix.md audit-map/24-agent-memory/checkpointing-policy.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/23-coverage/coverage-ledger.md ###
+# Coverage Ledger
+
+| Surface | Status | Evidence | Last update | Notes |
+| --- | --- | --- | --- | --- |
+| Inventory baseline | Seeded | `audit-map/01-inventory/*` | 2026-04-15 | Repo-wide file census captured for frontend, backend, scripts, tests, docs, deploy, ML, and queue surfaces |
+| Repo topology | Seeded | `package.json`, `air-mentor-api/package.json`, `flake.nix` | 2026-04-15 | Frontend and backend workspaces verified |
+| Route map pass | Mapped | `audit-map/15-final-maps/route-map.md`, `tests/portal-routing.test.ts`, `tests/proof-pilot.test.ts`, `tests/system-admin-proof-dashboard-workspace.test.tsx`, `tests/proof-playback.test.ts`, `tests/student-shell.test.tsx`, `tests/risk-explorer.test.tsx`, `tests/hod-pages.test.ts`, `tests/academic-route-pages.test.tsx`, `src/App.tsx`, `src/system-admin-live-app.tsx` | 2026-04-15 | v2 pass expanded the map to cover portal hashes, internal page-state families, route-affecting query/storage sources, restore/history behavior, canonical proof normalization, and admin subview persistence; live capture remains for the later live-behavior pass |
+| Role surface pass | Mapped | `audit-map/15-final-maps/role-feature-matrix.md`, `src/academic-workspace-route-helpers.ts`, `src/academic-workspace-route-surface.tsx`, `src/academic-workspace-sidebar.tsx`, `src/academic-route-pages.tsx`, `src/pages/workflow-pages.tsx`, `src/pages/course-pages.tsx`, `src/pages/calendar-pages.tsx`, `src/pages/hod-pages.tsx`, `src/system-admin-live-app.tsx`, `src/system-admin-request-workspace.tsx`, `src/system-admin-faculties-workspace.tsx`, `src/system-admin-history-workspace.tsx`, `air-mentor-api/src/modules/academic.ts`, `air-mentor-api/src/modules/academic-proof-routes.ts`, `air-mentor-api/src/modules/admin-requests.ts`, `tests/academic-route-pages.test.tsx`, `tests/system-admin-live-data.test.ts` | 2026-04-15 | Exhaustive local role-surface inventory captured for public, course leader, mentor, HoD, and SYSTEM_ADMIN surfaces, including cross-cutting drilldowns, route guards, and the admin request workflow mismatch; live verification remains for the later live-behavior pass |
+| Feature atom pass | Mapped | `audit-map/04-feature-atoms/*`, `audit-map/15-final-maps/feature-registry.md` | 2026-04-16 | Current registry truth is `24` feature-atom files plus `1` cross-surface microinteraction row in `feature-registry.md` (`25` rows total). Taxonomy corrections for HoD `unlock-review` and cross-role `queue-history` remain applied; live browser verification and audit-the-audit remain for later passes. |
+| Dependency pass | Mapped | `audit-map/05-dependencies/*`, `audit-map/15-final-maps/dependency-graph.md` | 2026-04-15 | Detailed dependency chains captured for portal routing, academic session bootstrap, route sync, proof playback, student shell access, sysadmin proof scope, admin requests, admin search, runtime shadow state, and backend session config; live verification remains for later passes |
+| Data-flow pass | Mapped with standalone corpus backing | `audit-map/15-final-maps/data-flow-map.md`, `audit-map/06-data-flow/flow-corpus-index.md`, `audit-map/06-data-flow/flow-proof-run-checkpoint-projection.md`, `audit-map/06-data-flow/flow-proof-risk-artifact-evidence-snapshot.md`, `audit-map/06-data-flow/flow-academic-route-session-bootstrap.md`, `audit-map/06-data-flow/flow-sysadmin-request-proof-history-search.md`, `audit-map/06-data-flow/flow-telemetry-startup-diagnostics.md`, `audit-map/32-reports/data-flow-pass-deep-inspection-2026-04-15.md`, `audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-pass.status`, `audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-data-flow-pass.checkpoint`, `audit-map/22-logs/audit-air-mentor-ui-bootstrap-data-flow-pass.log` | 2026-04-16 | Standalone per-flow corpus entries now back the final map for the required high-risk families (proof run/checkpoint/projection, proof-risk artifacts/evidence snapshots, academic bootstrap/session routing, sysadmin request/proof/history/search, telemetry/startup diagnostics). Remaining scope is long-tail component mapping and duplicate directory naming cleanup (`06-data-flow/` vs `06-data-flows/`). |
+| State-flow pass | Mapped | `audit-map/07-state-flows/*`, `audit-map/15-final-maps/state-flow-map.md`, `src/App.tsx`, `src/system-admin-live-app.tsx`, `src/proof-playback.ts`, `src/proof-pilot.ts`, `src/system-admin-request-workspace.tsx`, `src/repositories.ts`, `air-mentor-api/src/modules/session.ts`, `air-mentor-api/src/modules/academic-runtime-routes.ts`, `air-mentor-api/src/modules/admin-requests.ts`, `tests/proof-playback.test.ts`, `tests/proof-pilot.test.ts`, `tests/portal-routing.test.ts`, `tests/system-admin-proof-dashboard-workspace.test.tsx`, `air-mentor-api/tests/admin-foundation.test.ts` | 2026-04-15 | v2 state-flow map now captures academic and sysadmin session/route machines, proof checkpoint playback progression and invalidation, runtime shadow conflict/drift transitions, and admin request lifecycle mismatch carry-forward (C-006); live verification remains for later pass |
+| ML audit pass | Mapped with verification blockers | `audit-map/08-ml-audit/*`, `audit-map/15-final-maps/ml-system-map.md`, `air-mentor-api/src/lib/inference-engine.ts`, `air-mentor-api/src/lib/proof-risk-model.ts`, `air-mentor-api/src/lib/msruas-proof-control-plane.ts`, `air-mentor-api/src/lib/proof-control-plane-runtime-service.ts`, `air-mentor-api/src/lib/proof-control-plane-playback-service.ts`, `air-mentor-api/src/lib/proof-queue-governance.ts`, `air-mentor-api/src/lib/monitoring-engine.ts`, `air-mentor-api/src/lib/proof-control-plane-tail-service.ts`, `air-mentor-api/src/lib/curriculum-linkage.ts`, `air-mentor-api/scripts/curriculum_linkage_nlp.py`, `tests/system-admin-proof-dashboard-workspace.test.tsx`, `tests/risk-explorer.test.tsx`, `tests/student-shell.test.tsx`, `tests/hod-pages.test.ts`, `air-mentor-api/tests/proof-risk-model.test.ts`, `air-mentor-api/tests/evaluate-proof-risk-model.test.ts`, `air-mentor-api/tests/proof-queue-governance.test.ts`, `air-mentor-api/tests/policy-phenotypes.test.ts`, `air-mentor-api/tests/msruas-curriculum-compiler.test.ts` | 2026-04-15 | Classified deterministic fallback scoring, trained proof-risk artifacts, calibration/display suppression, runtime fallback provenance, policy replay heuristics, derived scenario heads, and curriculum-linkage generation. Fresh evaluation artifact regeneration and several route-level backend tests were blocked in this sandbox by `listen EPERM`, and live artifact posture remains for the later live-behavior pass |
+| Test-gap pass | Mapped with gaps | `audit-map/23-coverage/test-gap-ledger.md`, `tests/*`, `air-mentor-api/tests/*`, `scripts/playwright-admin-live-*.sh`, `scripts/verify-final-closeout-live.sh`, `scripts/check-railway-deploy-readiness.mjs` | 2026-04-15 | Local coverage is strong for deterministic helpers, backend routes, and UI contracts; the remaining high-risk blind spots are cross-role same-student parity, admin request transition UI parity, live Pages/Railway auth/session proof, and live proof-artifact credibility |
+| UX friction pass | Mapped | `audit-map/11-ux-audit/ux-friction-ledger.md`, `src/system-admin-request-workspace.tsx`, `src/system-admin-proof-dashboard-workspace.tsx`, `src/system-admin-faculties-workspace.tsx`, `src/pages/course-pages.tsx`, `src/pages/calendar-pages.tsx`, `src/academic-route-pages.tsx`, `src/pages/hod-pages.tsx`, `src/pages/risk-explorer.tsx`, `src/pages/student-shell.tsx`, `src/system-admin-history-workspace.tsx` | 2026-04-15 | Local UX pass recorded concrete density and ambiguity hotspots across sysadmin request/proof/hierarchy, course setup, calendar/timetable, mentor/HoD drilldowns, risk explorer framing, and student shell; live verification remains for the later live-behavior pass |
+| Live deployment baseline | Mapped with blockers | `audit-map/10-live-behavior/*`, `audit-map/15-final-maps/live-vs-local-master-diff.md`, `audit-map/17-artifacts/live/2026-04-15T221301Z--railway-health--live--headers--bootstrap.txt`, `audit-map/17-artifacts/live/2026-04-15T221302Z--pages-root--live--html-shell--bootstrap.html`, `audit-map/17-artifacts/live/2026-04-15T164511Z--pages-shell--live--web-observation--live-pass.md`, `audit-map/17-artifacts/live/2026-04-15T164512Z--live-closeout--live--credential-blocker--live-pass.txt`, `audit-map/17-artifacts/live/2026-04-15T164513Z--live-capture-path--live--environment-blocker--live-pass.md`, `audit-map/17-artifacts/live/2026-04-15T174110Z--pages-shell--live--web-observation--live-pass.md`, `audit-map/17-artifacts/live/2026-04-15T174110Z--live-closeout--live--credential-blocker--live-pass.txt`, `audit-map/17-artifacts/live/2026-04-15T174110Z--live-capture-path--live--environment-blocker--live-pass.md`, `audit-map/17-artifacts/live/2026-04-16T110353Z--live-session-contract--live--credential-blocker--parity-pass.txt`, `audit-map/17-artifacts/live/2026-04-16T110353Z--playwright-mcp--live--browser-cancelled--parity-pass.md`, `audit-map/17-artifacts/live/2026-04-16T110353Z--live-proof-parity-safety--code-audit--parity-pass.md`, `audit-map/17-artifacts/local/2026-04-15T164514Z--pages-root--local--html-shell--head-build.html`, `audit-map/17-artifacts/diffs/2026-04-15T164515Z--pages-root--diff--head-parity--live-pass.md` | 2026-04-16 | Pages shell reachability and committed-`HEAD` parity remain proven at the HTML-shell level. The current run re-proved that session-contract work is blocked by missing live admin credentials, Playwright MCP still cannot refresh browser-rendered evidence, and the existing proof/parity scripts are unsafe for blind live use because they can mutate proof lifecycle or faculty records. |
+| Model routing baseline | Seeded | `00-governance/model-routing-policy.md` | 2026-04-15 | Local cache verified; nano/pro not exposed locally |
+| Account routing pass | Mapped with controller fix | `audit-map/25-accounts-routing/account-routing-decision.md`, `audit-map/16-scripts/select-execution-route.sh`, `audit-map/16-scripts/task-classify-route.sh`, `audit-map/16-scripts/check-model-budget.sh`, `audit-map/29-status/arctic-slot-*.status`, `audit-map/29-status/route-health-native-codex.status`, `audit-map/18-snapshots/accounts/*/execution-smoke-*.txt`, `/home/raed/.codex/models_cache.json` | 2026-04-15 | Confirmed that `account-routing-pass` itself remains native Codex `gpt-5.4` + `xhigh` under `native-only` policy; reconciled stale routing docs that still claimed Arctic Codex execution failure; tightened alternate-provider selection so Arctic routes pin to slot execution-verified models instead of higher merely visible models |
+codex
+The core ledgers confirm this pass is entering a non-clean state: there are open contradiction IDs through `C-023`, live parity remains blocked, and multiple pass status files have supervisor-field drift even when primary completion fields are terminal. I’m moving to the status/checkpoint layer now to determine which of those contradictions are still current versus already superseded by newer control-plane artifacts.
+exec
+/run/current-system/sw/bin/zsh -lc 'ls -lt audit-map/30-checkpoints | head -n 40' in /home/raed/projects/air-mentor-uiexec
+/run/current-system/sw/bin/zsh -lc 'ls -lt audit-map/29-status | head -n 40' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+ls: write error: Broken pipe
+total 212
+-rw------- 1 raed users 2656 Apr 18 05:31 arctic-slot-codex-02.status
+-rw------- 1 raed users 2528 Apr 18 05:31 arctic-slot-codex-01.status
+-rw------- 1 raed users 1484 Apr 18 05:31 audit-air-mentor-ui-overnight-night-run-orchestrator.status
+-rw------- 1 raed users 1159 Apr 18 05:31 audit-air-mentor-ui-overnight-usage-refresh-orchestrator.status
+-rw------- 1 raed users 1122 Apr 18 05:31 audit-air-mentor-ui-overnight-final-gap-and-shutdown.status
+-rw------- 1 raed users  986 Apr 18 05:31 audit-air-mentor-ui-overnight-absolute-closure-campaign.status
+-rw------- 1 raed users 2511 Apr 18 05:31 audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.status
+-rw------- 1 raed users 2412 Apr 18 05:31 audit-air-mentor-ui-live-live-credentialed-parity-pass.status
+-rw------- 1 raed users 1011 Apr 18 05:31 audit-air-mentor-ui-live-live-behavior-pass.status
+-rw------- 1 raed users 2264 Apr 18 05:31 audit-air-mentor-ui-bootstrap-workflow-automation-pass.status
+-rw------- 1 raed users 1031 Apr 18 05:31 audit-air-mentor-ui-bootstrap-ux-friction-pass.status
+-rw------- 1 raed users 2548 Apr 18 05:31 audit-air-mentor-ui-bootstrap-unknown-omission-pass.status
+-rw------- 1 raed users 2363 Apr 18 05:31 audit-air-mentor-ui-bootstrap-unattended-run-pass.status
+-rw------- 1 raed users 2269 Apr 18 05:31 audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status
+-rw------- 1 raed users 2192 Apr 18 05:31 audit-air-mentor-ui-bootstrap-test-gap-pass.status
+-rw------- 1 raed users 2353 Apr 18 05:31 audit-air-mentor-ui-bootstrap-synthesis-pass.status
+-rw------- 1 raed users 2319 Apr 18 05:31 audit-air-mentor-ui-bootstrap-state-flow-pass.status
+-rw------- 1 raed users  754 Apr 18 05:31 audit-air-mentor-ui-bootstrap-smoke-job.status
+ succeeded in 0ms:
+total 144
+-rw------- 1 raed users  526 Apr 18 05:31 audit-air-mentor-ui-overnight-night-run-orchestrator.checkpoint
+-rw------- 1 raed users  260 Apr 18 05:31 audit-air-mentor-ui-overnight-usage-refresh-orchestrator.checkpoint
+-rw------- 1 raed users  254 Apr 18 05:31 audit-air-mentor-ui-overnight-final-gap-and-shutdown.checkpoint
+-rw------- 1 raed users  260 Apr 18 05:31 audit-air-mentor-ui-overnight-absolute-closure-campaign.checkpoint
+-rw------- 1 raed users 3548 Apr 18 05:31 audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.checkpoint
+-rw------- 1 raed users 3786 Apr 18 05:31 audit-air-mentor-ui-live-live-credentialed-parity-pass.checkpoint
+-rw------- 1 raed users 2218 Apr 18 05:31 audit-air-mentor-ui-live-live-behavior-pass.checkpoint
+-rw------- 1 raed users  405 Apr 18 05:31 audit-air-mentor-ui-bootstrap-workflow-automation-pass.checkpoint
+-rw------- 1 raed users  401 Apr 18 05:31 audit-air-mentor-ui-bootstrap-ux-friction-pass.checkpoint
+-rw------- 1 raed users  615 Apr 18 05:31 audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint
+-rw------- 1 raed users  580 Apr 18 05:31 audit-air-mentor-ui-bootstrap-unattended-run-pass.checkpoint
+-rw------- 1 raed users  424 Apr 18 05:31 audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+-rw------- 1 raed users 2651 Apr 18 05:31 audit-air-mentor-ui-bootstrap-test-gap-pass.checkpoint
+-rw------- 1 raed users  414 Apr 18 05:31 audit-air-mentor-ui-bootstrap-synthesis-pass.checkpoint
+-rw------- 1 raed users 2212 Apr 18 05:31 audit-air-mentor-ui-bootstrap-state-flow-pass.checkpoint
+-rw------- 1 raed users  194 Apr 18 05:31 audit-air-mentor-ui-bootstrap-smoke-job.checkpoint
+-rw------- 1 raed users  409 Apr 18 05:31 audit-air-mentor-ui-bootstrap-script-behavior-pass.checkpoint
+-rw------- 1 raed users  238 Apr 18 05:31 audit-air-mentor-ui-bootstrap-route-map-pass.checkpoint
+-rw------- 1 raed users  370 Apr 18 05:31 audit-air-mentor-ui-bootstrap-role-surface-pass.checkpoint
+exec
+/run/current-system/sw/bin/zsh -lc "if [ -f audit-map/31-queues/pending.queue ]; then sed -n '1,220p' audit-map/31-queues/pending.queue; else echo 'MISSING: audit-map/31-queues/pending.queue'; fi" in /home/raed/projects/air-mentor-uiexec
+/run/current-system/sw/bin/zsh -lc 'ls -lt audit-map/22-logs | head -n 40' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+truth-drift-reconciliation-pass	bootstrap		
+feature-intent-integrity-pass	bootstrap		
+cross-flow-recovery-pass	bootstrap		
+fault-tolerance-degradation-pass	bootstrap		
+memory-lifecycle-cleanup-pass	bootstrap		
+ux-consistency-cohesion-pass	bootstrap		
+live-behavior-pass	live		
+account-routing-pass	bootstrap		
+claim-verification-pass	bootstrap		
+unknown-omission-pass	bootstrap		
+residual-gap-closure-pass	bootstrap		
+closure-readiness-pass	bootstrap		
+cost-optimization-pass	bootstrap		
+prompt-self-improvement-pass	bootstrap		
+unattended-run-pass	bootstrap		
+audit-the-audit-pass	bootstrap		
+synthesis-pass	bootstrap		
+ succeeded in 0ms:
+total 119432
+-rw------- 1 raed users   63652 Apr 18 05:31 audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.attempt-1.iFaxPx.log
+-rw-r--r-- 1 raed users   64028 Apr 18 05:31 audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.log
+-rw-r--r-- 1 raed users     814 Apr 18 05:31 audit-air-mentor-ui-overnight-usage-refresh-orchestrator.log
+-rw-r--r-- 1 raed users     852 Apr 18 05:30 audit-air-mentor-ui-overnight-night-run-orchestrator.log
+-rw-r--r-- 1 raed users    3144 Apr 18 05:11 audit-air-mentor-ui-overnight-usage-refresh-orchestrator.log.20260418T000018Z.prev
+-rw-r--r-- 1 raed users     299 Apr 18 05:06 audit-air-mentor-ui-overnight-night-run-orchestrator.log.20260418T000018Z.prev
+-rw-r--r-- 1 raed users    5003 Apr 17 00:12 audit-air-mentor-ui-overnight-absolute-closure-campaign.log
+-rw-r--r-- 1 raed users   46130 Apr 17 00:11 audit-air-mentor-ui-bootstrap-closure-readiness-pass.log
+-rw------- 1 raed users    1870 Apr 17 00:11 audit-air-mentor-ui-bootstrap-closure-readiness-pass.attempt-2.CGdd1y.log
+-rw------- 1 raed users   43474 Apr 17 00:10 audit-air-mentor-ui-bootstrap-closure-readiness-pass.attempt-1.3we3pP.log
+-rw-r--r-- 1 raed users   46473 Apr 17 00:09 audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.log
+-rw------- 1 raed users    1870 Apr 17 00:09 audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.attempt-2.gteiF4.log
+-rw------- 1 raed users   43808 Apr 17 00:08 audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.attempt-1.TYwjWC.log
+-rw-r--r-- 1 raed users 2574747 Apr 17 00:08 audit-air-mentor-ui-bootstrap-claim-verification-pass.log
+-rw------- 1 raed users 2574352 Apr 17 00:08 audit-air-mentor-ui-bootstrap-claim-verification-pass.attempt-1.sRBEjA.log
+-rw-r--r-- 1 raed users   53000 Apr 17 00:07 audit-air-mentor-ui-bootstrap-unknown-omission-pass.log
+-rw------- 1 raed users    2782 Apr 17 00:07 audit-air-mentor-ui-bootstrap-unknown-omission-pass.attempt-2.DdZ2Z3.log
+-rw------- 1 raed users   49435 Apr 17 00:06 audit-air-mentor-ui-bootstrap-unknown-omission-pass.attempt-1.7rR0NI.log
+-rw-r--r-- 1 raed users 1353753 Apr 16 23:59 audit-air-mentor-ui-live-live-credentialed-parity-pass.log
+exec
+/run/current-system/sw/bin/zsh -lc "awk 'FNR==1{print \"\\n### FILE: \" FILENAME \" ###\"} {print}' audit-map/19-runbooks/caveman-integration-runbook.md audit-map/19-runbooks/arctic-integration-runbook.md audit-map/19-runbooks/arctic-vscode-on-nixos-runbook.md audit-map/19-runbooks/arctic-account-switching-runbook.md audit-map/19-runbooks/nixos-vscode-strategy.md audit-map/19-runbooks/nixos-dev-environment-strategy.md audit-map/19-runbooks/nixos-extension-compatibility-notes.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/19-runbooks/caveman-integration-runbook.md ###
+# Caveman Integration Runbook
+
+## Verified Baseline
+
+- Caveman skills are installed globally under `~/.agents/skills/`
+- Always-on repo-local activation is not enabled
+
+## Safe Usage
+
+- use Caveman only for low-risk terse work
+- keep high-risk synthesis on normal prompts
+- record use in status/checkpoint files
+
+## If Always-On Mode Is Desired Later
+
+- resolve the repo-root `.codex` file conflict intentionally first
+- only then consider adding repo-local hook-based activation
+
+exec
+/run/current-system/sw/bin/zsh -lc "awk 'FNR==1{print \"\\n### FILE: \" FILENAME \" ###\"} {print}' audit-map/19-runbooks/local-analysis-runbook.md audit-map/19-runbooks/environment-setup-runbook.md audit-map/19-runbooks/troubleshooting-runbook.md audit-map/19-runbooks/live-verification-runbook.md audit-map/19-runbooks/github-pages-verification-runbook.md audit-map/19-runbooks/railway-verification-runbook.md audit-map/19-runbooks/live-vs-local-comparison-runbook.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/19-runbooks/local-analysis-runbook.md ###
+# Local Analysis Runbook
+
+## First Pass
+
+1. Read `audit-map/index.md`.
+2. Check detached jobs:
+   - `bash audit-map/16-scripts/tmux-list-jobs.sh`
+3. Refresh or inspect inventory scaffolds in `01-inventory/`.
+4. Launch a pass through:
+   - `bash audit-map/16-scripts/run-audit-pass.sh inventory-pass`
+
+## Good Default Local Commands
+
+- frontend tests: `npm test`
+- backend tests: `npm --workspace air-mentor-api test`
+- proof-risk eval: `npm run evaluate:proof-risk-model`
+- local live-like stack: `npm run dev:live`
+
+exec
+/run/current-system/sw/bin/zsh -lc "awk 'FNR==1{print \"\\n### FILE: \" FILENAME \" ###\"} {print}' audit-map/20-prompts/prompt-index.md audit-map/20-prompts/prompt-version-history.md audit-map/20-prompts/prompt-change-log.md audit-map/20-prompts/templates/feature-template.md audit-map/20-prompts/templates/role-surface-template.md audit-map/20-prompts/templates/dependency-template.md audit-map/20-prompts/templates/data-flow-template.md audit-map/20-prompts/templates/state-flow-template.md audit-map/20-prompts/templates/ml-component-template.md audit-map/20-prompts/templates/test-gap-template.md audit-map/20-prompts/templates/live-behavior-template.md audit-map/20-prompts/templates/ux-friction-template.md audit-map/20-prompts/templates/final-synthesis-template.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/20-prompts/prompt-index.md ###
+# Prompt Index
+
+All prompts are versioned operating assets for the AirMentor audit OS.
+
+Default prompt version: `v5.4`
+
+## Bootstrap And Environment
+
+- `environment/main-analysis-agent-bootstrap.md`
+- `exhaustive-closure-campaign.md`
+- `adversarial-validation-campaign.md`
+- `deterministic-gap-closure-campaign.md`
+- `absolute-forensic-closure-campaign.md`
+- `no-expenses-spared-final-closure-campaign.md`
+
+## Core Passes
+
+- `inventory-pass.md`
+exec
+/run/current-system/sw/bin/zsh -lc "awk 'FNR==1{print \"\\n### FILE: \" FILENAME \" ###\"} {print}' audit-map/25-accounts-routing/current-model-availability.md audit-map/25-accounts-routing/account-status.md audit-map/25-accounts-routing/provider-status.md audit-map/25-accounts-routing/provider-model-preferences.md audit-map/25-accounts-routing/desired-provider-account-plan.md audit-map/25-accounts-routing/manual-action-required.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/25-accounts-routing/current-model-availability.md ###
+# Current Model Availability
+
+Date: 2026-04-15
+
+This file is based on current local machine evidence only.
+
+## Ground Truth
+
+- Native Codex model cache: `/home/raed/.codex/models_cache.json`
+- Arctic slot status files: `audit-map/29-status/arctic-slot-*.status`
+- Arctic model snapshots in `audit-map/18-snapshots/accounts/`
+- Arctic execution-smoke snapshots in `audit-map/18-snapshots/accounts/`
+
+## Native Codex
+
+Exact locally exposed models:
+
+- `gpt-5.4`
+exec
+/run/current-system/sw/bin/zsh -lc "awk 'FNR==1{print \"\\n### FILE: \" FILENAME \" ###\"} {print}' audit-map/29-status/README.md audit-map/29-status/route-health-native-codex.status audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint audit-map/29-status/audit-air-mentor-ui-bootstrap-claim-verification-pass.status audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-claim-verification-pass.checkpoint audit-map/29-status/audit-air-mentor-ui-bootstrap-unknown-omission-pass.status audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint audit-map/29-status/audit-air-mentor-ui-live-live-credentialed-parity-pass.status audit-map/30-checkpoints/audit-air-mentor-ui-live-live-credentialed-parity-pass.checkpoint audit-map/29-status/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.status audit-map/30-checkpoints/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.checkpoint" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/29-status/README.md ###
+# Status Directory
+
+Runtime status files for detached jobs belong here.
+
+Checked-in Markdown files document the status model; generated `.status` or `.json` files are ignored.
+
+### FILE: audit-map/29-status/route-health-native-codex.status ###
+cooldown_state=clear
+cooldown_reason=''
+cooldown_next_eligible_at=''
+cooldown_source=''
+cooldown_updated_at=2026-04-18T00:00:27Z
+
+### FILE: audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status ###
+task_class=high-stakes
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ truth-drift-reconciliation-pass\ --context\ bootstrap\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 0\ --provider-mode\ auto\ --wait-timeout-seconds\ 1800\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '1,220p' audit-map/24-agent-memory/known-facts.md && printf '\\n### SPLIT ###\\n' && sed -n '1,260p' audit-map/24-agent-memory/working-knowledge.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+# Known Facts
+
+- Repo root: `/home/raed/projects/air-mentor-ui`
+- The root workspace uses npm workspaces with `air-mentor-api` as a child workspace.
+- The repository contains `.github/workflows/ci-verification.yml`, `.github/workflows/deploy-pages.yml`, `.github/workflows/deploy-railway-api.yml`, `.github/workflows/proof-browser-cadence.yml`, and `.github/workflows/verify-live-closeout.yml`.
+- Frontend scripts include `dev`, `build`, `test`, and multiple Playwright live-verification scripts.
+- Backend scripts include `dev`, `build`, `test`, `db:migrate`, `db:seed`, and proof-risk evaluation.
+- Backend tests use `embedded-postgres`.
+- Optional ML helper dependencies are `spacy==3.7.5` and `sentence-transformers==3.0.1`.
+- The frontend tree contains both `src/data.ts` and `src/data.old.ts`.
+- The backend tree contains `air-mentor-api/scripts/curriculum_linkage_nlp.py`.
+- Frontend routing is hash-based at the portal level: `#/` is the chooser, `#/app` is the academic portal, and `#/admin` is the sysadmin portal; academic workspace pages are internal state, while sysadmin deep links extend through `students`, `faculty-members`, `requests`, and the proof-scoped `faculties/.../batches/...` hierarchy.
+- Verified live URLs documented repeatedly in repo docs:
+  - Pages: `https://raed2180416.github.io/AirMentor/`
+  - Railway: `https://api-production-ab72.up.railway.app/`
+- Verified local Codex models on this machine:
+  - `gpt-5.4`
+  - `gpt-5.4-mini`
+  - `gpt-5.3-codex`
+  - `gpt-5.2`
+codex
+I’ve confirmed current route truth differs from some older memory: native cooldown is clear as of `2026-04-18T00:00:27Z`, but the existing truth-drift pass status/checkpoint still show a stale `running` state from `00:00:30Z` with live PIDs. I’m reading the orchestrator suite’s Prompt 9 contract and the tmux helper scripts next so I can judge the current truth-drift artifacts against the exact required schema and control-plane precedence rules.
+exec
+/run/current-system/sw/bin/zsh -lc 'rg -n "P9|truth drift|Required finding schema|required test output|artifact-coherence contract test|status/checkpoint/log precedence test" audit-map/20-prompts/adversarial-master-orchestrator-suite.md' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+12:5. New mandatory schema blocks for truth drift, intent integrity, logic integrity, UX integrity, and recovery integrity
+45:  "prompt_id": "P0|P1|P2|P3|P4|P5|P6|P7|P8|P9|P10|P11|P12|P13|P14",
+122:        "prompt_id": "P1|P2|P3|P4|P5|P6|P7|P8|P9|P10|P11|P12|P13|P14",
+154:  "prompt_id": "P1|P2|P3|P4|P5|P6|P7|P8|P9|P10|P11|P12|P13|P14",
+192:- `prompt-output-P9.json`
+202:  - P1, P2, P3, P4, P5, P6, P8, P9, P10, P11, P12, P13, P14, P7
+211:  - contains unresolved truth drift for a closed finding
+241:  "prompts_evaluated": ["P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","P11","P12","P13","P14"],
+266:5. Fail if any unresolved truth drift is marked closed.
+696:You are an adversarial audit agent. Assume truth drift exists between documentation, status artifacts, and real implementation until proven otherwise.
+715:- P9-C01: Every open contradiction has a current evidence triad (expected, implemented, tested/live)
+716:- P9-C02: Contradiction status labels match latest artifacts and are not stale carryovers
+717:- P9-C03: Status/checkpoint/log precedence is enforced when they disagree
+718:- P9-C04: Pass success claims are backed by required artifacts and not by status text alone
+719:- P9-C05: Coverage ledger entries map to real files and current prompt coverage scope
+720:- P9-C06: Known-facts entries remain append-only and are not silently contradicted downstream
+721:- P9-C07: Prompt index, version history, and change log are mutually coherent
+722:- P9-C08: Truth drift type classification is applied to every high/critical mismatch
+723:- P9-C09: Each unresolved truth drift has deterministic resume instructions
+727:- P9-R01: Status file restamp during active tmux session transition
+exec
+/run/current-system/sw/bin/zsh -lc "awk 'FNR==1{print \"\\n### FILE: \" FILENAME \" ###\"} {print}' audit-map/32-reports/claim-verification-matrix.md audit-map/32-reports/unknown-omission-ledger.md audit-map/32-reports/residual-gap-closure-report.md audit-map/32-reports/closure-readiness-verdict.md audit-map/32-reports/final-gap-and-shutdown-overnight.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/32-reports/claim-verification-matrix.md ###
+# Claim Verification Matrix
+
+Pass: `claim-verification-pass`
+Context: `bootstrap`
+Date: `2026-04-16T18:30:20Z`
+Model/provider/account: `gpt-5.4 / native-codex / native-codex-session`
+Caveman used: `no`
+Live verification performed in this pass: `no new live execution; current live rows were refreshed from 2026-04-16 stored artifacts`
+
+## Environment Drift Check
+
+- `audit-map/29-status/route-health-native-codex.status` is now current and clear (`cooldown_state=clear` at `2026-04-16T17:25:16Z`), so earlier cooldown wording is stale historical context only.
+- `audit-map/29-status/audit-air-mentor-ui-bootstrap-claim-verification-pass.status` and the paired checkpoint reported `running` from `2026-04-16T18:23:48Z`, but `ps -p 1588448,1588999` returned no recorded processes. This pass reconciles those control files to terminal truth after evidence persistence.
+- The prior 2026-04-15 claim matrix is now stale on two material points:
+  - data-flow backing is no longer merely an absent `06-data-flows/` placeholder claim; canonical corpus entries now exist under `audit-map/06-data-flow/`
+  - the feature-registry count claim must distinguish `24` feature-atom files from `25` current registry rows (the extra row is the cross-surface microinteraction cluster entry)
+- The strongest current live blocker evidence is now the 2026-04-16 artifact set, not the earlier bootstrap-only shell observations:
+  - direct `POST /api/session/login` against Railway returned `404 Application not found`
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '1,220p' audit-map/16-scripts/tmux-list-jobs.sh && printf '\\n### SPLIT ###\\n' && sed -n '1,220p' audit-map/16-scripts/tmux-job-status.sh && printf '\\n### SPLIT ###\\n' && sed -n '1,220p' audit-map/16-scripts/tmux-tail-job-log.sh" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$SCRIPT_DIR/_audit-common.sh"
+
+ensure_audit_dirs
+printf 'session\tstate\ttmux\tlog\n'
+for file in "$AUDIT_STATUS_ROOT"/*.status; do
+  [ -e "$file" ] || exit 0
+  if [[ "$(basename "$file")" != audit-* ]]; then
+    continue
+  fi
+  checkpoint_file="$(checkpoint_path_for "$(basename "$file" .status)")"
+  reconcile_status_with_tmux "$file" "$checkpoint_file"
+  session_name="$(read_env_value "$file" session_name 2>/dev/null || true)"
+  state="$(read_env_value "$file" state 2>/dev/null || true)"
+  log_file="$(read_env_value "$file" log_file 2>/dev/null || true)"
+  tmux_state="$(tmux_session_state "$session_name" 2>/dev/null || true)"
+  case "$tmux_state" in
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '680,760p' audit-map/20-prompts/adversarial-master-orchestrator-suite.md && printf '\\n### SPLIT ###\\n' && sed -n '1,120p' audit-map/20-prompts/adversarial-master-orchestrator-suite.md && printf '\\n### SPLIT ###\\n' && sed -n '120,190p' audit-map/20-prompts/adversarial-master-orchestrator-suite.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+After findings, emit test specs and stubs for every high/critical finding.
+Each high/critical accessibility finding must include at least one `axe`-style or role-query assertion spec and one keyboard/screen-reader flow spec.
+Each high/critical leak finding must include an unmount/remount cleanup test spec.
+
+### Hard pass/fail gates
+
+- Fail if no boundary map exists for top-level and major surfaces.
+- Fail if any high/critical leak remains open.
+- Fail if any high/critical ARIA/screen-reader issue remains open.
+- Fail if high/critical findings lack test specs and stubs.
+- Pass only when all boundary, cleanup, and accessibility gates are evidenced.
+
+---
+
+## Prompt 9: Truth Drift and Contradiction Reconciliation Audit
+
+You are an adversarial audit agent. Assume truth drift exists between documentation, status artifacts, and real implementation until proven otherwise.
+
+### Scope and evidence targets
+
+exec
+/run/current-system/sw/bin/zsh -lc 'bash audit-map/16-scripts/tmux-list-jobs.sh' in /home/raed/projects/air-mentor-uiexec
+/run/current-system/sw/bin/zsh -lc 'bash audit-map/16-scripts/tmux-job-status.sh truth-drift-reconciliation-pass bootstrap' in /home/raed/projects/air-mentor-uiexec
+/run/current-system/sw/bin/zsh -lc 'rg -n "reconcile_status_with_tmux|execution_supervisor_state|last_execution_progress_source|tmux_visibility|state=running|watching" audit-map/16-scripts/_audit-common.sh' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+866:reconcile_status_with_tmux() {
+882:  supervisor_state="$(read_env_value "$status_file" execution_supervisor_state 2>/dev/null || true)"
+895:          upsert_env "$status_file" tmux_visibility "present"
+905:            upsert_env "$status_file" tmux_visibility "missing"
+913:            upsert_env "$status_file" tmux_visibility "missing"
+921:          upsert_env "$status_file" tmux_visibility "inaccessible"
+928:          upsert_env "$status_file" tmux_visibility "present"
+931:          upsert_env "$status_file" tmux_visibility "inaccessible"
+937:            upsert_env "$status_file" tmux_visibility "missing"
+945:            upsert_env "$status_file" tmux_visibility "missing"
+953:            upsert_env "$status_file" tmux_visibility "missing"
+ succeeded in 2.41s:
+task_class=high-stakes
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ truth-drift-reconciliation-pass\ --context\ bootstrap\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 0\ --provider-mode\ auto\ --wait-timeout-seconds\ 1800\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+archived_log_file=''
+started_at=2026-04-18T00:00:30Z
+pid=1786880
+route_attempt=1
+route_provider_mode=auto
+route_selected_slot=''
+route_selected_account=native-codex-session
+route_last_changed_at=2026-04-18T00:00:30Z
+execution_supervisor_pid=1788320
+execution_supervisor_state=watching
+execution_supervisor_detail=Latest\ progress\ source:\ attempt-log.
+execution_supervisor_updated_at=2026-04-18T00:02:00Z
+last_execution_progress_at=2026-04-18T00:02:00Z
+last_execution_progress_source=attempt-log
+session_name=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+pass_name=truth-drift-reconciliation-pass
+codex
+I’m now checking the tmux wrappers against live control files rather than trusting the static `.status` content. If those wrappers reconcile the truth-drift pass out of `running`, that’s direct evidence of current status-vs-reality drift in the checked-in files themselves.
+ succeeded in 10.05s:
+session	state	tmux	log
+audit-air-mentor-ui-bootstrap-account-routing-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-account-routing-pass.log
+audit-air-mentor-ui-bootstrap-audit-the-audit-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-audit-the-audit-pass.log
+audit-air-mentor-ui-bootstrap-backend-provenance-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-backend-provenance-pass.log
+audit-air-mentor-ui-bootstrap-claim-verification-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-claim-verification-pass.log
+audit-air-mentor-ui-bootstrap-closure-readiness-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-closure-readiness-pass.log
+audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass.log
+audit-air-mentor-ui-bootstrap-data-flow-pass	completed	running	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-data-flow-pass.log
+audit-air-mentor-ui-bootstrap-dependency-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-dependency-pass.log
+audit-air-mentor-ui-bootstrap-feature-atom-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-feature-atom-pass.log
+audit-air-mentor-ui-bootstrap-frontend-long-tail-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.log
+audit-air-mentor-ui-bootstrap-frontend-microinteraction-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-frontend-microinteraction-pass.log
+audit-air-mentor-ui-bootstrap-inventory-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-inventory-pass.log
+audit-air-mentor-ui-bootstrap-ml-audit-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-ml-audit-pass.log
+audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass.log
+audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass.log
+audit-air-mentor-ui-bootstrap-residual-gap-closure-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.log
+audit-air-mentor-ui-bootstrap-role-surface-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-role-surface-pass.log
+audit-air-mentor-ui-bootstrap-route-map-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-route-map-pass.log
+audit-air-mentor-ui-bootstrap-script-behavior-pass	completed	missing	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-script-behavior-pass.log
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '866,960p' audit-map/16-scripts/_audit-common.sh" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+reconcile_status_with_tmux() {
+  local status_file="$1"
+  local checkpoint_file="${2:-}"
+  local session_state=""
+  local session_name=""
+  local state=""
+  local exit_code=""
+  local supervisor_state=""
+  local last_execution_failure_class=""
+  local terminal_failure="0"
+  [ -f "$status_file" ] || return 0
+  repair_session_status_file "$status_file" "$checkpoint_file" || return 0
+
+  session_name="$(read_env_value "$status_file" session_name 2>/dev/null || true)"
+  state="$(read_env_value "$status_file" state 2>/dev/null || true)"
+  exit_code="$(read_env_value "$status_file" exit_code 2>/dev/null || true)"
+  supervisor_state="$(read_env_value "$status_file" execution_supervisor_state 2>/dev/null || true)"
+  last_execution_failure_class="$(read_env_value "$status_file" last_execution_failure_class 2>/dev/null || true)"
+  session_state="$(tmux_session_state "${session_name:-}" 2>/dev/null || true)"
+  if [ -n "${last_execution_failure_class:-}" ] || { [ -n "${exit_code:-}" ] && [ "${exit_code:-}" != "0" ]; }; then
+exec
+/run/current-system/sw/bin/zsh -lc 'tail -n 80 audit-map/22-logs/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.log' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+/run/current-system/sw/bin/zsh -lc 'bash audit-map/16-scripts/tmux-list-jobs.sh' in /home/raed/projects/air-mentor-uiexec
+/run/current-system/sw/bin/zsh -lc 'bash audit-map/16-scripts/tmux-job-status.sh truth-drift-reconciliation-pass bootstrap' in /home/raed/projects/air-mentor-uiexec
+/run/current-system/sw/bin/zsh -lc 'rg -n "reconcile_status_with_tmux|execution_supervisor_state|last_execution_progress_source|tmux_visibility|state=running|watching" audit-map/16-scripts/_audit-common.sh' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+866:reconcile_status_with_tmux() {
+882:  supervisor_state="$(read_env_value "$status_file" execution_supervisor_state 2>/dev/null || true)"
+895:          upsert_env "$status_file" tmux_visibility "present"
+905:            upsert_env "$status_file" tmux_visibility "missing"
+913:            upsert_env "$status_file" tmux_visibility "missing"
+921:          upsert_env "$status_file" tmux_visibility "inaccessible"
+928:          upsert_env "$status_file" tmux_visibility "present"
+931:          upsert_env "$status_file" tmux_visibility "inaccessible"
+937:            upsert_env "$status_file" tmux_visibility "missing"
+945:            upsert_env "$status_file" tmux_visibility "missing"
+953:            upsert_env "$status_file" tmux_visibility "missing"
+ succeeded in 2.41s:
+task_class=high-stakes
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ truth-drift-reconciliation-pass\ --context\ bootstrap\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 0\ --provider-mode\ auto\ --wait-timeout-seconds\ 1800\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+archived_log_file=''
+exec
+/run/current-system/sw/bin/zsh -lc 'ps -p 1786880,1788320 -o pid=,ppid=,etime=,stat=,cmd=' in /home/raed/projects/air-mentor-ui exited 1 in 0ms:
+
+exec
+/run/current-system/sw/bin/zsh -lc "if [ -f audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md ]; then sed -n '1,220p' audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md; else echo 'MISSING: last-message'; fi" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+MISSING: last-message
+exec
+/run/current-system/sw/bin/zsh -lc 'tmux ls' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+audit-air-mentor-ui-bootstrap-data-flow-pass: 1 windows (created Sat Apr 18 04:59:55 2026)
+audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass: 1 windows (created Sat Apr 18 05:30:28 2026)
+audit-air-mentor-ui-overnight-night-run-orchestrator: 1 windows (created Sat Apr 18 05:30:19 2026)
+audit-air-mentor-ui-overnight-usage-refresh-orchestrator: 1 windows (created Sat Apr 18 05:30:18 2026)
+exec
+/run/current-system/sw/bin/zsh -lc 'tmux capture-pane -pt audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass | tail -n 80' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+error connecting to /run/user/1002/tmux-1002/default (Operation not permitted)
+exec
+/run/current-system/sw/bin/zsh -lc 'tmux capture-pane -pt audit-air-mentor-ui-bootstrap-data-flow-pass | tail -n 80' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+error connecting to /run/user/1002/tmux-1002/default (Operation not permitted)
+exec
+/run/current-system/sw/bin/zsh -lc 'tmux capture-pane -pt audit-air-mentor-ui-overnight-night-run-orchestrator | tail -n 80' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+error connecting to /run/user/1002/tmux-1002/default (Operation not permitted)
+codex
+The control plane is in a mixed state. `tmux ls` sees four sessions, but the recorded truth-drift PIDs are gone, `capture-pane` is permission-blocked, and the pass still lacks its required `last-message` artifact. I’m now checking whether those tmux sessions have any surviving worker processes or whether they’re just idle shells keeping stale `running` claims alive.
+exec
+/run/current-system/sw/bin/zsh -lc "pgrep -af 'audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass|audit-air-mentor-ui-bootstrap-data-flow-pass|audit-air-mentor-ui-overnight-night-run-orchestrator|audit-air-mentor-ui-overnight-usage-refresh-orchestrator|execute-pass-with-failover|night-run-orchestrator|usage-refresh-orchestrator'" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+1 codex-linux-sandbox --sandbox-policy-cwd /home/raed/projects/air-mentor-ui --sandbox-policy {"type":"workspace-write","writable_roots":["/home/raed/.codex/memories"],"network_access":false,"exclude_tmpdir_env_var":false,"exclude_slash_tmp":false} --file-system-sandbox-policy {"kind":"restricted","entries":[{"path":{"type":"special","value":{"kind":"root"}},"access":"read"},{"path":{"type":"special","value":{"kind":"current_working_directory"}},"access":"write"},{"path":{"type":"special","value":{"kind":"slash_tmp"}},"access":"write"},{"path":{"type":"special","value":{"kind":"tmpdir"}},"access":"write"},{"path":{"type":"path","path":"/home/raed/.codex/memories"},"access":"write"}]} --network-sandbox-policy "restricted" -- /run/current-system/sw/bin/zsh -c if . '/home/raed/.codex/shell_snapshots/019d9de3-969a-77c1-9f9b-46dc8260d143.sh' >/dev/null 2>&1; then :; fi  exec '/run/current-system/sw/bin/zsh' -c 'pgrep -af '"'"'audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass|audit-air-mentor-ui-bootstrap-data-flow-pass|audit-air-mentor-ui-overnight-night-run-orchestrator|audit-air-mentor-ui-overnight-usage-refresh-orchestrator|execute-pass-with-failover|night-run-orchestrator|usage-refresh-orchestrator'"'"''
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '1,220p' audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-pass.status && printf '\\n### SPLIT ###\\n' && sed -n '1,220p' audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-data-flow-pass.checkpoint" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+task_class=structured
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ data-flow-pass\ --context\ bootstrap\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-data-flow-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-data-flow-pass.last-message.md\ --provider\ google\ --account\ google-main\ --model\ gemini-3.1-pro-preview\ --reasoning-effort\ xhigh\ --search\ 0\ --provider-mode\ auto\ --wait-timeout-seconds\ 1800\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-data-flow-pass.checkpoint\ --slot\ google-main
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-data-flow-pass.log.20260415T143536Z.prev
+started_at=2026-04-15T14:35:36Z
+pid=4063226
+last_execution_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-data-flow-pass.attempt-1.jBL7uJ.log
+route_attempt=2
+route_provider_mode=auto
+route_selected_slot=codex-04
+route_selected_account=codex-04
+route_last_changed_at=2026-04-15T14:57:39Z
+execution_supervisor_pid=324242
+last_execution_progress_at=2026-04-15T14:58:09Z
+last_execution_progress_source=attempt-log
+tmux_visibility=present
+execution_supervisor_state=completed
+execution_supervisor_detail=Attempt\ process\ exited\ with\ code=0.
+execution_supervisor_updated_at=2026-04-15T15:04:39Z
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '1,220p' audit-map/29-status/audit-air-mentor-ui-overnight-night-run-orchestrator.status && printf '\\n### SPLIT ###\\n' && sed -n '1,220p' audit-map/30-checkpoints/audit-air-mentor-ui-overnight-night-run-orchestrator.checkpoint && printf '\\n### SPLIT ###\\n' && sed -n '1,220p' audit-map/29-status/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.status && printf '\\n### SPLIT ###\\n' && sed -n '1,220p' audit-map/30-checkpoints/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.checkpoint" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+task_class=orchestration
+model=''
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/night-run-orchestrator.sh\ --worker\ --shutdown-on-complete
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-night-run-orchestrator.log.20260418T000018Z.prev
+pid=1771056
+current_phase=queue-processing
+started_at=2026-04-18T00:00:19Z
+shutdown_on_complete=1
+last_completed_pass=ux-friction-pass
+last_completed_session=audit-air-mentor-ui-bootstrap-ux-friction-pass
+current_queue_context=bootstrap
+current_queue_task_class=''
+current_queue_prompt_file=''
+session_name=audit-air-mentor-ui-overnight-night-run-orchestrator
+pass_name=night-run-orchestrator
+context=overnight
+workdir=/home/raed/projects/air-mentor-ui
+state=running
+codex
+I’ve found at least one concrete split-brain pattern already: `data-flow-pass` is marked `completed`, but its checkpoint still carries `runtime_failure_class=stalled-no-progress` from an earlier route. I’m doing a repo-wide control-file sweep now so this pass doesn’t miss other completed/running states that are internally contradictory.
+exec
+/run/current-system/sw/bin/zsh -lc "python - <<'PY'
+import pathlib, re
+root = pathlib.Path('audit-map/29-status')
+for p in sorted(root.glob('audit-*.status')):
+    txt = p.read_text()
+    state = re.search(r'"'^state=(.*)$'"', txt, re.M)
+    lfc = re.search(r'"'^last_execution_failure_class=(.*)$'"', txt, re.M)
+    exitc = re.search(r'"'^exit_code=(.*)$'"', txt, re.M)
+    pid = re.search(r'"'^pid=(.*)$'"', txt, re.M)
+    sup = re.search(r'"'^execution_supervisor_state=(.*)$'"', txt, re.M)
+    if state:
+        sv = state.group(1)
+        if sv == 'completed' and ((lfc and lfc.group(1).strip()) or (exitc and exitc.group(1).strip() and exitc.group(1).strip() "'!= '"'0')):
+            print(f'STATUS_COMPLETED_WITH_FAILURE\\t{p}\\tlast_execution_failure_class={lfc.group(1) if lfc else \"\"}\\texit_code={exitc.group(1) if exitc else \"\"}')
+        if sv == 'running':
+            print(f'STATUS_RUNNING\\t{p}\\tpid={pid.group(1) if pid else \"\"}\\tsupervisor={sup.group(1) if sup else \"\"}')
+PY" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-account-routing-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-audit-the-audit-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-backend-provenance-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-claim-verification-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-closure-readiness-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-dependency-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-feature-atom-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-frontend-microinteraction-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-ml-audit-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-role-surface-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-script-behavior-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-state-flow-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-synthesis-pass.status	last_execution_failure_class=''	exit_code=0
+STATUS_COMPLETED_WITH_FAILURE	audit-map/29-status/audit-air-mentor-ui-bootstrap-test-gap-pass.status	last_execution_failure_class=''	exit_code=0
+exec
+/run/current-system/sw/bin/zsh -lc "python - <<'PY'
+import pathlib, re
+root = pathlib.Path('audit-map/30-checkpoints')
+for p in sorted(root.glob('audit-*.checkpoint')):
+    txt = p.read_text()
+    last = re.search(r'"'^last_event=(.*)$'"', txt, re.M)
+    rfc = re.search(r'"'^runtime_failure_class=(.*)$'"', txt, re.M)
+    stop = re.search(r'"'^stop_reason=(.*)$'"', txt, re.M)
+    if last and last.group(1) == 'completed' and ((rfc and rfc.group(1).strip()) or (stop and stop.group(1).strip())):
+        print(f'CHECKPOINT_COMPLETED_WITH_FAILURE\\t{p}\\truntime_failure_class={rfc.group(1) if rfc else \"\"}\\tstop_reason={stop.group(1) if stop else \"\"}')
+    if last and last.group(1) == 'running':
+        print(f'CHECKPOINT_RUNNING\\t{p}')
+PY" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+CHECKPOINT_COMPLETED_WITH_FAILURE	audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-closure-readiness-pass.checkpoint	runtime_failure_class=quota-or-rate-limit	stop_reason=
+CHECKPOINT_COMPLETED_WITH_FAILURE	audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-data-flow-pass.checkpoint	runtime_failure_class=stalled-no-progress	stop_reason=No\ progress\ signal\ observed\ for\ 1200s.
+CHECKPOINT_COMPLETED_WITH_FAILURE	audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass.checkpoint	runtime_failure_class=quota-or-rate-limit	stop_reason=
+CHECKPOINT_COMPLETED_WITH_FAILURE	audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.checkpoint	runtime_failure_class=quota-or-rate-limit	stop_reason=
+CHECKPOINT_RUNNING	audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+CHECKPOINT_COMPLETED_WITH_FAILURE	audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unattended-run-pass.checkpoint	runtime_failure_class=quota-or-rate-limit	stop_reason=
+CHECKPOINT_COMPLETED_WITH_FAILURE	audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint	runtime_failure_class=quota-or-rate-limit	stop_reason=
+CHECKPOINT_RUNNING	audit-map/30-checkpoints/audit-air-mentor-ui-overnight-night-run-orchestrator.checkpoint
+CHECKPOINT_RUNNING	audit-map/30-checkpoints/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.checkpoint
+exec
+/run/current-system/sw/bin/zsh -lc "python - <<'PY'
+import pathlib, re, subprocess
+root = pathlib.Path('audit-map/29-status')
+for p in sorted(root.glob('audit-*.status')):
+    txt = p.read_text()
+    state = re.search(r'"'^state=(.*)$'"', txt, re.M)
+    pid = re.search(r'"'^pid=(.*)$'"', txt, re.M)
+    spid = re.search(r'"'^execution_supervisor_pid=(.*)$'"', txt, re.M)
+    if not state or state.group(1) "'!= '"'running':
+        continue
+    vals=[]
+    for name,m in [('pid',pid),('spid',spid)]:
+        v = (m.group(1).strip() if m else '')
+        if v:
+            rc = subprocess.run(['ps','-p',v,'-o','pid='], capture_output=True, text=True)
+            alive = bool(rc.stdout.strip())
+        else:
+            alive = False
+        vals.append(f'{name}={v or \"<empty>\"}:{\"alive\" if alive else \"dead\"}')
+    print(f'RUNNING_PID_CHECK\\t{p}\\t'+'\\t'.join(vals))
+PY" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+RUNNING_PID_CHECK	audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status	pid=1786880:dead	spid=1788320:dead
+RUNNING_PID_CHECK	audit-map/29-status/audit-air-mentor-ui-overnight-night-run-orchestrator.status	pid=1771056:dead	spid=<empty>:dead
+RUNNING_PID_CHECK	audit-map/29-status/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.status	pid=1770662:dead	spid=<empty>:dead
+codex
+I’ve now got a repeatable control-plane pattern, not a one-off. Three files report `state=running` with dead recorded PIDs, and several completed checkpoints still carry unresolved failure-class fields from older attempts. I’m checking the related logs next so I can separate resolvable historical-attempt residue from truly stale “running” claims that need escalation or explicit blocking.
+exec
+/run/current-system/sw/bin/zsh -lc 'tail -n 80 audit-map/22-logs/audit-air-mentor-ui-overnight-night-run-orchestrator.log' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+[2026-04-18T00:00:19Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-18T00:00:19Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+[2026-04-18T00:00:27Z] COST WARNING: No native Codex spend API is wired into this audit OS; using class-based guardrails plus observed route health.
+session=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+exec
+/run/current-system/sw/bin/zsh -lc 'tail -n 80 audit-map/22-logs/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.log' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+[2026-04-18T00:00:19Z] session=audit-air-mentor-ui-overnight-usage-refresh-orchestrator
+[2026-04-18T00:00:19Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.command.sh
+slot=antigravity-main
+provider=antigravity
+stats_snapshot=/home/raed/projects/air-mentor-ui/audit-map/18-snapshots/accounts/antigravity-main/stats-20260418T000019Z.json
+usage_snapshot=/home/raed/projects/air-mentor-ui/audit-map/18-snapshots/accounts/antigravity-main/usage-view-20260418T000019Z.txt
+slot=codex-01
+provider=codex
+stats_snapshot=/home/raed/projects/air-mentor-ui/audit-map/18-snapshots/accounts/codex-01/stats-20260418T000051Z.json
+usage_snapshot=/home/raed/projects/air-mentor-ui/audit-map/18-snapshots/accounts/codex-01/usage-view-20260418T000051Z.txt
+slot=codex-02
+provider=codex
+stats_snapshot=/home/raed/projects/air-mentor-ui/audit-map/18-snapshots/accounts/codex-02/stats-20260418T000122Z.json
+usage_snapshot=/home/raed/projects/air-mentor-ui/audit-map/18-snapshots/accounts/codex-02/usage-view-20260418T000122Z.txt
+slot=codex-03
+provider=codex
+stats_snapshot=/home/raed/projects/air-mentor-ui/audit-map/18-snapshots/accounts/codex-03/stats-20260418T000207Z.json
+usage_snapshot=/home/raed/projects/air-mentor-ui/audit-map/18-snapshots/accounts/codex-03/usage-view-20260418T000207Z.txt
+slot=codex-04
+provider=codex
+exec
+/run/current-system/sw/bin/zsh -lc "for f in audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-{closure-readiness-pass,prompt-self-improvement-pass,residual-gap-closure-pass,unattended-run-pass,unknown-omission-pass}.checkpoint; do printf '\\n### FILE: %s ###\\n' \""'$f"; sed -n '"'1,220p' \""'$f"; done' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-closure-readiness-pass.checkpoint ###
+pass_name=closure-readiness-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-closure-readiness-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+runtime_failure_class=quota-or-rate-limit
+runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-closure-readiness-pass.attempt-1.3we3pP.log
+current_provider=github-copilot
+current_account=copilot-accneww432
+current_model=gpt-5.3-codex
+current_slot=copilot-accneww432
+route_attempt=2
+execution_supervisor_pid=2067242
+last_event=completed
+last_checkpoint_at=2026-04-16T18:41:55Z
+
+### FILE: audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass.checkpoint ###
+exec
+/run/current-system/sw/bin/zsh -lc "rg -n '"'^execution_supervisor_state=watching|''^last_execution_progress_source=.*attempt-log'"' audit-map/29-status/audit-*.status" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+audit-map/29-status/audit-air-mentor-ui-bootstrap-audit-the-audit-pass.status:16:last_execution_progress_source=attempt-log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.status:16:last_execution_progress_source=attempt-log\,last-message
+audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-pass.status:16:last_execution_progress_source=attempt-log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass.status:15:last_execution_progress_source=attempt-log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-claim-verification-pass.status:16:last_execution_progress_source=attempt-log\,last-message
+audit-map/29-status/audit-air-mentor-ui-bootstrap-closure-readiness-pass.status:17:last_execution_progress_source=attempt-log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-backend-provenance-pass.status:17:last_execution_progress_source=attempt-log\,last-message
+audit-map/29-status/audit-air-mentor-ui-bootstrap-account-routing-pass.status:3:last_execution_progress_source=attempt-log\,last-message
+audit-map/29-status/audit-air-mentor-ui-bootstrap-frontend-microinteraction-pass.status:16:last_execution_progress_source=attempt-log\,last-message
+audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status:14:execution_supervisor_state=watching
+audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status:18:last_execution_progress_source=attempt-log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass.status:15:last_execution_progress_source=attempt-log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-synthesis-pass.status:15:last_execution_progress_source=attempt-log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.status:17:last_execution_progress_source=attempt-log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-script-behavior-pass.status:15:last_execution_progress_source=attempt-log\,last-message
+audit-map/29-status/audit-air-mentor-ui-bootstrap-ml-audit-pass.status:16:last_execution_progress_source=attempt-log\,last-message
+audit-map/29-status/audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass.status:15:last_execution_progress_source=attempt-log
+audit-map/29-status/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.status:16:last_execution_progress_source=attempt-log\,last-message
+audit-map/29-status/audit-air-mentor-ui-bootstrap-test-gap-pass.status:16:last_execution_progress_source=attempt-log\,last-message
+audit-map/29-status/audit-air-mentor-ui-bootstrap-unknown-omission-pass.status:17:last_execution_progress_source=attempt-log
+exec
+/run/current-system/sw/bin/zsh -lc "for f in audit-map/29-status/audit-air-mentor-ui-bootstrap-{frontend-long-tail-pass,unknown-omission-pass,closure-readiness-pass}.status audit-map/29-status/audit-air-mentor-ui-live-{live-credentialed-parity-pass,same-student-cross-surface-parity-pass}.status; do printf '\\n### FILE: %s ###\\n' \""'$f"; sed -n '"'1,220p' \""'$f"; done' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/29-status/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.status ###
+task_class=high-stakes
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ frontend-long-tail-pass\ --context\ bootstrap\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 1\ --provider-mode\ auto\ --wait-timeout-seconds\ 1800\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.checkpoint
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.log.20260416T093237Z.prev
+started_at=2026-04-16T09:32:38Z
+pid=966315
+route_attempt=1
+route_provider_mode=auto
+route_selected_slot=''
+route_selected_account=native-codex-session
+route_last_changed_at=2026-04-16T09:32:38Z
+execution_supervisor_pid=966684
+tmux_visibility=present
+last_execution_progress_at=2026-04-16T09:55:10Z
+last_execution_progress_source=attempt-log\,last-message
+execution_supervisor_state=completed
+execution_supervisor_detail=Attempt\ process\ exited\ with\ code=0.
+exec
+/run/current-system/sw/bin/zsh -lc "for f in audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-{frontend-long-tail-pass,unknown-omission-pass,closure-readiness-pass}.checkpoint audit-map/30-checkpoints/audit-air-mentor-ui-live-{live-credentialed-parity-pass,same-student-cross-surface-parity-pass}.checkpoint; do printf '\\n### FILE: %s ###\\n' \""'$f"; sed -n '"'1,220p' \""'$f"; done' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+
+### FILE: audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.checkpoint ###
+pass_name=frontend-long-tail-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-frontend-long-tail-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+current_provider=native-codex
+current_account=native-codex-session
+current_model=gpt-5.4
+current_slot=''
+route_attempt=1
+execution_supervisor_pid=966684
+last_event=completed
+last_checkpoint_at=2026-04-16T09:55:10Z
+
+### FILE: audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint ###
+pass_name=unknown-omission-pass
+context=bootstrap
+exec
+/run/current-system/sw/bin/zsh -lc 'find audit-map/18-snapshots -maxdepth 2 -type d | sort' in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+audit-map/18-snapshots
+audit-map/18-snapshots/accounts
+audit-map/18-snapshots/accounts/antigravity-main
+audit-map/18-snapshots/accounts/codex-01
+audit-map/18-snapshots/accounts/codex-02
+audit-map/18-snapshots/accounts/codex-03
+audit-map/18-snapshots/accounts/codex-04
+audit-map/18-snapshots/accounts/codex-05
+audit-map/18-snapshots/accounts/codex-06
+audit-map/18-snapshots/accounts/copilot-accneww432
+audit-map/18-snapshots/accounts/copilot-raed2180416
+audit-map/18-snapshots/accounts/google-main
+audit-map/18-snapshots/env
+audit-map/18-snapshots/live
+audit-map/18-snapshots/repo
+audit-map/18-snapshots/tmux
+exec
+/run/current-system/sw/bin/zsh -lc "rg -n '16-scripts|20-prompts|29-status|30-checkpoints|32-reports|14-reconciliation|23-coverage|24-agent-memory' audit-map/23-coverage/review-status-by-path.md audit-map/23-coverage/unreviewed-surface-list.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+audit-map/23-coverage/review-status-by-path.md:25:| `audit-map/16-scripts/` | Partially mapped | Routing controller, budget guardrail, tmux wrappers, and Arctic execution-smoke logic were reviewed for `account-routing-pass`; broader automation script behavior still needs the later workflow/script passes |
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '1,260p' audit-map/23-coverage/unreviewed-surface-list.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+# Unreviewed Surface List
+
+- `src/` exhaustive every-component interaction mapping outside the six high-density clusters plus the sysadmin long-tail helper addendum now captured in `audit-map/12-frontend-microinteractions/component-cluster-microinteraction-map.md` and `audit-map/12-frontend-microinteractions/long-tail-interaction-map.md`
+- `src/data.old.ts` formal archival / deletion decision after zero active repo imports were re-confirmed
+- duplicate data-flow directory naming drift (`audit-map/06-data-flow/` canonical vs `audit-map/06-data-flows/` placeholder) and cleanup decision
+- deployed proof-refresh worker liveness/continuity verification (local ownership path is mapped; live runtime evidence still pending)
+- fresh proof-risk evaluation artifact regeneration in a less restricted environment
+- live proof-risk artifact availability, fallback frequency, and same-student cross-surface parity
+- telemetry and startup-diagnostics family (`src/telemetry.ts`, `src/startup-diagnostics.ts`, `air-mentor-api/src/modules/client-telemetry.ts`, `air-mentor-api/src/lib/telemetry.ts`, `air-mentor-api/src/lib/operational-event-store.ts`, and their frontend/backend tests)
+- frontend proof provenance / count-source explanation contract (`src/proof-provenance.ts`, `src/academic-proof-summary-strip.tsx`, `src/academic-faculty-profile-page.tsx`, `src/pages/hod-pages.tsx`, `src/pages/risk-explorer.tsx`, `src/pages/student-shell.tsx`, `src/system-admin-proof-dashboard-workspace.tsx`, `src/system-admin-live-app.tsx`); the backend provenance builders are now locally mapped, but user-visible copy parity and live same-truth confirmation remain open
+- live/read-only confirmation of proof playback lifecycle semantics, including invalid-checkpoint handling, denied-path behavior, reset safety, and the default active-semester slice that can recurse into playback checkpoints even when surfaced as run-level provenance
+- safe read-only live proof/parity observer for deployed same-target role comparison; the current proof smoke and teaching parity helpers mutate live proof lifecycle or faculty records before parity is proven
+- current deployment dependency posture for Python NLP, `sentence-transformers`, and optional Ollama curriculum-linkage assist
+- workflow-run semantic gap hardening: enforce explicit live-mode env assertions or naming disambiguation for `proof-browser-cadence.yml` so local-seeded runs cannot be misread as live proof
+- live authenticated admin flows
+- live teacher, HoD, mentor, and student flows
+- deployment automation edge cases and stale artifact detection
+- seed-data-to-live parity
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '1,220p' audit-map/23-coverage/review-status-by-path.md" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+# Review Status By Path
+
+| Path | Status | Scope note |
+| --- | --- | --- |
+| `src/` | Mapped with focused microinteraction clusters plus long-tail sysadmin helper coverage | Frontend interaction coverage now spans the six dense clusters in `audit-map/12-frontend-microinteractions/component-cluster-microinteraction-map.md` plus the sysadmin long-tail helper/shell addendum in `audit-map/12-frontend-microinteractions/long-tail-interaction-map.md` |
+| `src/pages/` | Mapped | Page module inventory captured; route behavior mapping completed, and proof-risk student and HoD surfaces were reviewed for ML framing and advisory-head presentation |
+| `src/api/` | Seeded | Client and type surfaces captured; endpoint coupling pending |
+| `src/telemetry.ts`, `src/startup-diagnostics.ts`, `tests/frontend-telemetry.test.ts`, `tests/frontend-startup-diagnostics.test.ts` | Unmapped | Production-like API base URL validation, telemetry sink resolution, and client telemetry emission/relay are implemented and test-backed but absent from the current final maps and live-behavior ledger |
+| `src/proof-provenance.ts`, `src/academic-proof-summary-strip.tsx`, `src/academic-faculty-profile-page.tsx`, `src/pages/hod-pages.tsx`, `src/pages/risk-explorer.tsx`, `src/pages/student-shell.tsx`, `src/system-admin-proof-dashboard-workspace.tsx`, `src/system-admin-live-app.tsx` | Unmapped as proof explanation contract | User-visible proof provenance banners and model-usefulness/count-source copy are implemented across sysadmin, HoD, faculty-profile, risk-explorer, proof-summary, and student-shell surfaces, but the audit does not yet treat this shared phrasing as a dedicated same-truth contract |
+| `src/admin-section-scope.ts`, `src/system-admin-provisioning-helpers.ts`, `src/system-admin-scoped-registry-launches.tsx`, `src/system-admin-faculty-calendar-workspace.tsx`, `src/system-admin-session-shell.tsx`, `src/system-admin-action-queue.ts`, `src/system-admin-overview-helpers.ts`, `src/system-admin-hierarchy-workspace-shell.tsx`, `src/system-admin-app.tsx` | Mapped with residual drift risks | Long-tail pass now captures section-scope normalization, scoped registry launch/return, bulk mentor preview/apply invalidation, queue-dismiss persistence, session/login/role-switch gates, faculties restore banner semantics, startup env gate, and active faculty planner modal/save behavior. Residual risks are duplicate section-scope helper definitions, global queue-hide localStorage, and missing direct runtime tests |
+| `src/system-admin-timetable-editor.tsx` | Mapped (repo-present, currently unmounted) | Alternate weekly planner semantics were inspected and documented in the long-tail interaction map, but the file has no current imports or tests outside itself, so it is not an active route-backed surface |
+| `src/data.old.ts` | Partially mapped | Zero active repo imports were re-confirmed; the file now looks archival from a call-site perspective, but formal disposition is still open |
+| `air-mentor-api/src/` | Mapped | Backend topology known; endpoint and inference audit completed for route families |
+| `air-mentor-api/src/db/` | Mapped with live/runtime residuals | Migration lineage through `0018`, lexical migration ordering, and the destructive seed boundary are now explicit. Remaining uncertainty is deployed runtime behavior, not local DB provenance coverage. |
+| `air-mentor-api/src/lib/telemetry.ts`, `air-mentor-api/src/modules/client-telemetry.ts`, `air-mentor-api/src/lib/operational-event-store.ts` | Unmapped | Backend telemetry relay, persistence, and operational event sink surfaces are implemented with dedicated tests but are absent from the dependency/data-flow/live maps |
+| `air-mentor-api/src/lib/proof-provenance.ts`, `air-mentor-api/src/lib/proof-control-plane-access.ts`, `air-mentor-api/src/lib/proof-control-plane-playback-governance-service.ts`, `air-mentor-api/src/lib/proof-control-plane-playback-reset-service.ts`, `air-mentor-api/src/lib/proof-control-plane-stage-summary-service.ts`, `air-mentor-api/src/lib/proof-observed-state.ts`, `air-mentor-api/src/lib/proof-control-plane-hod-service.ts`, `air-mentor-api/src/lib/proof-control-plane-tail-service.ts` | Mapped (local provenance pass) | Proof lifecycle, checkpoint-bound count provenance, playback reset deletion, stage-summary aggregation, and role-scoped queue/status semantics are now durably represented in `audit-map/13-backend-provenance/backend-provenance-map.md` with supporting tests and final-map cross-links. |
+| `air-mentor-api/src/lib/proof-active-run.ts`, `air-mentor-api/src/lib/proof-control-plane-live-run-service.ts`, `air-mentor-api/src/lib/proof-control-plane-dashboard-service.ts`, `air-mentor-api/src/lib/proof-control-plane-section-risk-service.ts`, `air-mentor-api/src/modules/academic-authoritative-first.ts`, `air-mentor-api/src/lib/academic-provisioning.ts` | Mapped with live/runtime residuals | Active-run selection, live-runtime snapshotting, dashboard diagnostics, section-risk aggregation, authoritative-first fallback, and mentor provisioning eligibility are now locally mapped. Remaining uncertainty is live parity and deployed worker/runtime behavior, not helper-family omission. |
+| `air-mentor-api/src/lib/` | Mapped | Proof-risk, calibration, correlation, queue, monitoring, playback, tail inference, and curriculum-linkage ML and heuristic surfaces audited |
+| `air-mentor-api/src/modules/` | Mapped | Route module inventory captured; route and guard mapping completed |
+| `audit-map/05-dependencies/` | Mapped | Hidden dependency chains, persistence couplings, and runtime contract edges captured |
+exec
+/run/current-system/sw/bin/zsh -lc "rg -n '"'^last_execution_failure_log=|''^runtime_failure_class=|''^runtime_failure_log=|''^stop_reason='"' audit-map/29-status/audit-*.status audit-map/30-checkpoints/audit-*.checkpoint" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+audit-map/29-status/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.status:8:last_execution_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.attempt-1.TYwjWC.log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-state-flow-pass.status:8:last_execution_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-state-flow-pass.attempt-1.rglro4.log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-unattended-run-pass.status:8:last_execution_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unattended-run-pass.attempt-1.F0S6oy.log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-data-flow-pass.status:8:last_execution_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-data-flow-pass.attempt-1.jBL7uJ.log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-closure-readiness-pass.status:8:last_execution_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-closure-readiness-pass.attempt-1.3we3pP.log
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-data-flow-pass.checkpoint:7:stop_reason=No\ progress\ signal\ observed\ for\ 1200s.
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-data-flow-pass.checkpoint:8:runtime_failure_class=stalled-no-progress
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-data-flow-pass.checkpoint:9:runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-data-flow-pass.attempt-1.jBL7uJ.log
+audit-map/29-status/audit-air-mentor-ui-bootstrap-unknown-omission-pass.status:8:last_execution_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unknown-omission-pass.attempt-1.7rR0NI.log
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unattended-run-pass.checkpoint:7:runtime_failure_class=quota-or-rate-limit
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unattended-run-pass.checkpoint:8:runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unattended-run-pass.attempt-1.F0S6oy.log
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-closure-readiness-pass.checkpoint:7:runtime_failure_class=quota-or-rate-limit
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-closure-readiness-pass.checkpoint:8:runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-closure-readiness-pass.attempt-1.3we3pP.log
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass.checkpoint:7:runtime_failure_class=quota-or-rate-limit
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass.checkpoint:8:runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass.attempt-1.J3Z7AA.log
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint:7:runtime_failure_class=quota-or-rate-limit
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint:8:runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unknown-omission-pass.attempt-1.7rR0NI.log
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.checkpoint:7:runtime_failure_class=quota-or-rate-limit
+audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.checkpoint:8:runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.attempt-1.TYwjWC.log
+codex
+The drift isn’t just in markdown; there’s workflow-level hygiene debt behind it. Completed passes keep stale `tmux_visibility=present`, and some recovered passes keep first-attempt failure fields in their terminal checkpoints. I’m checking the wrapper code paths now to see whether I can harden the control-plane logic instead of only documenting the symptoms.
+exec
+/run/current-system/sw/bin/zsh -lc "rg -n 'runtime_failure_class|runtime_failure_log|last_execution_failure_log|last_execution_failure_class|tmux_visibility|status_mark .*completed|last_event=completed' audit-map/16-scripts/*.sh" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+audit-map/16-scripts/_audit-common.sh:874:  local last_execution_failure_class=""
+audit-map/16-scripts/_audit-common.sh:883:  last_execution_failure_class="$(read_env_value "$status_file" last_execution_failure_class 2>/dev/null || true)"
+audit-map/16-scripts/_audit-common.sh:885:  if [ -n "${last_execution_failure_class:-}" ] || { [ -n "${exit_code:-}" ] && [ "${exit_code:-}" != "0" ]; }; then
+audit-map/16-scripts/_audit-common.sh:895:          upsert_env "$status_file" tmux_visibility "present"
+audit-map/16-scripts/_audit-common.sh:905:            upsert_env "$status_file" tmux_visibility "missing"
+audit-map/16-scripts/_audit-common.sh:911:            status_mark "$status_file" completed
+audit-map/16-scripts/_audit-common.sh:913:            upsert_env "$status_file" tmux_visibility "missing"
+audit-map/16-scripts/_audit-common.sh:921:          upsert_env "$status_file" tmux_visibility "inaccessible"
+audit-map/16-scripts/_audit-common.sh:928:          upsert_env "$status_file" tmux_visibility "present"
+audit-map/16-scripts/_audit-common.sh:931:          upsert_env "$status_file" tmux_visibility "inaccessible"
+audit-map/16-scripts/_audit-common.sh:937:            upsert_env "$status_file" tmux_visibility "missing"
+audit-map/16-scripts/_audit-common.sh:943:            status_mark "$status_file" completed
+audit-map/16-scripts/_audit-common.sh:945:            upsert_env "$status_file" tmux_visibility "missing"
+audit-map/16-scripts/_audit-common.sh:953:            upsert_env "$status_file" tmux_visibility "missing"
+audit-map/16-scripts/tmux-start-job.sh:133:  printf '  status_mark "$status_file" completed\n'
+audit-map/16-scripts/execute-pass-with-failover.sh:357:        upsert_env "$status_file" last_execution_failure_class "$failure_class"
+audit-map/16-scripts/execute-pass-with-failover.sh:358:        upsert_env "$status_file" last_execution_failure_log "$attempt_log"
+audit-map/16-scripts/execute-pass-with-failover.sh:363:        upsert_env "$checkpoint_file" runtime_failure_class "$failure_class"
+audit-map/16-scripts/execute-pass-with-failover.sh:364:        upsert_env "$checkpoint_file" runtime_failure_log "$attempt_log"
+audit-map/16-scripts/execute-pass-with-failover.sh:369:    [ -n "$status_file" ] && upsert_env "$status_file" last_execution_failure_class ""
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '960,1140p' audit-map/16-scripts/_audit-common.sh" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+      esac
+      ;;
+  esac
+}
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '1,260p' audit-map/16-scripts/execute-pass-with-failover.sh" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$SCRIPT_DIR/_audit-common.sh"
+
+usage() {
+  cat >&2 <<'EOF'
+Usage: execute-pass-with-failover.sh
+  --pass <name>
+  --context <context>
+  --prompt-bundle <file>
+  --last-message-file <file>
+  --provider <native-codex|antigravity|codex|google|github-copilot>
+  --account <account>
+  [--slot <slot>]
+  --model <slug>
+  --reasoning-effort <low|medium|high|xhigh>
+  [--search 0|1]
+  [--provider-mode <native-only|auto>]
+exec
+/run/current-system/sw/bin/zsh -lc "sed -n '260,460p' audit-map/16-scripts/execute-pass-with-failover.sh" in /home/raed/projects/air-mentor-ui succeeded in 0ms:
+}
+
+validate_required_artifacts() {
+  local rc="0"
+  set +e
+  bash "$SCRIPT_DIR/validate-pass-artifacts.sh" "$pass_name"
+  rc="$?"
+  set -e
+  return "$rc"
+}
+
+recover_next_route() {
+  local failure_class="$1"
+  local rotation_output=""
+  local rotation_rc="0"
+  local wait_output=""
+  local wait_rc="0"
+  local from_provider="$current_provider"
+  local from_slot="$current_slot"
+  local from_account="$current_account"
+codex
+I’ve finished the evidence-gathering phase. The actionable work now is to reconcile stale contradiction rows, harden the wrapper logic that preserves false failure residue on recovered passes, and write the durable truth-drift report plus updated control files for this pass.
+Plan update
+Read the required governance, coverage, memory, status/checkpoint, prompt, report, and tmux helper artifacts; identified current drift in contradiction rows, control-plane statuses, and recovered-pass checkpoint residue.
+  ✓ Read required audit environment files and current status/checkpoint artifacts; identify prompt-vs-artifact drift before deeper work
+  ✓ Cross-check contradiction, coverage, status/checkpoint/log, prompt, and tmux helper artifacts against P9 mandatory checks
+  → Write durable audit outputs and update contradiction/coverage/working-knowledge artifacts with findings and resume state

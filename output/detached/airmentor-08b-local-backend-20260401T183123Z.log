@@ -1,0 +1,31 @@
+[2026-04-01T18:31:23Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T18:31:23Z] command=env -C air-mentor-api npx vitest run --reporter=verbose --maxWorkers=1 tests/session.test.ts tests/startup-diagnostics.test.ts tests/academic-access.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/session.test.ts > session routes > allows the Vite dev origin to call session routes with credentials 4450ms
+ ✓ tests/session.test.ts > session routes > supports GitHub Pages cross-origin login with secure SameSite=None cookies 3701ms
+ ✓ tests/session.test.ts > session routes > logs in, restores session, switches role context, and logs out 4057ms
+ ✓ tests/session.test.ts > session routes > chooses a deterministic default academic role on login for multi-role faculty 4269ms
+ ✓ tests/session.test.ts > session routes > guards system-admin routes from non-admin role contexts 3740ms
+ ✓ tests/session.test.ts > session routes > rejects authenticated mutations that do not include a CSRF token 3668ms
+ ✓ tests/session.test.ts > session routes > rate limits repeated failed login attempts 3785ms
+ ✓ tests/session.test.ts > session routes > persists failed login buckets in the database and clears them after a successful login 3646ms
+ ✓ tests/session.test.ts > session routes > shares login throttling across app instances through the database 3449ms
+ ✓ tests/startup-diagnostics.test.ts > startup diagnostics > treats non-local origins as production-like 1ms
+ ✓ tests/startup-diagnostics.test.ts > startup diagnostics > flags invalid GitHub Pages cookie posture as a startup error 1ms
+ ✓ tests/startup-diagnostics.test.ts > startup diagnostics > accepts the expected Pages plus Railway cookie posture 0ms
+ ✓ tests/startup-diagnostics.test.ts > startup diagnostics > requires an explicit csrf secret for production-like targets 1ms
+ ✓ tests/startup-diagnostics.test.ts > startup diagnostics > does not warn when production-like deployments rely on local telemetry retention without an external sink 0ms
+ ✓ tests/academic-access.test.ts > academic access decisions > rejects non-admin proof run selection with a stable access code 2ms
+ ✓ tests/academic-access.test.ts > academic access decisions > allows system admin to inspect inactive proof runs 0ms
+ ✓ tests/academic-access.test.ts > academic access decisions > requires faculty context for academic roles 0ms
+ ✓ tests/academic-access.test.ts > academic access decisions > rejects mentor access to offering-owned config 0ms
+ ✓ tests/academic-access.test.ts > academic access decisions > rejects student shell session messages outside the viewer scope 0ms
+
+ Test Files  3 passed (3)
+      Tests  19 passed (19)
+   Start at  00:01:23
+   Duration  36.49s (transform 880ms, setup 0ms, import 1.40s, tests 34.78s, environment 0ms)
+
+[2026-04-01T18:32:00Z] exit=0

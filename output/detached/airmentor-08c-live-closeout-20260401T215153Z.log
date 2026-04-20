@@ -1,0 +1,151 @@
+[2026-04-01T21:51:53Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T21:51:53Z] command=npm run verify:final-closeout:live 
+
+> air-mentor-ui@0.0.0 verify:final-closeout:live
+> bash scripts/verify-final-closeout-live.sh
+
+
+> air-mentor-ui@0.0.0 inventory:compat-routes
+> node scripts/report-compat-route-callers.mjs --assert-runtime-clean
+
+# Academic Compatibility Route Inventory
+
+Generated: 2026-04-01T21:51:53.991Z
+
+## /api/academic/runtime/:stateKey
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:544
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:555
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:30
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:376
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:423
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:433
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:448
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:547
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:553
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:561
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:71
+  - audit/08-state-management-and-client-logic-audit.md:22
+  - audit/15-issue-catalog-prioritized.md:169
+  - audit/22-evidence-appendix-by-issue.md:47
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/25-implementation-spec-AM-003.md:18
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:165
+  - audit/42-audit-navigation-and-document-status.md:55
+  - audit/43-manual-closeout-checklist.md:62
+  - audit/44-final-closeout-evidence-2026-03-28.md:87
+
+## /api/academic/tasks/sync
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:104
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:633
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:643
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:40
+  - air-mentor-api/tests/academic-parity.test.ts:544
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:253
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:264
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:400
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:408
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:72
+  - audit/15-issue-catalog-prioritized.md:170
+  - audit/21-feature-inventory-and-traceability-matrix.md:32
+  - audit/22-evidence-appendix-by-issue.md:47
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:166
+  - audit/43-manual-closeout-checklist.md:63
+  - audit/44-final-closeout-evidence-2026-03-28.md:88
+
+## /api/academic/task-placements/sync
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:105
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:691
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:701
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:37
+  - air-mentor-api/tests/academic-parity.test.ts:552
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:277
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:73
+  - audit/15-issue-catalog-prioritized.md:171
+  - audit/21-feature-inventory-and-traceability-matrix.md:33
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:167
+  - audit/43-manual-closeout-checklist.md:64
+  - audit/44-final-closeout-evidence-2026-03-28.md:89
+
+## /api/academic/calendar-audit/sync
+
+- first-party runtime callers: none
+- route-definition:
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:106
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:771
+  - air-mentor-api/src/modules/academic-runtime-routes.ts:780
+- tests:
+  - air-mentor-api/tests/__snapshots__/openapi.test.ts.snap:8
+  - air-mentor-api/tests/academic-parity.test.ts:573
+  - air-mentor-api/tests/academic-runtime-narrow-routes.test.ts:292
+- audit-docs:
+  - audit/06-api-and-integration-audit.md:74
+  - audit/15-issue-catalog-prioritized.md:172
+  - audit/21-feature-inventory-and-traceability-matrix.md:33
+  - audit/22-evidence-appendix-by-issue.md:56
+  - audit/41-current-state-reconciliation-and-gap-analysis.md:168
+  - audit/43-manual-closeout-checklist.md:65
+  - audit/44-final-closeout-evidence-2026-03-28.md:90
+
+Skipping Railway deploy preflight because Railway auth/context is not configured.
+
+> air-mentor-api@0.1.0 verify:live-session-contract
+> node ../scripts/check-railway-deploy-readiness.mjs session-contract
+
+Railway live session-contract verification passed after 1 attempt(s). Report: output/railway-live-session-contract.json
+
+> air-mentor-ui@0.0.0 verify:proof-closure:live
+> AIRMENTOR_LIVE_STACK=1 bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running system admin proof-risk smoke...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+[smoke] step: login-system-admin
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T21:51:57.671Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=missing
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T21:51:57.672Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke] current step: login-system-admin
+[smoke] failure url: https://raed2180416.github.io/AirMentor/#/admin
+Failure HTML: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html
+System admin proof-risk smoke failed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png
+Trace: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip
+[browser] page closed unexpectedly
+[browser] browser disconnected unexpectedly
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByText(/System Admin Live Mode/) to be visible[22m
+
+    at expectVisible (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:132:17)
+    at loginAsSystemAdmin (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:735:9)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:911:3 {
+  name: 'TimeoutError'
+}
+
+Node.js v24.13.0
+[2026-04-01T21:52:28Z] exit=1

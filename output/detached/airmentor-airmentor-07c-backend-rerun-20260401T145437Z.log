@@ -1,0 +1,38 @@
+[2026-04-01T14:54:38Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T14:54:38Z] command=env -C air-mentor-api npx vitest run --reporter=verbose --maxWorkers=1 tests/hod-proof-analytics.test.ts tests/risk-explorer.test.ts tests/student-agent-shell.test.ts tests/proof-control-plane-dashboard-service.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > serves live in-scope HoD analytics and reconciles with dashboard and faculty profile 4333ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps a department-scoped HoD in scope even when the active proof batch is on a sibling branch 3591ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps an in-scope HoD role grant authoritative when faculty appointments drift out of scope 3612ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps HoD analytics in scope when another active HoD grant matches the proof department 3578ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > returns an empty view for HODs outside the active proof department scope 3481ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > supports deterministic filtering for section, risk band, and reassessment status 3618ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > projects checkpoint-scoped HoD analytics without exposing no-action comparator fields 165605ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps explicit checkpoint playback available even if the run active flag drifts off 122917ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > does not expose inactive runs in the HoD summary 6825ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > uses the activated proof semester as the default HoD slice while keeping checkpoint playback separate 77708ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps the default HoD slice aligned with activated semesters 1 through 3 128783ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps the default HoD slice aligned with activated semesters 4 through 6 using the late checkpoint walk 135298ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > returns a deterministic card and bounded replies for in-scope course leaders 60763ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > enforces mentor and HoD scope and allows system admin archived-run inspection 3819ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > allows HOD student shell access when the active role grant remains in scope after appointment drift 7191ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > allows HOD student shell access when a second active HoD grant matches the proof department 8947ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > uses the activated proof semester for the default student shell while keeping checkpoint playback separate 75445ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > keeps the default student shell aligned with activated semesters 1 through 3 96056ms
+ ✓ tests/student-agent-shell.test.ts > student agent shell > keeps the default student shell aligned with activated semesters 4 through 6 using the late checkpoint walk 75723ms
+ ✓ tests/risk-explorer.test.ts > student risk explorer > returns checkpoint-bound proof analysis for an in-scope course leader and matches shell evidence 59290ms
+ ✓ tests/risk-explorer.test.ts > student risk explorer > enforces scoped access and lets sysadmin inspect an archived run explicitly 6917ms
+ ✓ tests/risk-explorer.test.ts > student risk explorer > uses the activated proof semester for the default risk explorer while keeping checkpoint playback separate 56844ms
+ ✓ tests/risk-explorer.test.ts > student risk explorer > keeps the default risk explorer aligned with activated semesters 1 through 3 55140ms
+ ✓ tests/risk-explorer.test.ts > student risk explorer > keeps the default risk explorer aligned with activated semesters 4 through 6 using the late checkpoint walk 57819ms
+ ✓ tests/proof-control-plane-dashboard-service.test.ts > proof-control-plane-dashboard-service > derives queue, lease, retry, and worker diagnostics from proof runs 2ms
+ ✓ tests/proof-control-plane-dashboard-service.test.ts > proof-control-plane-dashboard-service > summarizes checkpoint readiness for dashboard diagnostics 0ms
+
+ Test Files  4 passed (4)
+      Tests  26 passed (26)
+   Start at  20:24:39
+   Duration  1226.54s (transform 1.17s, setup 0ms, import 2.77s, tests 1223.31s, environment 0ms)
+
+[2026-04-01T15:15:05Z] exit=0

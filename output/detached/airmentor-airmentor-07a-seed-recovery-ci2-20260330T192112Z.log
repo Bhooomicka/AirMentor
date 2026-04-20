@@ -1,0 +1,49 @@
+[2026-03-30T19:21:12Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:21:12Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/msruas-proof-sandbox.test.ts\ tests/proof-control-plane-activation-service.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > bootstraps the proof branch, batch, import, and run when the proof sandbox is missing 3845ms
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > does not duplicate proof seed records when recovery runs twice 2955ms
+ × tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > rebuilds the canonical proof batch shell when the proof cohort already exists 3846ms
+   → expected { …(24) } to match object { …(5) }
+(19 matching properties omitted from actual)
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > updates the active operational semester, publishes the active projection, and emits audit payload details 4ms
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > does not republish projections when the target proof run is inactive 0ms
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > rejects semesters outside the proof run range before mutating state or audit 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > rebuilds the canonical proof batch shell when the proof cohort already exists
+AssertionError: expected { …(24) } to match object { …(5) }
+(19 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "batchId": "batch_branch_mnc_btech_2023",
+    "curriculumImportVersionId": "curriculum_import_983f8d4b-ea6d-4718-957d-714ac7df6a85",
+-   "sourcePath": "embedded:msruas-mnc-curriculum.json",
+-   "sourceType": "bundled-json",
++   "sourcePath": "/home/raed/Downloads/airmentor_curriculum_compiler_reconciled.xlsx",
++   "sourceType": "workbook",
+    "status": "validated",
+  }
+
+ ❯ tests/msruas-proof-sandbox.test.ts:249:27
+    247|     })
+    248|     expect(importRows).toHaveLength(1)
+    249|     expect(importRows[0]).toMatchObject({
+       |                           ^
+    250|       curriculumImportVersionId: result.curriculumImportVersionId,
+    251|       batchId: MSRUAS_PROOF_BATCH_ID,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 5 passed (6)
+   Start at  00:51:14
+   Duration  12.43s (transform 602ms, setup 0ms, import 1.54s, tests 10.65s, environment 0ms)
+

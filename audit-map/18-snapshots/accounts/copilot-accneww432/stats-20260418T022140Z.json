@@ -1,0 +1,74 @@
+{
+  "totalSessions": 76,
+  "totalTokens": 285878,
+  "totalCost": 0.48119575000000003,
+  "activeDays": 4,
+  "longestStreak": 4,
+  "currentStreak": 4,
+  "longestSession": 21075,
+  "peakHour": 2,
+  "modelUsage": {
+    "gemini-3-pro-preview": {
+      "count": 58,
+      "tokens": 0,
+      "cost": 0
+    },
+    "gpt-5.3-codex": {
+      "count": 31,
+      "tokens": 276159,
+      "cost": 0.46149775000000004
+    },
+    "gemini-3.1-pro-preview": {
+      "count": 1,
+      "tokens": 9719,
+      "cost": 0.019698
+    },
+    "gpt-5.4": {
+      "count": 1,
+      "tokens": 0,
+      "cost": 0
+    }
+  },
+  "dailyActivity": {
+    "2026-04-18": 37041,
+    "2026-04-17": 0,
+    "2026-04-16": 58261,
+    "2026-04-15": 190576
+  },
+  "dailyCost": {
+    "2026-04-18": 0.07949724999999999,
+    "2026-04-17": 0,
+    "2026-04-16": 0.09374575,
+    "2026-04-15": 0.30795275
+  },
+  "hourlyActivity": {
+    "0": 7,
+    "1": 6,
+    "2": 13,
+    "3": 1,
+    "4": 4,
+    "5": 11,
+    "6": 6,
+    "7": 5,
+    "15": 1,
+    "19": 4,
+    "20": 5,
+    "21": 2,
+    "22": 9,
+    "23": 2
+  },
+  "tokenBreakdown": {
+    "input": 215950,
+    "output": 7208,
+    "cacheRead": 62720,
+    "cacheWrite": 0
+  },
+  "costBreakdown": {
+    "input": 0.3803357500000001,
+    "output": 0.10086,
+    "cacheRead": 0,
+    "cacheWrite": 0
+  },
+  "costPerDay": 0.12029893750000001,
+  "costPerSession": 0.00633152302631579
+}

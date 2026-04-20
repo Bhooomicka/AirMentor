@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-04-01T19:17:38.879Z",
+  "appUrl": "https://raed2180416.github.io/AirMentor/",
+  "apiUrl": "https://api-production-ab72.up.railway.app/",
+  "actor": {
+    "username": "kavitha.rao",
+    "role": "HOD",
+    "grantId": "grant_t1_hod",
+    "scopeType": "department",
+    "scopeId": "dept_cse"
+  },
+  "proofContext": {
+    "simulationRunId": "sim_mnc_2023_first6_v1",
+    "simulationStageCheckpointId": "stage_checkpoint_654335929a345857eab259b0",
+    "studentId": "student_675135a6-1349-4658-85d5-1b1b07258a1c"
+  },
+  "invalidRequest": {
+    "route": "/api/academic/students/student_675135a6-1349-4658-85d5-1b1b07258a1c/risk-explorer",
+    "simulationStageCheckpointId": "stage_checkpoint_invalid_08b_live"
+  },
+  "response": {
+    "status": 404,
+    "body": {
+      "error": "NOT_FOUND",
+      "message": "Proof run not found"
+    }
+  }
+}

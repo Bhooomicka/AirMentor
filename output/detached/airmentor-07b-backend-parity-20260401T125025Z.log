@@ -1,0 +1,5 @@
+[2026-04-01T12:50:26Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T12:50:26Z] command=env -C air-mentor-api npx vitest run tests/hod-proof-analytics.test.ts tests/risk-explorer.test.ts tests/student-agent-shell.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+

@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-04-01T21:15:25.922Z",
+  "appUrl": "http://127.0.0.1:4173",
+  "artifacts": {
+    "successScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance.png",
+    "successReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance-report.json",
+    "failureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance-failure.png",
+    "failureReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance-failure.json",
+    "prefixedSuccessScreenshot": null,
+    "prefixedSuccessReport": null,
+    "prefixedFailureScreenshot": null,
+    "prefixedFailureReport": null
+  },
+  "checks": [
+    {
+      "name": "system-admin-login",
+      "status": "passed"
+    },
+    {
+      "name": "faculty-create-update",
+      "status": "passed",
+      "facultyCode": "QA8682"
+    },
+    {
+      "name": "department-create-update",
+      "status": "passed",
+      "departmentCode": "Q682"
+    },
+    {
+      "name": "branch-create-update",
+      "status": "passed",
+      "branchCode": "QS-82"
+    },
+    {
+      "name": "batch-create-update",
+      "status": "passed",
+      "batchLabel": "2028-A"
+    },
+    {
+      "name": "workspace-reset-after-refresh",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-overview-refresh",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-bands",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-ce-see",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-cgpa-formula",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-stage-gates",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-courses",
+      "status": "passed"
+    },
+    {
+      "name": "workspace-tab-provision",
+      "status": "passed"
+    },
+    {
+      "name": "hierarchy-refresh",
+      "status": "passed"
+    },
+    {
+      "name": "student-detail-open",
+      "status": "passed",
+      "studentUsn": "1MS24CS022"
+    },
+    {
+      "name": "request-closeout",
+      "status": "passed",
+      "summary": "Grant additional mentor mapping coverage"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/raed/projects/air-mentor-ui
+bash /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh --pass cost-optimization-pass --context bootstrap --prompt-bundle /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-cost-optimization-pass.prompt.md --last-message-file /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-cost-optimization-pass.last-message.md --provider google --account google-main --model gemini-3.1-pro-preview --reasoning-effort medium --search 0 --provider-mode auto --wait-timeout-seconds 0 --wait-poll-seconds 60 --max-attempts 0 --status-file /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-cost-optimization-pass.status --checkpoint-file /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-cost-optimization-pass.checkpoint --slot google-main

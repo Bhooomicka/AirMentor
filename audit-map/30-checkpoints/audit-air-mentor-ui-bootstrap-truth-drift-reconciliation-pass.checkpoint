@@ -1,0 +1,14 @@
+pass_name=truth-drift-reconciliation-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=1
+caveman_mode=full
+current_provider=native-codex
+current_account=native-codex-session
+current_model=gpt-5.4
+current_slot=''
+route_attempt=1
+execution_supervisor_pid=3002309
+last_event=completed
+last_checkpoint_at=2026-04-18T00:55:03Z

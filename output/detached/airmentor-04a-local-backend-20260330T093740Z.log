@@ -1,0 +1,3 @@
+[2026-03-30T09:37:40Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T09:37:40Z] command=cd air-mentor-api \&\& npx vitest run tests/academic-parity.test.ts tests/academic-access.test.ts tests/academic-runtime-narrow-routes.test.ts 
+/home/raed/projects/air-mentor-ui/output/detached/airmentor-04a-local-backend-20260330T093740Z.sh: line 15: cd: too many arguments

@@ -1,0 +1,12 @@
+[2026-03-30T18:28:17Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T18:28:17Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ tests/admin-control-plane.test.ts\ -t\ \"runs\ the\ proof\ control\ plane\ end\ to\ end\ and\ exposes\ proof\ operations\ on\ the\ faculty\ profile\|recomputes\ the\ seeded\ baseline\ active\ proof\ run\ when\ it\ starts\ without\ checkpoints\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed | 12 skipped (14)
+   Start at  23:58:18
+   Duration  217.90s (transform 746ms, setup 0ms, import 1.16s, tests 216.65s, environment 0ms)
+
+[2026-03-30T18:31:56Z] exit=0

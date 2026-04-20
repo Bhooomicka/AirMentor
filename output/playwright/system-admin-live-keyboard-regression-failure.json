@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-04-14T19:48:47.406Z",
+  "appUrl": "http://127.0.0.1:4173",
+  "apiUrl": "http://127.0.0.1:44261",
+  "liveStack": false,
+  "proofRoute": {
+    "routeHash": "#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+    "batchId": "batch_branch_mnc_btech_2023"
+  },
+  "requestRoute": {
+    "id": "request_001",
+    "summary": "Grant additional mentor mapping coverage",
+    "status": "New"
+  },
+  "lateCheckpointWalk": {
+    "availableOperationalSemesters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "checkpoint": {
+      "simulationStageCheckpointId": "stage_checkpoint_1faf7cb29e5ff1c9af135f75",
+      "semesterNumber": 6,
+      "stageKey": "post-see",
+      "stageLabel": "Post SEE",
+      "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+      "stageOrder": 5,
+      "stageAdvanceBlocked": true,
+      "playbackAccessible": false,
+      "blockedByCheckpointId": "stage_checkpoint_76d3a972c6b0d7654239f9cc",
+      "blockedProgressionReason": "Playback is blocked until all queue items for checkpoint stage_checkpoint_76d3a972c6b0d7654239f9cc are resolved.",
+      "surfaceLabel": "Sem 6 · Post SEE",
+      "bannerLabel": "semester 6 · Post SEE"
+    }
+  },
+  "artifacts": {
+    "successScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression.png",
+    "successReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-report.json",
+    "failureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.png",
+    "failureTrace": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.zip",
+    "failureHtml": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.html",
+    "failureReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.json",
+    "prefixedSuccessScreenshot": null,
+    "prefixedSuccessReport": null,
+    "prefixedFailureScreenshot": null,
+    "prefixedFailureTrace": null,
+    "prefixedFailureHtml": null,
+    "prefixedFailureReport": null
+  },
+  "checks": [
+    {
+      "name": "request_flow_keyboard_navigation",
+      "status": "passed"
+    },
+    {
+      "name": "modal_focus_trap_and_restore",
+      "status": "passed"
+    },
+    {
+      "name": "proof_dashboard_checkpoint_keyboard_controls",
+      "status": "passed"
+    },
+    {
+      "name": "portal_role_switch_keyboard_navigation",
+      "status": "passed"
+    },
+    {
+      "name": "teacher_proof_surface_keyboard_navigation",
+      "status": "passed"
+    }
+  ],
+  "error": {
+    "message": "System admin proof control plane did not materialize for #/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+    "stack": "Error: System admin proof control plane did not materialize for #/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023\n    at openSeededProofRoute (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-keyboard-regression.mjs:555:13)\n    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-keyboard-regression.mjs:771:23",
+    "step": "proof-playback-restore-reset"
+  }
+}

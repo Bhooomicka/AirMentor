@@ -1,0 +1,12 @@
+[2026-03-30T20:28:27Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:28:27Z] command=zsh -lc $'cd air-mentor-api\nCI=1 npx tsx <<\'TS\'\nimport { count } from "drizzle-orm"\nimport { createTestApp, loginAs, TEST_ORIGIN } from "./tests/helpers/test-app.ts"\nimport { studentAttendanceSnapshots, studentAssessmentScores, transcriptSubjectResults, transcriptTermResults } from "./src/db/schema.ts"\n\nconst current = await createTestApp()\ntry {\n  const adminLogin = await loginAs(current.app, "sysadmin", "admin1234")\n  const dashboardBefore = await current.app.inject({ method: "GET", url: "/api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard", headers: { cookie: adminLogin.cookie } })\n  const activeRunId = dashboardBefore.json().activeRunDetail?.simulationRunId\n\n  async function countsFor(label) {\n    const [attendance, assessment, term, subject] = await Promise.all([\n      current.db.select({ count: count() }).from(studentAttendanceSnapshots),\n      current.db.select({ count: count() }).from(studentAssessmentScores),\n      current.db.select({ count: count() }).from(transcriptTermResults),\n      current.db.select({ count: count() }).from(transcriptSubjectResults),\n    ])\n    console.log(label, JSON.stringify({\n      attendance: Number(attendance[0]?.count ?? 0),\n      assessment: Number(assessment[0]?.count ?? 0),\n      term: Number(term[0]?.count ?? 0),\n      subject: Number(subject[0]?.count ?? 0),\n    }))\n  }\n\n  await countsFor("before")\n  for (const semesterNumber of [4, 6, 4, 6, 4, 6]) {\n    const response = await current.app.inject({ method: "POST", url: `/api/admin/proof-runs/${activeRunId}/activate-semester`, headers: { cookie: adminLogin.cookie, origin: TEST_ORIGIN }, payload: { semesterNumber } })\n    console.log(`activate-${semesterNumber}`, response.statusCode)\n  }\n  await countsFor("after")\n} finally {\n  await current.close()\n}\nTS' 
+{"type":"airmentor-operational-event","name":"auth.login.succeeded","level":"info","timestamp":"2026-03-30T20:28:34.068Z","details":{"sessionId":"session_8aabd92a-7d5c-4ff6-a695-02e9b134445f","userId":"user_sysadmin","facultyId":"fac_sysadmin","activeRole":"SYSTEM_ADMIN"}}
+before {"attendance":720,"assessment":2160,"term":600,"subject":3600}
+activate-4 200
+activate-6 200
+activate-4 200
+activate-6 200
+activate-4 200
+activate-6 200
+after {"attendance":1440,"assessment":3600,"term":600,"subject":3600}
+[2026-03-30T20:28:41Z] exit=0

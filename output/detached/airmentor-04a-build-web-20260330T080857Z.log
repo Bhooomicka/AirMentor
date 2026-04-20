@@ -1,0 +1,11 @@
+[2026-03-30T08:08:57Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T08:08:57Z] command=npm run build 
+
+> air-mentor-ui@0.0.0 build
+> tsc -b && vite build
+
+src/App.tsx(80,1): error TS6133: 'FacultyProfilePage' is declared but its value is never read.
+src/App.tsx(98,3): error TS6133: 'PageBackButton' is declared but its value is never read.
+src/App.tsx(99,3): error TS6133: 'PageShell' is declared but its value is never read.
+src/App.tsx(128,10): error TS2300: Duplicate identifier 'FacultyProfilePage'.
+src/App.tsx(282,10): error TS2300: Duplicate identifier 'FacultyProfilePage'.

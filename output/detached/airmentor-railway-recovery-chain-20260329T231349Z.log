@@ -1,0 +1,16 @@
+[2026-03-29T23:13:49Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T23:13:49Z] command=bash -lc source\ /tmp/airmentor-live-recovery-env.sh\;\ rm\ -f\ /tmp/airmentor-live-recovery-env.sh\;\ bash\ scripts/railway-recovery-chain.sh 
+login-probe-attempt=1 status=429
+login-probe-attempt=2 status=429
+login-probe-attempt=3 status=429
+login-probe-attempt=4 status=429
+login-probe-attempt=5 status=429
+login-probe-attempt=6 status=429
+login-probe-attempt=7 status=429
+login-probe-attempt=8 status=429
+login-probe-attempt=9 status=429
+login-probe-attempt=10 status=429
+login-probe-attempt=11 status=429
+login-probe-attempt=12 status=200
+railway-run-id=23721506962
+Run Deploy API to Railway (23721506962) has already completed with 'cancelled'

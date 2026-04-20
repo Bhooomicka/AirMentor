@@ -1,0 +1,5 @@
+┌  Credentials [90m~/.local/share/air-mentor-audit/arctic-slots/antigravity-06/data/arctic/auth.json
+│
+●  Antigravity [90m(OAuth)
+│
+└  1 credential

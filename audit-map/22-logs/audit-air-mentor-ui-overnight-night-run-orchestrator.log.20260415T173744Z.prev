@@ -1,0 +1,22 @@
+[2026-04-15T15:46:11Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-15T15:46:11Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+[2026-04-15T15:46:12Z] COST WARNING: No native Codex spend API is wired into this audit OS; using class-based guardrails plus observed route health.
+session=audit-air-mentor-ui-bootstrap-ml-audit-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-ml-audit-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-ml-audit-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-ml-audit-pass.checkpoint
+session=audit-air-mentor-ui-bootstrap-test-gap-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-test-gap-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-test-gap-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-test-gap-pass.checkpoint
+session=audit-air-mentor-ui-bootstrap-ux-friction-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-ux-friction-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-ux-friction-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-ux-friction-pass.checkpoint
+[2026-04-15T16:34:43Z] COST WARNING: No native Codex spend API is wired into this audit OS; using class-based guardrails plus observed route health.
+session=audit-air-mentor-ui-live-live-behavior-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-live-live-behavior-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-live-live-behavior-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-live-live-behavior-pass.checkpoint
+/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-live-live-behavior-pass.status: line 29: 3Z: command not found
+[2026-04-15T16:35:13Z] exit_code=127

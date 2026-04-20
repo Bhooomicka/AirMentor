@@ -1,0 +1,9 @@
+[2026-04-15T21:01:09Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-15T21:01:09Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+[2026-04-15T21:01:10Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-15T21:23:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-claim-verification-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-claim-verification-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-claim-verification-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-claim-verification-pass.checkpoint
+Overnight run stopped on audit-air-mentor-ui-bootstrap-claim-verification-pass with state=failed
+[2026-04-15T21:02:12Z] exit_code=65

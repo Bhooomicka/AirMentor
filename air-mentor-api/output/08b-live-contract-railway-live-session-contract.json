@@ -1,0 +1,37 @@
+{
+  "mode": "session-contract",
+  "generatedAt": "2026-04-01T18:36:16.809Z",
+  "apiBaseUrl": "https://api-production-ab72.up.railway.app",
+  "expectedFrontendOrigin": "https://raed2180416.github.io",
+  "identifier": "sysadmin",
+  "status": "passed",
+  "retryWindow": {
+    "maxAttempts": 36,
+    "retryDelayMs": 5000,
+    "attemptsUsed": 1,
+    "recoveredAfterAttempt": 1,
+    "stoppedEarly": false,
+    "stopReason": null
+  },
+  "response": {
+    "status": 200,
+    "hasCsrfToken": true,
+    "hasSessionCookie": true,
+    "hasCsrfCookie": true,
+    "restoreStatus": 200
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": 200,
+      "hasCsrfToken": true,
+      "hasSessionCookie": true,
+      "hasCsrfCookie": true,
+      "restoreStatus": 200,
+      "issues": [],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"sessionId\":\"session_86f18560-612e-45f2-8b0a-7a664852cd9c\",\"csrfToken\":\"UgCxpJD6mfZvETgGgXXOejj-2efDDTi_JIbpvC3ffeI\",\"user\":{\"userId\":\"user_sysadmin\",\"username\":\"sysadmin\",\"email\":\"sysadmin@airmentor.local\"},\"faculty\":{\"facultyId\":\"fac_sys"
+    }
+  ],
+  "issues": []
+}
