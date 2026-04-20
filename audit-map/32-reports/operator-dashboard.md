@@ -1,6 +1,6 @@
 # Operator Dashboard
 
-Generated: 2026-04-20 02:15:18 UTC
+Generated: 2026-04-20 02:15:38 UTC
 
 ## Active Pass
 
@@ -11,7 +11,7 @@ Generated: 2026-04-20 02:15:18 UTC
 - slot: `google-main`
 - route attempt: `1`
 - tmux: `present`
-- last visible activity age: `8m 47s`
+- last visible activity age: `9m 8s`
 - supervisor: `watching`
 - suspected stall: `no`
 
@@ -27,51 +27,51 @@ Generated: 2026-04-20 02:15:18 UTC
 
 | Session | State | Provider | Model | Route Attempt | Idle | tmux | Suspected Stall |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `audit-air-mentor-ui-bootstrap-smoke-job` | `completed` | `native-codex` | `` | `` | `9m 5s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-inventory-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `9m 7s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-route-map-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `9m 6s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-role-surface-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `9m 6s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-feature-atom-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `9m 9s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-dependency-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `9m 9s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-data-flow-pass` | `stopped` | `codex` | `gpt-5.3-codex` | `2` | `9m 9s` | `present` | `no` |
-| `audit-air-mentor-ui-bootstrap-state-flow-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `9m 5s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-ml-audit-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 7s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-test-gap-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `9m 5s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-ux-friction-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `9m 3s` | `missing` | `no` |
-| `audit-air-mentor-ui-live-live-behavior-pass` | `completed` | `native-codex` | `gpt-5.4` | `` | `9m 3s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-account-routing-pass` | `completed` | `native-codex` | `gpt-5.4` | `` | `9m 11s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `9m 7s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-unattended-run-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `9m 4s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-workflow-automation-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `9m 3s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-audit-the-audit-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `1` | `9m 11s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-synthesis-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `1` | `9m 5s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `9m 10s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `9m 6s` | `missing` | `no` |
-| `audit-air-mentor-ui-overnight-final-gap-and-shutdown` | `completed` | `native-codex` | `` | `` | `9m 2s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-frontend-long-tail-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 8s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-script-behavior-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `9m 5s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-backend-provenance-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 11s` | `missing` | `no` |
-| `audit-air-mentor-ui-overnight-absolute-closure-campaign` | `completed` | `native-codex` | `` | `` | `9m 2s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-frontend-microinteraction-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 8s` | `missing` | `no` |
-| `audit-air-mentor-ui-live-same-student-cross-surface-parity-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 2s` | `missing` | `no` |
-| `audit-air-mentor-ui-live-live-credentialed-parity-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 3s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-claim-verification-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 10s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-unknown-omission-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 4s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-residual-gap-closure-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 6s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-closure-readiness-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 10s` | `missing` | `no` |
-| `audit-air-mentor-ui-overnight-usage-refresh-orchestrator` | `stopped` | `native-codex` | `` | `` | `9m 1s` | `present` | `no` |
-| `audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass` | `stopped` | `native-codex` | `gpt-5.4` | `1` | `9m 4s` | `present` | `no` |
-| `audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor` | `completed` | `` | `` | `` | `9m 2s` | `missing` | `no` |
-| `audit-air-mentor-ui-overnight-overnight-watchdog` | `stale` | `native-codex` | `` | `` | `9m 1s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-feature-intent-integrity-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `3` | `9m 8s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-cross-flow-recovery-pass` | `completed` | `google` | `gemini-3.1-pro-preview` | `1` | `9m 10s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-fault-tolerance-degradation-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 9s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-memory-lifecycle-cleanup-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 7s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-ux-consistency-cohesion-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 4s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-cost-optimization-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 10s` | `missing` | `no` |
-| `audit-air-mentor-ui-overnight-night-run-orchestrator` | `completed` | `native-codex` | `` | `` | `9m 2s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-gap-closure-deploy-audit-reconciliation-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 8s` | `missing` | `no` |
-| `audit-air-mentor-ui-bootstrap-ml-optimal-model-deep-tune-pass` | `running` | `google` | `gemini-3.1-pro-preview` | `1` | `8m 47s` | `present` | `no` |
+| `audit-air-mentor-ui-bootstrap-smoke-job` | `completed` | `native-codex` | `` | `` | `9m 26s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-inventory-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `9m 28s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-route-map-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `9m 26s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-role-surface-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `9m 26s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-feature-atom-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `9m 29s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-dependency-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `9m 30s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-data-flow-pass` | `stopped` | `codex` | `gpt-5.3-codex` | `2` | `9m 30s` | `present` | `no` |
+| `audit-air-mentor-ui-bootstrap-state-flow-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `9m 25s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-ml-audit-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 27s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-test-gap-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `9m 25s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-ux-friction-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `9m 24s` | `missing` | `no` |
+| `audit-air-mentor-ui-live-live-behavior-pass` | `completed` | `native-codex` | `gpt-5.4` | `` | `9m 23s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-account-routing-pass` | `completed` | `native-codex` | `gpt-5.4` | `` | `9m 32s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `9m 27s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-unattended-run-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `9m 25s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-workflow-automation-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `9m 24s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-audit-the-audit-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `1` | `9m 31s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-synthesis-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `1` | `9m 25s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `9m 30s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `9m 27s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-final-gap-and-shutdown` | `completed` | `native-codex` | `` | `` | `9m 22s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-frontend-long-tail-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 29s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-script-behavior-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `9m 26s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-backend-provenance-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 31s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-absolute-closure-campaign` | `completed` | `native-codex` | `` | `` | `9m 23s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-frontend-microinteraction-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 28s` | `missing` | `no` |
+| `audit-air-mentor-ui-live-same-student-cross-surface-parity-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 23s` | `missing` | `no` |
+| `audit-air-mentor-ui-live-live-credentialed-parity-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 23s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-claim-verification-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 31s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-unknown-omission-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 24s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-residual-gap-closure-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 27s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-closure-readiness-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 31s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-usage-refresh-orchestrator` | `stopped` | `native-codex` | `` | `` | `9m 22s` | `present` | `no` |
+| `audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass` | `stopped` | `native-codex` | `gpt-5.4` | `1` | `9m 25s` | `present` | `no` |
+| `audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor` | `completed` | `` | `` | `` | `9m 22s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-overnight-watchdog` | `stale` | `native-codex` | `` | `` | `9m 22s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-feature-intent-integrity-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `3` | `9m 29s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-cross-flow-recovery-pass` | `completed` | `google` | `gemini-3.1-pro-preview` | `1` | `9m 30s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-fault-tolerance-degradation-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 29s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-memory-lifecycle-cleanup-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 28s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-ux-consistency-cohesion-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 24s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-cost-optimization-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `9m 30s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-night-run-orchestrator` | `completed` | `native-codex` | `` | `` | `9m 22s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-gap-closure-deploy-audit-reconciliation-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `9m 28s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-ml-optimal-model-deep-tune-pass` | `running` | `google` | `gemini-3.1-pro-preview` | `1` | `9m 8s` | `present` | `no` |
 
 ## Slot Reset Windows
 
@@ -99,4 +99,4 @@ Generated: 2026-04-20 02:15:18 UTC
 
 ## Warnings
 
-- `audit-air-mentor-ui-overnight-overnight-watchdog` needs attention: state=`stale`, idle=`9m 1s`, provider=`native-codex`, model=``
+- `audit-air-mentor-ui-overnight-overnight-watchdog` needs attention: state=`stale`, idle=`9m 22s`, provider=`native-codex`, model=``
