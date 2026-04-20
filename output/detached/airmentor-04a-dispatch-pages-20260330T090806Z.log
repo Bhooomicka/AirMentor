@@ -1,0 +1,3 @@
+[2026-03-30T09:08:06Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T09:08:06Z] command=gh workflow run deploy-pages.yml --ref deploy-proof-control-plane 
+[2026-03-30T09:08:08Z] exit=0

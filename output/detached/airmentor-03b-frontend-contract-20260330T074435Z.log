@@ -1,0 +1,16 @@
+[2026-03-30T07:44:37Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:44:37Z] command=npm test -- --run tests/system-admin-live-data.test.ts tests/system-admin-accessibility-contracts.test.tsx tests/system-admin-ui.test.tsx 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/system-admin-live-data.test.ts tests/system-admin-accessibility-contracts.test.tsx tests/system-admin-ui.test.tsx
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+
+ Test Files  3 passed (3)
+      Tests  18 passed (18)
+   Start at  13:14:37
+   Duration  838ms (transform 611ms, setup 0ms, import 1.23s, tests 31ms, environment 0ms)
+
+[2026-03-30T07:44:38Z] exit=0

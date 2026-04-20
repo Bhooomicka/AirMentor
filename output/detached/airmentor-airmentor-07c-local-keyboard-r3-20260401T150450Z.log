@@ -1,0 +1,47 @@
+[2026-04-01T15:04:50Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T15:04:50Z] command=env AIRMENTOR_KEYBOARD_ARTIFACT_PREFIX=07c-local npm run playwright:admin-live:keyboard-regression 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:keyboard-regression
+> bash scripts/playwright-admin-live-keyboard-regression.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running system admin live keyboard regression...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:39181
+Backend log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-backend.log
+Preview log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-keyboard-preview.log
+[keyboard] step: login-system-admin
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T15:05:42.466Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T15:05:42.466Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[response:401] http://127.0.0.1:4173/api/session
+[response:401] http://127.0.0.1:39181/api/admin/requests
+[keyboard] current step: login-system-admin
+[keyboard] failure url: http://127.0.0.1:4173/#/admin
+Failure HTML: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.html
+System admin live keyboard regression failed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.png
+Trace: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.zip
+Prefixed keyboard failure artifacts:
+- screenshot: /home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression-failure.png
+- report: /home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression-failure.json
+- trace: /home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression-failure.zip
+- html: /home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression-failure.html
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+Error: Admin API /api/admin/requests failed with 401: {"error":"UNAUTHORIZED","message":"Authentication required"}
+    at adminApiRequest (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-keyboard-regression.mjs:184:11)
+    at async discoverRequestState (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-keyboard-regression.mjs:315:19)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-keyboard-regression.mjs:533:3
+
+Node.js v24.13.0

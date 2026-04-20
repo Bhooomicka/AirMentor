@@ -1,0 +1,60 @@
+{
+  "stageId": "08C",
+  "generatedAt": "2026-04-01T22:05:23.595Z",
+  "supportDocs": [
+    "docs/closeout/final-authoritative-plan-security-observability-annex.md",
+    "docs/closeout/deploy-env-contract.md",
+    "docs/closeout/operational-event-taxonomy.md"
+  ],
+  "redactionAudit": {
+    "status": "passed",
+    "scannedFiles": [
+      "output/playwright/execution-ledger.jsonl",
+      "output/playwright/proof-evidence-index.md",
+      "output/playwright/defect-register.json"
+    ],
+    "placeholders": {
+      "identifier": "<identifier>",
+      "password": "<password>",
+      "envPassword": "<redacted>"
+    }
+  },
+  "passes": [
+    {
+      "id": "pass-1-authoritative-plan-claim-coverage",
+      "status": "passed",
+      "evidence": [
+        "docs/closeout/assertion-traceability-matrix.md",
+        "docs/closeout/stage-08c-live-closeout-proof-pack-completion.md",
+        "docs/closeout/final-authoritative-plan-security-observability-annex.md",
+        "docs/closeout/deploy-env-contract.md",
+        "docs/closeout/operational-event-taxonomy.md"
+      ],
+      "note": "Authoritative-plan closeout, deployment, security, observability, and redaction claims are mapped into the final stage docs and matrices."
+    },
+    {
+      "id": "pass-2-repo-test-script-crosswalk",
+      "status": "passed",
+      "evidence": [
+        "output/playwright/08c-local-closeout-artifact-bundle.json",
+        "output/playwright/08c-live-closeout-artifact-bundle.json",
+        "output/detached/airmentor-08c-local-lint-20260401T194008Z.log",
+        "output/detached/airmentor-08c-local-compat-20260401T194008Z.log",
+        "output/detached/airmentor-08c-local-closeout-20260401T203245Z.log",
+        "output/detached/airmentor-08c-live-closeout-20260401T215001Z.log"
+      ],
+      "note": "The final closeout wrappers, detached logs, and resulting artifact bundles reconcile to the command bank and stage-gate protocol."
+    },
+    {
+      "id": "pass-3-surface-and-negative-path-coverage",
+      "status": "passed",
+      "evidence": [
+        "docs/closeout/sysadmin-teaching-proof-coverage-matrix.md",
+        "output/playwright/08b-live-denied-hod-proof-invalid-checkpoint-live.json",
+        "output/playwright/08c-local-closeout-artifact-bundle.json",
+        "output/playwright/08c-live-closeout-artifact-bundle.json"
+      ],
+      "note": "Sysadmin, teaching, HoD, risk explorer, student shell, accessibility, keyboard, session/origin/CSRF, and denied-path coverage all remain mapped into the final bundle."
+    }
+  ]
+}

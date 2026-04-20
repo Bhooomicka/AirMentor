@@ -1,0 +1,22 @@
+[2026-03-30T17:49:59Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T17:49:59Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ NODE_OPTIONS=--max-old-space-size=6144\ npx\ vitest\ run\ --maxWorkers=1\ --reporter=verbose\ tests/hod-proof-analytics.test.ts\ -t\ \"uses\ the\ activated\ proof\ semester\ as\ the\ default\ HoD\ slice\ while\ keeping\ checkpoint\ playback\ separate\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/hod-proof-analytics.test.ts > hod proof analytics > serves live in-scope HoD analytics and reconciles with dashboard and faculty profile
+ ↓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps a department-scoped HoD in scope even when the active proof batch is on a sibling branch
+ ↓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps an in-scope HoD role grant authoritative when faculty appointments drift out of scope
+ ↓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps HoD analytics in scope when another active HoD grant matches the proof department
+ ↓ tests/hod-proof-analytics.test.ts > hod proof analytics > returns an empty view for HODs outside the active proof department scope
+ ↓ tests/hod-proof-analytics.test.ts > hod proof analytics > supports deterministic filtering for section, risk band, and reassessment status
+ ↓ tests/hod-proof-analytics.test.ts > hod proof analytics > projects checkpoint-scoped HoD analytics without exposing no-action comparator fields
+ ↓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps explicit checkpoint playback available even if the run active flag drifts off
+ ↓ tests/hod-proof-analytics.test.ts > hod proof analytics > does not expose inactive runs in the HoD summary
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > uses the activated proof semester as the default HoD slice while keeping checkpoint playback separate 71320ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 9 skipped (10)
+   Start at  23:20:01
+   Duration  72.76s (transform 805ms, setup 0ms, import 1.34s, tests 71.32s, environment 0ms)
+
+[2026-03-30T17:51:14Z] exit=0

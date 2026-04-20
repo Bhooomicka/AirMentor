@@ -1,0 +1,16 @@
+[2026-03-29T23:01:36Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T23:01:36Z] command=bash -lc npm\ test\ --\ --run\ tests/railway-deploy-readiness.test.ts 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/railway-deploy-readiness.test.ts
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  04:31:36
+   Duration  12.71s (transform 28ms, setup 0ms, import 39ms, tests 12.59s, environment 0ms)
+
+[2026-03-29T23:01:49Z] exit=0

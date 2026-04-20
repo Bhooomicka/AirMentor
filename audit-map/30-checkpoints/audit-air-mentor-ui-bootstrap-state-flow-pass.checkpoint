@@ -1,0 +1,17 @@
+pass_name=state-flow-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-state-flow-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+current_provider=codex
+current_account=codex-05
+current_model=gpt-5.3-codex
+current_slot=codex-05
+route_attempt=2
+completed_at=2026-04-15T15:19:29Z
+files_touched=audit-map/07-state-flows/academic-session-role-page-state.md,audit-map/07-state-flows/admin-session-route-state.md,audit-map/07-state-flows/proof-playback-checkpoint-state.md,audit-map/07-state-flows/runtime-shadow-conflict-and-drift-state.md,audit-map/07-state-flows/admin-request-lifecycle-state.md,audit-map/15-final-maps/state-flow-map.md,audit-map/23-coverage/coverage-ledger.md,audit-map/23-coverage/review-status-by-path.md,audit-map/24-agent-memory/working-knowledge.md,audit-map/29-status/audit-air-mentor-ui-bootstrap-state-flow-pass.status,audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-state-flow-pass.checkpoint,audit-map/31-queues/pending.queue,audit-map/32-reports/current-run-status.md,audit-map/32-reports/audit-air-mentor-ui-bootstrap-state-flow-pass.last-message.md
+evidence_paths=src/App.tsx:87,1190,1279,1583,1631,1788,1815,3559,3569,3652,3679;src/system-admin-live-app.tsx:518,546,1999,2052,2207,2209,2270,2312,2317,2324,2350,2359,2510,2918,2934,2949,2972,4497,4507,4538,4539,4540,4541;src/proof-playback.ts;src/proof-pilot.ts;src/system-admin-request-workspace.tsx;src/repositories.ts;air-mentor-api/src/modules/session.ts;air-mentor-api/src/modules/academic-runtime-routes.ts:34,92,103,112,191,203,256,397,398,476,633,691,771;air-mentor-api/src/modules/admin-requests.ts;tests/proof-playback.test.ts;tests/proof-pilot.test.ts;tests/portal-routing.test.ts;tests/academic-workspace-route-helpers.test.ts;tests/academic-route-pages.test.tsx;tests/system-admin-live-data.test.ts;tests/system-admin-proof-dashboard-workspace.test.tsx;tests/proof-surface-shell.test.tsx;air-mentor-api/tests/admin-foundation.test.ts
+next_unresolved_question=Should the sysadmin request workspace expose explicit Needs Info and Rejected controls for full parity with backend admin-request transitions?
+last_event=completed
+last_checkpoint_at=2026-04-15T15:20:30Z

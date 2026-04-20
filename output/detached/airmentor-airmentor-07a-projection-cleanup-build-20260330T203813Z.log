@@ -1,0 +1,7 @@
+[2026-03-30T20:38:14Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:38:14Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ npm\ run\ build 
+
+> air-mentor-api@0.1.0 build
+> tsc -p tsconfig.build.json
+
+[2026-03-30T20:38:23Z] exit=0

@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: System-admin faculty calendar and timetable planner
+- Parent domain: System-admin calendar / timetable surface
+- Feature scope boundary: The admin faculty calendar workspace and expanded timetable planner, including direct edit windows, extra-class creation, block details, and save actions. Excludes the academic calendar page.
+- Roles and role-specific variants: SYSTEM_ADMIN primary.
+- Product or user intent: Let the admin inspect the institutional calendar first, then expand into the timetable planner when a deeper review or edit is needed.
+- Source files: [`src/system-admin-faculty-calendar-workspace.tsx`](../../src/system-admin-faculty-calendar-workspace.tsx), [`src/system-admin-timetable-editor.tsx`](../../src/system-admin-timetable-editor.tsx), [`src/system-admin-live-app.tsx`](../../src/system-admin-live-app.tsx), [`src/pages/calendar-pages.tsx`](../../src/pages/calendar-pages.tsx)
+- Entry points: Faculty calendar workspace, timetable planner, block editor sheets, and save handlers.
+- Routes, deep links, query params, and restore entry states: Admin faculty-calendar route state inside the live workspace; the selected faculty and timetable context are preserved in the current snapshot.
+- Preconditions and guard conditions: SYSTEM_ADMIN access is required; a faculty member must be selected before the planner can open.
+- Visible surfaces involved: Calendar summary, planner expansion controls, month/week navigation, direct-edit window notices, block and extra-class sheets, drag/resize handles, save buttons, and course-workspace/action-queue links.
+- Hidden or conditional surfaces involved: Month-only vs split layout, class-editing lock state, and edit-window expiration copy.
+- Trigger sources: Open the faculty calendar, expand the planner, edit a block, create an extra class, drag/resize a task, or save a meeting/schedule.
+- Atomic user actions: Inspect the summary, switch views, open a block, create an extra class, adjust timing, and save the planner change.
+- Hidden, hover-only, or keyboard-only actions: Hover add buttons and shared button primitives remain keyboard reachable; planner sheets and modals are standard focusable surfaces.
+- Automatic or system actions: Derive the summary from the selected faculty calendar, keep the selected week/month coherent, and enforce the class-editing lock or direct-edit window.
+- API and backend calls: Admin faculty-calendar and timetable-editor routes through the live admin workspace and the shared calendar utilities.
+- State dependencies: Selected faculty, calendar summary, planner mode, selected week/month, editing lock state, and block/editor sheet state.
+- Persistence dependencies: Live admin snapshot state and backend calendar/planner records.
+- Restore behavior: Returning to the planner restores the selected faculty and calendar context if the admin snapshot still matches.
+- Permissions and scope logic: Only SYSTEM_ADMIN can reach the timetable planner, and selected-faculty access must remain valid.
+- State transitions: Summary -> expanded planner -> block/edit sheet -> save or close; lock or expired window -> read-only notice.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Select-a-faculty and direct-edit-window states are explicit; class-editing lock and expired window should disable mutation paths.
+- Success path: The admin reviews the calendar summary, opens the planner, and saves the intended scheduling change.
+- Failure and recovery paths: If a faculty member is not selected or the edit window is closed, the user must return to the summary and choose a different path.
+- Data read: Faculty calendar summary, weekly blocks, edit-window metadata, class-editing lock state, and timetable details.
+- Data written: Calendar/planner edits, block and extra-class mutations, selected view state, and save state.
+- Telemetry, analytics, or audit-trail side effects: Calendar and timetable changes remain part of the admin audit trail.
+- Downstream effects: Calendar edits affect timetable visibility and the institutional schedule used by other admin and academic surfaces.
+- Hidden couplings: The planner shares the same calendar identity and block model as the academic calendar features, even though the admin editing surface is distinct.
+- Expected behavior: The admin should be able to inspect the summary first, then open the planner and make timing edits only while the edit window is open.
+- Implemented behavior: The faculty calendar workspace and timetable editor expose the summary, planner, edit window notices, and save controls.
+- Tested behavior: [`tests/system-admin-faculties-workspace.test.tsx`](../../tests/system-admin-faculties-workspace.test.tsx), [`tests/calendar-utils.test.ts`](../../tests/calendar-utils.test.ts), [`tests/system-admin-live-detail.test.tsx`](../../tests/system-admin-live-detail.test.tsx).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/system-admin-faculties-workspace.test.tsx`](../../tests/system-admin-faculties-workspace.test.tsx), [`tests/calendar-utils.test.ts`](../../tests/calendar-utils.test.ts), [`tests/system-admin-live-detail.test.tsx`](../../tests/system-admin-live-detail.test.tsx).
+- Known gaps: No live browser pass confirmed drag, resize, and save interactions in the same admin planner loop.
+- Open questions: Should the planner expose the direct-edit-window deadline more prominently than the summary strip does today?
+- Confidence level: Medium-high

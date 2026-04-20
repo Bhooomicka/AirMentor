@@ -1,0 +1,13 @@
+[2026-04-01T19:27:31Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T19:27:31Z] command=npm run lint 
+
+> air-mentor-ui@0.0.0 lint
+> eslint .
+
+
+/home/raed/projects/air-mentor-ui/src/system-admin-live-app.tsx
+  5284:9  warning  The 'batchFacultyPool' conditional could make the dependencies of useEffect Hook (at line 5313) change on every render. To fix this, wrap the initialization of 'batchFacultyPool' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+✖ 1 problem (0 errors, 1 warning)
+
+[2026-04-01T19:27:52Z] exit=0

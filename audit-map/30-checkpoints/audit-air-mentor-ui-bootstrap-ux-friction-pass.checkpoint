@@ -1,0 +1,14 @@
+pass_name=ux-friction-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-ux-friction-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+current_provider=native-codex
+current_account=native-codex-session
+current_model=gpt-5.4-mini
+current_slot=''
+route_attempt=1
+execution_supervisor_pid=2209687
+last_event=completed
+last_checkpoint_at=2026-04-15T16:29:58Z

@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Calendar mode and planner interactions
+- Parent domain: Academic timetable / planner surface
+- Feature scope boundary: The academic calendar/timetable planner, mode switching, date navigation, block details, add-target sheets, and meeting edits. Excludes sysadmin timetable planning.
+- Roles and role-specific variants: Academic roles that can access the timetable or planning surface; the planner reacts to the current academic scope.
+- Product or user intent: Let the user inspect month/week views, add or edit a target, and manage schedule blocks without leaving the academic planner.
+- Source files: [`src/pages/calendar-pages.tsx`](../../src/pages/calendar-pages.tsx), [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx)
+- Entry points: Calendar and timetable page components and the planner modal/sheet handlers.
+- Routes, deep links, query params, and restore entry states: Calendar route state inside the academic workspace; mode, selected date, and selected week are internal planner state rather than URL query state.
+- Preconditions and guard conditions: The academic planner must have a current scope with a calendar/timetable model.
+- Visible surfaces involved: Calendar mode toggle, timetable mode toggle, previous/next month buttons, previous/next week buttons, selected-date/selected-week chips, add-target sheet, extra-class sheet, block-details sheet, meeting edit modal, save buttons, and action-queue/course-workspace buttons.
+- Hidden or conditional surfaces involved: Hover add buttons, marker details, month-only layout, and the day-panel visibility toggle.
+- Trigger sources: Switch calendar mode, move month/week, click a day or block, add or edit a target, drag or resize a task, or open the action queue/course workspace.
+- Atomic user actions: Toggle calendar/timetable mode, move time windows, add or edit a block, drag or resize a task, save meeting/schedule data, and open queue/course workspaces.
+- Hidden, hover-only, or keyboard-only actions: Add buttons appear on hover; planner controls remain keyboard reachable through the shared button and sheet primitives.
+- Automatic or system actions: Keep the selected date/week in sync with the active mode; show the correct planner sheet for the selected entity; update marker and block details as the calendar model changes.
+- API and backend calls: Academic calendar/planner routes and the shared academic client.
+- State dependencies: Mode, selected date, selected week, add-target state, block-details state, and meeting-edit state.
+- Persistence dependencies: Local planner state and any backend-saved schedule changes.
+- Restore behavior: Re-entering the planner can restore the selected mode and current date/week from local component state while the route remains mounted.
+- Permissions and scope logic: The planner should only expose the targets and blocks inside the current academic scope.
+- State transitions: Mode toggle -> calendar or timetable view -> selected date/week -> sheet or modal -> save or close.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Empty or sparse calendar cells are possible; blocked edits can disable the save path; no dedicated conflict dialog is surfaced inline.
+- Success path: The user toggles the desired mode, edits or reviews the selected block, and saves the planner change.
+- Failure and recovery paths: If a block cannot be edited, the user can close the sheet and choose another block or time window without leaving the page.
+- Data read: Calendar model, timetable blocks, markers, selected date/week, and meeting details.
+- Data written: Calendar/planner changes, meeting edits, selected mode, and selected date/week state.
+- Telemetry, analytics, or audit-trail side effects: Planner edits are part of the broader academic audit trail.
+- Downstream effects: Changes here affect timetable views, block details, and linked academic workflows that consume the same schedule model.
+- Hidden couplings: The calendar model and timetable editor share the same institutional scheduling state and block identity model.
+- Expected behavior: The planner should let the user move between calendar and timetable views, edit blocks, and keep the selected time window coherent.
+- Implemented behavior: `calendar-pages.tsx` exposes the mode toggles, navigation controls, planner sheets, and save actions.
+- Tested behavior: [`tests/calendar-utils.test.ts`](../../tests/calendar-utils.test.ts), [`tests/page-utils.test.ts`](../../tests/page-utils.test.ts), [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/calendar-utils.test.ts`](../../tests/calendar-utils.test.ts), [`tests/page-utils.test.ts`](../../tests/page-utils.test.ts), [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx).
+- Known gaps: No live browser pass confirmed drag, resize, and save behavior in the same interaction loop.
+- Open questions: Should the planner preserve the selected week when the user flips back from timetable to calendar mode?
+- Confidence level: Medium-high

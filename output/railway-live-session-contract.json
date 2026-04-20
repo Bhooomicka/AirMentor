@@ -1,0 +1,16 @@
+{
+  "mode": "session-contract",
+  "generatedAt": "2026-03-28T21:03:00.342Z",
+  "apiBaseUrl": "https://api-production-ab72.up.railway.app",
+  "expectedFrontendOrigin": "https://raed2180416.github.io",
+  "identifier": "sysadmin",
+  "status": "passed",
+  "response": {
+    "status": 200,
+    "hasCsrfToken": true,
+    "hasSessionCookie": true,
+    "hasCsrfCookie": true,
+    "restoreStatus": 200
+  },
+  "issues": []
+}

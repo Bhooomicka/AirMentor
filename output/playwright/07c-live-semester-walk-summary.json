@@ -1,0 +1,228 @@
+{
+  "stack": "live",
+  "appUrl": "https://raed2180416.github.io/AirMentor/",
+  "apiUrl": "https://api-production-ab72.up.railway.app/",
+  "summaryPaths": [
+    "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-4-proof-risk-walk-summary.json",
+    "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-5-proof-risk-walk-summary.json",
+    "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-6-proof-risk-walk-summary.json"
+  ],
+  "summaries": [
+    {
+      "stack": "live",
+      "proofCoverageTarget": "full",
+      "simulationRunId": "sim_mnc_2023_first6_v1",
+      "batchId": "batch_branch_mnc_btech_2023",
+      "routeHash": "#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+      "appUrl": "https://raed2180416.github.io/AirMentor/",
+      "apiUrl": "https://api-production-ab72.up.railway.app/",
+      "targetedSemester": 4,
+      "activatedOperationalSemester": 4,
+      "previousOperationalSemester": 3,
+      "availableOperationalSemesters": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "selectedCheckpoint": {
+        "simulationStageCheckpointId": "stage_checkpoint_fd713de15d3771038ced9bfd",
+        "semesterNumber": 4,
+        "stageKey": "post-see",
+        "stageLabel": "Post SEE",
+        "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+        "stageOrder": 5,
+        "stageAdvanceBlocked": false,
+        "blockingQueueItemCount": 0,
+        "playbackAccessible": false,
+        "blockedByCheckpointId": "stage_checkpoint_182e4d047d959f28a86c6b39",
+        "blockedProgressionReason": "Playback is blocked until all queue items for checkpoint stage_checkpoint_182e4d047d959f28a86c6b39 are resolved.",
+        "noActionHighRiskCount": 720,
+        "averageCounterfactualLiftScaled": 0,
+        "electiveVisibleCount": 120,
+        "buttonLabel": "S4 · Post SEE",
+        "surfaceLabel": "Sem 4 · Post SEE",
+        "bannerLabel": "semester 4 · Post SEE"
+      },
+      "storedPlaybackSelection": {
+        "simulationRunId": "sim_mnc_2023_first6_v1",
+        "simulationStageCheckpointId": "stage_checkpoint_fd713de15d3771038ced9bfd",
+        "updatedAt": "2026-04-01T15:36:05.593Z"
+      },
+      "genericArtifacts": {
+        "screenshots": {
+          "systemAdmin": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-control-plane.png",
+          "teacher": "/home/raed/projects/air-mentor-ui/output/playwright/teacher-proof-panel.png",
+          "teacherRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/teacher-risk-explorer-proof.png",
+          "hod": "/home/raed/projects/air-mentor-ui/output/playwright/hod-proof-analytics.png",
+          "hodRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/hod-risk-explorer-proof.png",
+          "studentShell": "/home/raed/projects/air-mentor-ui/output/playwright/student-shell-proof.png"
+        },
+        "activationArtifacts": {
+          "request": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-live-request.json",
+          "response": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-live-response.json"
+        }
+      },
+      "semesterScopedArtifacts": {
+        "screenshots": {
+          "systemAdmin": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-4-system-admin-proof-control-plane.png",
+          "teacher": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-4-teacher-proof-panel.png",
+          "teacherRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-4-teacher-risk-explorer-proof.png",
+          "hod": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-4-hod-proof-analytics.png",
+          "hodRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-4-hod-risk-explorer-proof.png",
+          "studentShell": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-4-student-shell-proof.png"
+        },
+        "activationArtifacts": {
+          "request": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-4-system-admin-proof-semester-activation-live-request.json",
+          "response": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-4-system-admin-proof-semester-activation-live-response.json"
+        }
+      }
+    },
+    {
+      "stack": "live",
+      "proofCoverageTarget": "full",
+      "simulationRunId": "sim_mnc_2023_first6_v1",
+      "batchId": "batch_branch_mnc_btech_2023",
+      "routeHash": "#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+      "appUrl": "https://raed2180416.github.io/AirMentor/",
+      "apiUrl": "https://api-production-ab72.up.railway.app/",
+      "targetedSemester": 5,
+      "activatedOperationalSemester": 5,
+      "previousOperationalSemester": 4,
+      "availableOperationalSemesters": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "selectedCheckpoint": {
+        "simulationStageCheckpointId": "stage_checkpoint_19ede662df23cf9be4d8c7e8",
+        "semesterNumber": 5,
+        "stageKey": "post-see",
+        "stageLabel": "Post SEE",
+        "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+        "stageOrder": 5,
+        "stageAdvanceBlocked": false,
+        "blockingQueueItemCount": 0,
+        "playbackAccessible": false,
+        "blockedByCheckpointId": "stage_checkpoint_182e4d047d959f28a86c6b39",
+        "blockedProgressionReason": "Playback is blocked until all queue items for checkpoint stage_checkpoint_182e4d047d959f28a86c6b39 are resolved.",
+        "noActionHighRiskCount": 720,
+        "averageCounterfactualLiftScaled": 0,
+        "electiveVisibleCount": 120,
+        "buttonLabel": "S5 · Post SEE",
+        "surfaceLabel": "Sem 5 · Post SEE",
+        "bannerLabel": "semester 5 · Post SEE"
+      },
+      "storedPlaybackSelection": {
+        "simulationRunId": "sim_mnc_2023_first6_v1",
+        "simulationStageCheckpointId": "stage_checkpoint_19ede662df23cf9be4d8c7e8",
+        "updatedAt": "2026-04-01T15:38:30.934Z"
+      },
+      "genericArtifacts": {
+        "screenshots": {
+          "systemAdmin": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-control-plane.png",
+          "teacher": "/home/raed/projects/air-mentor-ui/output/playwright/teacher-proof-panel.png",
+          "teacherRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/teacher-risk-explorer-proof.png",
+          "hod": "/home/raed/projects/air-mentor-ui/output/playwright/hod-proof-analytics.png",
+          "hodRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/hod-risk-explorer-proof.png",
+          "studentShell": "/home/raed/projects/air-mentor-ui/output/playwright/student-shell-proof.png"
+        },
+        "activationArtifacts": {
+          "request": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-live-request.json",
+          "response": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-live-response.json"
+        }
+      },
+      "semesterScopedArtifacts": {
+        "screenshots": {
+          "systemAdmin": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-5-system-admin-proof-control-plane.png",
+          "teacher": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-5-teacher-proof-panel.png",
+          "teacherRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-5-teacher-risk-explorer-proof.png",
+          "hod": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-5-hod-proof-analytics.png",
+          "hodRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-5-hod-risk-explorer-proof.png",
+          "studentShell": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-5-student-shell-proof.png"
+        },
+        "activationArtifacts": {
+          "request": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-5-system-admin-proof-semester-activation-live-request.json",
+          "response": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-5-system-admin-proof-semester-activation-live-response.json"
+        }
+      }
+    },
+    {
+      "stack": "live",
+      "proofCoverageTarget": "full",
+      "simulationRunId": "sim_mnc_2023_first6_v1",
+      "batchId": "batch_branch_mnc_btech_2023",
+      "routeHash": "#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+      "appUrl": "https://raed2180416.github.io/AirMentor/",
+      "apiUrl": "https://api-production-ab72.up.railway.app/",
+      "targetedSemester": 6,
+      "activatedOperationalSemester": 6,
+      "previousOperationalSemester": 4,
+      "availableOperationalSemesters": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "selectedCheckpoint": {
+        "simulationStageCheckpointId": "stage_checkpoint_654335929a345857eab259b0",
+        "semesterNumber": 6,
+        "stageKey": "post-see",
+        "stageLabel": "Post SEE",
+        "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+        "stageOrder": 5,
+        "stageAdvanceBlocked": true,
+        "blockingQueueItemCount": 10,
+        "playbackAccessible": false,
+        "blockedByCheckpointId": "stage_checkpoint_182e4d047d959f28a86c6b39",
+        "blockedProgressionReason": "Playback is blocked until all queue items for checkpoint stage_checkpoint_182e4d047d959f28a86c6b39 are resolved.",
+        "noActionHighRiskCount": 698,
+        "averageCounterfactualLiftScaled": 3.4,
+        "electiveVisibleCount": 120,
+        "buttonLabel": "S6 · Post SEE",
+        "surfaceLabel": "Sem 6 · Post SEE",
+        "bannerLabel": "semester 6 · Post SEE"
+      },
+      "storedPlaybackSelection": {
+        "simulationRunId": "sim_mnc_2023_first6_v1",
+        "simulationStageCheckpointId": "stage_checkpoint_654335929a345857eab259b0",
+        "updatedAt": "2026-04-01T15:40:37.188Z"
+      },
+      "genericArtifacts": {
+        "screenshots": {
+          "systemAdmin": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-control-plane.png",
+          "teacher": "/home/raed/projects/air-mentor-ui/output/playwright/teacher-proof-panel.png",
+          "teacherRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/teacher-risk-explorer-proof.png",
+          "hod": "/home/raed/projects/air-mentor-ui/output/playwright/hod-proof-analytics.png",
+          "hodRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/hod-risk-explorer-proof.png",
+          "studentShell": "/home/raed/projects/air-mentor-ui/output/playwright/student-shell-proof.png"
+        },
+        "activationArtifacts": {
+          "request": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-live-request.json",
+          "response": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-live-response.json"
+        }
+      },
+      "semesterScopedArtifacts": {
+        "screenshots": {
+          "systemAdmin": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-6-system-admin-proof-control-plane.png",
+          "teacher": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-6-teacher-proof-panel.png",
+          "teacherRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-6-teacher-risk-explorer-proof.png",
+          "hod": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-6-hod-proof-analytics.png",
+          "hodRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-6-hod-risk-explorer-proof.png",
+          "studentShell": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-6-student-shell-proof.png"
+        },
+        "activationArtifacts": {
+          "request": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-6-system-admin-proof-semester-activation-live-request.json",
+          "response": "/home/raed/projects/air-mentor-ui/output/playwright/07c-live-semester-6-system-admin-proof-semester-activation-live-response.json"
+        }
+      }
+    }
+  ]
+}

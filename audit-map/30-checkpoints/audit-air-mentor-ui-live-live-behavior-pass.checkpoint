@@ -1,0 +1,23 @@
+pass_name=live-behavior-pass
+context=live
+session_name=audit-air-mentor-ui-live-live-behavior-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+current_provider=native-codex
+current_account=native-codex-session
+current_model=gpt-5.4
+current_slot=''
+route_attempt=1
+execution_supervisor_pid=''
+scope='pages shell rerun and current live-capture blockers'
+files_touched='audit-map/10-live-behavior/*,audit-map/14-reconciliation/*,audit-map/15-final-maps/live-vs-local-master-diff.md,audit-map/17-artifacts/live/2026-04-15T174110Z--*,audit-map/23-coverage/*,audit-map/24-agent-memory/*,audit-map/25-accounts-routing/manual-action-required.md,audit-map/29-status/audit-air-mentor-ui-live-live-behavior-pass.status,audit-map/32-reports/audit-air-mentor-ui-live-live-behavior-pass.last-message.md'
+next_unresolved_question='Can a network-enabled credentialed environment refresh Railway root health openapi and session evidence and run the live closeout wrapper end to end?'
+evidence_paths='audit-map/17-artifacts/live/2026-04-15T174110Z--pages-shell--live--web-observation--live-pass.md,audit-map/17-artifacts/live/2026-04-15T174110Z--live-closeout--live--credential-blocker--live-pass.txt,audit-map/17-artifacts/live/2026-04-15T174110Z--live-capture-path--live--environment-blocker--live-pass.md'
+manual_action_required=1
+manual_action_reason='Missing live system-admin credentials and the current native Codex shell cannot refresh live API or browser evidence.'
+resume_point='live-behavior-pass rerun from network-enabled environment'
+resume_command='PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> bash scripts/verify-final-closeout-live.sh'
+remaining_uncovered_scope='live login, overview, faculties workspace, request flow, proof semester walk, teaching parity, HoD proof/risk, student-shell proof parity, accessibility, keyboard, session security, Railway slash root, Railway slash health recapture, Railway openapi, and live session-contract output'
+last_event=completed
+last_checkpoint_at=2026-04-15T17:58:17Z

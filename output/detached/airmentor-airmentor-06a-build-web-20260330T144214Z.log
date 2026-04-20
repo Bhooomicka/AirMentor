@@ -1,0 +1,12 @@
+[2026-03-30T14:42:14Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T14:42:14Z] command=npm run build 
+
+> air-mentor-ui@0.0.0 build
+> tsc -b && vite build
+
+src/system-admin-faculties-workspace.tsx(187,38): error TS2345: Argument of type '"section" | "institution" | "academic-faculty" | "department" | "branch" | "batch" | "proof" | "student"' is not assignable to parameter of type '"section" | "institution" | "academic-faculty" | "department" | "branch" | "batch"'.
+  Type '"proof"' is not assignable to type '"section" | "institution" | "academic-faculty" | "department" | "branch" | "batch"'.
+src/system-admin-live-app.tsx(1332,10): error TS6133: 'formatScopeTypeLabel' is declared but its value is never read.
+src/system-admin-live-app.tsx(5643,5): error TS2304: Cannot find name 'governanceScopeSummary'.
+src/system-admin-live-app.tsx(5644,5): error TS2304: Cannot find name 'policyOverrideTrail'.
+src/system-admin-live-app.tsx(5645,5): error TS2304: Cannot find name 'stageOverrideTrail'.

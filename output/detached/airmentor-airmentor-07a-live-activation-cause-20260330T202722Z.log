@@ -1,0 +1,19 @@
+[2026-03-30T20:27:24Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:27:24Z] command=zsh -lc $'cd air-mentor-api && set -a && source .env && set +a && npx tsx <<\'TS\'\nimport { createPool, createDb } from "./src/db/client.ts"\nimport { activateProofOperationalSemester } from "./src/lib/msruas-proof-control-plane.ts"\n\nconst pool = createPool(process.env.DATABASE_URL!)\nconst db = createDb(pool)\ntry {\n  await db.transaction(async tx => {\n    try {\n      await activateProofOperationalSemester(tx as any, {\n        simulationRunId: "sim_mnc_2023_first6_v1",\n        semesterNumber: 4,\n        actorFacultyId: "fac_sysadmin",\n        now: new Date().toISOString(),\n      })\n      throw new Error("ROLLBACK_AFTER_SUCCESS")\n    } catch (error) {\n      const candidate = error as any\n      console.log("top-name", candidate?.name ?? null)\n      console.log("top-message", candidate?.message?.slice?.(0, 400) ?? String(candidate))\n      console.log("top-code", candidate?.code ?? null)\n      console.log("cause-name", candidate?.cause?.name ?? null)\n      console.log("cause-message", candidate?.cause?.message ?? null)\n      console.log("cause-code", candidate?.cause?.code ?? null)\n      console.log("cause-detail", candidate?.cause?.detail ?? null)\n      console.log("cause-hint", candidate?.cause?.hint ?? null)\n      console.log("cause-table", candidate?.cause?.table ?? null)\n      console.log("cause-column", candidate?.cause?.column ?? null)\n      console.log("cause-constraint", candidate?.cause?.constraint ?? null)\n      console.log("cause-severity", candidate?.cause?.severity ?? null)\n      console.log("cause-routine", candidate?.cause?.routine ?? null)\n      throw error\n    }\n  })\n} catch (error) {\n  if (!(error instanceof Error && error.message === "ROLLBACK_AFTER_SUCCESS")) {\n    console.log("outer", error instanceof Error ? error.message.slice(0, 400) : String(error))\n  }\n} finally {\n  await pool.end()\n}\nTS' 
+(node:508624) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+top-name Error
+top-message Failed query: insert into "transcript_term_results" ("transcript_term_result_id", "student_id", "term_id", "sgpa_scaled", "registered_credits", "earned_credits", "backlog_count", "created_at", "updated_at") values ($1, $2, $3, $4, $5, $6, $7, $8, $9), ($10, $11, $12, $13, $14, $15, $16, $17, $18), ($19, $20, $21, $22, $23, $24, $25, $26, $27), ($28, $29, $30, $31, $32, $33, $34, $35, $36), ($37, $
+top-code null
+cause-name error
+cause-message could not extend file "base/16384/17237": No space left on device
+cause-code 53100
+cause-detail null
+cause-hint Check free disk space.
+cause-table null
+cause-column null
+cause-constraint null
+cause-severity ERROR
+cause-routine mdzeroextend
+outer Failed query: insert into "transcript_term_results" ("transcript_term_result_id", "student_id", "term_id", "sgpa_scaled", "registered_credits", "earned_credits", "backlog_count", "created_at", "updated_at") values ($1, $2, $3, $4, $5, $6, $7, $8, $9), ($10, $11, $12, $13, $14, $15, $16, $17, $18), ($19, $20, $21, $22, $23, $24, $25, $26, $27), ($28, $29, $30, $31, $32, $33, $34, $35, $36), ($37, $
+[2026-03-30T20:27:32Z] exit=0

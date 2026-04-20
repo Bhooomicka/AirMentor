@@ -1,0 +1,12 @@
+[2026-04-15T09:47:52Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-15T09:47:52Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+session=audit-air-mentor-ui-bootstrap-route-map-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-route-map-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-route-map-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-route-map-pass.checkpoint
+session=audit-air-mentor-ui-bootstrap-role-surface-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-role-surface-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-role-surface-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-role-surface-pass.checkpoint
+Overnight run stopped on audit-air-mentor-ui-bootstrap-role-surface-pass with state=failed
+[2026-04-15T09:53:52Z] exit_code=65

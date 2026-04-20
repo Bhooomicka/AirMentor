@@ -1,0 +1,62 @@
+# Proof Risk Production Model And Calibration
+
+- Component name: Observable proof-risk production and challenger artifacts
+- Type: Trained model plus post-hoc calibration and deterministic display gating
+- Intent: Train governed batch-specific risk artifacts from proof evidence, score multi-head observable risk, and expose probabilities only when held-out support and calibration quality clear explicit gates
+- Source files: `air-mentor-api/src/lib/proof-risk-model.ts`, `air-mentor-api/src/lib/msruas-proof-control-plane.ts`, `air-mentor-api/src/modules/admin-proof-sandbox.ts`, `air-mentor-api/src/db/schema.ts`
+- Inputs:
+  - Governed proof corpus rows selected from manifest-backed complete runs
+  - Feature payloads built from attendance, performance, weakness, intervention, prerequisite, downstream-dependency, section-risk, and semester-progress signals
+  - Labels for heads `attendanceRisk`, `ceRisk`, `seeRisk`, `overallCourseRisk`, and `downstreamCarryoverRisk`
+- Transformations:
+  - `buildObservableFeaturePayload()` builds normalized feature vectors under schema `observable-risk-features-v3`
+  - `trainObservableRiskModelArtifact()` trains per-head logistic models for production artifact `observable-risk-logit-v5`
+  - `trainObservableRiskChallengerArtifact()` trains stump-based challenger artifact `observable-risk-stump-v4`
+  - Post-hoc calibration candidates are selected per head from identity, sigmoid, and isotonic via validation Brier score with ECE tiebreak
+  - Runtime scoring uses `overallCourseRisk` for displayed banding and uses a weighted max across heads for queue priority
+- Outputs:
+  - Production artifact payload
+  - Challenger artifact payload
+  - Evaluation JSON including split support, calibration, policy diagnostics, CO-evidence diagnostics, and UI-parity diagnostics
+  - Runtime `headDisplay`, `overallRisk`, `queuePriorityScore`, and comparison metadata
+- Thresholds and gates:
+  - Manifest version: `proof-corpus-v1` with 64 seeds split as 40 train, 12 validation, 12 test
+  - Runtime band thresholds on `overallCourseRisk`: medium `0.4`, high `0.85`
+  - Head probability display requires held-out `testSupport >= 1000`
+  - Display also requires positive support minimums of `100` and ECE ceilings of `0.08` for attendance, SEE, and overall, and `0.1` for downstream carryover
+  - `ceRisk` is always band-only
+  - Isotonic calibration is only eligible when validation support is `>=1000` and positives are `>=250`
+  - These thresholds remain code-backed defaults in current implementation; no per-run slider/config override path exists yet for the deferred GAP-6 track
+- Calibration or provenance:
+  - Calibration version: `post-hoc-calibration-v1`
+  - Thresholds and suppression rules are code-defined, not learned online
+  - Training rows are selected only from governed corpus runs with expected checkpoints and stage evidence
+- Fallback path:
+  - If no active production artifact exists or the feature schema mismatches, runtime falls back to `observable-inference-v2`
+  - The UI exposes support warnings when probabilities are withheld or the artifact is unavailable
+- Persistence and artifacts:
+  - `riskModelArtifacts` stores `production`, `challenger`, `correlation`, `evaluationJson`, `status`, and `activeFlag`
+  - `riskEvidenceSnapshots` stores per-row feature, label, and source-reference JSON
+  - `riskAssessments` stores served course-risk rows
+  - Artifacts are DB-backed. The repo does not include a fresh checked-in evaluation report for the current active artifact family
+- UI presentation surfaces:
+  - `src/system-admin-proof-dashboard-workspace.tsx`
+  - `src/pages/risk-explorer.tsx`
+  - `src/pages/student-shell.tsx`
+  - `src/pages/hod-pages.tsx`
+  - `src/system-admin-live-app.tsx`
+- Evaluation evidence:
+  - Unit coverage in `air-mentor-api/tests/proof-risk-model.test.ts`
+  - Evaluation-path checks in `air-mentor-api/tests/evaluate-proof-risk-model.test.ts`
+  - Dashboard rendering coverage in `air-mentor-api/tests/proof-control-plane-dashboard-service.test.ts`
+  - UI rendering coverage in `tests/system-admin-proof-dashboard-workspace.test.tsx`, `tests/risk-explorer.test.tsx`, `tests/student-shell.test.tsx`, and `tests/hod-pages.test.ts`
+- Reproducibility status: Partial. Training and scoring logic are source-auditable, but fresh regeneration of `output/proof-risk-model/evaluation-report.{json,md}` was blocked in this sandbox by `listen EPERM`, so this pass could not prove end-to-end artifact rebuildability
+- Failure or misleading modes:
+  - A trained artifact can exist while head probabilities remain hidden; users may misread band-only output as lower-confidence model failure rather than deliberate suppression
+  - UI copy can over-compress the distinction between trained overall risk and derived advisory heads if the disclaimer is missed
+  - Artifact presence in DB is batch-specific and not guaranteed on live
+- Risks:
+  - No fresh evaluation artifact was regenerated in this pass
+  - The same family can be presented as "trained" in some contexts while local or live runtime may still be fallback-heavy
+  - Cross-surface trust depends on artifact availability, calibration gates, and provenance chips all being surfaced clearly
+- Confidence: High on code classification and gates, medium on current live artifact posture

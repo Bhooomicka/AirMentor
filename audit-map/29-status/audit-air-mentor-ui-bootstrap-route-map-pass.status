@@ -1,0 +1,23 @@
+task_class=structured
+caveman_active=0
+caveman_mode=off
+original_command=codex\ exec\ -C\ /home/raed/projects/air-mentor-ui\ -m\ gpt-5.4-mini\ -c\ model_reasoning_effort=\\\"high\\\"\ -o\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-route-map-pass.last-message.md\ --full-auto\ -\ \<\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-route-map-pass.prompt.md
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-route-map-pass.log.20260415T094752Z.prev
+started_at=2026-04-15T09:47:52Z
+pid=1475095
+tmux_visibility=present
+exit_code=0
+finished_at=2026-04-15T09:52:54Z
+session_name=audit-air-mentor-ui-bootstrap-route-map-pass
+pass_name=route-map-pass
+context=bootstrap
+workdir=/home/raed/projects/air-mentor-ui
+state=completed
+model=gpt-5.4-mini
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-route-map-pass.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-route-map-pass.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-route-map-pass.checkpoint
+created_at=2026-04-15T09:47:52Z
+updated_at=2026-04-15T09:52:54Z

@@ -1,0 +1,19 @@
+[2026-04-01T19:14:36Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T19:14:36Z] command=env AIRMENTOR_SESSION_SECURITY_ARTIFACT_PREFIX=08b-local-session-security npm run playwright:admin-live:session-security 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:session-security
+> bash scripts/playwright-admin-live-session-security.sh
+
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running session security smoke...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:35355
+Backend log: output/playwright/system-admin-live-backend.log
+Preview log: output/playwright/system-admin-session-security-preview.log
+Session security smoke passed. Report: output/playwright/system-admin-live-session-security-report.json
+Prefixed session-security report: output/playwright/08b-local-session-security-system-admin-live-session-security-report.json
+[2026-04-01T19:14:53Z] exit=0

@@ -1,0 +1,14 @@
+pass_name=cross-flow-recovery-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-cross-flow-recovery-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=1
+caveman_mode=full
+current_provider=google
+current_account=google-main
+current_model=gemini-3.1-pro-preview
+current_slot=google-main
+route_attempt=1
+execution_supervisor_pid=4113318
+last_event=completed
+last_checkpoint_at=2026-04-18T01:38:45Z

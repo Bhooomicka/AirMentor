@@ -1,0 +1,14 @@
+[2026-04-01T12:44:32Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T12:44:32Z] command=npm --workspace air-mentor-api test -- --run tests/hod-proof-analytics.test.ts tests/risk-explorer.test.ts tests/student-agent-shell.test.ts 
+
+> air-mentor-api@0.1.0 test
+> node scripts/run-vitest-suite.mjs --run tests/hod-proof-analytics.test.ts tests/risk-explorer.test.ts tests/student-agent-shell.test.ts
+
+[air-mentor-api] Running fast backend suite across 28 test files.
+
+[air-mentor-api] -> tests/academic-access.test.ts
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ❯ tests/hod-proof-analytics.test.ts (11 tests | 1 failed) 641615ms
+     × keeps the default HoD slice aligned with activated semesters 1 through 3 149354ms

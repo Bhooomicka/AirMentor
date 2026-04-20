@@ -1,0 +1,42 @@
+[2026-03-30T19:43:16Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:43:16Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/academic-parity.test.ts\ -t\ \"keeps\ faculty-profile\ proof\ payloads\ and\ student\ drilldowns\ scoped\ for\ course\ leaders\ and\ mentors\|keeps\ academic\ playback\ checkpoints\ available\ when\ another\ proof\ run\ is\ also\ active\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof context and linked proof drilldowns aligned for the active teaching role
+ ↓ tests/academic-parity.test.ts > academic bootstrap > exposes non-overlapping faculty timetable blocks in the proof bootstrap for course-leader playback
+ ↓ tests/academic-parity.test.ts > academic bootstrap > ignores legacy academic asset snapshots and derives the live view from admin-owned records
+ ↓ tests/academic-parity.test.ts > academic bootstrap > reflects admin master-data changes into the academic bootstrap on the next fetch
+ ↓ tests/academic-parity.test.ts > academic bootstrap > persists resolved course outcomes, offering schemes, and question papers through backend-owned routes
+ ↓ tests/academic-parity.test.ts > academic bootstrap > persists authoritative queue, calendar workspace, attendance, and TT1 entry state through the teaching routes
+ ✓ tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof payloads and student drilldowns scoped for course leaders and mentors 98309ms
+ × tests/academic-parity.test.ts > academic bootstrap > keeps academic playback checkpoints available when another proof run is also active 7365ms
+   → expected undefined to be truthy
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/academic-parity.test.ts > academic bootstrap > keeps academic playback checkpoints available when another proof run is also active
+AssertionError: expected undefined to be truthy
+
+- Expected:
+true
+
++ Received:
+undefined
+
+ ❯ tests/academic-parity.test.ts:878:32
+    876|       eq(simulationStageCheckpoints.semesterNumber, 6),
+    877|     )).orderBy(asc(simulationStageCheckpoints.stageOrder))
+    878|     expect(selectedCheckpoint).toBeTruthy()
+       |                                ^
+    879|
+    880|     const syntheticRunId = 'sim_parallel_active_checkpoint_scope'
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed | 6 skipped (8)
+   Start at  01:13:22
+   Duration  113.42s (transform 5.94s, setup 0ms, import 7.60s, tests 105.68s, environment 0ms)
+

@@ -1,0 +1,84 @@
+# Test Index
+
+Frontend and shared test surfaces:
+
+- `tests/academic-proof-summary-strip.test.tsx`
+- `tests/academic-role-sync.test.ts`
+- `tests/academic-route-pages.test.tsx`
+- `tests/academic-workspace-route-helpers.test.ts`
+- `tests/academic-workspace-route-surface.test.tsx`
+- `tests/academic-workspace-sidebar.test.tsx`
+- `tests/api-client.test.ts`
+- `tests/calendar-utils.test.ts`
+- `tests/compat-route-inventory.test.ts`
+- `tests/domain.test.ts`
+- `tests/faculty-profile-proof.test.tsx`
+- `tests/frontend-startup-diagnostics.test.ts`
+- `tests/frontend-telemetry.test.ts`
+- `tests/hod-pages.test.ts`
+- `tests/live-admin-common.test.ts`
+- `tests/page-utils.test.ts`
+- `tests/portal-routing.test.ts`
+- `tests/proof-pilot.test.ts`
+- `tests/proof-playback.test.ts`
+- `tests/proof-risk-semester-walk.test.ts`
+- `tests/proof-surface-launcher.test.tsx`
+- `tests/proof-surface-shell.test.tsx`
+- `tests/railway-deploy-readiness.test.ts`
+- `tests/repositories-http.test.ts`
+- `tests/repositories.test.ts`
+- `tests/risk-explorer.test.tsx`
+- `tests/run-detached.test.ts`
+- `tests/selectors.test.ts`
+- `tests/student-shell-loading.test.tsx`
+- `tests/student-shell.test.tsx`
+- `tests/system-admin-accessibility-contracts.test.tsx`
+- `tests/system-admin-action-queue.test.ts`
+- `tests/system-admin-faculties-workspace.test.tsx`
+- `tests/system-admin-live-data.test.ts`
+- `tests/system-admin-live-detail.test.tsx`
+- `tests/system-admin-live-form-submit.test.tsx`
+- `tests/system-admin-overview-helpers.test.ts`
+- `tests/system-admin-proof-dashboard-workspace.test.tsx`
+- `tests/system-admin-ui.test.tsx`
+- `tests/ui-primitives-accessibility-contracts.test.tsx`
+- `tests/ui-primitives-modal.test.tsx`
+- `tests/verify-final-closeout-live.test.ts`
+
+API workspace test surfaces:
+
+- `air-mentor-api/tests/__snapshots__/openapi.test.ts.snap`
+- `air-mentor-api/tests/academic-access.test.ts`
+- `air-mentor-api/tests/academic-bootstrap-routes.test.ts`
+- `air-mentor-api/tests/academic-parity.test.ts`
+- `air-mentor-api/tests/academic-proof-routes.test.ts`
+- `air-mentor-api/tests/academic-runtime-narrow-routes.test.ts`
+- `air-mentor-api/tests/admin-control-plane.test.ts`
+- `air-mentor-api/tests/admin-curriculum-feature-config.test.ts`
+- `air-mentor-api/tests/admin-foundation.test.ts`
+- `air-mentor-api/tests/admin-hierarchy.test.ts`
+- `air-mentor-api/tests/admin-proof-observability.test.ts`
+- `air-mentor-api/tests/client-telemetry.test.ts`
+- `air-mentor-api/tests/config.test.ts`
+- `air-mentor-api/tests/evaluate-proof-risk-model.test.ts`
+- `air-mentor-api/tests/helpers/test-app.ts`
+- `air-mentor-api/tests/hod-proof-analytics.test.ts`
+- `air-mentor-api/tests/http-smoke.test.ts`
+- `air-mentor-api/tests/msruas-curriculum-compiler.test.ts`
+- `air-mentor-api/tests/msruas-proof-engines.test.ts`
+- `air-mentor-api/tests/msruas-proof-sandbox.test.ts`
+- `air-mentor-api/tests/openapi.test.ts`
+- `air-mentor-api/tests/policy-phenotypes.test.ts`
+- `air-mentor-api/tests/proof-control-plane-access.test.ts`
+- `air-mentor-api/tests/proof-control-plane-activation-service.test.ts`
+- `air-mentor-api/tests/proof-control-plane-checkpoint-service.test.ts`
+- `air-mentor-api/tests/proof-control-plane-dashboard-service.test.ts`
+- `air-mentor-api/tests/proof-queue-governance.test.ts`
+- `air-mentor-api/tests/proof-risk-model.test.ts`
+- `air-mentor-api/tests/proof-run-queue.test.ts`
+- `air-mentor-api/tests/risk-explorer.test.ts`
+- `air-mentor-api/tests/session.test.ts`
+- `air-mentor-api/tests/startup-diagnostics.test.ts`
+- `air-mentor-api/tests/student-agent-shell.test.ts`
+- `air-mentor-api/tests/telemetry-sink.test.ts`
+- `air-mentor-api/tests/telemetry.test.ts`

@@ -1,0 +1,100 @@
+{
+  "mode": "preflight",
+  "generatedAt": "2026-03-29T22:52:53.241Z",
+  "railwayService": "api",
+  "railwayEnvironment": "production",
+  "expectedFrontendOrigin": "https://raed2180416.github.io",
+  "status": "passed",
+  "checks": {
+    "csrfSecretPresent": true,
+    "corsAllowedOrigins": "https://raed2180416.github.io,http://127.0.0.1:5173,http://localhost:5173,http://127.0.0.1:4173,http://localhost:4173",
+    "sessionCookieSecure": "true",
+    "sessionCookieSameSite": "none",
+    "telemetrySinkConfigured": false,
+    "databaseUrlConfigured": true,
+    "host": "0.0.0.0"
+  },
+  "syncedUpdates": [],
+  "bootSmoke": {
+    "status": "passed",
+    "issues": [],
+    "stdout": "{\"type\":\"airmentor-operational-event\",\"name\":\"startup.diagnostic\",\"level\":\"info\",\"timestamp\":\"2026-03-29T22:52:47.338Z\",\"details\":{\"level\":\"info\",\"code\":\"STARTUP_MODE\",\"message\":\"Running with production-like origin and cookie expectations.\"}}\n{\"type\":\"airmentor-operational-event\",\"name\":\"startup.ready\",\"level\":\"info\",\"timestamp\":\"2026-03-29T22:52:48.001Z\",\"details\":{\"host\":\"0.0.0.0\",\"port\":40679,\"corsAllowedOrigins\":[\"https://raed2180416.github.io\",\"http://127.0.0.1:5173\",\"http://localhost:5173\",\"http://127.0.0.1:4173\",\"http://localhost:4173\"],\"telemetrySinkConfigured\":false,\"sessionCookieSecure\":true,\"sessionCookieSameSite\":\"none\"}}\n",
+    "stderr": "{\"type\":\"airmentor-operational-event\",\"name\":\"telemetry.persistence_failed\",\"level\":\"warn\",\"timestamp\":\"2026-03-29T22:52:47.563Z\",\"details\":{\"source\":\"backend\",\"eventName\":\"startup.diagnostic\",\"error\":{\"name\":\"Error\",\"message\":\"Failed query: insert into \\\"operational_telemetry_events\\\" (\\\"operational_telemetry_event_id\\\", \\\"source\\\", \\\"name\\\", \\\"level\\\", \\\"event_timestamp\\\", \\\"payload_json\\\", \\\"created_at\\\") values ($1, $2, $3, $4, $5, $6, $7)\\nparams: ops_evt_5f63cad0-f516-418e-8a3f-5b121986c563,backend,startup.diagnostic,info,2026-03-29T22:52:47.338Z,{\\\"level\\\":\\\"info\\\",\\\"code\\\":\\\"STARTUP_MODE\\\",\\\"message\\\":\\\"Running with production-like origin and cookie expectations.\\\"},2026-03-29T22:52:47.340Z\"}}}\n{\"type\":\"airmentor-operational-event\",\"name\":\"telemetry.persistence_failed\",\"level\":\"warn\",\"timestamp\":\"2026-03-29T22:52:48.113Z\",\"details\":{\"source\":\"backend\",\"eventName\":\"startup.ready\",\"error\":{\"name\":\"Error\",\"message\":\"Failed query: insert into \\\"operational_telemetry_events\\\" (\\\"operational_telemetry_event_id\\\", \\\"source\\\", \\\"name\\\", \\\"level\\\", \\\"event_timestamp\\\", \\\"payload_json\\\", \\\"created_at\\\") values ($1, $2, $3, $4, $5, $6, $7)\\nparams: ops_evt_1dd858c3-5dcb-4f10-aef4-506efc953727,backend,startup.ready,info,2026-03-29T22:52:48.001Z,{\\\"host\\\":\\\"0.0.0.0\\\",\\\"port\\\":40679,\\\"corsAllowedOrigins\\\":[\\\"https://raed2180416.github.io\\\",\\\"http://127.0.0.1:5173\\\",\\\"http://localhost:5173\\\",\\\"http://127.0.0.1:4173\\\",\\\"http://localhost:4173\\\"],\\\"telemetrySinkConfigured\\\":false,\\\"sessionCookieSecure\\\":true,\\\"sessionCookieSameSite\\\":\\\"none\\\"},2026-03-29T22:52:48.002Z\"}}}\n",
+    "health": {
+      "ok": true,
+      "checks": [
+        {
+          "attempt": 1,
+          "startedAt": "2026-03-29T22:52:47.105Z",
+          "status": null,
+          "ok": false,
+          "body": "",
+          "error": "fetch failed"
+        },
+        {
+          "attempt": 2,
+          "startedAt": "2026-03-29T22:52:49.122Z",
+          "status": 200,
+          "ok": true,
+          "body": "{\"ok\":true}"
+        }
+      ]
+    },
+    "port": 40679,
+    "configSnapshot": {
+      "CSRF_SECRET_PRESENT": true,
+      "CORS_ALLOWED_ORIGINS": "https://raed2180416.github.io,http://127.0.0.1:5173,http://localhost:5173,http://127.0.0.1:4173,http://localhost:4173",
+      "SESSION_COOKIE_SECURE": "true",
+      "SESSION_COOKIE_SAME_SITE": "none",
+      "DATABASE_URL_PRESENT": true,
+      "DATABASE_URL_IS_LOCAL_DEFAULT": false,
+      "HOST": "0.0.0.0"
+    }
+  },
+  "deployPathSmoke": {
+    "status": "passed",
+    "issues": [],
+    "stdout": "{\"type\":\"airmentor-operational-event\",\"name\":\"startup.diagnostic\",\"level\":\"info\",\"timestamp\":\"2026-03-29T22:52:51.241Z\",\"details\":{\"level\":\"info\",\"code\":\"STARTUP_MODE\",\"message\":\"Running with production-like origin and cookie expectations.\"}}\n{\"type\":\"airmentor-operational-event\",\"name\":\"startup.ready\",\"level\":\"info\",\"timestamp\":\"2026-03-29T22:52:51.901Z\",\"details\":{\"host\":\"0.0.0.0\",\"port\":39733,\"corsAllowedOrigins\":[\"https://raed2180416.github.io\",\"http://127.0.0.1:5173\",\"http://localhost:5173\",\"http://127.0.0.1:4173\",\"http://localhost:4173\"],\"telemetrySinkConfigured\":false,\"sessionCookieSecure\":true,\"sessionCookieSameSite\":\"none\"}}\n",
+    "stderr": "",
+    "health": {
+      "ok": true,
+      "checks": [
+        {
+          "attempt": 1,
+          "startedAt": "2026-03-29T22:52:51.012Z",
+          "status": null,
+          "ok": false,
+          "body": "",
+          "error": "fetch failed"
+        },
+        {
+          "attempt": 2,
+          "startedAt": "2026-03-29T22:52:53.014Z",
+          "status": 200,
+          "ok": true,
+          "body": "{\"ok\":true}"
+        }
+      ]
+    },
+    "port": 39733,
+    "configSnapshot": {
+      "CSRF_SECRET_PRESENT": true,
+      "CORS_ALLOWED_ORIGINS": "https://raed2180416.github.io,http://127.0.0.1:5173,http://localhost:5173,http://127.0.0.1:4173,http://localhost:4173",
+      "SESSION_COOKIE_SECURE": "true",
+      "SESSION_COOKIE_SAME_SITE": "none",
+      "DATABASE_URL_PRESENT": true,
+      "DATABASE_URL_IS_LOCAL_DEFAULT": false,
+      "HOST": "0.0.0.0"
+    },
+    "migration": {
+      "command": "npm run db:migrate",
+      "status": "passed",
+      "stdout": "\n> air-mentor-api@0.1.0 db:migrate\n> tsx src/db/migrate.ts\n\n",
+      "stderr": ""
+    }
+  },
+  "issues": [],
+  "warnings": [
+    "AIRMENTOR_TELEMETRY_SINK_URL is not configured; external telemetry forwarding will remain disabled."
+  ]
+}

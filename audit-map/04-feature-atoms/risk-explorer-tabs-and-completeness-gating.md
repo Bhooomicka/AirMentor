@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Risk explorer tabs and completeness gating
+- Parent domain: Academic risk / inference surface
+- Feature scope boundary: The risk explorer page, its tabs, completeness banner, scenario comparison surfaces, and proof-bound drilldown popup. Excludes the mentor queue and student shell.
+- Roles and role-specific variants: Academic roles with access to the selected student or course proof context.
+- Product or user intent: Let the user inspect risk heads, compare scenarios, and confirm when the model view is complete enough to trust.
+- Source files: [`src/pages/risk-explorer.tsx`](../../src/pages/risk-explorer.tsx), [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`air-mentor-api/src/modules/academic-proof-routes.ts`](../../air-mentor-api/src/modules/academic-proof-routes.ts), [`air-mentor-api/src/modules/academic.ts`](../../air-mentor-api/src/modules/academic.ts)
+- Entry points: `RiskExplorerPage`, the tab handlers, and the proof launcher popup.
+- Routes, deep links, query params, and restore entry states: Risk-explorer route state inside the academic workspace; the selected proof checkpoint drives the bound view.
+- Preconditions and guard conditions: The selected risk context must be in scope for the active proof run and current role.
+- Visible surfaces involved: Overview/details/advanced tabs, feature-completeness banner, trained risk heads, derived scenario heads, no-action comparator, current-status cards, evidence cards, component evidence grid, and proof launcher popup.
+- Hidden or conditional surfaces involved: Load/empty/error states, checkpoint-bound comparator availability, and stage-advance-blocked badges.
+- Trigger sources: Open the risk explorer, switch tabs, and open the proof launcher popup.
+- Atomic user actions: Switch tabs, inspect the completeness banner, compare the no-action view, and drill into the evidence grid.
+- Hidden, hover-only, or keyboard-only actions: Tabs and cards remain keyboard reachable; there is no hidden edit mode on this page.
+- Automatic or system actions: Bind the view to the selected proof checkpoint, populate the evidence cards, and suppress comparators that are not available for the current context.
+- API and backend calls: Risk explorer proof routes through the academic client and backend proof routes.
+- State dependencies: Risk context, checkpoint context, tab state, and evidence payloads.
+- Persistence dependencies: Route state and any shared academic proof caches.
+- Restore behavior: Reopening the same risk explorer reuses the same checkpoint-bound context if the active proof run is unchanged.
+- Permissions and scope logic: The page should remain read-only and proof-bound; it cannot escape the selected checkpoint context.
+- State transitions: Open explorer -> overview/details/advanced tab -> comparator or evidence drilldown -> return.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Loading, empty, and load-error states are explicit; the no-action comparator is absent when the active view cannot support it.
+- Success path: The user confirms the completeness banner, inspects the risk heads, and drills into the relevant evidence.
+- Failure and recovery paths: Missing context or load failures keep the page in its error or empty state until the proof-backed scope is corrected.
+- Data read: Risk heads, evidence cards, comparator state, checkpoint context, and student or course risk summaries.
+- Data written: Tab state and popup state.
+- Telemetry, analytics, or audit-trail side effects: Risk and evidence exploration remain visible in the academic proof trail.
+- Downstream effects: Risk findings feed the mentor, HoD, and student-shell drilldowns that share the same proof context.
+- Hidden couplings: The risk explorer depends on the same checkpoint-bound proof scope that drives the student shell and HoD analytics.
+- Expected behavior: The page should make it obvious when the risk view is complete enough to trust and should keep all comparisons bound to the selected checkpoint.
+- Implemented behavior: `RiskExplorerPage` renders the tabs, completeness banner, comparator cards, evidence grid, and proof popup.
+- Tested behavior: [`tests/risk-explorer.test.tsx`](../../tests/risk-explorer.test.tsx), [`tests/proof-surface-launcher.test.tsx`](../../tests/proof-surface-launcher.test.tsx), [`air-mentor-api/tests/risk-explorer.test.ts`](../../air-mentor-api/tests/risk-explorer.test.ts), [`air-mentor-api/tests/academic-proof-routes.test.ts`](../../air-mentor-api/tests/academic-proof-routes.test.ts).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/risk-explorer.test.tsx`](../../tests/risk-explorer.test.tsx), [`tests/proof-surface-launcher.test.tsx`](../../tests/proof-surface-launcher.test.tsx), [`air-mentor-api/tests/risk-explorer.test.ts`](../../air-mentor-api/tests/risk-explorer.test.ts), [`air-mentor-api/tests/academic-proof-routes.test.ts`](../../air-mentor-api/tests/academic-proof-routes.test.ts).
+- Known gaps: No live browser pass confirmed the advanced-tab comparator flow.
+- Open questions: Should the completeness banner expose the exact missing evidence family when the model is incomplete?
+- Confidence level: High

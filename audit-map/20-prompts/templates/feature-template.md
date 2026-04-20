@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name:
+- Parent domain:
+- Feature scope boundary:
+- Roles and role-specific variants:
+- Product or user intent:
+- Source files:
+- Entry points:
+- Routes, deep links, query params, and restore entry states:
+- Preconditions and guard conditions:
+- Visible surfaces involved:
+- Hidden or conditional surfaces involved:
+- Trigger sources:
+- Atomic user actions:
+- Hidden, hover-only, or keyboard-only actions:
+- Automatic or system actions:
+- API and backend calls:
+- State dependencies:
+- Persistence dependencies:
+- Restore behavior:
+- Permissions and scope logic:
+- State transitions:
+- Empty, loading, stale, disabled, locked, conflict, and error states:
+- Success path:
+- Failure and recovery paths:
+- Data read:
+- Data written:
+- Telemetry, analytics, or audit-trail side effects:
+- Downstream effects:
+- Hidden couplings:
+- Expected behavior:
+- Implemented behavior:
+- Tested behavior:
+- Live behavior notes:
+- Known mismatches:
+- Tests covering it:
+- Known gaps:
+- Open questions:
+- Confidence level:

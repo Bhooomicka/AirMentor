@@ -1,0 +1,30 @@
+[2026-03-30T20:42:02Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:42:02Z] command=zsh -lc $'cd air-mentor-api && set -a && source .env && set +a && npx tsx <<\'TS\'\nimport { createPool } from "./src/db/client.ts"\nconst pool = createPool(process.env.DATABASE_URL!)\ntry {\n  const sql = `\n    select json_build_object(\n      run, (\n        select row_to_json(t) from (\n          select simulation_run_id, batch_id, active_flag, status, semester_start, semester_end, active_operational_semester, updated_at\n          from simulation_runs\n          where simulation_run_id = sim_mnc_2023_first6_v1\n        ) t\n      ),\n      counts, (\n        select row_to_json(t) from (\n          select\n            (select count(*) from transcript_term_results where student_id like mnc_student_% and term_id like term_mnc_sem%) as transcript_term_count,\n            (select count(*) from transcript_subject_results tsr join transcript_term_results ttr on ttr.transcript_term_result_id = tsr.transcript_term_result_id where ttr.student_id like mnc_student_% and ttr.term_id like term_mnc_sem%) as transcript_subject_count,\n            (select count(*) from student_attendance_snapshots where student_id like mnc_student_% and source like proof-run:%) as attendance_count,\n            (select count(*) from student_assessment_scores where student_id like mnc_student_% and term_id = term_mnc_sem6) as assessment_count\n        ) t\n      ),\n      sizes, (\n        select json_object_agg(relname, pg_total_relation_size(oid))\n        from pg_class\n        where relname in (transcript_term_results,transcript_subject_results,student_attendance_snapshots,student_assessment_scores)\n      )\n    ) as payload\n  `\n  const result = await pool.query(sql)\n  console.log(JSON.stringify(result.rows[0]?.payload ?? null, null, 2))\n} finally {\n  await pool.end()\n}\nTS' 
+/home/raed/projects/air-mentor-ui/node_modules/pg-pool/index.js:45
+    Error.captureStackTrace(err)
+          ^
+
+error: syntax error at or near "and"
+    at /home/raed/projects/air-mentor-ui/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async [eval]:29:18 {
+  length: 93,
+  severity: 'ERROR',
+  code: '42601',
+  detail: undefined,
+  hint: undefined,
+  position: '494',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'scan.l',
+  line: '1236',
+  routine: 'scanner_yyerror'
+}
+
+Node.js v24.13.0

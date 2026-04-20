@@ -1,0 +1,12 @@
+[2026-03-30T21:00:52Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T21:00:52Z] command=zsh -lc env\ -C\ air-mentor-api\ npx\ vitest\ run\ --maxWorkers=1\ tests/openapi.test.ts\ tests/proof-control-plane-activation-service.test.ts\ tests/admin-control-plane.test.ts\ -t\ \"activates\ a\ proof\ operational\ semester\ without\ mutating\ checkpoint\ playback\ state\|re-activates\ proof\ semesters\ without\ duplicating\ the\ published\ operational\ projection\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  1 passed | 2 skipped (3)
+      Tests  2 passed | 19 skipped (21)
+   Start at  02:31:03
+   Duration  130.80s (transform 2.92s, setup 0ms, import 4.38s, tests 125.56s, environment 0ms)
+
+[2026-03-30T21:03:14Z] exit=0

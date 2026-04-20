@@ -1,0 +1,12 @@
+[2026-03-30T07:48:29Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:48:29Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ npx\ vitest\ run\ tests/admin-hierarchy.test.ts\ tests/academic-access.test.ts\ tests/academic-parity.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  3 passed (3)
+      Tests  17 passed (17)
+   Start at  13:18:31
+   Duration  58.36s (transform 939ms, setup 0ms, import 1.95s, tests 56.09s, environment 0ms)
+
+[2026-03-30T07:49:29Z] exit=0

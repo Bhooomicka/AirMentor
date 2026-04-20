@@ -1,0 +1,17 @@
+[2026-03-29T23:22:07Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T23:22:07Z] command=bash -lc AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ RAILWAY_PUBLIC_API_URL=https://api-production-ab72.up.railway.app\ EXPECTED_FRONTEND_ORIGIN=https://raed2180416.github.io\ npm\ --workspace\ air-mentor-api\ run\ verify:live-session-contract\ \&\&\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ npm\ run\ verify:proof-closure:live\ \&\&\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ npm\ run\ playwright:admin-live:teaching-parity\ \&\&\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ npm\ run\ playwright:admin-live:acceptance 
+
+> air-mentor-api@0.1.0 verify:live-session-contract
+> node ../scripts/check-railway-deploy-readiness.mjs session-contract
+
+Railway live session-contract verification passed after 1 attempt(s). Report: output/railway-live-session-contract.json
+
+> air-mentor-ui@0.0.0 verify:proof-closure:live
+> AIRMENTOR_LIVE_STACK=1 bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Another proof smoke run is already active (pid 577972).

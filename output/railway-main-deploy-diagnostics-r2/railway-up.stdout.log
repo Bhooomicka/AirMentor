@@ -1,0 +1,51 @@
+Indexing...
+Uploading...
+  Build Logs: https://railway.com/project/71baa9af-c17f-4782-b1a7-f53259a161fe/service/f81182f4-2023-4ac9-9f26-dad15cb00435?id=55619fec-11c7-4777-a90e-231276845b1f&
+CI mode enabled
+
+[35m[Region: asia-southeast1][0m
+Using Nixpacks
+==============
+context: p6zq-j7gq
+╔════════════ Nixpacks v1.38.0 ════════════╗
+║ setup      │ nodejs_22, npm-9_x, openssl ║
+║──────────────────────────────────────────║
+║ install    │ npm ci                      ║
+║──────────────────────────────────────────║
+║──────────────────────────────────────────║
+║ start      │ npm run start               ║
+╚══════════════════════════════════════════╝
+[internal] load build definition from Dockerfile
+[internal] load build definition from Dockerfile
+[internal] load build definition from Dockerfile
+[internal] load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+[internal] load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+[internal] load .dockerignore
+[internal] load .dockerignore
+[internal] load .dockerignore
+[internal] load .dockerignore
+[stage-0 10/10] COPY . /app
+[stage-0  9/10] RUN printf '\nPATH=/app/node_modules/.bin:$PATH' >> /root/.profile
+[stage-0  8/10] RUN --mount=type=cache,id=s/f81182f4-2023-4ac9-9f26-dad15cb00435-node_modules/cache,target=/app/node_modules/.cache npm run build
+[stage-0  4/10] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d
+[stage-0  3/10] COPY .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix
+[internal] load build context
+[stage-0  2/10] WORKDIR /app/
+[stage-0  1/10] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+[internal] load build context
+[internal] load build context
+[stage-0  1/10] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+[internal] load build context
+[stage-0  3/10] COPY .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix
+[stage-0  4/10] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d
+[stage-0  6/10] RUN --mount=type=cache,id=s/f81182f4-2023-4ac9-9f26-dad15cb00435-/root/npm,target=/root/.npm npm ci
+[stage-0  9/10] RUN printf '\nPATH=/app/node_modules/.bin:$PATH' >> /root/.profile
+[stage-0 10/10] COPY . /app
+[auth] sharing credentials for production-asia-southeast1-eqsg3a.railway-registry.com
+[auth] sharing credentials for production-asia-southeast1-eqsg3a.railway-registry.com
+importing to docker
+importing to docker
+Run:
+docker run -it production-asia-southeast1-eqsg3a.railway-registry.com/f81182f4-2023-4ac9-9f26-dad15cb00435:55619fec-11c7-4777-a90e-231276845b1f
+[92mBuild time: 14.87 seconds[0m
+Deploy complete

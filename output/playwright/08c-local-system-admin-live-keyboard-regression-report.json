@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-04-01T21:19:37.842Z",
+  "appUrl": "http://127.0.0.1:4173",
+  "apiUrl": "http://127.0.0.1:42725",
+  "liveStack": false,
+  "proofRoute": {
+    "routeHash": "#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+    "batchId": "batch_branch_mnc_btech_2023"
+  },
+  "requestRoute": {
+    "id": "request_001",
+    "summary": "Grant additional mentor mapping coverage",
+    "status": "New"
+  },
+  "lateCheckpointWalk": {
+    "availableOperationalSemesters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "checkpoint": {
+      "simulationStageCheckpointId": "stage_checkpoint_a4cde7dffe0a367c41e961aa",
+      "semesterNumber": 6,
+      "stageKey": "post-see",
+      "stageLabel": "Post SEE",
+      "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+      "stageOrder": 5,
+      "stageAdvanceBlocked": true,
+      "playbackAccessible": false,
+      "blockedByCheckpointId": "stage_checkpoint_4eed3a2c6e987653e59a9900",
+      "blockedProgressionReason": "Playback is blocked until all queue items for checkpoint stage_checkpoint_4eed3a2c6e987653e59a9900 are resolved.",
+      "surfaceLabel": "Sem 6 · Post SEE",
+      "bannerLabel": "semester 6 · Post SEE"
+    }
+  },
+  "artifacts": {
+    "successScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression.png",
+    "successReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-report.json",
+    "failureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.png",
+    "failureTrace": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.zip",
+    "failureHtml": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.html",
+    "failureReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.json",
+    "prefixedSuccessScreenshot": null,
+    "prefixedSuccessReport": null,
+    "prefixedFailureScreenshot": null,
+    "prefixedFailureTrace": null,
+    "prefixedFailureHtml": null,
+    "prefixedFailureReport": null
+  },
+  "checks": [
+    {
+      "name": "request_flow_keyboard_navigation",
+      "status": "passed"
+    },
+    {
+      "name": "modal_focus_trap_and_restore",
+      "status": "passed"
+    },
+    {
+      "name": "proof_dashboard_checkpoint_keyboard_controls",
+      "status": "passed"
+    },
+    {
+      "name": "portal_role_switch_keyboard_navigation",
+      "status": "passed"
+    },
+    {
+      "name": "teacher_proof_surface_keyboard_navigation",
+      "status": "passed"
+    },
+    {
+      "name": "proof_playback_restore_reset_keyboard_path",
+      "status": "passed"
+    }
+  ]
+}

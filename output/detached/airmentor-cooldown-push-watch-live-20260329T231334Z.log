@@ -1,0 +1,17 @@
+[2026-03-29T23:13:34Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T23:13:34Z] command=bash -lc $'\nset -euo pipefail\nprobe_login_status() {\n  node --input-type=module <<"EOF"\nconst apiBaseUrl = "https://api-production-ab72.up.railway.app/"\nconst origin = "https://raed2180416.github.io"\nconst response = await fetch(new URL("/api/session/login", apiBaseUrl), {\n  method: "POST",\n  headers: {\n    origin,\n    "content-type": "application/json",\n    accept: "application/json",\n  },\n  body: JSON.stringify({ identifier: "sysadmin", password: "admin1234" }),\n})\nconsole.log(response.status)\nEOF\n}\nfor attempt in $(seq 1 24); do\n  status="$(probe_login_status)"\n  echo "login-probe-attempt=${attempt} status=${status}"\n  if [ "${status}" = "200" ]; then\n    break\n  fi\n  if [ "${attempt}" = "24" ]; then\n    echo "login probe did not recover within the cooldown window" >&2\n    exit 1\n  fi\n  sleep 30\ndone\nsha="$(git rev-parse HEAD)"\ngit push origin HEAD:main\nfor poll in $(seq 1 20); do\n  run_id="$(gh run list --workflow "Deploy API to Railway" --limit 10 --json databaseId,headSha --jq ".[] | select(.headSha == \\"${sha}\\") | .databaseId" | head -n 1)"\n  if [ -n "${run_id}" ]; then\n    echo "railway-run-id=${run_id}"\n    break\n  fi\n  sleep 5\ndone\nif [ -z "${run_id:-}" ]; then\n  echo "Could not find Deploy API to Railway run for ${sha}" >&2\n  exit 1\nfi\ngh run watch "${run_id}" --exit-status\nAIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 RAILWAY_PUBLIC_API_URL=https://api-production-ab72.up.railway.app EXPECTED_FRONTEND_ORIGIN=https://raed2180416.github.io npm --workspace air-mentor-api run verify:live-session-contract\nPLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 npm run verify:proof-closure:live\nPLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 npm run playwright:admin-live:teaching-parity\nPLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 npm run playwright:admin-live:acceptance\n' 
+login-probe-attempt=1 status=429
+login-probe-attempt=2 status=429
+login-probe-attempt=3 status=429
+login-probe-attempt=4 status=429
+login-probe-attempt=5 status=429
+login-probe-attempt=6 status=429
+login-probe-attempt=7 status=429
+login-probe-attempt=8 status=429
+login-probe-attempt=9 status=429
+login-probe-attempt=10 status=429
+login-probe-attempt=11 status=429
+login-probe-attempt=12 status=200
+Everything up-to-date
+railway-run-id=23721506962
+Run Deploy API to Railway (23721506962) has already completed with 'cancelled'

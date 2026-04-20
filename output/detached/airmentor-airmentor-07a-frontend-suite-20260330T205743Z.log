@@ -1,0 +1,16 @@
+[2026-03-30T20:57:43Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:57:43Z] command=zsh -lc npm\ test\ --\ --run\ tests/system-admin-proof-dashboard-workspace.test.tsx\ tests/api-client.test.ts\ tests/faculty-profile-proof.test.tsx\ tests/risk-explorer.test.tsx\ tests/student-shell.test.tsx\ tests/hod-pages.test.ts 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/system-admin-proof-dashboard-workspace.test.tsx tests/api-client.test.ts tests/faculty-profile-proof.test.tsx tests/risk-explorer.test.tsx tests/student-shell.test.tsx tests/hod-pages.test.ts
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+
+ Test Files  6 passed (6)
+      Tests  24 passed (24)
+   Start at  02:27:45
+   Duration  1.59s (transform 954ms, setup 0ms, import 2.53s, tests 855ms, environment 1.56s)
+
+[2026-03-30T20:57:46Z] exit=0

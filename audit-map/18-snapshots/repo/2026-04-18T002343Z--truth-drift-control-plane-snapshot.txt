@@ -1,0 +1,517 @@
+# Truth Drift Control-Plane Snapshot
+captured_at=2026-04-18T00:23:43Z
+
+== pending.queue ==
+truth-drift-reconciliation-pass	bootstrap		
+feature-intent-integrity-pass	bootstrap		
+cross-flow-recovery-pass	bootstrap		
+fault-tolerance-degradation-pass	bootstrap		
+memory-lifecycle-cleanup-pass	bootstrap		
+ux-consistency-cohesion-pass	bootstrap		
+live-behavior-pass	live		
+account-routing-pass	bootstrap		
+claim-verification-pass	bootstrap		
+unknown-omission-pass	bootstrap		
+residual-gap-closure-pass	bootstrap		
+closure-readiness-pass	bootstrap		
+cost-optimization-pass	bootstrap		
+prompt-self-improvement-pass	bootstrap		
+unattended-run-pass	bootstrap		
+audit-the-audit-pass	bootstrap		
+synthesis-pass	bootstrap		
+
+== current-run-status.md ==
+# Current Run Status
+
+Date: 2026-04-16
+
+## Queue Reality
+
+- The overnight queue completed successfully.
+- `pending.queue` is empty.
+- `audit-air-mentor-ui-overnight-night-run-orchestrator` finished with `exit_code=0` at `2026-04-15T23:20:20Z`.
+- There are no active bootstrap forensic passes still running in tmux.
+
+## Core Bootstrap Passes
+
+- `inventory-pass`: completed on `native-codex` / `gpt-5.4-mini`
+- `route-map-pass`: completed on `native-codex` / `gpt-5.4-mini`
+- `role-surface-pass`: completed on `native-codex` / `gpt-5.4-mini`
+- `feature-atom-pass`: completed on `native-codex` / `gpt-5.4-mini`
+- `dependency-pass`: completed on `native-codex` / `gpt-5.4-mini`
+- `data-flow-pass`: completed on `codex` / `gpt-5.3-codex`
+- `state-flow-pass`: completed on `codex` / `gpt-5.3-codex`
+- `ml-audit-pass`: completed on `native-codex` / `gpt-5.4`
+- `test-gap-pass`: completed on `native-codex` / `gpt-5.4-mini`
+- `ux-friction-pass`: completed on `native-codex` / `gpt-5.4-mini`
+- `account-routing-pass`: completed on `native-codex` / `gpt-5.4`
+- `prompt-self-improvement-pass`: completed on `codex` / `gpt-5.3-codex`
+- `unattended-run-pass`: completed on `codex` / `gpt-5.3-codex`
+- `audit-the-audit-pass`: completed on `github-copilot` / `gpt-5.3-codex`
+- `synthesis-pass`: completed on `github-copilot` / `gpt-5.3-codex`
+
+## Additional Closure Passes
+
+- `backend-provenance-pass`: completed on `native-codex` / `gpt-5.4` with local provenance closure refreshed on `2026-04-16`
+- `workflow-automation-pass`: completed on `codex` / `gpt-5.3-codex`
+- `script-behavior-pass`: completed on `codex` / `gpt-5.3-codex`
+- `frontend-microinteraction-pass`: completed on `codex` / `gpt-5.3-codex`
+- `claim-verification-pass`: completed on `native-codex` / `gpt-5.4`
+- `residual-gap-closure-pass`: completed on `github-copilot` / `gpt-5.3-codex`
+- `unknown-omission-pass`: completed on `native-codex` / `gpt-5.4`
+- `data-flow-corpus-rerun-pass`: completed on `codex` / `gpt-5.3-codex`
+- `proof-refresh-completion-pass`: completed on `codex` / `gpt-5.3-codex`
+- `frontend-long-tail-pass`: completed on `native-codex` / `gpt-5.4`
+- `closure-readiness-pass`: completed on `native-codex` / `gpt-5.4`
+
+## Routing Truth
+
+- Native Codex remained the primary route.
+- Arctic `codex-*` slots are now execution-verified on pinned `gpt-5.3-codex`.
+- Arctic `google-main` is execution-verified on `gemini-3.1-pro-preview`.
+- Arctic `copilot-raed2180416` is execution-verified on `gemini-3.1-pro-preview` and `gpt-4.1`.
+- Arctic `copilot-accneww432` is execution-verified on `gemini-3.1-pro-preview`.
+- Visible Copilot `gpt-5.4` remains guarded because runtime smoke rejects it as `model_not_supported`.
+
+## Caveman Truth
+
+- Caveman is installed and available.
+- Caveman was not active for the high-risk forensic passes.
+- The completed queue reflects model/provider failover and routing logic, not Caveman compression.
+
+## Current Operator State
+
+- The audit pipeline is not paused; it is finished.
+- The main remaining work is review of the generated audit outputs and any targeted reruns the operator wants to schedule.
+
+== operator-dashboard.md ==
+# Operator Dashboard
+
+Generated: 2026-04-18 00:23:38 UTC
+
+## Active Pass
+
+- pass: `truth-drift-reconciliation-pass`
+- state: `running`
+- provider: `native-codex`
+- model: `gpt-5.4`
+- slot: `native-codex-session`
+- route attempt: `1`
+- tmux: `present`
+- last visible activity age: `12s`
+- supervisor: `watching`
+- suspected stall: `no`
+
+## Queue Preview
+
+1. `truth-drift-reconciliation-pass` (`bootstrap` / `unknown`)
+2. `feature-intent-integrity-pass` (`bootstrap` / `unknown`)
+3. `cross-flow-recovery-pass` (`bootstrap` / `unknown`)
+4. `fault-tolerance-degradation-pass` (`bootstrap` / `unknown`)
+5. `memory-lifecycle-cleanup-pass` (`bootstrap` / `unknown`)
+6. `ux-consistency-cohesion-pass` (`bootstrap` / `unknown`)
+7. `live-behavior-pass` (`live` / `unknown`)
+8. `account-routing-pass` (`bootstrap` / `unknown`)
+
+## Next Route Decision
+
+- route state: `ready`
+- provider: `native-codex`
+- model: `gpt-5.4`
+- slot: `native-codex-session`
+- reason: Native Codex is the default verified execution path.
+
+## Detached Sessions
+
+| Session | State | Provider | Model | Route Attempt | Idle | tmux | Suspected Stall |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `audit-air-mentor-ui-bootstrap-smoke-job` | `completed` | `native-codex` | `` | `` | `1m 19s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-inventory-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `1m 20s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-route-map-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `1m 19s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-role-surface-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `1m 19s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-feature-atom-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `1m 21s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-dependency-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `1m 21s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-data-flow-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `1m 21s` | `present` | `no` |
+| `audit-air-mentor-ui-bootstrap-state-flow-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `1m 19s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-ml-audit-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `1m 20s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-test-gap-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `1m 18s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-ux-friction-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `1m 17s` | `missing` | `no` |
+| `audit-air-mentor-ui-live-live-behavior-pass` | `completed` | `native-codex` | `gpt-5.4` | `` | `1m 17s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-account-routing-pass` | `completed` | `native-codex` | `gpt-5.4` | `` | `1m 23s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `1m 20s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-unattended-run-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `1m 18s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-workflow-automation-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `1m 17s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-audit-the-audit-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `1` | `1m 22s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-synthesis-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `1` | `1m 18s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `1m 22s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `1m 20s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-final-gap-and-shutdown` | `completed` | `native-codex` | `` | `` | `1m 16s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-frontend-long-tail-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `1m 21s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-script-behavior-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `1m 19s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-backend-provenance-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `1m 22s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-absolute-closure-campaign` | `completed` | `native-codex` | `` | `` | `1m 16s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-frontend-microinteraction-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `1m 21s` | `missing` | `no` |
+| `audit-air-mentor-ui-live-same-student-cross-surface-parity-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `1m 17s` | `missing` | `no` |
+| `audit-air-mentor-ui-live-live-credentialed-parity-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `1m 17s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-claim-verification-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `1m 22s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-unknown-omission-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `1m 18s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-residual-gap-closure-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `1m 20s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-closure-readiness-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `1m 22s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-usage-refresh-orchestrator` | `running` | `native-codex` | `` | `` | `1m 16s` | `present` | `no` |
+| `audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass` | `running` | `native-codex` | `gpt-5.4` | `1` | `12s` | `present` | `no` |
+| `audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor` | `running` | `` | `` | `` | `27s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-night-run-orchestrator` | `running` | `native-codex` | `` | `` | `0s` | `present` | `no` |
+
+## Slot Reset Windows
+
+| Slot | Provider | Account | Access | Route State | Exec State | Last Probe Failure | Execution Model | Primary % | Primary Reset | Secondary % | Secondary Reset | Cooldown |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `antigravity-main` | `antigravity` | `Antigravity OAuth` | `allowed` | `unexpected-output` | `failed` | `unexpected-output` | `` | `100` | `` | `` | `` | `clear` |
+| `codex-01` | `codex` | `dummy account` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `100` | `2026-04-18 05:01 UTC` | `2` | `2026-04-18 23:43 UTC` | `clear` |
+| `codex-02` | `codex` | `GeoWake App` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `100` | `2026-04-18 05:02 UTC` | `0` | `2026-04-18 22:50 UTC` | `clear` |
+| `codex-03` | `codex` | `Hazzy` | `blocked, limit reached` | `quota-blocked` | `verified` | `` | `gpt-5.3-codex` | `100` | `2026-04-18 05:03 UTC` | `0` | `2026-04-18 21:17 UTC` | `cooling-down 2026-04-18 05:03 UTC` |
+| `codex-04` | `codex` | `Raed` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `100` | `2026-04-18 05:03 UTC` | `32` | `2026-04-21 14:06 UTC` | `clear` |
+| `codex-05` | `codex` | `raed siddiqui` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `83` | `2026-04-18 04:59 UTC` | `53` | `2026-04-21 09:46 UTC` | `clear` |
+| `codex-06` | `codex` | `stuff rand (You)` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `100` | `2026-04-18 05:04 UTC` | `0` | `2026-04-18 19:57 UTC` | `clear` |
+| `copilot-accneww432` | `github-copilot` | `accneww432` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `82` | `2026-05-01 00:00 UTC` | `` | `` | `clear` |
+| `copilot-raed2180416` | `github-copilot` | `Raed2180416` | `allowed` | `verified` | `verified` | `provider-rejected` | `gpt-5.3-codex` | `23.1` | `2026-05-01 00:00 UTC` | `` | `` | `clear` |
+| `google-main` | `google` | `youaretalkingtoraed@gmail.com` | `allowed` | `verified` | `verified` | `` | `gemini-3.1-pro-preview` | `100` | `` | `` | `` | `clear` |
+
+## Warnings
+
+- No sessions currently breach the stall threshold.
+
+== truth-drift status ==
+task_class=high-stakes
+caveman_active=1
+caveman_mode=full
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ truth-drift-reconciliation-pass\ --context\ bootstrap\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 0\ --provider-mode\ auto\ --wait-timeout-seconds\ 1800\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+archived_log_file=''
+started_at=2026-04-18T00:18:37Z
+pid=2352188
+route_attempt=1
+route_provider_mode=auto
+route_selected_slot=''
+route_selected_account=native-codex-session
+route_last_changed_at=2026-04-18T00:18:38Z
+execution_supervisor_pid=2352712
+session_name=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+pass_name=truth-drift-reconciliation-pass
+context=bootstrap
+workdir=/home/raed/projects/air-mentor-ui
+state=running
+model=gpt-5.4
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+created_at=2026-04-18T00:18:37Z
+updated_at=2026-04-18T00:18:38Z
+tmux_visibility=present
+execution_supervisor_state=watching
+execution_supervisor_detail=Latest\ progress\ source:\ attempt-log.
+execution_supervisor_updated_at=2026-04-18T00:24:08Z
+last_execution_progress_at=2026-04-18T00:24:08Z
+last_execution_progress_source=attempt-log
+
+== truth-drift checkpoint ==
+pass_name=truth-drift-reconciliation-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=1
+caveman_mode=full
+last_event=running
+current_provider=native-codex
+current_account=native-codex-session
+current_model=gpt-5.4
+current_slot=''
+route_attempt=1
+last_checkpoint_at=2026-04-18T00:18:38Z
+execution_supervisor_pid=2352712
+
+== night-run status ==
+task_class=orchestration
+model=''
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/night-run-orchestrator.sh\ --worker\ --shutdown-on-complete
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-night-run-orchestrator.log.20260418T002310Z.prev
+pid=2494691
+current_phase=queue-processing
+started_at=2026-04-18T00:23:10Z
+shutdown_on_complete=1
+current_queue_context=bootstrap
+current_queue_task_class=''
+current_queue_prompt_file=''
+session_name=audit-air-mentor-ui-overnight-night-run-orchestrator
+pass_name=night-run-orchestrator
+context=overnight
+workdir=/home/raed/projects/air-mentor-ui
+state=running
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-night-run-orchestrator.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-overnight-night-run-orchestrator.checkpoint
+created_at=2026-04-18T00:23:10Z
+updated_at=2026-04-18T00:23:10Z
+tmux_visibility=present
+current_queue_session=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+current_queue_pass=truth-drift-reconciliation-pass
+
+== usage-refresh status ==
+task_class=orchestration
+model=''
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/usage-refresh-orchestrator.sh\ --worker\ --interval-seconds\ 900
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.log.20260418T000018Z.prev
+pid=1770662
+started_at=2026-04-18T00:00:18Z
+last_refresh_state=completed
+last_refresh_at=2026-04-18T00:07:01Z
+current_phase=sleeping
+next_refresh_in_seconds=900
+finished_at=2026-04-18T00:09:51Z
+recovered_from_stale_at=2026-04-18T00:20:03Z
+session_name=audit-air-mentor-ui-overnight-usage-refresh-orchestrator
+pass_name=usage-refresh-orchestrator
+context=overnight
+workdir=/home/raed/projects/air-mentor-ui
+state=running
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.checkpoint
+created_at=2026-04-18T00:00:18Z
+updated_at=2026-04-18T00:20:03Z
+tmux_visibility=present
+
+== closure-readiness status ==
+task_class=high-stakes
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ closure-readiness-pass\ --context\ bootstrap\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-closure-readiness-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-closure-readiness-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 0\ --provider-mode\ auto\ --wait-timeout-seconds\ 3600\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-closure-readiness-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-closure-readiness-pass.checkpoint
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-closure-readiness-pass.log.20260416T184053Z.prev
+started_at=2026-04-16T18:40:53Z
+pid=2052695
+last_execution_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-closure-readiness-pass.attempt-1.3we3pP.log
+route_attempt=2
+route_provider_mode=auto
+route_selected_slot=copilot-accneww432
+route_selected_account=copilot-accneww432
+route_last_changed_at=2026-04-16T18:41:24Z
+execution_supervisor_pid=2067242
+tmux_visibility=present
+last_execution_progress_at=2026-04-16T18:41:54Z
+last_execution_progress_source=attempt-log
+execution_supervisor_state=completed
+execution_supervisor_detail=Attempt\ process\ exited\ with\ code=0.
+execution_supervisor_updated_at=2026-04-16T18:41:55Z
+last_execution_failure_class=''
+exit_code=0
+finished_at=2026-04-16T18:41:55Z
+session_name=audit-air-mentor-ui-bootstrap-closure-readiness-pass
+pass_name=closure-readiness-pass
+context=bootstrap
+workdir=/home/raed/projects/air-mentor-ui
+state=completed
+model=gpt-5.3-codex
+provider=github-copilot
+account=copilot-accneww432
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-closure-readiness-pass.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-closure-readiness-pass.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-closure-readiness-pass.checkpoint
+created_at=2026-04-16T18:40:53Z
+updated_at=2026-04-16T18:41:55Z
+
+== live parity status ==
+task_class=high-stakes
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ live-credentialed-parity-pass\ --context\ live\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-live-live-credentialed-parity-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-live-live-credentialed-parity-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 1\ --provider-mode\ auto\ --wait-timeout-seconds\ 3600\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-live-live-credentialed-parity-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-live-live-credentialed-parity-pass.checkpoint
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-live-live-credentialed-parity-pass.log.20260416T181746Z.prev
+started_at=2026-04-16T18:17:46Z
+pid=''
+route_attempt=1
+route_provider_mode=auto
+route_selected_slot=''
+route_selected_account=native-codex-session
+route_last_changed_at=2026-04-16T18:17:46Z
+execution_supervisor_pid=''
+tmux_visibility=absent
+last_execution_progress_at=2026-04-16T18:29:17Z
+last_execution_progress_source=attempt-log\,last-message
+execution_supervisor_state=completed
+execution_supervisor_detail=Attempt\ process\ exited\ with\ code=0.
+execution_supervisor_updated_at=2026-04-16T18:29:17Z
+last_execution_failure_class=''
+exit_code=0
+finished_at=2026-04-16T18:29:17Z
+session_name=audit-air-mentor-ui-live-live-credentialed-parity-pass
+pass_name=live-credentialed-parity-pass
+context=live
+workdir=/home/raed/projects/air-mentor-ui
+state=completed
+model=gpt-5.4
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-live-live-credentialed-parity-pass.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-live-live-credentialed-parity-pass.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-live-live-credentialed-parity-pass.checkpoint
+created_at=2026-04-16T18:17:46Z
+updated_at=2026-04-16T18:29:17Z
+
+== same-student parity status ==
+task_class=high-stakes
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ same-student-cross-surface-parity-pass\ --context\ live\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 1\ --provider-mode\ auto\ --wait-timeout-seconds\ 3600\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.checkpoint
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.log.20260416T180042Z.prev
+started_at=2026-04-16T18:00:42Z
+pid=''
+route_attempt=1
+route_provider_mode=auto
+route_selected_slot=''
+route_selected_account=native-codex-session
+route_last_changed_at=2026-04-16T18:00:42Z
+execution_supervisor_pid=''
+tmux_visibility=absent
+last_execution_progress_at=2026-04-16T18:23:14Z
+last_execution_progress_source=attempt-log\,last-message
+execution_supervisor_state=completed
+execution_supervisor_detail=Attempt\ process\ exited\ with\ code=0.
+execution_supervisor_updated_at=2026-04-16T18:23:14Z
+last_execution_failure_class=''
+exit_code=0
+finished_at=2026-04-16T18:23:14Z
+session_name=audit-air-mentor-ui-live-same-student-cross-surface-parity-pass
+pass_name=same-student-cross-surface-parity-pass
+context=live
+workdir=/home/raed/projects/air-mentor-ui
+state=completed
+model=gpt-5.4
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.checkpoint
+created_at=2026-04-16T18:00:42Z
+updated_at=2026-04-16T18:23:14Z
+
+== unknown-omission status ==
+task_class=high-stakes
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ unknown-omission-pass\ --context\ bootstrap\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-unknown-omission-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-unknown-omission-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 0\ --provider-mode\ auto\ --wait-timeout-seconds\ 3600\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-unknown-omission-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unknown-omission-pass.log.20260416T183651Z.prev
+started_at=2026-04-16T18:36:51Z
+pid=1946595
+last_execution_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unknown-omission-pass.attempt-1.7rR0NI.log
+route_attempt=2
+route_provider_mode=auto
+route_selected_slot=copilot-accneww432
+route_selected_account=copilot-accneww432
+route_last_changed_at=2026-04-16T18:37:22Z
+execution_supervisor_pid=1960059
+tmux_visibility=present
+last_execution_progress_at=2026-04-16T18:37:52Z
+last_execution_progress_source=attempt-log
+execution_supervisor_state=completed
+execution_supervisor_detail=Attempt\ process\ exited\ with\ code=0.
+execution_supervisor_updated_at=2026-04-16T18:37:52Z
+last_execution_failure_class=''
+exit_code=0
+finished_at=2026-04-16T18:37:52Z
+session_name=audit-air-mentor-ui-bootstrap-unknown-omission-pass
+pass_name=unknown-omission-pass
+context=bootstrap
+workdir=/home/raed/projects/air-mentor-ui
+state=completed
+model=gpt-5.3-codex
+provider=github-copilot
+account=copilot-accneww432
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unknown-omission-pass.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-unknown-omission-pass.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint
+created_at=2026-04-16T18:36:51Z
+updated_at=2026-04-16T18:37:52Z
+
+== frontend-long-tail status ==
+task_class=high-stakes
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ frontend-long-tail-pass\ --context\ bootstrap\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 1\ --provider-mode\ auto\ --wait-timeout-seconds\ 1800\ --wait-poll-seconds\ 60\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.checkpoint
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.log.20260416T093237Z.prev
+started_at=2026-04-16T09:32:38Z
+pid=966315
+route_attempt=1
+route_provider_mode=auto
+route_selected_slot=''
+route_selected_account=native-codex-session
+route_last_changed_at=2026-04-16T09:32:38Z
+execution_supervisor_pid=966684
+tmux_visibility=present
+last_execution_progress_at=2026-04-16T09:55:10Z
+last_execution_progress_source=attempt-log\,last-message
+execution_supervisor_state=completed
+execution_supervisor_detail=Attempt\ process\ exited\ with\ code=0.
+execution_supervisor_updated_at=2026-04-16T09:55:10Z
+last_execution_failure_class=''
+exit_code=0
+finished_at=2026-04-16T09:55:10Z
+session_name=audit-air-mentor-ui-bootstrap-frontend-long-tail-pass
+pass_name=frontend-long-tail-pass
+context=bootstrap
+workdir=/home/raed/projects/air-mentor-ui
+state=completed
+model=gpt-5.4
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.checkpoint
+created_at=2026-04-16T09:32:37Z
+updated_at=2026-04-16T09:55:10Z
+
+== tmux-list-jobs.sh ==
+session	state	tmux	log
+audit-air-mentor-ui-bootstrap-account-routing-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-account-routing-pass.log
+audit-air-mentor-ui-bootstrap-audit-the-audit-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-audit-the-audit-pass.log
+audit-air-mentor-ui-bootstrap-backend-provenance-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-backend-provenance-pass.log
+audit-air-mentor-ui-bootstrap-claim-verification-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-claim-verification-pass.log
+audit-air-mentor-ui-bootstrap-closure-readiness-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-closure-readiness-pass.log
+audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass.log
+audit-air-mentor-ui-bootstrap-data-flow-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-data-flow-pass.log
+audit-air-mentor-ui-bootstrap-dependency-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-dependency-pass.log
+audit-air-mentor-ui-bootstrap-feature-atom-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-feature-atom-pass.log
+audit-air-mentor-ui-bootstrap-frontend-long-tail-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-frontend-long-tail-pass.log
+audit-air-mentor-ui-bootstrap-frontend-microinteraction-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-frontend-microinteraction-pass.log
+audit-air-mentor-ui-bootstrap-inventory-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-inventory-pass.log
+audit-air-mentor-ui-bootstrap-ml-audit-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-ml-audit-pass.log
+audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass.log
+audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass.log
+audit-air-mentor-ui-bootstrap-residual-gap-closure-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-residual-gap-closure-pass.log
+audit-air-mentor-ui-bootstrap-role-surface-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-role-surface-pass.log
+audit-air-mentor-ui-bootstrap-route-map-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-route-map-pass.log
+audit-air-mentor-ui-bootstrap-script-behavior-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-script-behavior-pass.log
+audit-air-mentor-ui-bootstrap-smoke-job	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-smoke-job.log
+audit-air-mentor-ui-bootstrap-state-flow-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-state-flow-pass.log
+audit-air-mentor-ui-bootstrap-synthesis-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-synthesis-pass.log
+audit-air-mentor-ui-bootstrap-test-gap-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-test-gap-pass.log
+audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass	running	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.log
+audit-air-mentor-ui-bootstrap-unattended-run-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unattended-run-pass.log
+audit-air-mentor-ui-bootstrap-unknown-omission-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unknown-omission-pass.log
+audit-air-mentor-ui-bootstrap-ux-friction-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-ux-friction-pass.log
+audit-air-mentor-ui-bootstrap-workflow-automation-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-workflow-automation-pass.log
+audit-air-mentor-ui-live-live-behavior-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-live-live-behavior-pass.log
+audit-air-mentor-ui-live-live-credentialed-parity-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-live-live-credentialed-parity-pass.log
+audit-air-mentor-ui-live-same-student-cross-surface-parity-pass	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-live-same-student-cross-surface-parity-pass.log
+audit-air-mentor-ui-overnight-absolute-closure-campaign	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-absolute-closure-campaign.log
+audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor	running	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor.log
+audit-air-mentor-ui-overnight-final-gap-and-shutdown	completed	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-final-gap-and-shutdown.log
+audit-air-mentor-ui-overnight-night-run-orchestrator	running	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-night-run-orchestrator.log
+audit-air-mentor-ui-overnight-usage-refresh-orchestrator	running	inaccessible	/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.log

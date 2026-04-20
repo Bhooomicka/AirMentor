@@ -1,0 +1,62 @@
+++ local slot=anthropic-main
+++ shift
+++ ensure_arctic_slot_dirs anthropic-main
+++ local slot=anthropic-main
++++ arctic_slot_data_home anthropic-main
++++ local slot
+++++ arctic_slot_slug anthropic-main
+++++ local slot=anthropic-main
+++++ slugify anthropic-main
+++++ local input=anthropic-main
+++++ printf %s anthropic-main
+++++ tr '[:upper:]' '[:lower:]'
+++++ tr -cs a-z0-9 -
++++ slot=anthropic-main
++++ printf '%s/%s/data\n' /home/raed/.local/share/air-mentor-audit/arctic-slots anthropic-main
++++ arctic_slot_config_home anthropic-main
++++ local slot
+++++ arctic_slot_slug anthropic-main
+++++ local slot=anthropic-main
+++++ slugify anthropic-main
+++++ local input=anthropic-main
+++++ printf %s anthropic-main
+++++ tr '[:upper:]' '[:lower:]'
+++++ tr -cs a-z0-9 -
++++ slot=anthropic-main
++++ printf '%s/%s/config\n' /home/raed/.config/air-mentor-audit/arctic-slots anthropic-main
+++ mkdir -p /home/raed/.local/share/air-mentor-audit/arctic-slots/anthropic-main/data /home/raed/.config/air-mentor-audit/arctic-slots/anthropic-main/config
++++ arctic_slot_data_home anthropic-main
++++ local slot
+++++ arctic_slot_slug anthropic-main
+++++ local slot=anthropic-main
+++++ slugify anthropic-main
+++++ local input=anthropic-main
+++++ printf %s anthropic-main
+++++ tr '[:upper:]' '[:lower:]'
+++++ tr -cs a-z0-9 -
++++ slot=anthropic-main
++++ printf '%s/%s/data\n' /home/raed/.local/share/air-mentor-audit/arctic-slots anthropic-main
+++ XDG_DATA_HOME=/home/raed/.local/share/air-mentor-audit/arctic-slots/anthropic-main/data
++++ arctic_slot_config_home anthropic-main
++++ local slot
+++++ arctic_slot_slug anthropic-main
+++++ local slot=anthropic-main
+++++ slugify anthropic-main
+++++ local input=anthropic-main
+++++ printf %s anthropic-main
+++++ tr '[:upper:]' '[:lower:]'
+++++ tr -cs a-z0-9 -
++++ slot=anthropic-main
++++ printf '%s/%s/config\n' /home/raed/.config/air-mentor-audit/arctic-slots anthropic-main
+++ XDG_CONFIG_HOME=/home/raed/.config/air-mentor-audit/arctic-slots/anthropic-main/config
++++ arctic_slot_slug anthropic-main
++++ local slot=anthropic-main
++++ slugify anthropic-main
++++ local input=anthropic-main
++++ printf %s anthropic-main
++++ tr '[:upper:]' '[:lower:]'
++++ tr -cs a-z0-9 -
+++ ARCTIC_SLOT_ID=anthropic-main
+++ arctic run --format json --model anthropic/claude-opus-4-6 'Reply with exactly: execution-ok slot=anthropic-main model=claude-opus-4-6'
+[94m⠋ Working...[0m[94m⠙ Working...[0m[94m⠹ Working...[0m[94m⠸ Working...[0m[94m⠼ Working...[0m[94m⠴ Working...[0m[94m⠦ Working...[0m[94m⠧ Working...[0m{"type":"error","timestamp":1776621508253,"sessionID":"ses_2591b2d03ffe0XkFF1j55pZ8vf","error":{"name":"APIError","data":{"message":"Third-party apps now draw from your extra usage, not your plan limits. Add more at claude.ai/settings/usage and keep going.","statusCode":400,"isRetryable":false,"responseHeaders":{"anthropic-organization-id":"c6cb4546-f02c-44be-8176-45ae188f31d1","anthropic-ratelimit-unified-overage-disabled-reason":"org_level_disabled","cf-cache-status":"DYNAMIC","cf-ray":"9eedcc2589de83f3-BLR","connection":"keep-alive","content-encoding":"gzip","content-security-policy":"default-src 'none'; frame-ancestors 'none'","content-type":"application/json","date":"Sun, 19 Apr 2026 17:58:28 GMT","request-id":"req_011CaDZev4CFdDpEJXUHV4SU","server":"cloudflare","server-timing":"x-originResponse;dur=497","strict-transport-security":"max-age=31536000; includeSubDomains; preload","transfer-encoding":"chunked","vary":"Accept-Encoding","x-envoy-upstream-service-time":"491","x-robots-tag":"none","x-should-retry":"false","set-cookie":"_cfuvid=WBBXTHBBVuXU3LVsdYZyPy71.PYdIyWQeuAfUKPVKOQ-1776621507.4442437-1.0.1.1-Nh8bT9BZOgg5EKxs7ajSnTBgKHU3pi9GtqR7pTRUHu4; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.anthropic.com"},"responseBody":"{\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Third-party apps now draw from your extra usage, not your plan limits. Add more at claude.ai/settings/usage and keep going.\"},\"request_id\":\"req_011CaDZev4CFdDpEJXUHV4SU\"}"}}}
+                                                  

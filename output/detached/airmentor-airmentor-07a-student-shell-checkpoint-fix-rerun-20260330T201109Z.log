@@ -1,0 +1,28 @@
+[2026-03-30T20:11:09Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:11:09Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/academic-proof-routes.test.ts\ tests/academic-bootstrap-routes.test.ts\ tests/student-agent-shell.test.ts\ tests/academic-parity.test.ts\ -t\ \"passes\ checkpoint\ playback\ identity\ through\ student-shell\ proof\ scope\ checks\|validates\ a\ requested\ playback\ checkpoint\ against\ the\ checkpoint\ run\ instead\ of\ the\ first\ active\ run\ row\|uses\ the\ activated\ proof\ semester\ for\ the\ default\ student\ shell\ while\ keeping\ checkpoint\ playback\ separate\|keeps\ academic\ playback\ checkpoints\ available\ when\ another\ proof\ run\ is\ also\ active\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof context and linked proof drilldowns aligned for the active teaching role
+ ↓ tests/academic-parity.test.ts > academic bootstrap > exposes non-overlapping faculty timetable blocks in the proof bootstrap for course-leader playback
+ ↓ tests/academic-parity.test.ts > academic bootstrap > ignores legacy academic asset snapshots and derives the live view from admin-owned records
+ ↓ tests/academic-parity.test.ts > academic bootstrap > reflects admin master-data changes into the academic bootstrap on the next fetch
+ ↓ tests/academic-parity.test.ts > academic bootstrap > persists resolved course outcomes, offering schemes, and question papers through backend-owned routes
+ ↓ tests/academic-parity.test.ts > academic bootstrap > persists authoritative queue, calendar workspace, attendance, and TT1 entry state through the teaching routes
+ ↓ tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof payloads and student drilldowns scoped for course leaders and mentors
+ ✓ tests/academic-parity.test.ts > academic bootstrap > keeps academic playback checkpoints available when another proof run is also active 59136ms
+ ↓ tests/student-agent-shell.test.ts > student agent shell > returns a deterministic card and bounded replies for in-scope course leaders
+ ↓ tests/student-agent-shell.test.ts > student agent shell > enforces mentor and HoD scope and allows system admin archived-run inspection
+ ↓ tests/student-agent-shell.test.ts > student agent shell > allows HOD student shell access when the active role grant remains in scope after appointment drift
+ ↓ tests/student-agent-shell.test.ts > student agent shell > allows HOD student shell access when a second active HoD grant matches the proof department
+ ✓ tests/student-agent-shell.test.ts > student agent shell > uses the activated proof semester for the default student shell while keeping checkpoint playback separate 76864ms
+ ✓ tests/academic-proof-routes.test.ts > academic proof routes > passes checkpoint playback identity through student-shell proof scope checks 118ms
+ ↓ tests/academic-proof-routes.test.ts > academic proof routes > resolves checkpoint session messages against the session run instead of the first active proof row
+ ✓ tests/academic-bootstrap-routes.test.ts > academic bootstrap routes > validates a requested playback checkpoint against the checkpoint run instead of the first active run row 80ms
+
+ Test Files  4 passed (4)
+      Tests  4 passed | 12 skipped (16)
+   Start at  01:41:11
+   Duration  139.64s (transform 1.03s, setup 0ms, import 2.92s, tests 136.20s, environment 0ms)
+
+[2026-03-30T20:13:31Z] exit=0

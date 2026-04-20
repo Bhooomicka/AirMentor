@@ -1,0 +1,43 @@
+[2026-04-18T00:40:27Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-18T00:40:27Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+[2026-04-18T00:40:27Z] cooldown-aware-rotation-monitor started with pid=2999670
+[2026-04-18T00:40:30Z] COST WARNING: No native Codex spend API is wired into this audit OS; using class-based guardrails plus observed route health.
+session=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+[2026-04-18T00:55:36Z] COST WARNING: No native Codex spend API is wired into this audit OS; using class-based guardrails plus observed route health.
+session=audit-air-mentor-ui-bootstrap-feature-intent-integrity-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-feature-intent-integrity-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-feature-intent-integrity-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-feature-intent-integrity-pass.checkpoint
+[2026-04-18T01:20:43Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-18T04:59:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-cross-flow-recovery-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-cross-flow-recovery-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-cross-flow-recovery-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-cross-flow-recovery-pass.checkpoint
+[2026-04-18T01:40:50Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-18T04:59:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-fault-tolerance-degradation-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-fault-tolerance-degradation-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-fault-tolerance-degradation-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-fault-tolerance-degradation-pass.checkpoint
+[2026-04-18T02:05:58Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-18T04:59:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-memory-lifecycle-cleanup-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-memory-lifecycle-cleanup-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-memory-lifecycle-cleanup-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-memory-lifecycle-cleanup-pass.checkpoint
+[2026-04-18T02:31:05Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-18T04:59:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-ux-consistency-cohesion-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-ux-consistency-cohesion-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-ux-consistency-cohesion-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-ux-consistency-cohesion-pass.checkpoint
+[2026-04-18T02:56:36Z] COST WARNING: Observed native Codex cooldown is active until 2026-04-18T04:59:00Z; route selection should prefer a verified alternate provider.
+session=audit-air-mentor-ui-bootstrap-cost-optimization-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-cost-optimization-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-cost-optimization-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-cost-optimization-pass.checkpoint
+[2026-04-18T03:21:56Z] skipping proof-refresh-completion-pass (already completed)
+[2026-04-18T03:21:56Z] skipping frontend-long-tail-pass (already completed)
+[2026-04-18T03:21:56Z] skipping closure-readiness-pass (already completed)
+Overnight queue complete.
+[2026-04-18T03:21:59Z] exit_code=0

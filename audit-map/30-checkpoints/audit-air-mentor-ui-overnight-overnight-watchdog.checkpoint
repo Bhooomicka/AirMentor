@@ -1,0 +1,8 @@
+pass_name=overnight-watchdog
+context=overnight
+session_name=audit-air-mentor-ui-overnight-overnight-watchdog
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+last_event=stale
+last_checkpoint_at=2026-04-18T08:24:40Z

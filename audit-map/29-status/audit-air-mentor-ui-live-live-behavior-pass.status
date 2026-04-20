@@ -1,0 +1,22 @@
+tmux_visibility=running
+last_execution_progress_at=2026-04-15T17:58:17Z
+last_execution_progress_source=attempt-log\,last-message
+execution_supervisor_state=completed
+execution_supervisor_detail=Attempt\ process\ exited\ with\ code=0.
+execution_supervisor_updated_at=2026-04-15T17:58:17Z
+last_execution_failure_class=''
+exit_code=0
+finished_at=2026-04-15T17:58:17Z
+session_name=audit-air-mentor-ui-live-live-behavior-pass
+pass_name=live-behavior-pass
+context=live
+workdir=/home/raed/projects/air-mentor-ui
+state=completed
+model=gpt-5.4
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-live-live-behavior-pass.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-live-live-behavior-pass.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-live-live-behavior-pass.checkpoint
+created_at=2026-04-15T17:37:46Z
+updated_at=2026-04-15T17:58:17Z

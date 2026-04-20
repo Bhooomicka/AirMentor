@@ -1,0 +1,13 @@
+[2026-03-30T08:56:25Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T08:56:25Z] command=npm run verify:proof-closure:live 
+
+> air-mentor-ui@0.0.0 verify:proof-closure:live
+> AIRMENTOR_LIVE_STACK=1 bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+PLAYWRIGHT_API_URL is required when AIRMENTOR_LIVE_STACK=1

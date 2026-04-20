@@ -1,0 +1,31 @@
+# Generated evidence and volatile runtime state
+17-artifacts/local/**
+17-artifacts/live/**
+17-artifacts/diffs/**
+17-artifacts/logs/**
+17-artifacts/screenshots/**
+17-artifacts/json/**
+17-artifacts/html/**
+17-artifacts/traces/**
+18-snapshots/repo/**
+18-snapshots/live/**
+18-snapshots/env/**
+18-snapshots/tmux/**
+18-snapshots/accounts/**
+22-logs/**/*.log
+22-logs/**/*.json
+29-status/**/*.status
+29-status/**/*.json
+29-status/**/*.tmp
+30-checkpoints/**/*.checkpoint
+30-checkpoints/**/*.json
+31-queues/**/*.queue
+31-queues/**/*.tmp
+
+# Keep Markdown, templates, and scripts
+!17-artifacts/**/*.md
+!18-snapshots/**/*.md
+!22-logs/**/*.md
+!29-status/**/*.md
+!30-checkpoints/**/*.md
+!31-queues/**/*.md

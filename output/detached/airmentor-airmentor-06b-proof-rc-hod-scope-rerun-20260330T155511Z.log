@@ -1,0 +1,12 @@
+[2026-03-30T15:55:12Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T15:55:12Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ tests/admin-control-plane.test.ts\ -t\ \"returns\ an\ empty\ HoD\ proof\ surface\ outside\ the\ supervised\ proof\ branch\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 13 skipped (14)
+   Start at  21:25:14
+   Duration  8.73s (transform 730ms, setup 0ms, import 1.16s, tests 7.48s, environment 0ms)
+
+[2026-03-30T15:55:23Z] exit=0

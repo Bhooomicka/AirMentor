@@ -1,0 +1,39 @@
+[2026-04-01T17:54:35Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T17:54:35Z] command=env PLAYWRIGHT_OUTPUT_DIR=output/playwright/08a-local AIRMENTOR_REQUEST_FLOW_ARTIFACT_PREFIX=08a-local-request-flow npm run playwright:admin-live:request-flow 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:request-flow
+> bash scripts/playwright-admin-live-request-flow.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running focused system admin live request flow...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:42783
+Backend log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-backend.log
+Preview log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-preview.log
+Playwright root: /nix/store/w94nd74jw950wlwm06f51n62d0sb5yp0-playwright-test-1.57.0
+Browsers path: /nix/store/bas6dg486nm7lc5b9529da43418mymbz-playwright-browsers
+System admin live request flow failed. Report: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-failure.json
+Prefixed request-flow failure artifacts:
+- report: /home/raed/projects/air-mentor-ui/output/playwright/08a-local-request-flow-system-admin-live-request-flow-failure.json
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.evaluate: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for getByRole('button', { name: 'Requests', exact: true })[22m
+
+    at focusAndActivate (/home/raed/projects/air-mentor-ui/scripts/system-admin-live-request-flow.mjs:79:35)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-request-flow.mjs:136:3
+
+Node.js v24.13.0

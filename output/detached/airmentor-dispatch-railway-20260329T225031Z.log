@@ -1,0 +1,3 @@
+[2026-03-29T22:50:32Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T22:50:32Z] command=gh workflow run deploy-railway-api.yml --ref deploy-proof-control-plane 
+[2026-03-29T22:50:34Z] exit=0

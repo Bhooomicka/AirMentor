@@ -1,0 +1,5 @@
+[2026-03-30T19:11:40Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:11:40Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ --maxWorkers=1\ tests/admin-control-plane.test.ts\ -t\ \"runs\ the\ proof\ control\ plane\ end\ to\ end\ and\ exposes\ proof\ operations\ on\ the\ faculty\ profile\|activates\ a\ proof\ operational\ semester\ without\ mutating\ checkpoint\ playback\ state\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+

@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: System-admin proof dashboard checkpoints and playback
+- Parent domain: System-admin proof control plane
+- Feature scope boundary: The dedicated proof dashboard, its tabs, checkpoint playback, proof-run actions, and restore/reset flows. Excludes hierarchy editing and admin history.
+- Roles and role-specific variants: SYSTEM_ADMIN primary.
+- Product or user intent: Inspect proof checkpoints, validate proof import/evaluation work, and activate or restore proof runs with clear playback state.
+- Source files: [`src/system-admin-proof-dashboard-workspace.tsx`](../../src/system-admin-proof-dashboard-workspace.tsx), [`src/system-admin-live-app.tsx`](../../src/system-admin-live-app.tsx), [`air-mentor-api/src/modules/admin-proof-sandbox.ts`](../../air-mentor-api/src/modules/admin-proof-sandbox.ts)
+- Entry points: `SystemAdminProofDashboardWorkspace`, checkpoint selectors, playback controls, and proof-run action handlers.
+- Routes, deep links, query params, and restore entry states: `proof-dashboard` route state inside the admin workspace; tab state is persisted in session storage and playback can restore a selected checkpoint.
+- Preconditions and guard conditions: SYSTEM_ADMIN access is required; the active proof run or checkpoint list must exist to render the interactive dashboard.
+- Visible surfaces involved: Summary/checkpoint/diagnostics/operations tabs, checkpoint list, checkpoint detail, playback restore notice, evidence-view toggles, proof controls popup, and proof-run action buttons.
+- Hidden or conditional surfaces involved: No-active-checkpoint state, blocked progression warning, playback override banner, and the queue/offering evidence split.
+- Trigger sources: Open the proof dashboard, change tabs, select a checkpoint, restore playback, or run a proof action.
+- Atomic user actions: Inspect checkpoint readiness, switch tabs, restore a checkpoint, reset playback, and trigger proof-run actions such as create, validate, approve, activate, retry, archive, or restore snapshot.
+- Hidden, hover-only, or keyboard-only actions: Tabs and buttons are keyboard reachable; evidence-view toggles and popup actions follow the shared button primitive.
+- Automatic or system actions: Persist the selected proof-dashboard tab, keep the checkpoint selection synced to playback, and emit readiness/diagnostic signals for the active run.
+- API and backend calls: Admin proof-dashboard routes and sandbox actions from `air-mentor-api/src/modules/admin-proof-sandbox.ts`.
+- State dependencies: Active proof run, checkpoint list, selected checkpoint, tab state, readiness state, and playback state.
+- Persistence dependencies: SessionStorage tab key, selected checkpoint state, and backend proof-run state.
+- Restore behavior: Returning to the dashboard restores the last selected tab and checkpoint if the current admin snapshot still matches.
+- Permissions and scope logic: Only SYSTEM_ADMIN can reach the dashboard actions; proof-run activation and semester activation must respect the active proof-run scope.
+- State transitions: Summary -> checkpoint -> diagnostics -> operations; checkpoint selection -> playback restore -> proof action -> refreshed state.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Loading, no-active-checkpoint, and blocked-progression states are explicit; stale or inactive runs should disable the path until refreshed.
+- Success path: The admin inspects the checkpoint, validates or approves the proof work, and activates or restores the desired run state.
+- Failure and recovery paths: Invalid checkpoint or inactive run should fall back to the no-selection state and leave the previous proof context intact until the user reselects.
+- Data read: Checkpoint summaries, checkpoint detail, diagnostics, evidence, proof-run status, and playback state.
+- Data written: Selected checkpoint, proof-dashboard tab state, proof-run mutations, and playback restore/reset state.
+- Telemetry, analytics, or audit-trail side effects: Proof-run actions emit readiness, checkpoint, and diagnostic events and are part of the admin audit trail.
+- Downstream effects: The proof dashboard controls the proof state that the academic and HoD surfaces consume.
+- Hidden couplings: Tab persistence, playback selection, and proof-run activation all share the same proof dashboard state model.
+- Expected behavior: The dashboard should make checkpoint selection, playback restore, and proof-run actions obvious and reversible where possible.
+- Implemented behavior: `SystemAdminProofDashboardWorkspace` renders the tabs, checkpoint selector, playback restore/reset flow, and proof-run actions.
+- Tested behavior: [`tests/system-admin-proof-dashboard-workspace.test.tsx`](../../tests/system-admin-proof-dashboard-workspace.test.tsx), [`air-mentor-api/tests/proof-control-plane-dashboard-service.test.ts`](../../air-mentor-api/tests/proof-control-plane-dashboard-service.test.ts), [`air-mentor-api/tests/proof-control-plane-checkpoint-service.test.ts`](../../air-mentor-api/tests/proof-control-plane-checkpoint-service.test.ts), [`air-mentor-api/tests/proof-control-plane-activation-service.test.ts`](../../air-mentor-api/tests/proof-control-plane-activation-service.test.ts), [`air-mentor-api/tests/admin-proof-observability.test.ts`](../../air-mentor-api/tests/admin-proof-observability.test.ts).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/system-admin-proof-dashboard-workspace.test.tsx`](../../tests/system-admin-proof-dashboard-workspace.test.tsx), [`air-mentor-api/tests/proof-control-plane-dashboard-service.test.ts`](../../air-mentor-api/tests/proof-control-plane-dashboard-service.test.ts), [`air-mentor-api/tests/proof-control-plane-checkpoint-service.test.ts`](../../air-mentor-api/tests/proof-control-plane-checkpoint-service.test.ts), [`air-mentor-api/tests/proof-control-plane-activation-service.test.ts`](../../air-mentor-api/tests/proof-control-plane-activation-service.test.ts), [`air-mentor-api/tests/admin-proof-observability.test.ts`](../../air-mentor-api/tests/admin-proof-observability.test.ts).
+- Known gaps: No live browser pass confirmed the playback override banner and checkpoint detail toggles.
+- Open questions: Should the dashboard surface blocked-progression reasons even when the selected checkpoint is already restored?
+- Confidence level: High

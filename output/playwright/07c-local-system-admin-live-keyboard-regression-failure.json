@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-04-01T15:07:44.361Z",
+  "appUrl": "http://127.0.0.1:4174",
+  "apiUrl": "http://127.0.0.1:33765",
+  "liveStack": false,
+  "proofRoute": {
+    "routeHash": "#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+    "batchId": "batch_branch_mnc_btech_2023"
+  },
+  "requestRoute": {
+    "id": "request_001",
+    "summary": "Grant additional mentor mapping coverage",
+    "status": "New"
+  },
+  "lateCheckpointWalk": {
+    "availableOperationalSemesters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "checkpoint": {
+      "simulationStageCheckpointId": "stage_checkpoint_1d5c987c1f8bff6da54de64f",
+      "semesterNumber": 6,
+      "stageKey": "post-see",
+      "stageLabel": "Post SEE",
+      "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+      "stageOrder": 5,
+      "stageAdvanceBlocked": true,
+      "playbackAccessible": false,
+      "blockedByCheckpointId": "stage_checkpoint_5d5a5348c1a1362017352606",
+      "blockedProgressionReason": "Playback is blocked until all queue items for checkpoint stage_checkpoint_5d5a5348c1a1362017352606 are resolved.",
+      "surfaceLabel": "Sem 6 · Post SEE",
+      "bannerLabel": "semester 6 · Post SEE"
+    }
+  },
+  "artifacts": {
+    "successScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression.png",
+    "successReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-report.json",
+    "failureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.png",
+    "failureTrace": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.zip",
+    "failureHtml": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.html",
+    "failureReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression-failure.json",
+    "prefixedSuccessScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression.png",
+    "prefixedSuccessReport": "/home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression-report.json",
+    "prefixedFailureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression-failure.png",
+    "prefixedFailureTrace": "/home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression-failure.zip",
+    "prefixedFailureHtml": "/home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression-failure.html",
+    "prefixedFailureReport": "/home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression-failure.json"
+  },
+  "checks": [
+    {
+      "name": "request_flow_keyboard_navigation",
+      "status": "passed"
+    },
+    {
+      "name": "modal_focus_trap_and_restore",
+      "status": "passed"
+    },
+    {
+      "name": "proof_dashboard_checkpoint_keyboard_controls",
+      "status": "passed"
+    },
+    {
+      "name": "portal_role_switch_keyboard_navigation",
+      "status": "passed"
+    },
+    {
+      "name": "teacher_proof_surface_keyboard_navigation",
+      "status": "passed"
+    }
+  ],
+  "error": {
+    "message": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-proof-surface=\"system-admin-proof-control-plane\"]:visible').first() to be visible\u001b[22m\n",
+    "stack": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-proof-surface=\"system-admin-proof-control-plane\"]:visible').first() to be visible\u001b[22m\n\n    at expectVisible (/home/raed/projects/air-mentor-ui/scripts/system-admin-live-keyboard-regression.mjs:120:17)\n    at openSeededProofRoute (/home/raed/projects/air-mentor-ui/scripts/system-admin-live-keyboard-regression.mjs:472:9)\n    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-keyboard-regression.mjs:657:23",
+    "step": "proof-playback-restore-reset"
+  }
+}

@@ -1,0 +1,5 @@
+[2026-03-30T19:20:15Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:20:15Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/admin-control-plane.test.ts\ -t\ \"re-seeds\ proof\ batch\ routes\ after\ the\ canonical\ batch\ disappears\|runs\ the\ proof\ control\ plane\ end\ to\ end\ and\ exposes\ proof\ operations\ on\ the\ faculty\ profile\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+

@@ -1,0 +1,16 @@
+[2026-03-30T08:11:23Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T08:11:23Z] command=npm test -- --run tests/faculty-profile-proof.test.tsx tests/academic-route-pages.test.tsx tests/portal-routing.test.ts 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/faculty-profile-proof.test.tsx tests/academic-route-pages.test.tsx tests/portal-routing.test.ts
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+
+ Test Files  3 passed (3)
+      Tests  11 passed (11)
+   Start at  13:41:23
+   Duration  1.69s (transform 1.05s, setup 0ms, import 1.21s, tests 1.31s, environment 594ms)
+
+[2026-03-30T08:11:25Z] exit=0

@@ -1,0 +1,53 @@
+[2026-04-01T15:23:21Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T15:23:21Z] command=env AIRMENTOR_KEYBOARD_ARTIFACT_PREFIX=07c-local npm run playwright:admin-live:keyboard-regression 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:keyboard-regression
+> bash scripts/playwright-admin-live-keyboard-regression.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running system admin live keyboard regression...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:38449
+Backend log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-backend.log
+Preview log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-keyboard-preview.log
+[keyboard] step: login-system-admin
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T15:23:41.248Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T15:23:41.248Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[response:401] http://127.0.0.1:4173/api/session
+[keyboard] request route discovered: id=request_001 status=New summary=Grant additional mentor mapping coverage
+[keyboard] step: request-flow-keyboard
+[keyboard] step: student-modal-focus-trap
+[keyboard] step: proof-dashboard-keyboard
+[browser:info] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"info","timestamp":"2026-04-01T15:24:41.687Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_a86edc7e-449b-4ef9-b833-b8487c97250a","simulationStageCheckpointId":"stage_checkpoint_c59ad3661069c03ce8fb6837","stageLabel":"Pre TT1","playbackAccessible":true,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":true,"canPlayToEnd":false}}
+[browser:warning] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"warn","timestamp":"2026-04-01T15:24:41.878Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_a86edc7e-449b-4ef9-b833-b8487c97250a","simulationStageCheckpointId":"stage_checkpoint_6de6c32042ac0f009e569956","stageLabel":"Post SEE","playbackAccessible":false,"stageAdvanceBlocked":true,"blockingQueueItemCount":42,"canStepForward":false,"canPlayToEnd":false}}
+[browser:info] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"info","timestamp":"2026-04-01T15:24:42.200Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_a86edc7e-449b-4ef9-b833-b8487c97250a","simulationStageCheckpointId":"stage_checkpoint_c59ad3661069c03ce8fb6837","stageLabel":"Pre TT1","playbackAccessible":true,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":true,"canPlayToEnd":false}}
+[keyboard] step: switch-to-academic-portal
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T15:24:42.721Z","details":{"workspace":"academic","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T15:24:42.721Z","details":{"workspace":"academic","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[response:401] http://127.0.0.1:4173/api/session
+[response:403] http://127.0.0.1:4173/api/academic/bootstrap?simulationStageCheckpointId=stage_checkpoint_c59ad3661069c03ce8fb6837
+[browser:warning] {"type":"airmentor-client-event","name":"proof.playback.inaccessible","level":"warn","timestamp":"2026-04-01T15:24:43.814Z","details":{"workspace":"academic","requestedCheckpointId":"stage_checkpoint_c59ad3661069c03ce8fb6837","error":{"name":"Error","message":"Academic roles may inspect only checkpoints from the active proof run","status":403}}}
+[keyboard] step: teacher-risk-and-shell-keyboard
+[keyboard] step: proof-playback-restore-reset
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T15:24:46.199Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T15:24:46.200Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[response:401] http://127.0.0.1:4173/api/session
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-04-01T15:24:55.679Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with local-first frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-04-01T15:24:55.679Z","details":{"workspace":"system-admin","apiBaseUrl":"/","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[browser:info] {"type":"airmentor-client-event","name":"auth.session.restored","level":"info","timestamp":"2026-04-01T15:24:55.690Z","details":{"workspace":"system-admin","sessionId":"session_399acafa-ced2-4b26-823f-b841d63e3401","facultyId":"fac_sysadmin","activeRole":"SYSTEM_ADMIN"}}
+[browser:info] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"info","timestamp":"2026-04-01T15:25:04.909Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_a86edc7e-449b-4ef9-b833-b8487c97250a","simulationStageCheckpointId":"stage_checkpoint_c59ad3661069c03ce8fb6837","stageLabel":"Pre TT1","playbackAccessible":true,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":true,"canPlayToEnd":false}}
+System admin live keyboard regression passed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression.png
+Prefixed keyboard artifacts:
+- screenshot: /home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression.png
+- report: /home/raed/projects/air-mentor-ui/output/playwright/07c-local-system-admin-live-keyboard-regression-report.json
+[2026-04-01T15:25:07Z] exit=0

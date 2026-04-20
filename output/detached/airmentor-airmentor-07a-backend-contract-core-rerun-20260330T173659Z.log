@@ -1,0 +1,52 @@
+[2026-03-30T17:36:59Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T17:36:59Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ NODE_OPTIONS=--max-old-space-size=4096\ npx\ vitest\ run\ --maxWorkers=1\ --reporter=verbose\ tests/proof-control-plane-activation-service.test.ts\ tests/openapi.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/openapi.test.ts > openapi > publishes the implemented route surface 10235ms
+ ✓ tests/openapi.test.ts > openapi > documents the semester activation request and response contract 7509ms
+
+<--- Last few GCs --->
+
+[2363036:0x55a29fa8c000]    47594 ms: Scavenge (interleaved) 4057.9 (4075.5) -> 4052.2 (4113.5) MB, pooled: 0 MB, 29.70 / 0.00 ms  (average mu = 0.273, current mu = 0.262) allocation failure; 
+[2363036:0x55a29fa8c000]    49894 ms: Mark-Compact (reduce) 4052.4 (4113.5) -> 4052.2 (4055.3) MB, pooled: 0 MB, 2190.98 / 0.00 ms  (+ 11.0 ms in 4 steps since start of marking, biggest step 5.0 ms, walltime since start of marking 2209 ms) (average mu = 0
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0x55a26b527040 node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/nix/store/9cyx2v23dip6p9q98384k9v06c96qskb-nodejs-24.13.0/bin/node]
+ 2: 0x55a26ba00170  [/nix/store/9cyx2v23dip6p9q98384k9v06c96qskb-nodejs-24.13.0/bin/node]
+ 3: 0x55a26ba00276  [/nix/store/9cyx2v23dip6p9q98384k9v06c96qskb-nodejs-24.13.0/bin/node]
+ 4: 0x55a26bcf6f97  [/nix/store/9cyx2v23dip6p9q98384k9v06c96qskb-nodejs-24.13.0/bin/node]
+ 5: 0x55a26bcf6fcb  [/nix/store/9cyx2v23dip6p9q98384k9v06c96qskb-nodejs-24.13.0/bin/node]
+ 6: 0x55a26bcf738b  [/nix/store/9cyx2v23dip6p9q98384k9v06c96qskb-nodejs-24.13.0/bin/node]
+ 7: 0x55a26bd0b56c  [/nix/store/9cyx2v23dip6p9q98384k9v06c96qskb-nodejs-24.13.0/bin/node]
+ 8: 0x55a26bd0f870  [/nix/store/9cyx2v23dip6p9q98384k9v06c96qskb-nodejs-24.13.0/bin/node]
+ 9: 0x55a26c91e233  [/nix/store/9cyx2v23dip6p9q98384k9v06c96qskb-nodejs-24.13.0/bin/node]
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: [vitest-pool]: Worker forks emitted error.
+ ❯ EventEmitter.<anonymous> ../node_modules/vitest/dist/chunks/cli-api.DuT9iuvY.js:3452:22
+ ❯ EventEmitter.emit node:events:508:28
+ ❯ ChildProcess.emitUnexpectedExit ../node_modules/vitest/dist/chunks/cli-api.DuT9iuvY.js:3019:22
+ ❯ ChildProcess.emit node:events:508:28
+ ❯ Process.ChildProcess._handle.onexit node:internal/child_process:294:12
+
+Caused by: Error: Worker exited unexpectedly
+ ❯ ChildProcess.emitUnexpectedExit ../node_modules/vitest/dist/chunks/cli-api.DuT9iuvY.js:3018:33
+ ❯ ChildProcess.emit node:events:508:28
+ ❯ Process.ChildProcess._handle.onexit node:internal/child_process:294:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+
+ Test Files  1 passed (2)
+      Tests  2 passed (5)
+     Errors  1 error
+   Start at  23:07:02
+   Duration  102.40s (transform 778ms, setup 0ms, import 1.68s, tests 17.75s, environment 0ms)
+
+[vitest-pool]: Timeout terminating forks worker for test files /home/raed/projects/air-mentor-ui/air-mentor-api/tests/proof-control-plane-activation-service.test.ts.

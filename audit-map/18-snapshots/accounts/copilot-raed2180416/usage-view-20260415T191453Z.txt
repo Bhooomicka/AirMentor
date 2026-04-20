@@ -1,0 +1,17 @@
+/usage
+Fetching usage...
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│  Usage summary · 2026-04-15T19:15:09.610Z                                                                                                 │
+│                                                                                                                                           │
+│  Visit https://chatgpt.com/codex/settings/usage for up-to-date                                                                            │
+│  information on rate limits and credits                                                                                                   │
+│                                                                                                                                           │
+│  GitHub Copilot (plan: free educational quota - individual
+- chat: unlimited
+- completions: unlimited
+- premium_interactions: 188/300)    │
+│    Access  : allowed                                                                                                                      │
+│    Credits : available                                                                                                                    │
+│    Limits                                                                                                                                 │
+│      Primary   37.4 [███████░░░░░░░░░░░░░]  ·  resets in 364h 45m (2026-05-01T00:00:00.000Z)                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

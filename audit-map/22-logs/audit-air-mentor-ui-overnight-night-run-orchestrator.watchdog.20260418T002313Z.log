@@ -1,0 +1,4 @@
+[2026-04-18T00:23:13Z] watchdog-start duration_seconds=900 interval_seconds=300 shutdown_on_complete=1 log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-night-run-orchestrator.watchdog.20260418T002313Z.log
+[2026-04-18T00:23:14Z] iteration=1 orchestrator_state=running queue_pass=truth-drift-reconciliation-pass queue_session=unknown pass_state=running
+[2026-04-18T00:28:15Z] iteration=2 orchestrator_state=running queue_pass=truth-drift-reconciliation-pass queue_session=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass pass_state=running
+[2026-04-18T00:33:16Z] iteration=3 orchestrator_state=running queue_pass=truth-drift-reconciliation-pass queue_session=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass pass_state=running

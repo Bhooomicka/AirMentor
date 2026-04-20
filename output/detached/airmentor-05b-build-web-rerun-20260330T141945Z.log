@@ -1,0 +1,26 @@
+[2026-03-30T14:19:45Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T14:19:45Z] command=npm run build 
+
+> air-mentor-ui@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 2187 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                           0.79 kB │ gzip:  0.38 kB
+dist/assets/index-BFfuiCzL.css           10.12 kB │ gzip:  2.50 kB
+dist/assets/icons-vendor-CepHMY_q.js      8.25 kB │ gzip:  3.20 kB
+dist/assets/risk-explorer-DzdcB00e.js    22.02 kB │ gzip:  5.53 kB
+dist/assets/student-shell-CDaiRY5e.js    25.19 kB │ gzip:  5.90 kB
+dist/assets/hod-pages-DXvnaqRd.js        31.10 kB │ gzip:  6.91 kB
+dist/assets/course-pages-DrUSqDJx.js     34.76 kB │ gzip:  7.97 kB
+dist/assets/workflow-pages-BXbMXsMv.js   35.30 kB │ gzip:  8.29 kB
+dist/assets/calendar-pages-Hyrdne6L.js   59.61 kB │ gzip: 13.94 kB
+dist/assets/app-shared-CqQykZ6Y.js      107.86 kB │ gzip: 30.18 kB
+dist/assets/motion-vendor-CvHdYO5Q.js   123.99 kB │ gzip: 40.77 kB
+dist/assets/react-vendor-Ah1pgjPn.js    192.35 kB │ gzip: 60.21 kB
+dist/assets/index-BRtaqvAn.js           203.71 kB │ gzip: 51.34 kB
+✓ built in 2.27s
+[2026-03-30T14:19:54Z] exit=0

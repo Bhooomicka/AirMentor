@@ -1,0 +1,28 @@
+[2026-04-01T18:17:45Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T18:17:45Z] command=env AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 AIRMENTOR_ACCEPTANCE_ARTIFACT_PREFIX=08a-live-acceptance npm run playwright:admin-live:acceptance 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:acceptance
+> bash scripts/playwright-admin-live-acceptance.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running system admin live acceptance flow...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+Playwright root: /nix/store/w94nd74jw950wlwm06f51n62d0sb5yp0-playwright-test-1.57.0
+Browsers path: /nix/store/bas6dg486nm7lc5b9529da43418mymbz-playwright-browsers
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.goto: Target page, context or browser has been closed
+Call log:
+[2m  - navigating to "https://raed2180416.github.io/AirMentor/", waiting until "networkidle"[22m
+
+    at /home/raed/projects/air-mentor-ui/scripts/system-admin-live-acceptance.mjs:250:14
+
+Node.js v24.13.0

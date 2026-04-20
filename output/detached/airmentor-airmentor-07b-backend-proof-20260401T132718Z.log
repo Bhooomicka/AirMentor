@@ -1,0 +1,7 @@
+[2026-04-01T13:27:18Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T13:27:18Z] command=env -C air-mentor-api npx vitest run --reporter=verbose --maxWorkers=1 tests/hod-proof-analytics.test.ts tests/risk-explorer.test.ts tests/student-agent-shell.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > serves live in-scope HoD analytics and reconciles with dashboard and faculty profile 4682ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps a department-scoped HoD in scope even when the active proof batch is on a sibling branch 4076ms

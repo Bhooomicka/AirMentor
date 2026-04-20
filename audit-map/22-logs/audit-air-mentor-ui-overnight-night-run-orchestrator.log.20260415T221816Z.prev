@@ -1,0 +1,8 @@
+[2026-04-15T21:55:24Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-15T21:55:24Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+session=audit-air-mentor-ui-bootstrap-unknown-omission-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unknown-omission-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-unknown-omission-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-unknown-omission-pass.checkpoint
+Overnight run stopped on audit-air-mentor-ui-bootstrap-unknown-omission-pass with state=failed
+[2026-04-15T22:01:30Z] exit_code=65

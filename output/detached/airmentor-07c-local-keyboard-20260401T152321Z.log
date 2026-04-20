@@ -1,0 +1,14 @@
+[2026-04-01T15:23:21Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T15:23:21Z] command=env AIRMENTOR_KEYBOARD_ARTIFACT_PREFIX=07c-local npm run playwright:admin-live:keyboard-regression 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:keyboard-regression
+> bash scripts/playwright-admin-live-keyboard-regression.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+error (ignored): SQLite database '/home/raed/.cache/nix/eval-cache-v6/d0b51d753423b7933577242d0382df542e1916f5003693542f57e26758de1e45.sqlite' is busy
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Another keyboard regression run is already active (pid 2887006).

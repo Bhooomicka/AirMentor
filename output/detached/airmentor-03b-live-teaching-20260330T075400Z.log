@@ -1,0 +1,3 @@
+[2026-03-30T07:54:00Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:54:00Z] command=AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:teaching-parity 
+/home/raed/projects/air-mentor-ui/output/detached/airmentor-03b-live-teaching-20260330T075400Z.sh: line 15: AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin: command not found

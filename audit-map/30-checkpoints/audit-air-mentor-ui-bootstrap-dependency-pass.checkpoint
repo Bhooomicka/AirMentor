@@ -1,0 +1,17 @@
+pass_name=dependency-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-dependency-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+current_provider=native-codex
+current_account=native-codex-session
+current_model=gpt-5.4-mini
+current_slot=''
+route_attempt=1
+completed_at=2026-04-15T10:46:14Z
+files_touched=audit-map/index.md,audit-map/05-dependencies/README.md,audit-map/05-dependencies/00-portal-routing-and-theme.md,audit-map/05-dependencies/01-academic-session-bootstrap-and-role-context.md,audit-map/05-dependencies/02-academic-route-snapshot-and-role-sync.md,audit-map/05-dependencies/03-proof-playback-and-bootstrap-selection.md,audit-map/05-dependencies/04-student-shell-risk-explorer-and-access.md,audit-map/05-dependencies/05-system-admin-proof-dashboard-and-canonical-scope.md,audit-map/05-dependencies/06-admin-request-visibility-and-transitions.md,audit-map/05-dependencies/07-admin-search-and-registry-scope.md,audit-map/05-dependencies/08-runtime-shadow-state-and-proof-refresh.md,audit-map/05-dependencies/09-backend-session-cookie-and-csrf-config.md,audit-map/15-final-maps/dependency-graph.md,audit-map/23-coverage/coverage-ledger.md,audit-map/23-coverage/review-status-by-path.md,audit-map/24-agent-memory/known-facts.md,audit-map/24-agent-memory/working-knowledge.md,audit-map/24-agent-memory/known-ambiguities.md,audit-map/29-status/audit-air-mentor-ui-bootstrap-dependency-pass.status,audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-dependency-pass.checkpoint,audit-map/31-queues/pending.queue,audit-map/32-reports/audit-air-mentor-ui-bootstrap-dependency-pass.last-message.md,audit-map/32-reports/current-run-status.md
+evidence_paths=src/App.tsx:1160-1822,3474-3925;src/portal-entry.tsx:48-60;src/repositories.ts:46-66,213-220,324-330,353-587,697-879;src/proof-playback.ts:1-41;src/academic-workspace-route-helpers.ts:7-93;src/proof-pilot.ts:15-125;src/system-admin-live-app.tsx:1997-2999,3010-3127,3906-4410,4539-4543,5955-7189,7599-7601;src/system-admin-proof-dashboard-workspace.tsx:29-38,244-1005;src/system-admin-request-workspace.tsx:45-155;src/system-admin-live-data.ts:41-350;air-mentor-api/src/config.ts:65-92;air-mentor-api/src/modules/session.ts:25-305;air-mentor-api/src/modules/support.ts:25-60,231-256;air-mentor-api/src/modules/academic.ts:926-1045,1833-2065,4012-4105;air-mentor-api/src/modules/academic-access.ts:59-181;air-mentor-api/src/modules/academic-bootstrap-routes.ts:20-58;air-mentor-api/src/modules/academic-proof-routes.ts:54-430;air-mentor-api/src/modules/academic-runtime-routes.ts:104-863,1055-1056;air-mentor-api/src/modules/admin-control-plane.ts:306-420,511-631,884-1075;air-mentor-api/src/modules/admin-requests.ts:59-383;air-mentor-api/src/modules/admin-proof-sandbox.ts:1-240
+next_unresolved_question=Which worker or cron consumer actually completes queued proof-refresh jobs, and does it guarantee parity with the dashboard's queued state?
+last_event=completed
+last_checkpoint_at=2026-04-15T10:50:13Z

@@ -1,0 +1,472 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "defectId": "DEF-08A-LOCAL-REQUEST-FLOW-PREVIEW-PORT-DRIFT",
+      "stageId": "08A",
+      "summary": "The local 08A request-flow wrapper allowed Vite preview to drift off the intended port, so Playwright kept driving `http://127.0.0.1:4173` while the preview server had moved to a different localhost port.",
+      "status": "closed",
+      "openedAt": "2026-04-01T17:50:13.000Z",
+      "owner": "request-flow harness / local preview contract",
+      "scope": "Repo-local Stage 08A request-flow verification",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 08A cannot advance while `npm run playwright:admin-live:request-flow` is nondeterministic. Multiple local reruns reused the default `PLAYWRIGHT_APP_URL` on `127.0.0.1:4173`, but the wrapper launched `vite preview` without `--strictPort`, so the preview log showed fallback to `127.0.0.1:4175` while the browser script kept reloading `http://127.0.0.1:4173/#/admin/requests/request_001`, ending in `Target page, context or browser has been closed`.",
+      "evidence": {
+        "command": "env PLAYWRIGHT_OUTPUT_DIR=output/playwright/08a-local AIRMENTOR_REQUEST_FLOW_ARTIFACT_PREFIX=08a-local-request-flow npm run playwright:admin-live:request-flow",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-08a-local-request-flow-20260401T174925Z.log",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-08a-local-request-flow-clean-20260401T174931Z.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-preview.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-failure.json"
+        ]
+      },
+      "nextAction": "None. The request-flow wrapper now preselects a free localhost port, enforces it with `--strictPort`, and the rerun produced a clean success report plus screenshot against `http://127.0.0.1:4174`.",
+      "closedAt": "2026-04-01T17:54:55.000Z",
+      "resolution": "Updated `scripts/playwright-admin-live-request-flow.sh` to mirror the proof-risk wrapper by selecting a free localhost UI port before computing `PLAYWRIGHT_APP_URL` and then running `vite preview` with `--strictPort`. The successful rerun in `output/detached/airmentor-08a-local-request-flow-fixed-20260401T175404Z.log` wrote `output/playwright/08a-local-request-flow-system-admin-live-request-flow-report.json` with `appUrl: http://127.0.0.1:4174` and a passing deep-link/closeout check list, proving the browser script and preview server stayed aligned."
+    },
+    {
+      "defectId": "DEF-08A-LOCAL-TEACHING-PARITY-PORTAL-HANDOFF",
+      "stageId": "08A",
+      "summary": "The local 08A teaching-parity smoke closed the browser context while handing off from the sysadmin logout state back into the academic portal.",
+      "status": "closed",
+      "openedAt": "2026-04-01T17:50:45.000Z",
+      "owner": "teaching parity smoke / portal handoff contract",
+      "scope": "Repo-local Stage 08A teaching parity verification",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 08A cannot advance while `npm run playwright:admin-live:teaching-parity` is red. The local teaching-parity smoke completed the sysadmin profile-update flow, logged out, then failed at the academic portal handoff because `expectVisible(page.getByText(/Teaching Workspace Live Mode/))` raised `Target page, context or browser has been closed` immediately after clicking `Open Academic Portal` from the post-logout selector state.",
+      "evidence": {
+        "command": "env PLAYWRIGHT_OUTPUT_DIR=output/playwright/08a-local AIRMENTOR_TEACHING_PARITY_ARTIFACT_PREFIX=08a-local-teaching npm run playwright:admin-live:teaching-parity",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-08a-local-teaching-20260401T174915Z.log",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-08a-local-teaching-rerun-20260401T175316Z.log",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-08a-local-teaching-clean-20260401T175650Z.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-teaching-system-admin-teaching-parity-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-teaching-system-admin-teaching-parity-smoke.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-teaching-course-leader-dashboard-proof.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-teaching-mentor-view-proof.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-teaching-queue-history-proof.png"
+        ]
+      },
+      "nextAction": "None. The local teaching-parity lane is green again with stage-scoped screenshots for the faculty profile, course-leader dashboard, mentor view, and queue-history surfaces.",
+      "closedAt": "2026-04-01T17:57:31.000Z",
+      "resolution": "The teaching-parity harness now waits for the logged-out portal selector, normalizes through `#/home`, and allows a longer academic-login restore window before it treats the portal handoff as failed. After the stale request-flow preview residue cleared, the clean rerun in `output/detached/airmentor-08a-local-teaching-clean-20260401T175650Z.log` exited `0` and refreshed the prefixed teaching-parity screenshots."
+    },
+    {
+      "defectId": "DEF-07A-LIVE-PROOF-NONSEEDED-BATCH-SELECTION",
+      "stageId": "07A",
+      "summary": "The second live 07A proof-risk run reached the semester-activation route but still targeted a stale 2022 batch because the smoke selected the live batch with the most existing checkpoints instead of the canonical seeded proof batch.",
+      "status": "closed",
+      "openedAt": "2026-03-30T18:09:02.000Z",
+      "owner": "proof automation / live proof route resolution",
+      "scope": "Deployed GitHub Pages + Railway Stage 07A live proof-risk verification",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 07A cannot advance while the deployed proof-risk walk proves the wrong cohort. After the CSRF helper fix, the live rerun logged `live proof route discovered ... batch=2022 checkpoints=5`, then `POST /api/admin/proof-runs/simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed/activate-semester` returned `500` before live activation JSON or final proof screenshots were recorded. The stage contract is tied to the seeded proof batch `batch_branch_mnc_btech_2023`, so the smoke must pin that batch when it exists instead of preferring arbitrary stale live data.",
+      "evidence": {
+        "command": "AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:proof-risk",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-airmentor-07a-live-proof-rerun-20260330T180836Z.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip"
+        ]
+      },
+      "nextAction": "None. The proof-risk smoke now pins the seeded proof batch when it exists, the direct live activation probe passed against `sim_mnc_2023_first6_v1`, and the final live proof-risk rerun refreshed the activation JSON plus proof screenshots against `batch_branch_mnc_btech_2023`.",
+      "closedAt": "2026-03-30T20:50:21.000Z",
+      "resolution": "Updated the live proof-route discovery so the seeded proof batch `batch_branch_mnc_btech_2023` wins over arbitrary stale cohorts, then reran the deployed activation probe and full proof-risk walkthrough. `output/detached/airmentor-airmentor-07a-live-activation-route-probe-rerun-20260330T204759Z.log` confirmed a clean `6 -> 4 -> 6` activation cycle, and `output/detached/airmentor-airmentor-07a-live-proof-risk-rerun7-20260330T204819Z.log` captured the live activation request/response JSON plus refreshed proof screenshots against the seeded cohort."
+    },
+    {
+      "defectId": "DEF-07A-LIVE-PROOF-CSRF-CROSS-ORIGIN-ACTIVATION",
+      "stageId": "07A",
+      "summary": "The first live 07A proof-risk run failed because the semester-activation smoke call tried to read the Railway-domain CSRF cookie from the GitHub Pages document context.",
+      "status": "closed",
+      "openedAt": "2026-03-30T18:03:30.000Z",
+      "owner": "proof automation / admin API request helper",
+      "scope": "Deployed GitHub Pages + Railway Stage 07A live proof-risk verification",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 07A cannot advance while the deployed proof-risk walk fails before activation evidence is captured. The first live rerun reached the proof dashboard, then `scripts/system-admin-proof-risk-smoke.mjs` called `POST /api/admin/proof-runs/:simulationRunId/activate-semester` through a browser fetch that could not read the Railway-domain `airmentor_csrf` cookie from the Pages origin, producing a 403 / missing CORS response before the activation request/response artifacts or refreshed live proof screenshots were written.",
+      "evidence": {
+        "command": "AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:proof-risk",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-airmentor-07a-live-proof-20260330T180311Z.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip"
+        ]
+      },
+      "nextAction": "None. The admin proof request helper now issues live activation calls through the Node-side browser-context cookie path, and the immediate live rerun advanced past the prior 403 / missing-CORS failure into the next seeded-batch selection defect.",
+      "closedAt": "2026-03-30T18:09:02.000Z",
+      "resolution": "Updated `scripts/system-admin-proof-risk-smoke.mjs` so `adminApiRequest` always uses the browser-context cookies and CSRF token from Node instead of trying to read the Railway-domain cookie from `document.cookie` on the GitHub Pages origin. The immediate rerun reached the live semester-activation route successfully, proving the cross-origin CSRF/CORS harness defect was removed."
+    },
+    {
+      "defectId": "DEF-06B-LIVE-PROOF-LOCK-COLLISION",
+      "stageId": "06B",
+      "summary": "The first live 06B proof-closure attempt exited before product verification because the proof-smoke harness detected an already-active local proof run lock.",
+      "status": "closed",
+      "openedAt": "2026-03-30T16:39:00.000Z",
+      "owner": "proof automation / local execution lock",
+      "scope": "Deployed GitHub Pages + Railway Stage 06B live proof-closure verification",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 06B cannot advance while `npm run verify:proof-closure:live` does not complete. The first live proof attempt exited immediately after `scripts/playwright-admin-live-proof-risk-smoke.sh` reported `Another proof smoke run is already active`, so no fresh live proof artifacts were captured against the newly deployed 06B stack.",
+      "evidence": {
+        "command": "AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ npm run verify:proof-closure:live",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-airmentor-06b-live-proof-20260330T163854Z.log",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-airmentor-06b-live-proof-rerun-20260330T164046Z.log"
+        ]
+      },
+      "nextAction": "None. The active proof-smoke lock owner exited, and the immediate rerun completed successfully against the already-probed 06B Pages and Railway deployment.",
+      "closedAt": "2026-03-30T16:41:28.000Z",
+      "resolution": "No product change was required. After the transient proof-smoke lock cleared, the same live proof command reran cleanly and exited `0` in `output/detached/airmentor-airmentor-06b-live-proof-rerun-20260330T164046Z.log`, refreshing the system-admin, teacher, HoD, risk-explorer, and student-shell proof artifacts on the deployed 06B stack."
+    },
+    {
+      "defectId": "DEF-06B-LOCAL-TEACHING-PARITY-NAV-CLOSE",
+      "stageId": "06B",
+      "summary": "The final local 06B teaching-parity smoke failed after faculty-profile verification because the academic page closed while the script tried to reopen the dashboard.",
+      "status": "closed",
+      "openedAt": "2026-03-30T16:29:22.000Z",
+      "owner": "teaching parity smoke / academic navigation contract",
+      "scope": "Repo-local Stage 06B teaching parity verification",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 06B cannot advance while `npm run playwright:admin-live:teaching-parity` is red. The local parity smoke reached the updated faculty profile and proof panel, then failed at `openNavItem('Dashboard')` in `scripts/system-admin-teaching-parity-smoke.mjs` with `page.waitForTimeout: Target page, context or browser has been closed`, so the final local browser gate is not yet deterministic.",
+      "evidence": {
+        "command": "npm run playwright:admin-live:teaching-parity",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-airmentor-06b-local-teaching-20260330T162922Z.log",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-airmentor-06b-local-teaching-rerun-20260330T163259Z.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke-failure.png"
+        ]
+      },
+      "nextAction": "None. A clean rerun of the same local teaching-parity command completed successfully end-to-end after restarting the preview/backend pair, so the temporary browser-context close no longer blocks Stage 06B progression.",
+      "closedAt": "2026-03-30T16:33:47.000Z",
+      "resolution": "No product change was required. The first local teaching-parity attempt hit a transient browser-context close after the faculty-profile handoff, but the immediate detached rerun completed successfully and refreshed the faculty-profile, dashboard, mentor-view, and queue-history parity screenshots."
+    },
+    {
+      "defectId": "DEF-06B-LOCAL-PROOF-TS-BULK-APPLY-INFERENCE",
+      "stageId": "06B",
+      "summary": "The first local 06B proof-closure run failed because the new bulk mentor-apply preview rows in students.ts were left to ambiguous TypeScript inference during the API build.",
+      "status": "closed",
+      "openedAt": "2026-03-30T15:30:45.000Z",
+      "owner": "backend student routes / type contract",
+      "scope": "Repo-local Stage 06B proof-closure verification",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 06B cannot advance while `npm run verify:proof-closure:proof-rc` fails during the API build. The new `/api/admin/mentor-assignments/bulk-apply` preview path used `flatMap` without an explicit row type, which caused `previewStudents` and later loop variables to collapse into incompatible union and `unknown` shapes under `tsc -p tsconfig.build.json`.",
+      "evidence": {
+        "command": "npm run verify:proof-closure:proof-rc",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-airmentor-06b-proof-closure-20260330T153031Z.log"
+        ]
+      },
+      "nextAction": "None. The bulk mentor-apply preview rows now use an explicit route-local type, the API build passes again, and the rerun advanced past the original TypeScript failure into a separate proof-rc HoD scope issue.",
+      "closedAt": "2026-03-30T15:48:30.000Z",
+      "resolution": "Added the explicit `MentorAssignmentBulkApplyPreviewStudent` type in `air-mentor-api/src/modules/students.ts`, which removed the `flatMap` inference collapse and restored a clean `npm --workspace air-mentor-api run build` pass before the next proof-closure rerun."
+    },
+    {
+      "defectId": "DEF-06B-LOCAL-PROOF-HOD-OUTSIDE-SCOPE-ASSUMPTION",
+      "stageId": "06B",
+      "summary": "The rerun of local 06B proof-closure failed in the proof-rc backend suite because the negative HoD proof-scope test was still using `kavitha.rao`, who now supervises the proof department.",
+      "status": "closed",
+      "openedAt": "2026-03-30T15:48:45.000Z",
+      "owner": "proof-rc backend contract / HoD proof-scope test",
+      "scope": "Repo-local Stage 06B proof-closure verification",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 06B cannot advance while `npm run verify:proof-closure:proof-rc` still fails in `air-mentor-api test:proof-rc`. The proof sandbox anchors `branch_mnc_btech` under `dept_cse`, so the negative case in `tests/admin-control-plane.test.ts` no longer uses an actually out-of-scope HoD when it logs in as `kavitha.rao`.",
+      "evidence": {
+        "command": "npm run verify:proof-closure:proof-rc",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-airmentor-06b-proof-closure-rerun-20260330T153218Z.log",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-airmentor-06b-proof-closure-rerun2-20260330T155545Z.log"
+        ]
+      },
+      "nextAction": "None. The proof-rc rerun is now green after the negative HoD scope fixture was made deterministic.",
+      "closedAt": "2026-03-30T16:23:02.000Z",
+      "resolution": "Replaced the stale `kavitha.rao` negative-case assumption in `air-mentor-api/tests/admin-control-plane.test.ts` with a deterministically created HoD on `branch_ece_btech`, confirmed the focused proof-rc case passes, and then reran the full local proof-closure bar to a clean `exit=0` in `output/detached/airmentor-airmentor-06b-proof-closure-rerun2-20260330T155545Z.log`."
+    },
+    {
+      "defectId": "DEF-05B-LIVE-A11Y-QUEUE-CONTRAST",
+      "stageId": "05B",
+      "summary": "The live 05B accessibility regression failed because the system-admin queue count badge and quick-add reminder CTA on the request detail route did not meet contrast requirements",
+      "status": "closed",
+      "openedAt": "2026-03-30T14:18:00.000Z",
+      "owner": "frontend shared admin chrome / accessibility",
+      "scope": "Deployed GitHub Pages + Railway Stage 05B live accessibility regression",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 05B requires a passing deployed accessibility regression after the queue polish publish. The refreshed Pages bundle reached `#/admin/requests/request_001`, but axe reported serious `color-contrast` violations on the queue toggle count badge and the `Quick Add Reminder` button inside the action queue rail, so the stage could not advance until the shared queue chrome was corrected and the live accessibility command was rerun cleanly.",
+      "evidence": {
+        "command": "AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:accessibility-regression",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-05b-live-a11y-20260330T141122Z.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-report.json",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-screen-reader-preflight.md",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-regression-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-regression-failure.html",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-regression-failure.zip"
+        ]
+      },
+      "nextAction": "None. The shared queue chrome contrast fix is deployed and the refreshed 05B live acceptance, accessibility, and keyboard commands are all green on the current Pages + Railway stack.",
+      "closedAt": "2026-03-30T14:26:15Z",
+      "resolution": "The shared queue badge now resolves against a darker accessible danger tone in `src/ui-primitives.tsx`, the request-detail reminder CTA uses the shared primary-action button chrome, and GitHub Pages deploy run `23749718170` published commit `ebec9d7ea4fcf24357b5c0d5edb19eabdd1d6d65`, serving `index-icg13pEx.js` with `app-shared-CaDGII2H.js` containing `#1d4ed8` and `#b91c1c` before the refreshed 05B LIVE-ACCEPTANCE, LIVE-A11Y, and LIVE-KEYBOARD reruns all passed on the deployed Pages + Railway stack."
+    },
+    {
+      "defectId": "DEF-04A-LIVE-PROOF-TEACHER-CREDENTIAL-RESOLUTION",
+      "stageId": "04A",
+      "summary": "The refreshed live proof-closure run failed during the academic-portal handoff because the proof smoke could not resolve a working teacher password for the selected faculty login",
+      "status": "closed",
+      "openedAt": "2026-03-30T09:14:27.000Z",
+      "owner": "proof automation / live teaching auth",
+      "scope": "Deployed GitHub Pages + Railway Stage 04A live proof-closure run",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 04A requires `verify:proof-closure:live` to refresh the teacher proof panel and proof-control-plane artifacts on the deployed stack. The current run reached the academic login screen but `resolveTeachingPassword` failed for `devika.shetty`, so the proof command exited before any teacher/HoD/student proof artifacts were refreshed.",
+      "evidence": {
+        "command": "AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> AIRMENTOR_LIVE_TEACHER_IDENTIFIER=devika.shetty PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run verify:proof-closure:live",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-04a-live-proof-20260330T091344Z.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip"
+        ]
+      },
+      "nextAction": "None. The live proof harness now uses the same live teacher default as the keyboard/accessibility suites, and direct login verification confirmed `kavitha.rao` works on the deployed stack.",
+      "closedAt": "2026-03-30T09:16:45.000Z",
+      "resolution": "The failure was caused by a stale live default teacher identifier in the proof harness. `scripts/system-admin-proof-risk-smoke.mjs` now defaults to `kavitha.rao` on the live stack instead of `devika.shetty`, matching the other live academic proof suites."
+    },
+    {
+      "defectId": "DEF-04A-LIVE-PROOF-TEACHER-ELECTIVE-ROW-ASSUMPTION",
+      "stageId": "04A",
+      "summary": "The live proof-closure rerun assumed the teacher proof panel would always expose a row-backed monitoring or elective-fit action source",
+      "status": "closed",
+      "openedAt": "2026-03-30T09:17:55.000Z",
+      "owner": "proof automation / teacher proof panel",
+      "scope": "Deployed GitHub Pages + Railway Stage 04A live proof-closure rerun",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "The corrected live rerun reached the course-leader faculty proof panel, but the selected proof batch rendered an explicit empty monitoring queue and an empty elective-fit section (`No elective recommendation is currently available for this profile.`). The script still required a visible `teacher-monitoring-item` or `teacher-elective-fit` row before it could continue into risk explorer and student-shell assertions, so the proof command timed out on a non-deterministic UI assumption.",
+      "evidence": {
+        "command": "AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> AIRMENTOR_LIVE_TEACHER_IDENTIFIER=kavitha.rao PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run verify:proof-closure:live",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-04a-live-proof-rerun1-20260330T091645Z.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip"
+        ]
+      },
+      "nextAction": "None. The live proof harness now accepts the teacher proof panel empty states as valid and only enters teacher-specific risk/student subflows when a row-backed action source is actually present.",
+      "closedAt": "2026-03-30T09:22:09.000Z",
+      "resolution": "The proof-risk smoke now mirrors the live keyboard/accessibility suites by treating empty monitoring/elective-fit teacher states as valid proof evidence and skipping the teacher-only drilldowns when no row-backed launch source exists."
+    },
+    {
+      "defectId": "DEF-04A-LIVE-PROOF-STAGE-COVERAGE-MISMATCH",
+      "stageId": "04A",
+      "summary": "The shared live proof-closure command still enforced HoD analytics even though Stage 04A only exits on system-admin and teacher proof evidence",
+      "status": "closed",
+      "openedAt": "2026-03-30T09:24:48.000Z",
+      "owner": "proof automation / stage gate wiring",
+      "scope": "Deployed GitHub Pages + Railway Stage 04A live proof-closure rerun",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "After the teacher-proof empty-state fix, the live rerun successfully refreshed the system-admin control plane and teacher proof panel, then failed because the generic `verify:proof-closure:live` harness continued into HoD analytics and timed out on a known Stage 04B behavior (`No active proof run`). Stage 04A explicitly marks HoD redesign as a non-goal and only requires live control-plane plus teacher-proof evidence.",
+      "evidence": {
+        "command": "AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> AIRMENTOR_LIVE_TEACHER_IDENTIFIER=kavitha.rao PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run verify:proof-closure:live",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-04a-live-proof-rerun2-20260330T092209Z.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip"
+        ]
+      },
+      "nextAction": "None. Stage 04A now uses the dedicated teaching-only live proof command and leaves the full HoD/risk/student proof walk to Stage 04B and later.",
+      "closedAt": "2026-03-30T09:35:06.000Z",
+      "resolution": "The proof harness now supports `AIRMENTOR_PROOF_COVERAGE_TARGET=teacher`, and Stage 04A runs `npm run verify:proof-closure:teaching-live` so the deployed verification stops after the system-admin control plane and teacher proof panel while the strict full proof walk remains unchanged for later stages."
+    },
+    {
+      "defectId": "DEF-02A-LIVE-GITHUB-PAGES-BANDS-DRIFT",
+      "stageId": "02A",
+      "summary": "Deployed GitHub Pages bundle omits the extracted Bands editor controls required for live faculties-workspace parity",
+      "status": "closed",
+      "openedAt": "2026-03-29T22:35:29.259Z",
+      "owner": "frontend deploy / GitHub Pages",
+      "scope": "Live stack only; https://raed2180416.github.io/AirMentor/ extracted faculties workspace",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 02A requires LIVE-ACCEPTANCE to reach the real extracted faculties tabs on the deployed stack. The current Pages bundle selects `Bands` but never renders `Academic Bands` or `Save Scope Governance`, and the loaded asset reports `Save Scope Governance=0` plus `Reset To Inherited Policy=0`.",
+      "evidence": {
+        "command": "AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:acceptance",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance-failure.json",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-acceptance-failure.png"
+        ]
+      },
+      "nextAction": "None. Stage 02A and Stage 02B are re-cleared on the deployed stack.",
+      "closedAt": "2026-03-29T23:24:40.892Z",
+      "resolution": "GitHub Pages now serves the extracted Bands editor controls, the GitHub Actions live system-admin secret was corrected, Railway deploy verification re-passed, and fresh live acceptance succeeded."
+    },
+    {
+      "defectId": "DEF-04A-LOCAL-TEACHING-FACULTY-PROOF-ROW-ASSUMPTION",
+      "stageId": "04A",
+      "summary": "Local teaching-parity smoke assumed the faculty-profile proof panel would always expose a row-backed Open Student action",
+      "status": "closed",
+      "openedAt": "2026-03-30T08:47:24.000Z",
+      "owner": "frontend proof automation",
+      "scope": "Repo-local teaching parity smoke against the preview stack",
+      "classification": "non-blocking",
+      "blocksNextStage": false,
+      "reason": "The proof panel itself was present, but the local seeded state did not guarantee a visible `teacher-proof-open-partial-profile` action unless a monitoring queue or elective-fit row existed, so the smoke encoded a brittle selector assumption instead of a deterministic parity check.",
+      "evidence": {
+        "command": "npm run playwright:admin-live:teaching-parity",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-04a-teaching-local-20260330T084652Z.log"
+        ]
+      },
+      "nextAction": "Rerun the local teaching-parity smoke after removing the non-deterministic faculty-profile row assertion and keeping student-launch verification in the row-backed mentor/proof flows.",
+      "closedAt": "2026-03-30T08:49:30.000Z",
+      "resolution": "The teaching-parity script now verifies the faculty profile and teacher proof panel without assuming a queue-backed row is always present; deterministic student-launch checks remain in the mentor queue and proof-risk flows."
+    },
+    {
+      "defectId": "DEF-04A-LOCAL-TEACHING-PLAYWRIGHT-ROLE-LOCATOR-CALL",
+      "stageId": "04A",
+      "summary": "Local teaching-parity smoke used a Testing Library-style `getAllByRole` call on the Playwright page object",
+      "status": "closed",
+      "openedAt": "2026-03-30T08:50:18.000Z",
+      "owner": "frontend proof automation",
+      "scope": "Repo-local teaching parity smoke against the preview stack",
+      "classification": "non-blocking",
+      "blocksNextStage": false,
+      "reason": "The smoke reached the mentor-view drilldown phase but failed before asserting product behavior because the script called a non-existent `page.getAllByRole` API instead of a Playwright locator chain.",
+      "evidence": {
+        "command": "npm run playwright:admin-live:teaching-parity",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-04a-teaching-local-rerun-20260330T084901Z.log"
+        ]
+      },
+      "nextAction": "Rerun the local teaching-parity smoke after replacing the invalid API call with `page.getByRole(...).first()`.",
+      "closedAt": "2026-03-30T08:50:48.000Z",
+      "resolution": "The teaching-parity script now uses standard Playwright locators for mentor and queue-history Open Student actions."
+    },
+    {
+      "defectId": "DEF-04A-LOCAL-TEACHING-MENTOR-ACTION-QUEUE-ASSUMPTION",
+      "stageId": "04A",
+      "summary": "Local teaching-parity smoke assumed the mentor landing page would always expose an action-queue Open Student button",
+      "status": "closed",
+      "openedAt": "2026-03-30T08:51:25.000Z",
+      "owner": "frontend proof automation",
+      "scope": "Repo-local teaching parity smoke against the preview stack",
+      "classification": "non-blocking",
+      "blocksNextStage": false,
+      "reason": "Mentor-view parity itself was present, but the action queue is data-dependent and can render no row-backed buttons in the local seeded state, so the smoke again encoded a brittle row-presence assumption.",
+      "evidence": {
+        "command": "npm run playwright:admin-live:teaching-parity",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-04a-teaching-local-rerun2-20260330T085027Z.log"
+        ]
+      },
+      "nextAction": "Rerun the local teaching-parity smoke after keeping mentor-view parity assertions but moving the deterministic student-launch check to queue history.",
+      "closedAt": "2026-03-30T08:52:02.000Z",
+      "resolution": "The teaching-parity script now treats mentor view as a parity surface only and relies on queue history for the guaranteed task-backed Open Student drilldown."
+    },
+    {
+      "defectId": "DEF-04A-LOCAL-TEACHING-QUEUE-HISTORY-ROW-ASSUMPTION",
+      "stageId": "04A",
+      "summary": "Local teaching-parity smoke still assumed queue history would always render a visible Open Student button",
+      "status": "closed",
+      "openedAt": "2026-03-30T08:53:14.000Z",
+      "owner": "frontend proof automation",
+      "scope": "Repo-local teaching parity smoke against the preview stack",
+      "classification": "non-blocking",
+      "blocksNextStage": false,
+      "reason": "The queue-history proof surface and summary strip were present, but the local seeded role task set did not guarantee a visible row-backed Open Student action, so the teaching-parity smoke still mixed parity capture with a data-dependent drilldown.",
+      "evidence": {
+        "command": "npm run playwright:admin-live:teaching-parity",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-04a-teaching-local-rerun3-20260330T085204Z.log"
+        ]
+      },
+      "nextAction": "Rerun the local teaching-parity smoke after leaving student drilldowns to the checkpoint-backed proof-risk flow and keeping this command focused on parity surfaces and screenshot capture.",
+      "closedAt": "2026-03-30T08:54:04.000Z",
+      "resolution": "The teaching-parity script now captures faculty profile, dashboard, mentor view, and queue-history parity without depending on data-variable row buttons; the partial-profile drilldown moved into the proof-risk smoke where the teacher proof row is authoritative."
+    },
+    {
+      "defectId": "DEF-04A-LOCAL-PROOF-WRONG-ENTRYPOINT",
+      "stageId": "04A",
+      "summary": "A local proof rerun used the live-only `verify:proof-closure:live` entrypoint instead of the local proof-risk smoke",
+      "status": "closed",
+      "openedAt": "2026-03-30T08:56:25.000Z",
+      "owner": "proof automation operator",
+      "scope": "Repo-local proof verification command selection",
+      "classification": "non-blocking",
+      "blocksNextStage": false,
+      "reason": "The live wrapper intentionally requires deployed URLs and exited immediately with `PLAYWRIGHT_API_URL is required when AIRMENTOR_LIVE_STACK=1`, so the run never exercised product behavior.",
+      "evidence": {
+        "command": "npm run verify:proof-closure:live",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-04a-proof-local-20260330T085623Z.log"
+        ]
+      },
+      "nextAction": "Use `npm run playwright:admin-live:proof-risk` for repo-local proof verification and reserve `verify:proof-closure:live` for deployed URLs.",
+      "closedAt": "2026-03-30T08:56:47.000Z",
+      "resolution": "The follow-up proof run was relaunched through the local proof-risk entrypoint."
+    },
+    {
+      "defectId": "DEF-04A-LOCAL-PROOF-PARTIAL-PROFILE-TARGET-MISMATCH",
+      "stageId": "04A",
+      "summary": "The local proof-risk smoke expected the teacher partial-profile action to navigate to Student History instead of the student drawer modal",
+      "status": "closed",
+      "openedAt": "2026-03-30T09:00:06.000Z",
+      "owner": "frontend proof automation",
+      "scope": "Repo-local proof-risk smoke against the preview stack",
+      "classification": "non-blocking",
+      "blocksNextStage": false,
+      "reason": "The `teacher-proof-open-partial-profile` action correctly opened the app-level student partial-profile drawer, but the smoke asserted the wrong target surface and timed out waiting for `Student History`.",
+      "evidence": {
+        "command": "npm run playwright:admin-live:proof-risk",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html",
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-04a-proof-local-rerun-20260330T085647Z.log"
+        ]
+      },
+      "nextAction": "Rerun the local proof-risk smoke after asserting the drawer-based partial profile (`Open Full Profile`, close control) and then returning to the teacher proof panel.",
+      "closedAt": "2026-03-30T09:00:58.000Z",
+      "resolution": "The proof-risk smoke now checks the actual student drawer modal opened by the teacher partial-profile action and closes it before continuing to the teacher risk-explorer flow."
+    },
+    {
+      "defectId": "DEF-05A-LIVE-A11Y-PROOF-HERO-CONTRAST",
+      "stageId": "05A",
+      "summary": "The live 05A accessibility regression failed because the shared proof-shell eyebrow color on the system-admin proof hero did not meet contrast requirements",
+      "status": "closed",
+      "openedAt": "2026-03-30T13:32:06.000Z",
+      "owner": "frontend proof shell / accessibility",
+      "scope": "Deployed GitHub Pages + Railway Stage 05A live accessibility regression",
+      "classification": "blocking",
+      "blocksNextStage": false,
+      "reason": "Stage 05A requires a passing live accessibility regression on the deployed shared proof shell. The refreshed Pages bundle reached the system-admin proof dashboard, but axe reported a serious `color-contrast` violation on the `Proof Control Plane` eyebrow inside `#system-admin-proof-control-plane-surface`, so the stage cannot advance until the shared proof hero contrast is corrected and the live accessibility command is rerun cleanly.",
+      "evidence": {
+        "command": "AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=<identifier> AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=<password> PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:accessibility-regression",
+        "artifacts": [
+          "/home/raed/projects/air-mentor-ui/output/detached/airmentor-05a-live-a11y-20260330T133143Z.log",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-report.json",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-screen-reader-preflight.md",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-regression-failure.png",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-regression-failure.html",
+          "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-regression-failure.zip"
+        ]
+      },
+      "nextAction": "None. The contrast fix is deployed and the refreshed 05A live accessibility, keyboard, and proof-closure commands are all green on the current Pages + Railway stack.",
+      "closedAt": "2026-03-30T13:41:25.000Z",
+      "resolution": "The shared proof-shell eyebrow now uses an accessible fallback blue in `src/proof-surface-shell.tsx`, GitHub Pages propagated commit `b5e1a0f8b72358ef32a061726edeae5318f0b96e` as `index-BTlTEY8n.js`, and the refreshed 05A live accessibility, keyboard, and proof-closure runs all passed on the deployed Pages + Railway stack."
+    }
+  ]
+}

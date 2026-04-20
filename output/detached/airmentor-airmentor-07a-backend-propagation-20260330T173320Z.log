@@ -1,0 +1,5 @@
+[2026-03-30T17:33:20Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T17:33:20Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ npx\ vitest\ run\ --maxWorkers=1\ tests/hod-proof-analytics.test.ts\ tests/risk-explorer.test.ts\ tests/student-agent-shell.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+

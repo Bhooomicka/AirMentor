@@ -1,0 +1,47 @@
+[2026-03-29T23:01:01Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T23:01:01Z] command=bash -lc npm\ test\ --\ --run\ tests/railway-deploy-readiness.test.ts 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/railway-deploy-readiness.test.ts
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+ ❯ tests/railway-deploy-readiness.test.ts (6 tests | 2 failed) 12619ms
+     × retries the live session contract until login settles after deploy 5183ms
+     × fails the live session contract after exhausting the retry window 5175ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/railway-deploy-readiness.test.ts > Railway deploy readiness script > retries the live session contract until login settles after deploy
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/railway-deploy-readiness.test.ts:253:3
+    251|   })
+    252|
+    253|   it('retries the live session contract until login settles after depl…
+       |   ^
+    254|     const outputDir = await makeOutputDir()
+    255|     const appDir = await makeBootSmokeAppDir()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/railway-deploy-readiness.test.ts > Railway deploy readiness script > fails the live session contract after exhausting the retry window
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/railway-deploy-readiness.test.ts:285:3
+    283|   })
+    284|
+    285|   it('fails the live session contract after exhausting the retry windo…
+       |   ^
+    286|     const outputDir = await makeOutputDir()
+    287|     const appDir = await makeBootSmokeAppDir()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  04:31:02
+   Duration  12.75s (transform 26ms, setup 0ms, import 35ms, tests 12.62s, environment 0ms)
+

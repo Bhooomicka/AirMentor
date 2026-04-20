@@ -1,0 +1,98 @@
+[
+  {
+    "label": "Portal home",
+    "url": "http://127.0.0.1:4173/",
+    "scope": "page",
+    "violations": []
+  },
+  {
+    "label": "System admin login",
+    "url": "http://127.0.0.1:4173/#/admin",
+    "scope": "page",
+    "violations": []
+  },
+  {
+    "label": "System admin requests detail",
+    "url": "http://127.0.0.1:4173/#/admin/requests/request_001",
+    "scope": "page",
+    "violations": []
+  },
+  {
+    "label": "System admin requests detail tree",
+    "url": "http://127.0.0.1:4173/#/admin/requests/request_001",
+    "scope": "aria-snapshot",
+    "snapshot": "- button \"Go to dashboard\": AM\n- text: AirMentor Academic Demo University Welcome System Admin · Governed Requests\n- button \"Go back\": Back\n- text: 02 Apr, 02:48 am\n- button \"Switch to dark mode\": 🌙\n- button \"Hide action queue\": \"1\"\n- button \"Refresh admin data\"\n- button \"Logout\"\n- complementary:\n  - text: Operations Rail Governed Requests\n  - button \"Collapse operations rail\"\n  - textbox \"Admin search\":\n    - /placeholder: Search governed requests...\n  - navigation:\n    - button \"Overview\"\n    - button \"Faculties\"\n    - button \"Students\"\n    - button \"Faculty Members\"\n    - button \"Requests\"\n  - text: Path\n  - button \"Requests\"\n  - text: Grant additional mentor mapping coverage\n- text: Workflow Requests HoD-issued permanent changes move through admin review, approval, implementation, and closure.\n- button \"Grant additional mentor mapping coverage faculty role or mapping update · department:dept_cse · due 18 Mar 2026, 10:30 pm New\"\n- text: Grant additional mentor mapping coverage Need temporary mentor reassignment capacity for section A. New\n- button \"Take Review\"\n- text: \"Request Type: faculty role or mapping update Priority: P2 Requester: t1 Current Owner: fac_sysadmin Due: 18 Mar 2026, 10:30 pm Updated: 16 Mar 2026, 05:30 am Linked Targets faculty_profile:t6 Status History Start -> New SYSTEM_ADMIN · fac_sysadmin · 16 Mar 2026, 05:30 am Action Queue 1 visible Requests go first. Personal reminders stay private to the signed-in system admin. Queue Controls Nothing hidden right now.\"\n- button \"Hide all\"\n- button \"Restore all hidden\" [disabled]\n- text: Requests\n- button \"Grant additional mentor mapping coverage faculty role or mapping update · Dr. Kavitha Rao · due 18 Mar 2026, 10:30 pm New P2\"\n- text: New\n- button \"Hide forever\"\n- text: Personal Tasks\n- status: No private admin reminders. Use the quick add button below.\n- text: Hidden Records Nothing hidden right now.\n- button \"Quick Add Reminder\""
+  },
+  {
+    "label": "System admin student detail tabs",
+    "url": "http://127.0.0.1:4173/#/admin/students/student_term_cse_sem4_a_1ms23cs001",
+    "scope": "aria-snapshot",
+    "snapshot": "- tablist \"Student detail sections\":\n  - tab \"Profile\" [selected]\n  - tab \"Academic 1\"\n  - tab \"Mentor 0\"\n  - tab \"Progression\"\n  - tab \"History 0\""
+  },
+  {
+    "label": "System admin student edit dialog",
+    "url": "http://127.0.0.1:4173/#/admin/students/student_term_cse_sem4_a_1ms23cs001",
+    "scope": "fragment",
+    "violations": []
+  },
+  {
+    "label": "System admin student edit dialog tree",
+    "url": "http://127.0.0.1:4173/#/admin/students/student_term_cse_sem4_a_1ms23cs001",
+    "scope": "aria-snapshot",
+    "snapshot": "- dialog \"Edit Aarav Sharma\":\n  - text: Student Edit Edit Aarav Sharma Update the core student identity from a focused dialog instead of the stretched workspace card.\n  - button \"Close dialog\": ×\n  - text: Name\n  - textbox \"Student Name\": Aarav Sharma\n  - text: USN\n  - textbox \"Student USN\": 1MS23CS001\n  - text: Roll Number\n  - textbox \"Student Roll Number\": \"001\"\n  - text: Admission Date\n  - textbox \"Student Admission Date\": 2024-08-01\n  - text: Email\n  - textbox \"Student Email\": 1ms23cs001@student.airmentor.local\n  - text: Phone\n  - textbox \"Student Phone\": +91 9700000000\n  - button \"Cancel\"\n  - button \"Delete Student\"\n  - button \"Save Student\""
+  },
+  {
+    "label": "System admin hierarchy workspace tabs",
+    "url": "http://127.0.0.1:4173/#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+    "scope": "aria-snapshot",
+    "snapshot": "- tablist \"Hierarchy workspace sections\":\n  - tab \"Overview\" [selected]\n  - tab \"Bands\"\n  - tab \"CE / SEE\"\n  - tab \"CGPA Formula\"\n  - tab \"Stage Gates\"\n  - tab \"Courses\"\n  - tab \"Provision\""
+  },
+  {
+    "label": "System admin proof dashboard",
+    "url": "http://127.0.0.1:4173/#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+    "scope": "fragment",
+    "violations": []
+  },
+  {
+    "label": "System admin proof dashboard tree",
+    "url": "http://127.0.0.1:4173/#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+    "scope": "aria-snapshot",
+    "snapshot": "- text: Proof Control Plane Proof Control Plane Curriculum import, crosswalk review, active run control, monitoring state, and snapshot restore all run from the backend proof shell now.\n- button \"Create Import\"\n- button \"Validate Import\"\n- button \"Review Mappings\" [disabled]\n- button \"Approve Import\"\n- button \"Run / Rerun\"\n- button \"Recompute Risk\"\n- status: Scope System admin proof route · Pre TT1 · resolved from Pre TT1 · MSRUAS proof rerun 9260 · Checkpoint-bound proof counts · operational semester 6 · Proof mode.\n- status: Checkpoint-bound proof counts are authoritative for System admin proof route · Pre TT1.\n- status: Playback override active. The dashboard is pinned to Semester 1 · Pre TT1, while the operational semester remains Semester 6.\n- button \"Jump to proof controls\"\n- text: Active Run MSRUAS proof rerun 9260 Seed 9260 · completed running · 5% Monitoring 720 watch scores · 659 open reassessments Alerts 720 decisions · 0 acknowledgements Snapshots 0 saved Operational Semester Semester 6\n- button \"Sem 1\"\n- button \"Sem 2\"\n- button \"Sem 3\"\n- button \"Sem 4\"\n- button \"Sem 5\"\n- button \"Sem 6\" [disabled]\n- text: \"Queue Health 0 queued · 0 running · 0 failed Oldest queue age n/a · retryable failures 0 Worker Lease leased · phase running Queue age n/a · progress 5% Lease expires 2/4/2026, 2:50:03 am Checkpoint Readiness 1/30 ready 29 blocked · 28 playback gated · 863 blocking queue items First blocked checkpoint stage_checkpoint_396102a5cfeeab0b2d58d581 Stage 2 Coverage 120/120 profiles · 69120 question results Topic 25440 · CO 12960 · response 1194 Risk Model Heuristic fallback only No active local artifact has been trained for this batch yet. Corpus + Split Manifest unknown Splits: Unavailable Worlds: Unavailable Scenario families: Unavailable Calibration + Policy Calibration unknown No evaluation payload is available. Governed policy: acceptanceGates structuredStudyPlanWithinLimit/targetedTutoringBeatsStructuredStudyPlanAcademicSlice/noRecommendedActionUnderperformsNoAction · byAction attendance-recovery-follow-up/pre-see-rescue/targeted-tutoring · byPhenotype late-semester-acute/persistent-nonresponse/prerequisite-dominant · counterfactualPolicyDiagnostics metricNote/efficacySupportThreshold/targetedTutoringVsStructuredStudyPlanAcademicSlice · realizedPathDiagnostics metricNote/byAction/byPhenotype · recommendedActionCount 140 · simulatedActionCount 43 · structuredStudyPlanShare 0 Governed CO evidence: acceptanceGates theoryCoursesDefaultToBlueprintEvidence/fallbackOnlyInExplicitCases · byCourseFamily object · byMode object · bySemester object · fallbackCount 0 · labFallbackCount 0 · theoryFallbackCount 0 · totalRows 0 Policy gates: noRecommendedActionUnderperformsNoAction true · structuredStudyPlanWithinLimit true · targetedTutoringBeatsStructuredStudyPlanAcademicSlice true Active-run parity: activeRunId simulation_run_f5892bb0-f6f4-47bb-ace9-8b5576665408 · coEvidenceDiagnostics totalRows/fallbackCount/theoryFallbackCount · policyDiagnostics recommendedActionCount/simulatedActionCount/structuredStudyPlanShare Checkpoint Playback Read-only playback overlay for the active proof run. The run itself does not mutate while stepping through stage checkpoints.\"\n- button \"Reset To Start\" [disabled]\n- button \"Previous\" [disabled]\n- button \"Next\"\n- button \"Play To End\" [disabled]\n- status: \"Selected checkpoint: semester 1 · Pre TT1 · Opening stage before TT1 closes. Scheme setup, attendance updates, and class execution stay open here.. This stage is synced into the academic playback overlay for teaching surfaces.\"\n- button \"S1 · Pre TT1\"\n- button \"S1 · Post TT1\"\n- button \"S1 · Post TT2 · blocked\"\n- button \"S1 · Post Assignments · blocked\"\n- button \"S1 · Post SEE · blocked\"\n- button \"S2 · Pre TT1 · blocked\"\n- button \"S2 · Post TT1 · blocked\"\n- button \"S2 · Post TT2 · blocked\"\n- button \"S2 · Post Assignments · blocked\"\n- button \"S2 · Post SEE · blocked\"\n- button \"S3 · Pre TT1 · blocked\"\n- button \"S3 · Post TT1 · blocked\"\n- button \"S3 · Post TT2 · blocked\"\n- button \"S3 · Post Assignments · blocked\"\n- button \"S3 · Post SEE · blocked\"\n- button \"S4 · Pre TT1 · blocked\"\n- button \"S4 · Post TT1 · blocked\"\n- button \"S4 · Post TT2 · blocked\"\n- button \"S4 · Post Assignments · blocked\"\n- button \"S4 · Post SEE · blocked\"\n- button \"S5 · Pre TT1 · blocked\"\n- button \"S5 · Post TT1 · blocked\"\n- button \"S5 · Post TT2 · blocked\"\n- button \"S5 · Post Assignments · blocked\"\n- button \"S5 · Post SEE · blocked\"\n- button \"S6 · Pre TT1 · blocked\"\n- button \"S6 · Post TT1 · blocked\"\n- button \"S6 · Post TT2 · blocked\"\n- button \"S6 · Post Assignments · blocked\"\n- button \"S6 · Post SEE · blocked\"\n- text: Risk Snapshot 0 high · 5 medium · 715 low Queue State 0 open · 720 watch · 0 resolved 0 blocking students · 120 watched students No-Action Comparator 0 high-risk rows without simulated support Average Risk Change 0 scaled points Average Counterfactual Lift 0 scaled points Stage queue preview No stage queue items exist at this checkpoint. Offering action summary No offering rollups are available for this checkpoint. Imports msruas-mnc-curriculum.json approved · review-required · 26 unresolved mappings Crosswalk Review No pending crosswalk reviews. Runs MSRUAS proof rerun 9260 completed Seed 9260 · 2/4/2026, 2:48:29 am running · 5% Queue age n/a · lease leased\n- button \"Set Active\"\n- button \"Archive\"\n- text: MSRUAS first-6-semester proof batch completed Seed 101 · 16/3/2026, 5:30:00 am Queue age n/a · lease released\n- button \"Set Active\"\n- button \"Archive\"\n- text: \"Teacher Load Dr. Devika Shetty Sem 1 · 4 contact hrs · 1 credits Dr. Devika Shetty Sem 2 · 3 contact hrs · 1 credits Dr. Devika Shetty Sem 3 · 4 contact hrs · 1 credits Dr. Devika Shetty Sem 4 · 4 contact hrs · 1 credits Dr. Devika Shetty Sem 5 · 4 contact hrs · 1 credits Dr. Devika Shetty Sem 6 · 4 contact hrs · 1 credits Queue Preview Aarav Sharma · MCC301A Mentor · Open · due 5/4/2026, 2:48:32 am Aarav Sharma · MCC310A Mentor · Open · due 5/4/2026, 2:48:32 am Ishita Sharma · AMC-S6-32 Mentor · Open · due 5/4/2026, 2:48:32 am Ishita Sharma · AMC-S6-33 Mentor · Open · due 5/4/2026, 2:48:32 am Ishita Sharma · AMC-S6-34 Mentor · Open · due 5/4/2026, 2:48:32 am Ishita Sharma · MCC301A Mentor · Open · due 5/4/2026, 2:48:32 am Vihaan Sharma · AID201A Mentor · Open · due 5/4/2026, 2:48:32 am Vihaan Sharma · AMC-S6-32 Mentor · Open · due 5/4/2026, 2:48:32 am Vihaan Sharma · AMC-S6-33 Mentor · Open · due 5/4/2026, 2:48:32 am Vihaan Sharma · MCC301A Mentor · Open · due 5/4/2026, 2:48:32 am Ananya Sharma · AID201A Mentor · Open · due 5/4/2026, 2:48:32 am Ananya Sharma · AMC-S6-32 Mentor · Open · due 5/4/2026, 2:48:32 am Lifecycle Audit No proof lifecycle audit entries yet. Recent Operational Events proof.run.claimed simulationRunId: simulation_run_f5892bb0-f6f4-47bb-ace9-8b5576665408 · batchId: batch_branch_mnc_btech_2023 · leaseToken: proof_worker_lease_21fda5d1-1c23-4112-9709-e943a0722e92 info backend 2/4/2026, 2:48:32 am proof.run.queued simulationRunId: simulation_run_f5892bb0-f6f4-47bb-ace9-8b5576665408 · batchId: batch_branch_mnc_btech_2023 · curriculumImportVersionId: curriculum_import_mnc_2023_first6_v1 info backend 2/4/2026, 2:48:29 am auth.session.restored sessionId: session_268fdfa8-3296-4b0d-82a7-2723c6948a81 · userId: user_sysadmin · facultyId: fac_sysadmin info backend 2/4/2026, 2:48:18 am auth.login.succeeded sessionId: session_268fdfa8-3296-4b0d-82a7-2723c6948a81 · userId: user_sysadmin · facultyId: fac_sysadmin info backend 2/4/2026, 2:48:18 am request.error method: GET · route: /api/session · statusCode: 401 warn backend 2/4/2026, 2:48:18 am\""
+  },
+  {
+    "label": "Academic portal login",
+    "url": "http://127.0.0.1:4173/#/app",
+    "scope": "page",
+    "violations": []
+  },
+  {
+    "label": "Teacher proof panel",
+    "url": "http://127.0.0.1:4173/#/app",
+    "scope": "fragment",
+    "violations": []
+  },
+  {
+    "label": "Teacher proof panel tree",
+    "url": "http://127.0.0.1:4173/#/app",
+    "scope": "aria-snapshot",
+    "snapshot": "- text: \"Proof Control Plane Proof Control Plane This panel only surfaces rerunnable proof data: active simulation runs, observed risk queue items, and elective-fit summaries. It does not expose latent-state internals.\"\n- status: Authoritative proof panel for this faculty scope. Use this card and the linked proof routes for checkpoint-bound evidence; surrounding faculty-profile cards remain operational context.\n- status: Scope Proof unavailable · resolved from No active proof run is available for this scope. · Unavailable counts · operational semester unavailable · Proof mode.\n- text: Active run contexts No active run is linked to this faculty context. Monitoring queue No governed queue items are currently linked to this profile. Semester-6 elective fit No elective recommendation is currently available for this profile."
+  },
+  {
+    "label": "Portal home",
+    "url": "http://127.0.0.1:4173/",
+    "scope": "page",
+    "violations": []
+  },
+  {
+    "label": "System admin login",
+    "url": "http://127.0.0.1:4173/#/admin",
+    "scope": "page",
+    "violations": []
+  },
+  {
+    "label": "System admin faculty detail tabs",
+    "url": "http://127.0.0.1:4173/#/admin/faculty-members/t1",
+    "scope": "aria-snapshot",
+    "snapshot": "- tablist \"Faculty detail sections\":\n  - tab \"Profile\" [selected]\n  - tab \"Appointments 1\"\n  - tab \"Permissions 3\"\n  - tab \"Teaching 0\"\n  - tab \"Timetable\"\n  - tab \"History 0\""
+  }
+]

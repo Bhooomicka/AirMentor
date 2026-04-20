@@ -1,0 +1,12 @@
+[2026-03-30T11:49:06Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T11:49:06Z] command=bash -lc cd\ air-mentor-api\ \&\&\ npx\ vitest\ run\ tests/hod-proof-analytics.test.ts\ tests/risk-explorer.test.ts\ tests/student-agent-shell.test.ts\ tests/academic-access.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  4 passed (4)
+      Tests  23 passed (23)
+   Start at  17:19:07
+   Duration  697.78s (transform 1.25s, setup 0ms, import 3.04s, tests 694.00s, environment 0ms)
+
+[2026-03-30T12:00:45Z] exit=0

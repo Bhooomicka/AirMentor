@@ -1,0 +1,51 @@
+# Curriculum Linkage Generation Pipeline
+
+- Component name: Curriculum linkage candidate generation
+- Type: Deterministic matching plus optional embedding-based semantic ranking and optional local LLM assist
+- Intent: Suggest prerequisite and related-course edges for curriculum management while keeping human approval in control
+- Source files: `air-mentor-api/src/lib/curriculum-linkage.ts`, `air-mentor-api/src/lib/curriculum-linkage-python.ts`, `air-mentor-api/scripts/curriculum_linkage_nlp.py`, `air-mentor-api/src/modules/admin-structure.ts`, `src/system-admin-faculties-workspace.tsx`
+- Inputs:
+  - Course titles, codes, descriptions, outcomes, and manifest prerequisites
+  - Tokenized overlap signals
+  - Optional Python NLP environment with spaCy and sentence-transformers
+  - Optional local Ollama endpoint
+- Transformations:
+  - TypeScript fallback promotes manifest prerequisite matches first and then semantic token overlap candidates
+  - TS overlap requires score `>=0.18` or at least `3` shared tokens
+  - Manifest prerequisite confidence is hard-coded higher at `96` or `92`
+  - Python helper uses cue extraction and, when available, `all-MiniLM-L6-v2` embeddings for semantic ranking
+  - Optional Ollama augmentation is only attempted on smaller scoped target sets and is framed as assistive
+- Outputs:
+  - Candidate prerequisite edges with confidence, provider label, signals, and warnings
+  - Provider status such as `python-nlp` or `typescript-fallback`
+  - Operator-visible warnings when optional dependencies are missing
+- Thresholds and gates:
+  - Python helper is preferred only when present and returns usable candidates
+  - Ollama use depends on local environment variables and successful local HTTP reachability
+  - Nothing updates the active graph until an operator approves a candidate or edits prerequisites directly
+- Calibration or provenance:
+  - No held-out calibration artifact in repo
+  - Provenance is exposed through provider labels, signal summaries, and warnings
+  - This pipeline includes optional embedding-model behavior, so it is the clearest mixed deterministic plus ML surface in the repo
+- Fallback path:
+  - Python failure or missing dependencies fall back to TypeScript heuristics
+  - Ollama is optional and non-blocking
+- Persistence and artifacts:
+  - Candidate rows persist `confidenceScaled`, `sourcesJson`, and `signalSummaryJson`
+  - No separate evaluation artifact or benchmark report was found in this pass
+- UI presentation surfaces:
+  - `src/system-admin-faculties-workspace.tsx`
+  - Admin curriculum management workflows under `src/system-admin-live-app.tsx`
+- Evaluation evidence:
+  - Compiler and admin feature coverage in `air-mentor-api/tests/msruas-curriculum-compiler.test.ts` and `air-mentor-api/tests/admin-curriculum-feature-config.test.ts`
+  - UI rendering coverage in `tests/faculty-profile-proof.test.tsx`
+  - Route-level backend verification for admin curriculum features was blocked in this sandbox by `listen EPERM`
+- Reproducibility status: Partial. TypeScript fallback is source-reproducible. Python and optional embedding or Ollama paths depend on local operator environment and were not re-executed end-to-end in this pass
+- Failure or misleading modes:
+  - Confidence values can look calibrated even though they are mixed rule and heuristic scores
+  - Operators may over-trust `python-nlp` or optional Ollama assist without a stored quality benchmark
+  - Deployment environments can silently lose Python or model dependencies and degrade to TypeScript fallback
+- Risks:
+  - No explicit evaluation artifact for linkage quality was found
+  - Provider-dependent drift can change candidate quality across environments
+- Confidence: High on pipeline classification, medium on deployed dependency posture

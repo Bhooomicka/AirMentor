@@ -1,0 +1,282 @@
+# Truth Drift Control-Plane Snapshot
+captured_at=2026-04-18T00:45:56Z
+
+== pending.queue ==
+truth-drift-reconciliation-pass	bootstrap		
+feature-intent-integrity-pass	bootstrap		
+cross-flow-recovery-pass	bootstrap		
+fault-tolerance-degradation-pass	bootstrap		
+memory-lifecycle-cleanup-pass	bootstrap		
+ux-consistency-cohesion-pass	bootstrap		
+live-behavior-pass	live		
+account-routing-pass	bootstrap		
+claim-verification-pass	bootstrap		
+unknown-omission-pass	bootstrap		
+residual-gap-closure-pass	bootstrap		
+closure-readiness-pass	bootstrap		
+cost-optimization-pass	bootstrap		
+prompt-self-improvement-pass	bootstrap		
+unattended-run-pass	bootstrap		
+audit-the-audit-pass	bootstrap		
+synthesis-pass	bootstrap		
+
+== direct tmux ls ==
+error connecting to /run/user/1002/tmux-1002/default (Operation not permitted)
+
+== direct tmux has-session audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass ==
+error connecting to /run/user/1002/tmux-1002/default (Operation not permitted)
+
+== direct tmux has-session audit-air-mentor-ui-overnight-night-run-orchestrator ==
+error connecting to /run/user/1002/tmux-1002/default (Operation not permitted)
+
+== direct tmux has-session audit-air-mentor-ui-overnight-usage-refresh-orchestrator ==
+error connecting to /run/user/1002/tmux-1002/default (Operation not permitted)
+
+== direct tmux has-session audit-air-mentor-ui-bootstrap-data-flow-pass ==
+error connecting to /run/user/1002/tmux-1002/default (Operation not permitted)
+
+== current-run-status.md ==
+# Current Run Status
+
+Date: 2026-04-18
+
+## Queue Reality
+
+- `audit-map/31-queues/pending.queue` is not empty. At `2026-04-18T00:23:43Z` it still held 17 queued entries, starting with `truth-drift-reconciliation-pass`.
+- Active bootstrap pass: `audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass` is `running` on `native-codex / gpt-5.4 / native-codex-session`; it started at `2026-04-18T00:18:37Z` with Caveman `full`.
+- `audit-air-mentor-ui-overnight-night-run-orchestrator` is currently `stale` at `2026-04-18T00:20:03Z` after handing off the queue head to the dedicated truth-drift tmux session.
+- `audit-air-mentor-ui-overnight-usage-refresh-orchestrator` is currently `running`; its last refresh completed at `2026-04-18T00:07:01Z`, and the status file was restamped from stale to running at `2026-04-18T00:20:03Z`.
+- The earlier `2026-04-16` summary that said "queue empty" and "pipeline finished" is stale historical context only.
+
+## Completed Pass Baseline
+
+- Core mapping passes through `ux-friction-pass` remain `completed` in the current `.status` and `.checkpoint` files.
+- Closure and validation passes already marked `completed`: `workflow-automation-pass`, `backend-provenance-pass`, `frontend-microinteraction-pass`, `script-behavior-pass`, `data-flow-corpus-rerun-pass`, `proof-refresh-completion-pass`, `frontend-long-tail-pass`, `account-routing-pass`, `claim-verification-pass`, `unknown-omission-pass`, `residual-gap-closure-pass`, `closure-readiness-pass`, `live-behavior-pass`, `same-student-cross-surface-parity-pass`, `live-credentialed-parity-pass`, `audit-the-audit-pass`, `synthesis-pass`, and `unattended-run-pass`.
+- Current control-plane precedence is: live `.status` + `.checkpoint` pair first, latest pass-scoped report second, older summary prose last.
+
+## Routing And Policy Truth
+
+- `audit-map/29-status/route-health-native-codex.status` is currently `cooldown_state=clear` at `2026-04-18T00:00:27Z`.
+- `audit-map/29-status/caveman.status` is `enabled=1`, `mode=full`, `force_all=1`.
+- `audit-map/29-status/provider-rotation-native-codex.state` currently points at `native-codex-session` with `updated_at=2026-04-18T00:18:37Z`.
+- Prompt metadata remains coherent at `v5.4`; `prompt-index.md`, `prompt-version-history.md`, and `prompt-change-log.md` agree on the new Prompt `0-14` suite.
+
+## Restart Point
+
+- Active session of record: `audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass`.
+- If the active truth-drift session completes cleanly, the next queued pass remains `feature-intent-integrity-pass`.
+- If recovery is needed, inspect:
+  - `audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status`
+  - `audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint`
+  - `audit-map/22-logs/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.log`
+  - `bash audit-map/16-scripts/tmux-job-status.sh truth-drift-reconciliation-pass bootstrap`
+
+## Current Operator State
+
+- Audit pipeline is mid-campaign, not finished.
+- Control-plane truth should come from live queue/status/checkpoint artifacts, not older summary reports.
+
+== operator-dashboard.md ==
+# Operator Dashboard
+
+Generated: 2026-04-18 00:45:31 UTC
+
+## Active Pass
+
+- pass: `truth-drift-reconciliation-pass`
+- state: `running`
+- provider: `native-codex`
+- model: `gpt-5.4`
+- slot: `native-codex-session`
+- route attempt: `1`
+- tmux: `present`
+- last visible activity age: `8s`
+- supervisor: `watching`
+- suspected stall: `no`
+
+## Queue Preview
+
+1. `truth-drift-reconciliation-pass` (`bootstrap` / `unknown`)
+2. `feature-intent-integrity-pass` (`bootstrap` / `unknown`)
+3. `cross-flow-recovery-pass` (`bootstrap` / `unknown`)
+4. `fault-tolerance-degradation-pass` (`bootstrap` / `unknown`)
+5. `memory-lifecycle-cleanup-pass` (`bootstrap` / `unknown`)
+6. `ux-consistency-cohesion-pass` (`bootstrap` / `unknown`)
+7. `live-behavior-pass` (`live` / `unknown`)
+8. `account-routing-pass` (`bootstrap` / `unknown`)
+
+## Next Route Decision
+
+- route state: `ready`
+- provider: `native-codex`
+- model: `gpt-5.4`
+- slot: `native-codex-session`
+- reason: Native Codex is the default verified execution path.
+
+## Detached Sessions
+
+| Session | State | Provider | Model | Route Attempt | Idle | tmux | Suspected Stall |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `audit-air-mentor-ui-bootstrap-smoke-job` | `completed` | `native-codex` | `` | `` | `55s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-inventory-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `57s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-route-map-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `56s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-role-surface-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `56s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-feature-atom-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `58s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-dependency-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `58s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-data-flow-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `58s` | `present` | `no` |
+| `audit-air-mentor-ui-bootstrap-state-flow-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `55s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-ml-audit-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `57s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-test-gap-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `55s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-ux-friction-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `` | `54s` | `missing` | `no` |
+| `audit-air-mentor-ui-live-live-behavior-pass` | `completed` | `native-codex` | `gpt-5.4` | `` | `53s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-account-routing-pass` | `completed` | `native-codex` | `gpt-5.4` | `` | `59s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-prompt-self-improvement-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `57s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-unattended-run-pass` | `completed` | `codex` | `gpt-5.3-codex` | `2` | `54s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-workflow-automation-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `54s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-audit-the-audit-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `1` | `59s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-synthesis-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `1` | `55s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-data-flow-corpus-rerun-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `58s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-proof-refresh-completion-pass` | `completed` | `codex` | `gpt-5.3-codex` | `1` | `57s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-final-gap-and-shutdown` | `completed` | `native-codex` | `` | `` | `52s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-frontend-long-tail-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `58s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-script-behavior-pass` | `completed` | `native-codex` | `gpt-5.4-mini` | `1` | `56s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-backend-provenance-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `59s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-absolute-closure-campaign` | `completed` | `native-codex` | `` | `` | `53s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-frontend-microinteraction-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `57s` | `missing` | `no` |
+| `audit-air-mentor-ui-live-same-student-cross-surface-parity-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `53s` | `missing` | `no` |
+| `audit-air-mentor-ui-live-live-credentialed-parity-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `53s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-claim-verification-pass` | `completed` | `native-codex` | `gpt-5.4` | `1` | `59s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-unknown-omission-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `54s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-residual-gap-closure-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `56s` | `missing` | `no` |
+| `audit-air-mentor-ui-bootstrap-closure-readiness-pass` | `completed` | `github-copilot` | `gpt-5.3-codex` | `2` | `59s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-night-run-orchestrator` | `running` | `native-codex` | `` | `` | `0s` | `present` | `no` |
+| `audit-air-mentor-ui-overnight-usage-refresh-orchestrator` | `running` | `native-codex` | `` | `` | `5s` | `present` | `no` |
+| `audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass` | `running` | `native-codex` | `gpt-5.4` | `1` | `8s` | `present` | `no` |
+| `audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor` | `stale` | `` | `` | `` | `53s` | `missing` | `no` |
+| `audit-air-mentor-ui-overnight-overnight-watchdog` | `running` | `native-codex` | `` | `` | `52s` | `present` | `no` |
+
+## Slot Reset Windows
+
+| Slot | Provider | Account | Access | Route State | Exec State | Last Probe Failure | Execution Model | Primary % | Primary Reset | Secondary % | Secondary Reset | Cooldown |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `antigravity-main` | `antigravity` | `Antigravity OAuth` | `allowed` | `unexpected-output` | `failed` | `unexpected-output` | `` | `100` | `` | `` | `` | `clear` |
+| `codex-01` | `codex` | `dummy account` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `100` | `2026-04-18 05:40 UTC` | `2` | `2026-04-18 23:43 UTC` | `clear` |
+| `codex-02` | `codex` | `GeoWake App` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `100` | `2026-04-18 05:41 UTC` | `0` | `2026-04-18 22:50 UTC` | `clear` |
+| `codex-03` | `codex` | `Hazzy` | `blocked, limit reached` | `quota-blocked` | `verified` | `` | `gpt-5.3-codex` | `100` | `2026-04-18 05:42 UTC` | `0` | `2026-04-18 21:17 UTC` | `cooling-down 2026-04-18 05:42 UTC` |
+| `codex-04` | `codex` | `Raed` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `100` | `2026-04-18 05:42 UTC` | `32` | `2026-04-21 14:06 UTC` | `clear` |
+| `codex-05` | `codex` | `raed siddiqui` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `17` | `2026-04-18 04:59 UTC` | `43` | `2026-04-21 09:46 UTC` | `clear` |
+| `codex-06` | `codex` | `stuff rand (You)` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `100` | `2026-04-18 05:43 UTC` | `0` | `2026-04-18 19:57 UTC` | `clear` |
+| `copilot-accneww432` | `github-copilot` | `accneww432` | `allowed` | `verified` | `verified` | `` | `gpt-5.3-codex` | `80` | `2026-05-01 00:00 UTC` | `` | `` | `clear` |
+| `copilot-raed2180416` | `github-copilot` | `Raed2180416` | `allowed` | `verified` | `verified` | `provider-rejected` | `gpt-5.3-codex` | `23.1` | `2026-05-01 00:00 UTC` | `` | `` | `clear` |
+| `google-main` | `google` | `youaretalkingtoraed@gmail.com` | `allowed` | `verified` | `verified` | `` | `gemini-3.1-pro-preview` | `100` | `` | `` | `` | `clear` |
+
+## Warnings
+
+- `audit-air-mentor-ui-overnight-cooldown-aware-rotation-monitor` needs attention: state=`stale`, idle=`53s`, provider=``, model=``
+
+== truth-drift status ==
+task_class=high-stakes
+caveman_active=1
+caveman_mode=full
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/execute-pass-with-failover.sh\ --pass\ truth-drift-reconciliation-pass\ --context\ bootstrap\ --prompt-bundle\ /home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.prompt.md\ --last-message-file\ /home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.last-message.md\ --provider\ native-codex\ --account\ native-codex-session\ --model\ gpt-5.4\ --reasoning-effort\ xhigh\ --search\ 0\ --provider-mode\ auto\ --wait-timeout-seconds\ 0\ --wait-poll-seconds\ 60\ --max-attempts\ 0\ --status-file\ /home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status\ --checkpoint-file\ /home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.log.20260418T004031Z.prev
+started_at=2026-04-18T00:40:31Z
+pid=3001779
+route_attempt=1
+route_provider_mode=auto
+route_selected_slot=''
+route_selected_account=native-codex-session
+route_last_changed_at=2026-04-18T00:40:31Z
+execution_supervisor_pid=3002309
+session_name=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+pass_name=truth-drift-reconciliation-pass
+context=bootstrap
+workdir=/home/raed/projects/air-mentor-ui
+state=running
+model=gpt-5.4
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint
+created_at=2026-04-18T00:40:31Z
+updated_at=2026-04-18T00:40:31Z
+tmux_visibility=present
+execution_supervisor_state=watching
+execution_supervisor_detail=Latest\ progress\ source:\ attempt-log.
+execution_supervisor_updated_at=2026-04-18T00:46:32Z
+last_execution_progress_at=2026-04-18T00:46:32Z
+last_execution_progress_source=attempt-log
+
+== truth-drift checkpoint ==
+pass_name=truth-drift-reconciliation-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=1
+caveman_mode=full
+last_event=running
+current_provider=native-codex
+current_account=native-codex-session
+current_model=gpt-5.4
+current_slot=''
+route_attempt=1
+last_checkpoint_at=2026-04-18T00:40:31Z
+execution_supervisor_pid=3002309
+
+== night-run status ==
+task_class=orchestration
+model=''
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/night-run-orchestrator.sh\ --worker\ --shutdown-on-complete
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-night-run-orchestrator.log.20260418T004026Z.prev
+pid=2998895
+current_phase=queue-processing
+started_at=2026-04-18T00:40:27Z
+shutdown_on_complete=1
+current_queue_context=bootstrap
+current_queue_task_class=''
+current_queue_prompt_file=''
+session_name=audit-air-mentor-ui-overnight-night-run-orchestrator
+pass_name=night-run-orchestrator
+context=overnight
+workdir=/home/raed/projects/air-mentor-ui
+state=running
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-night-run-orchestrator.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-overnight-night-run-orchestrator.checkpoint
+created_at=2026-04-18T00:40:26Z
+updated_at=2026-04-18T00:40:27Z
+tmux_visibility=present
+current_queue_session=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+current_queue_pass=truth-drift-reconciliation-pass
+
+== usage-refresh status ==
+task_class=orchestration
+model=''
+caveman_active=0
+caveman_mode=off
+original_command=bash\ /home/raed/projects/air-mentor-ui/audit-map/16-scripts/usage-refresh-orchestrator.sh\ --worker\ --interval-seconds\ 900
+archived_log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.log.20260418T004026Z.prev
+pid=2998171
+started_at=2026-04-18T00:40:26Z
+session_name=audit-air-mentor-ui-overnight-usage-refresh-orchestrator
+pass_name=usage-refresh-orchestrator
+context=overnight
+workdir=/home/raed/projects/air-mentor-ui
+state=running
+provider=native-codex
+account=native-codex-session
+log_file=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.log
+command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.command.sh
+checkpoint_file=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-overnight-usage-refresh-orchestrator.checkpoint
+created_at=2026-04-18T00:40:26Z
+updated_at=2026-04-18T00:40:26Z
+tmux_visibility=present
+last_refresh_state=completed
+last_refresh_at=2026-04-18T00:45:25Z
+current_phase=sleeping
+next_refresh_in_seconds=900

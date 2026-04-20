@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Course detail overview, risk tabs, and stage locks
+- Parent domain: Academic course leader surface
+- Feature scope boundary: The course detail shell, its tab bar, the overview and risk tabs, and the stage-based lock state for course navigation. Excludes the assessment entry hubs and gradebook setup controls.
+- Roles and role-specific variants: Course Leader primary; the tab family is shared across the current course scope and proof-backed stage.
+- Product or user intent: Let the course leader inspect the active course overview, stage risk, and student rows while preventing premature access to locked stages.
+- Source files: [`src/pages/course-pages.tsx`](../../src/pages/course-pages.tsx), [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`air-mentor-api/src/modules/academic.ts`](../../air-mentor-api/src/modules/academic.ts)
+- Entry points: `CourseDetail`, `OverviewTab`, `RiskTab`, and the tab-level row handlers wired from the course page.
+- Routes, deep links, query params, and restore entry states: Course-detail route state inside the academic workspace; no query-driven restore is used here.
+- Preconditions and guard conditions: A course offering must be selected; the proof-backed stage must allow the target tab.
+- Visible surfaces involved: Tab bar, overview cards, semester checklist, class-health cards, adaptive reassessment CTA, risk-band filters, summary cards, student rows, and export control.
+- Hidden or conditional surfaces involved: Locked tab labels before stage 2, empty student rows, and stage-gated risk access.
+- Trigger sources: Open a course detail, switch tabs, choose a risk filter, or open a student from the risk table.
+- Atomic user actions: Read the overview; toggle the risk filter; open a student row; attempt to reach a locked stage.
+- Hidden, hover-only, or keyboard-only actions: Tab buttons and row links are keyboard reachable; no hidden alternate stage selector is exposed.
+- Automatic or system actions: Lock `tt2` and `risk` before stage 2; route row actions to the appropriate student or entry surface; keep the active tab in local route state.
+- API and backend calls: Course-scope academic routes and the shared academic client fetch the course snapshot and student rows.
+- State dependencies: Offering stage, student list, scheme state, and the active detail tab.
+- Persistence dependencies: Local course-detail tab state within the workspace route model.
+- Restore behavior: Returning to the course-detail route restores the selected offering, but the tab can fall back to the route default if the page was re-mounted from a different workspace entry.
+- Permissions and scope logic: The visible tabs are clipped to the current stage and active role scope; locked tabs cannot be entered until the stage rule is satisfied.
+- State transitions: Course selected -> overview/risk/page tabs -> student drilldown or entry hub; locked stage -> disabled tab -> allowed once stage advances.
+- Empty, loading, stale, disabled, locked, conflict, and error states: `tt2` and `risk` are locked before stage 2; student tables can be empty; no separate error panel is surfaced inside the tab family.
+- Success path: The course opens, the user inspects overview or risk, and row drilldowns remain aligned with the current stage.
+- Failure and recovery paths: Attempting a locked stage simply keeps the user on the allowed tabs until the stage advances or the role changes.
+- Data read: Offering metadata, stage, scheme, student rows, and risk summary counts.
+- Data written: Local tab state and drilldown navigation state.
+- Telemetry, analytics, or audit-trail side effects: Row drilldowns continue into the shared academic audit trail.
+- Downstream effects: Risk-tab row clicks can open mentee detail, student shell, or risk explorer flows.
+- Hidden couplings: The stage lock behavior is shared with the assessment entry surfaces and the backend proof stage model.
+- Expected behavior: The overview and risk tabs should stay in sync with the active course offering and hide locked stage content until the current stage permits it.
+- Implemented behavior: `CourseDetail` exposes the tab bar, stage locks, overview cards, and risk filter/row drilldown behavior.
+- Tested behavior: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx), [`tests/proof-pilot.test.ts`](../../tests/proof-pilot.test.ts), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts).
+- Live behavior notes: Not browser-replayed in this pass; stage-lock behavior is inferred from the current frontend and parity tests.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx), [`tests/proof-pilot.test.ts`](../../tests/proof-pilot.test.ts), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts).
+- Known gaps: No browser proof was re-run for the stage-2 lock message or export path in this pass.
+- Open questions: Should the overview surface signal the lock reason more explicitly than the tab disable state?
+- Confidence level: High

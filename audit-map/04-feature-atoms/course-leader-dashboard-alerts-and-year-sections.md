@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Course leader dashboard alerts and year sections
+- Parent domain: Academic course leader surface
+- Feature scope boundary: The course leader landing dashboard, summary cards, alert rail, year-section collapse controls, and course-card drilldowns. Excludes the deeper course detail tabs and marking entry hubs.
+- Roles and role-specific variants: Course Leader primary; the dashboard reflects the active proof-backed scope for the current course-leader session.
+- Product or user intent: Give the course leader a fast proof-backed summary of student load, pending actions, and year-group hotspots before opening a specific course.
+- Source files: [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`src/academic-proof-summary-strip.tsx`](../../src/academic-proof-summary-strip.tsx), [`air-mentor-api/src/modules/academic-proof-routes.ts`](../../air-mentor-api/src/modules/academic-proof-routes.ts)
+- Entry points: `CLDashboard`, proof summary strip, and the course-card row handlers wired from the academic route page.
+- Routes, deep links, query params, and restore entry states: The course-leader home route inside the academic workspace; no dedicated query restore state is used here.
+- Preconditions and guard conditions: The academic session must already be active; the proof summary must resolve enough course data to render cards.
+- Visible surfaces involved: Proof summary strip, total-student / high-watch / pending-actions cards, priority-alert rail, year-section toggles, and course cards.
+- Hidden or conditional surfaces involved: Collapsed year sections, zero-count summaries, and empty alert rails.
+- Trigger sources: Dashboard mount, year-toggle click, and course-card click.
+- Atomic user actions: Expand or collapse a year section; inspect a priority alert; open a course card.
+- Hidden, hover-only, or keyboard-only actions: Course cards and year toggles use the shared button/card primitives and remain keyboard reachable.
+- Automatic or system actions: Load the proof summary, derive course counts, and sort the alert rail before paint.
+- API and backend calls: Academic proof-summary and course-scope routes through `air-mentor-api/src/modules/academic-proof-routes.ts` and the shared academic client.
+- State dependencies: Active academic role, proof-summary payload, course count summaries, and year-section expand state.
+- Persistence dependencies: Local UI expand/collapse state only; no separate persistence key is required.
+- Restore behavior: Re-entering the dashboard after navigation restores the current proof-backed summary but not any previously expanded year section unless the component stays mounted.
+- Permissions and scope logic: The dashboard only shows the course leader's supervised scope for the current proof-backed session.
+- State transitions: Dashboard mount -> summary cards -> optionally expanded year sections -> course drilldown.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Empty alerts or zero counts collapse into sparse cards; no dedicated backend error UI is surfaced in this shell beyond the parent workspace gate.
+- Success path: The dashboard shows the proof summary, year sections, and course cards, and the user drills into the desired course.
+- Failure and recovery paths: If the proof summary is missing or stale, the parent academic shell must retry the underlying bootstrap rather than this dashboard alone.
+- Data read: Course counts, pending actions, student/watch totals, and the current proof-backed year-group summary.
+- Data written: Local expand/collapse state and route/page state when a course card is opened.
+- Telemetry, analytics, or audit-trail side effects: Course-open and alert interactions continue through the shared academic route and proof audit trails.
+- Downstream effects: Opening a course card enters the course-detail feature family and can lead into marking, risk, and gradebook actions.
+- Hidden couplings: The dashboard summary depends on the same proof snapshot that drives later mentor and HoD drilldowns.
+- Expected behavior: The dashboard should show the current proof-backed course leader scope, highlight alerts, and let the user collapse or expand year groups without losing the summary context.
+- Implemented behavior: `CLDashboard` renders summary cards, alert cues, year toggles, and course-card drilldowns from the active academic scope.
+- Tested behavior: [`tests/academic-proof-summary-strip.test.tsx`](../../tests/academic-proof-summary-strip.test.tsx), [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts).
+- Live behavior notes: Not browser-replayed in this pass; live behavior is inferred from the current frontend and backend parity tests.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/academic-proof-summary-strip.test.tsx`](../../tests/academic-proof-summary-strip.test.tsx), [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts).
+- Known gaps: No live browser walk confirmed that course-card clicks preserve the summary strip state after return navigation.
+- Open questions: Should the year-section collapse state persist across in-workspace navigation?
+- Confidence level: Medium-high

@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-04-01T21:21:37.195Z",
+  "appUrl": "http://127.0.0.1:4173",
+  "apiUrl": "http://127.0.0.1:40219",
+  "allowedOrigin": "http://127.0.0.1:4173",
+  "checks": [
+    {
+      "name": "login_with_secure_cookie_posture",
+      "status": "passed"
+    },
+    {
+      "name": "session_restore_after_reload",
+      "status": "passed"
+    },
+    {
+      "name": "mutation_without_csrf_rejected",
+      "status": "passed"
+    },
+    {
+      "name": "mutation_with_valid_csrf_succeeds",
+      "status": "passed"
+    },
+    {
+      "name": "mismatched_origin_rejected",
+      "status": "passed"
+    },
+    {
+      "name": "session_logout_clears_server_session",
+      "status": "passed"
+    },
+    {
+      "name": "expired_or_invalidated_session_requires_reauth",
+      "status": "passed"
+    },
+    {
+      "name": "reauth_after_expired_or_invalidated_session_succeeds",
+      "status": "passed"
+    }
+  ]
+}

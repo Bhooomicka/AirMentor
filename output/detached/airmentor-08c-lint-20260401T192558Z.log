@@ -1,0 +1,7 @@
+[2026-04-01T19:25:58Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T19:25:58Z] command=npm run lint 
+
+> air-mentor-ui@0.0.0 lint
+> eslint .
+
+[2026-04-01T19:26:16Z] exit=0

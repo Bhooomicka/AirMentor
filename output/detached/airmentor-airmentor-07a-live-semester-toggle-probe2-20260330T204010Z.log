@@ -1,0 +1,26 @@
+[2026-03-30T20:40:11Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:40:11Z] command=zsh -lc $'export PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\nnode --input-type=module <<\'NODE\'\nimport assert from "node:assert/strict"\n\nconst api = process.env.PLAYWRIGHT_API_URL\nconst app = process.env.PLAYWRIGHT_APP_URL\nconst origin = new URL(app).origin\nconst identifier = process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER\nconst password = process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD\nconst batchId = "batch_branch_mnc_btech_2023"\n\nconst loginResponse = await fetch(new URL("/api/session/login", api), {\n  method: "POST",\n  headers: { origin, "content-type": "application/json" },\n  body: JSON.stringify({ identifier, password }),\n})\nconst loginBody = await loginResponse.clone().json()\nassert.equal(loginResponse.status, 200, `login failed: ${loginResponse.status}`)\nconst setCookies = typeof loginResponse.headers.getSetCookie === "function"\n  ? loginResponse.headers.getSetCookie()\n  : [loginResponse.headers.get("set-cookie")].filter(Boolean)\nconst cookieHeader = setCookies.map(value => value.split(";", 1)[0]).join("; ")\nconst csrfToken = loginBody?.csrfToken\nconst headers = { origin, cookie: cookieHeader, "content-type": "application/json", "x-airmentor-csrf": csrfToken }\n\nasync function readDashboard() {\n  const response = await fetch(new URL(`/api/admin/batches/${batchId}/proof-dashboard`, api), { headers: { origin, cookie: cookieHeader } })\n  const text = await response.text()\n  console.log("dashboard-status", response.status)\n  console.log("dashboard-body", text.slice(0, 800))\n  assert.equal(response.status, 200, "dashboard read should succeed")\n  return JSON.parse(text)\n}\n\nasync function activate(runId, semesterNumber) {\n  const response = await fetch(new URL(`/api/admin/proof-runs/${runId}/activate-semester`, api), {\n    method: "POST",\n    headers,\n    body: JSON.stringify({ semesterNumber }),\n  })\n  const text = await response.text()\n  console.log(`activate-${semesterNumber}-status`, response.status)\n  console.log(`activate-${semesterNumber}-body`, text.slice(0, 1200))\n  return { status: response.status, bodyText: text }\n}\n\nconst before = await readDashboard()\nconst runId = before?.activeRunDetail?.simulationRunId\nconst original = before?.activeRunDetail?.activeOperationalSemester\nassert.equal(typeof runId, "string", "expected active run id")\nassert.equal(typeof original, "number", "expected active operational semester")\nconsole.log("before-state", JSON.stringify({ runId, original }))\n\nif (original !== 4) {\n  const toFour = await activate(runId, 4)\n  assert.equal(toFour.status, 200, "semester toggle to 4 should succeed on live backend")\n  const after4 = await readDashboard()\n  console.log("after-4-state", JSON.stringify({ activeOperationalSemester: after4?.activeRunDetail?.activeOperationalSemester }))\n}\n\nconst restore = await activate(runId, original)\nassert.equal(restore.status, 200, "semester restore should succeed on live backend")\nconst afterRestore = await readDashboard()\nconsole.log("after-restore-state", JSON.stringify({ activeOperationalSemester: afterRestore?.activeRunDetail?.activeOperationalSemester, restoreStatus: restore.status }))\nNODE' 
+dashboard-status 200
+dashboard-body {"imports":[{"curriculumImportVersionId":"curriculum_import_8f1536fe-8b41-4c6c-a090-97407845f6a7","sourceLabel":"msruas-mnc-curriculum.json","sourceChecksum":"5c1424e0b383f9d4cc8c7c8c8cc100943a22713e49c24f6ae5f236f49dae9652","outputChecksum":"5c1424e0b383f9d4cc8c7c8c8cc100943a22713e49c24f6ae5f236f49dae9652","compilerVersion":"msruas-proof-compiler-v2","validationStatus":"review-required","unresolvedMappingCount":26,"status":"validated","approvedAt":null,"createdAt":"2026-03-30T19:22:43.964Z","certificate":{"sourceLabel":"msruas-mnc-curriculum.json","sourcePath":"embedded:msruas-mnc-curriculum.json","sourceChecksum":"5c1424e0b383f9d4cc8c7c8c8cc100943a22713e49c24f6ae5f236f49dae9652","compilerVersion":"msruas-proof-compiler-v2","outputChecksum":"5c1424e0b383f9d4cc8c7c8c8cc100943a22713e49c24f6
+before-state {"runId":"sim_mnc_2023_first6_v1","original":4}
+activate-4-status 500
+activate-4-body {"error":"INTERNAL_SERVER_ERROR","message":"Unexpected server error"}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: semester restore should succeed on live backend
+
+500 !== 200
+
+    at file:///home/raed/projects/air-mentor-ui/[eval1]:60:8
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 500,
+  expected: 200,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.13.0

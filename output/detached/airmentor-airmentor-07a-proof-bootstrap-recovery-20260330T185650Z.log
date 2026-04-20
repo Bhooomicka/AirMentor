@@ -1,0 +1,12 @@
+[2026-03-30T18:56:51Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T18:56:51Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ npx\ vitest\ run\ tests/msruas-proof-sandbox.test.ts\ tests/admin-proof-observability.test.ts\ tests/admin-control-plane.test.ts\ -t\ \"proof\ sandbox\|proof\ dashboard\|proof-imports\|proof\ control\ plane\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  2 passed | 1 skipped (3)
+      Tests  3 passed | 14 skipped (17)
+   Start at  00:26:54
+   Duration  12.76s (transform 977ms, setup 0ms, import 2.66s, tests 9.78s, environment 0ms)
+
+[2026-03-30T18:57:07Z] exit=0

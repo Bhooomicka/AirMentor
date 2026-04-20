@@ -1,0 +1,24 @@
+[2026-03-30T07:48:27Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:48:27Z] command=npm --workspace air-mentor-api run build 
+
+> air-mentor-api@0.1.0 build
+> tsc -p tsconfig.build.json
+
+src/modules/people.ts(367,7): error TS2322: Type 'ProvenanceScopeType' is not assignable to type '"institution" | "department" | "branch" | "batch" | "section" | "academic-faculty"'.
+  Type '"proof"' is not assignable to type '"institution" | "department" | "branch" | "batch" | "section" | "academic-faculty"'.
+src/modules/people.ts(370,7): error TS2322: Type 'null' is not assignable to type 'string'.
+src/modules/people.ts(372,7): error TS2322: Type 'string | null' is not assignable to type 'string'.
+  Type 'null' is not assignable to type 'string'.
+src/modules/people.ts(379,7): error TS2322: Type 'ProvenanceScopeType' is not assignable to type '"institution" | "department" | "branch" | "batch" | "section" | "academic-faculty"'.
+  Type '"proof"' is not assignable to type '"institution" | "department" | "branch" | "batch" | "section" | "academic-faculty"'.
+src/modules/people.ts(383,5): error TS2322: Type 'ProvenanceScopeType' is not assignable to type '"institution" | "department" | "branch" | "batch" | "section" | "academic-faculty" | null | undefined'.
+  Type '"proof"' is not assignable to type '"institution" | "department" | "branch" | "batch" | "section" | "academic-faculty" | null | undefined'.
+src/modules/people.ts(384,5): error TS2322: Type '"unavailable"' is not assignable to type '"operational-semester"'.
+src/modules/students.ts(186,7): error TS2322: Type 'string' is not assignable to type 'null'.
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path /home/raed/projects/air-mentor-ui/air-mentor-api
+npm error workspace air-mentor-api@0.1.0
+npm error location /home/raed/projects/air-mentor-ui/air-mentor-api
+npm error command failed
+npm error command sh -c tsc -p tsconfig.build.json

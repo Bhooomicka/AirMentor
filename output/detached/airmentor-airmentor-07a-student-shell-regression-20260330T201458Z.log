@@ -1,0 +1,17 @@
+[2026-03-30T20:14:59Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:14:59Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/student-agent-shell.test.ts\ -t\ \"uses\ the\ activated\ proof\ semester\ for\ the\ default\ student\ shell\ while\ keeping\ checkpoint\ playback\ separate\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/student-agent-shell.test.ts > student agent shell > returns a deterministic card and bounded replies for in-scope course leaders
+ ↓ tests/student-agent-shell.test.ts > student agent shell > enforces mentor and HoD scope and allows system admin archived-run inspection
+ ↓ tests/student-agent-shell.test.ts > student agent shell > allows HOD student shell access when the active role grant remains in scope after appointment drift
+ ↓ tests/student-agent-shell.test.ts > student agent shell > allows HOD student shell access when a second active HoD grant matches the proof department
+ ✓ tests/student-agent-shell.test.ts > student agent shell > uses the activated proof semester for the default student shell while keeping checkpoint playback separate 61525ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 4 skipped (5)
+   Start at  01:45:01
+   Duration  62.88s (transform 789ms, setup 0ms, import 1.23s, tests 61.53s, environment 0ms)
+
+[2026-03-30T20:16:04Z] exit=0

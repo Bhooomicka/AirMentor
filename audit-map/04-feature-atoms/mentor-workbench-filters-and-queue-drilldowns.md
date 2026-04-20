@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Mentor workbench filters and queue drilldowns
+- Parent domain: Academic mentor surface
+- Feature scope boundary: The mentor landing page, search/filter controls, action queue, and drilldowns that launch student-specific surfaces. Excludes the separate student detail page and queue history page.
+- Roles and role-specific variants: Mentor primary; the same workbench can be opened from the academic workspace after role switching or direct navigation.
+- Product or user intent: Help the mentor triage at-risk students quickly and jump from a filtered queue into deeper student, risk, or shell views.
+- Source files: [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`air-mentor-api/src/modules/academic-proof-routes.ts`](../../air-mentor-api/src/modules/academic-proof-routes.ts), [`air-mentor-api/src/modules/academic.ts`](../../air-mentor-api/src/modules/academic.ts)
+- Entry points: `MentorView` and its student-row / student-card actions.
+- Routes, deep links, query params, and restore entry states: Mentor home route inside the academic workspace; drilldowns open the student detail, risk explorer, or student shell routes.
+- Preconditions and guard conditions: Mentor scope must already be resolved by the academic bootstrap snapshot and active role.
+- Visible surfaces involved: Search input, clear button, high/medium/low filter cards, action queue, student cards, row actions, phone-copy affordance, and email action.
+- Hidden or conditional surfaces involved: Empty filtered results, queue ordering, and card-level contact actions.
+- Trigger sources: Typing in search, clearing search, clicking a filter card, or opening a student/risk/shell drilldown.
+- Atomic user actions: Search, clear, filter by severity, open a student, open the risk explorer, open the student shell, copy a phone number, or email a student.
+- Hidden, hover-only, or keyboard-only actions: Filter cards and row actions are keyboard accessible; contact icons follow the shared button primitive.
+- Automatic or system actions: Filter the mentor queue against the active proof-backed scope and keep the row order aligned with the current filter/search text.
+- API and backend calls: Mentor-scope academic proof routes and shared academic client calls.
+- State dependencies: Active mentor scope, search text, selected severity filter, queue items, and current contact data.
+- Persistence dependencies: Local search/filter state only; no separate server persistence is used here.
+- Restore behavior: Returning to the mentor page restores the mentor scope and repopulates the queue; search/filter state only persists while the component stays mounted.
+- Permissions and scope logic: Only students in the mentor's proof-backed scope should appear in the queue and contact affordances.
+- State transitions: Search/filter change -> queue narrows -> row action -> student/risk/shell drilldown.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Empty or no-result queue state when the search/filter excludes all students; no dedicated error recovery UI is exposed inside the workbench.
+- Success path: The mentor filters the queue and opens the correct drilldown or contact action.
+- Failure and recovery paths: Missing or empty results simply leave the queue sparse; the user can clear filters and retry without leaving the page.
+- Data read: Mentor queue rows, student names, contact data, and severity buckets.
+- Data written: Local search/filter state and any clipboard or mail-client handoff triggered by contact actions.
+- Telemetry, analytics, or audit-trail side effects: Drilldown navigation continues through the shared academic audit trail.
+- Downstream effects: Opens the mentee detail page, risk explorer, or student shell for the selected student.
+- Hidden couplings: The mentor queue is coupled to the same proof-backed scope and queue reasoning that drive HoD and student-shell surfaces.
+- Expected behavior: Filtering should narrow the mentor queue without changing the active scope, and drilldowns should open the selected student's deeper surfaces.
+- Implemented behavior: `MentorView` renders the search, filters, queue, and row-level drilldowns from the active mentor scope.
+- Tested behavior: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts).
+- Live behavior notes: Not browser-replayed in this pass; the queue behavior is inferred from the current frontend and parity coverage.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`tests/academic-workspace-route-surface.test.tsx`](../../tests/academic-workspace-route-surface.test.tsx), [`air-mentor-api/tests/academic-parity.test.ts`](../../air-mentor-api/tests/academic-parity.test.ts), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts).
+- Known gaps: No live browser pass verified contact actions or queue-filter persistence beyond component lifetime.
+- Open questions: Should filtered-out queue items be preserved in a distinct history panel rather than only in the queue history page?
+- Confidence level: High

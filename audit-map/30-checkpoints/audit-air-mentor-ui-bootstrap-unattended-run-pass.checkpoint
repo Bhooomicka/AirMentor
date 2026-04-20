@@ -1,0 +1,16 @@
+pass_name=unattended-run-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-unattended-run-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+runtime_failure_class=quota-or-rate-limit
+runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-unattended-run-pass.attempt-1.F0S6oy.log
+current_provider=codex
+current_account=codex-01
+current_model=gpt-5.3-codex
+current_slot=codex-01
+route_attempt=2
+execution_supervisor_pid=1115588
+last_event=completed
+last_checkpoint_at=2026-04-15T18:41:16Z

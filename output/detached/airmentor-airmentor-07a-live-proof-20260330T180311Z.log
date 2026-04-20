@@ -1,0 +1,46 @@
+[2026-03-30T18:03:13Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T18:03:13Z] command=zsh -lc export\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\;\ npm\ run\ playwright:admin-live:proof-risk 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:proof-risk
+> bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running system admin proof-risk smoke...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+[smoke] step: login-system-admin
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T18:03:30.661Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T18:03:30.662Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=missing
+[smoke:session-response] 401 https://api-production-ab72.up.railway.app/api/session set-cookie=missing body={"error":"UNAUTHORIZED","message":"Authentication required"}
+[smoke:session-request] POST https://api-production-ab72.up.railway.app/api/session/login cookie=missing
+[smoke:session-response] 200 https://api-production-ab72.up.railway.app/api/session/login set-cookie=present
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=present
+[smoke:session-response] 200 https://api-production-ab72.up.railway.app/api/session set-cookie=present
+[smoke] cookies after login: [{"name":"airmentor_session","value":"session_9df51084-0070-491c-ac73-08c025813331","domain":"api-production-ab72.up.railway.app","path":"/","expires":1775498611.529,"httpOnly":true,"secure":true,"sameSite":"None"},{"name":"airmentor_csrf","value":"-ToJhAlTblETI8w4yHYcUlmkV0rf7tI81X04Mr19blA","domain":"api-production-ab72.up.railway.app","path":"/","expires":1775498611.529,"httpOnly":false,"secure":true,"sameSite":"None"}]
+[smoke] live proof route discovered: faculty=Engineering and Technology department=Computer Science and Engineering branch=Mathematics and Computing batch=2022 checkpoints=5
+[smoke] step: activate-proof-semester
+[smoke] proof dashboard before prewarm: imports=1 activeRun=simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed checkpoints=5
+[browser:error] [JavaScript Error: "Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://api-production-ab72.up.railway.app/api/admin/proof-runs/simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed/activate-semester. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing). Status code: 403."]
+[pageerror] NetworkError when attempting to fetch resource.
+[smoke] current step: activate-proof-semester
+[smoke] failure url: https://raed2180416.github.io/AirMentor/#/admin
+Failure HTML: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html
+System admin proof-risk smoke failed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png
+Trace: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip
+[browser] page closed unexpectedly
+[browser] browser disconnected unexpectedly
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.evaluate: NetworkError when attempting to fetch resource.
+    at adminApiRequest (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:289:26)
+    at activateProofSemesterForContract (/home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:557:33)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:816:3
+
+Node.js v24.13.0

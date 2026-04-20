@@ -1,0 +1,607 @@
+{
+  "mode": "session-contract",
+  "generatedAt": "2026-04-16T13:49:43.878Z",
+  "apiBaseUrl": "https://api-production-ab72.up.railway.app",
+  "expectedFrontendOrigin": "https://raed2180416.github.io",
+  "identifier": "sysadmin",
+  "status": "failed",
+  "retryWindow": {
+    "maxAttempts": 36,
+    "retryDelayMs": 5000,
+    "attemptsUsed": 36,
+    "recoveredAfterAttempt": null,
+    "stoppedEarly": false,
+    "stopReason": null
+  },
+  "response": {
+    "status": 404,
+    "hasCsrfToken": false,
+    "hasSessionCookie": false,
+    "hasCsrfCookie": false,
+    "restoreStatus": null
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"dRrUOXZtTtaPbXUDV7rehQ\"}"
+    },
+    {
+      "attempt": 2,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"UMoNt3M-Qle8P9ie0ubPiw\"}"
+    },
+    {
+      "attempt": 3,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"xgP1cPa_QlOglDGZipRofQ\"}"
+    },
+    {
+      "attempt": 4,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"Wnw28T_YT_SefwM-JH0Vcg\"}"
+    },
+    {
+      "attempt": 5,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"pFNmzopjQLm4ZPTY0ubPiw\"}"
+    },
+    {
+      "attempt": 6,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"1P0iIourTAqzQ_dkipRofQ\"}"
+    },
+    {
+      "attempt": 7,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"xx9UtvH9SQuQzjkoJH0Vcg\"}"
+    },
+    {
+      "attempt": 8,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"jo2n3GfTTgau91AOacI7Nw\"}"
+    },
+    {
+      "attempt": 9,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"zSHRbXGcSjOicXz3VOLIQQ\"}"
+    },
+    {
+      "attempt": 10,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"v3jDuBxVROCyd_osDcO5xA\"}"
+    },
+    {
+      "attempt": 11,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"avkbLzgjTWuQv5isAXC71g\"}"
+    },
+    {
+      "attempt": 12,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"r2WJ_uzaSAKqdRXq0ubPiw\"}"
+    },
+    {
+      "attempt": 13,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"C2r4MsG0Rlq1z4JHoB_USg\"}"
+    },
+    {
+      "attempt": 14,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"tpnCPZD8Scmegc9f0ubPiw\"}"
+    },
+    {
+      "attempt": 15,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"IlM6ReghQq-PVU_EJH0Vcg\"}"
+    },
+    {
+      "attempt": 16,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"umJZESYgQSOE-6Ho0ubPiw\"}"
+    },
+    {
+      "attempt": 17,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"xl6aO_2oT4ulOX-1JH0Vcg\"}"
+    },
+    {
+      "attempt": 18,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"xcdJ5I4FSciDruwmacI7Nw\"}"
+    },
+    {
+      "attempt": 19,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"iTXyYfWgR6eFLPi6VOLIQQ\"}"
+    },
+    {
+      "attempt": 20,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"FV13DuNDSVaZX7un0ubPiw\"}"
+    },
+    {
+      "attempt": 21,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"vuurLoL4SC-2AcSWV7rehQ\"}"
+    },
+    {
+      "attempt": 22,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"TziRzWyrSXiFvdp_oB_USg\"}"
+    },
+    {
+      "attempt": 23,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"6pJ2q49hSwGEGXUpV7rehQ\"}"
+    },
+    {
+      "attempt": 24,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"uATg2OgHTdGWUVuiacI7Nw\"}"
+    },
+    {
+      "attempt": 25,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"d9aIxS88SVanf_3hDcO5xA\"}"
+    },
+    {
+      "attempt": 26,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"d-_zTAofTwu6PjP4AXC71g\"}"
+    },
+    {
+      "attempt": 27,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"MJUdaeupSyGOyV58VOLIQQ\"}"
+    },
+    {
+      "attempt": 28,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"9AzDdKXRQM25say1VOLIQQ\"}"
+    },
+    {
+      "attempt": 29,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"V9j4fOPQQmuvtBMKipRofQ\"}"
+    },
+    {
+      "attempt": 30,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"z_fTcbk_SpiMqVXqAXC71g\"}"
+    },
+    {
+      "attempt": 31,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"DOd0h_8jSBCaU_bsDcO5xA\"}"
+    },
+    {
+      "attempt": 32,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"r7146DylTnS4v78dmrpb1w\"}"
+    },
+    {
+      "attempt": 33,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"SJUKwsELQiyneJrkDcO5xA\"}"
+    },
+    {
+      "attempt": 34,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"E88mwla0SKmzUzNkAXC71g\"}"
+    },
+    {
+      "attempt": 35,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"Ro9XK_0yQXW-_OQrDcO5xA\"}"
+    },
+    {
+      "attempt": 36,
+      "status": 404,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 404 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "retryAbortReason": null,
+      "bodyPreview": "{\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"jpoNyMNATzaCTua50ubPiw\"}"
+    }
+  ],
+  "issues": [
+    "login returned 404 instead of 200",
+    "login body is missing csrfToken",
+    "login response did not set airmentor_session",
+    "login response did not set airmentor_csrf"
+  ]
+}

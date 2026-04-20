@@ -1,0 +1,16 @@
+[2026-04-01T14:04:03Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T14:04:03Z] command=env -C air-mentor-api npx vitest run --reporter=verbose --maxWorkers=1 tests/hod-proof-analytics.test.ts tests/risk-explorer.test.ts tests/student-agent-shell.test.ts tests/proof-control-plane-dashboard-service.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > serves live in-scope HoD analytics and reconciles with dashboard and faculty profile 5299ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps a department-scoped HoD in scope even when the active proof batch is on a sibling branch 4032ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps an in-scope HoD role grant authoritative when faculty appointments drift out of scope 4003ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps HoD analytics in scope when another active HoD grant matches the proof department 3957ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > returns an empty view for HODs outside the active proof department scope 3887ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > supports deterministic filtering for section, risk band, and reassessment status 3997ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > projects checkpoint-scoped HoD analytics without exposing no-action comparator fields 166699ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps explicit checkpoint playback available even if the run active flag drifts off 131647ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > does not expose inactive runs in the HoD summary 4077ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > uses the activated proof semester as the default HoD slice while keeping checkpoint playback separate 100296ms
+ ✓ tests/hod-proof-analytics.test.ts > hod proof analytics > keeps the default HoD slice aligned with activated semesters 1 through 3 164335ms

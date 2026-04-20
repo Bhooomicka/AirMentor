@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: System-admin search, breadcrumbs, and top tabs
+- Parent domain: System-admin shell
+- Feature scope boundary: The admin top bar, breadcrumb trail, search rail, dropdown results, and top-tab navigation. Excludes the inner workspaces opened by each tab.
+- Roles and role-specific variants: SYSTEM_ADMIN primary; the top bar also appears while the shell is restoring or showing the role-required gate.
+- Product or user intent: Help the admin move quickly between overview, proof, faculty, roster, and request surfaces while preserving route context.
+- Source files: [`src/system-admin-ui.tsx`](../../src/system-admin-ui.tsx), [`src/system-admin-live-app.tsx`](../../src/system-admin-live-app.tsx)
+- Entry points: `AdminTopBar`, breadcrumb click handlers, search handlers, and top-tab click handlers.
+- Routes, deep links, query params, and restore entry states: Admin route state and deep links inside `#/admin/*`; search and breadcrumb state are restored from the current live admin workspace snapshot.
+- Preconditions and guard conditions: The system-admin shell must already be mounted or restoring; the active role must be SYSTEM_ADMIN or the shell must be showing the gate.
+- Visible surfaces involved: Breadcrumbs, search input, search-result dropdown, overview/proof-dashboard/faculties/students/faculty-members/requests tabs.
+- Hidden or conditional surfaces involved: Dropdown results only appear while searching; route snapshot state can restore the current admin subview.
+- Trigger sources: Type into search, select a result, click a breadcrumb, or switch top tabs.
+- Atomic user actions: Search the admin workspace, choose a result, follow breadcrumbs, and jump between top-level tabs.
+- Hidden, hover-only, or keyboard-only actions: The search results dropdown and tab buttons are keyboard accessible; hover only affects standard button/card affordances.
+- Automatic or system actions: Normalize the admin route into a snapshot key, keep the live workspace aligned with the selected tab, and preserve breadcrumb/search context across in-workspace navigation.
+- API and backend calls: The admin search rail consumes the same live admin state that backs the workspace; no separate search API was isolated in this pass.
+- State dependencies: Current admin route, search text, snapshot key, selected top tab, and the live admin workspace projection.
+- Persistence dependencies: SessionStorage route snapshot keys plus any shared admin workspace state.
+- Restore behavior: Re-entering a deep admin subroute restores the tab and breadcrumb context as long as the current live workspace snapshot still matches.
+- Permissions and scope logic: The top bar only becomes useful once the admin workspace is reachable under SYSTEM_ADMIN; the shell gate prevents broader access.
+- State transitions: Admin mount -> breadcrumb/search/top-tab surface -> subworkspace route.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Search results can be empty; restoring and gate states are inherited from the parent admin shell.
+- Success path: The admin can search or click through breadcrumbs and land in the desired subworkspace without losing route context.
+- Failure and recovery paths: If the current route is stale, the shell should re-snapshot the live admin state and keep the breadcrumb rail consistent.
+- Data read: Admin route, search text, snapshot key, and the live top-tab selection.
+- Data written: SessionStorage snapshot state and admin route state.
+- Telemetry, analytics, or audit-trail side effects: Tab switches and search-driven drilldowns remain part of the admin audit trail.
+- Downstream effects: Opens the overview, proof, faculties, students, faculty-members, or requests workspaces.
+- Hidden couplings: The breadcrumb/search rail depends on the same route snapshot machinery that powers admin history and proof playback.
+- Expected behavior: Search, breadcrumbs, and top tabs should keep the admin orientation stable while moving across workspaces.
+- Implemented behavior: `AdminTopBar` renders the breadcrumb rail, search dropdown, and top tabs from the live admin workspace state.
+- Tested behavior: [`tests/system-admin-ui.test.tsx`](../../tests/system-admin-ui.test.tsx), [`tests/live-admin-common.test.ts`](../../tests/live-admin-common.test.ts), [`tests/system-admin-live-detail.test.tsx`](../../tests/system-admin-live-detail.test.tsx).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/system-admin-ui.test.tsx`](../../tests/system-admin-ui.test.tsx), [`tests/live-admin-common.test.ts`](../../tests/live-admin-common.test.ts), [`tests/system-admin-live-detail.test.tsx`](../../tests/system-admin-live-detail.test.tsx).
+- Known gaps: No live browser pass confirmed the search dropdown keyboard loop.
+- Open questions: Should breadcrumb clicks preserve the current search text when jumping between tabs?
+- Confidence level: Medium-high

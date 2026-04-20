@@ -1,0 +1,9 @@
+[2026-04-01T18:35:44Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T18:35:44Z] command=env -C air-mentor-api RAILWAY_PUBLIC_API_URL=https://api-production-ab72.up.railway.app EXPECTED_FRONTEND_ORIGIN=https://raed2180416.github.io AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 RAILWAY_DIAGNOSTIC_ARTIFACT_PREFIX=08b-live-contract npm run verify:live-session-contract 
+
+> air-mentor-api@0.1.0 verify:live-session-contract
+> node ../scripts/check-railway-deploy-readiness.mjs session-contract
+
+Railway live session-contract verification passed after 1 attempt(s). Report: output/railway-live-session-contract.json
+Prefixed session-contract report: output/08b-live-contract-railway-live-session-contract.json
+[2026-04-01T18:36:16Z] exit=0

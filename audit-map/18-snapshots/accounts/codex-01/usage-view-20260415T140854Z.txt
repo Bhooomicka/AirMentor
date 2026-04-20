@@ -1,0 +1,11 @@
+/usage
+Fetching usage...
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│  Usage summary · 2026-04-15T14:09:07.585Z                                                                                                     │
+│                                                                                                                                               │
+│  Visit https://chatgpt.com/codex/settings/usage for up-to-date                                                                                │
+│  information on rate limits and credits                                                                                                       │
+│                                                                                                                                               │
+│  Codex                                                                                                                                        │
+│    Error   : Codex usage request failed (503): upstream connect error or disconnect/reset before headers. reset reason: connection timeout    │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

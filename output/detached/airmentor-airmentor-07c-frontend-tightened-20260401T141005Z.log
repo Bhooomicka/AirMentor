@@ -1,0 +1,251 @@
+[2026-04-01T14:10:06Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T14:10:06Z] command=npm test -- --run tests/proof-playback.test.ts tests/proof-risk-semester-walk.test.ts tests/system-admin-proof-dashboard-workspace.test.tsx tests/hod-pages.test.ts tests/risk-explorer.test.tsx tests/student-shell.test.tsx 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/proof-playback.test.ts tests/proof-risk-semester-walk.test.ts tests/system-admin-proof-dashboard-workspace.test.tsx tests/hod-pages.test.ts tests/risk-explorer.test.tsx tests/student-shell.test.tsx
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+ ❯ tests/system-admin-proof-dashboard-workspace.test.tsx (5 tests | 1 failed) 829ms
+     × routes explicit semester activation through the proof dashboard owner 764ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/system-admin-proof-dashboard-workspace.test.tsx > SystemAdminProofDashboardWorkspace > routes explicit semester activation through the proof dashboard owner
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Sem 4"
+
+Here are the accessible roles:
+
+  button:
+
+  Name "Create Import":
+  [36m<button[39m
+    [33mdata-pressable[39m=[32m"true"[39m
+    [33mdata-proof-action[39m=[32m"proof-create-import"[39m
+    [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(29, 78, 216); background: rgb(29, 78, 216); color: rgb(255, 255, 255); cursor: pointer; box-shadow: 0 14px 28px #1d4ed824; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+    [33mtabindex[39m=[32m"0"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Validate Import":
+  [36m<button[39m
+    [33mdata-pressable[39m=[32m"true"[39m
+    [33mdata-proof-action[39m=[32m"proof-validate-import"[39m
+    [33mdisabled[39m=[32m""[39m
+    [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(36, 45, 64); background: rgb(22, 27, 40); color: rgb(61, 74, 96); cursor: not-allowed; box-shadow: none; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Review Mappings":
+  [36m<button[39m
+    [33mdata-pressable[39m=[32m"true"[39m
+    [33mdata-proof-action[39m=[32m"proof-review-crosswalks"[39m
+    [33mdisabled[39m=[32m""[39m
+    [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(36, 45, 64); background: rgb(22, 27, 40); color: rgb(61, 74, 96); cursor: not-allowed; box-shadow: none; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Approve Import":
+  [36m<button[39m
+    [33mdata-pressable[39m=[32m"true"[39m
+    [33mdata-proof-action[39m=[32m"proof-approve-import"[39m
+    [33mdisabled[39m=[32m""[39m
+    [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(36, 45, 64); background: rgb(22, 27, 40); color: rgb(61, 74, 96); cursor: not-allowed; box-shadow: none; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Run / Rerun":
+  [36m<button[39m
+    [33mdata-pressable[39m=[32m"true"[39m
+    [33mdata-proof-action[39m=[32m"proof-run-rerun"[39m
+    [33mdisabled[39m=[32m""[39m
+    [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(29, 78, 216); background: rgb(22, 27, 40); color: rgb(61, 74, 96); cursor: not-allowed; box-shadow: none; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Recompute Risk":
+  [36m<button[39m
+    [33mdata-pressable[39m=[32m"true"[39m
+    [33mdata-proof-action[39m=[32m"proof-recompute-risk"[39m
+    [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(36, 45, 64); background: linear-gradient(180deg, rgb(13, 16, 23), rgb(17, 21, 32)); color: rgb(226, 232, 244); cursor: pointer; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04); font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+    [33mtabindex[39m=[32m"0"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Jump to proof controls":
+  [36m<button[39m
+    [33maria-controls[39m=[32m"system-admin-proof-controls"[39m
+    [33maria-label[39m=[32m"Jump to proof controls"[39m
+    [33mdata-pressable[39m=[32m"true"[39m
+    [33mdata-proof-action[39m=[32m"proof-shell-launcher"[39m
+    [33mdata-proof-entity-id[39m=[32m"run_001"[39m
+    [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(36, 45, 64); background: linear-gradient(180deg, rgb(13, 16, 23), rgb(17, 21, 32)); color: rgb(226, 232, 244); cursor: pointer; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04); font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+    [33mtabindex[39m=[32m"0"[39m
+    [33mtitle[39m=[32m"Jump to proof controls"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Sem 5":
+  [36m<button[39m
+    [33mdata-pressable[39m=[32m"true"[39m
+    [33mdata-proof-action[39m=[32m"proof-activate-semester-5"[39m
+    [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(36, 45, 64); background: linear-gradient(180deg, rgb(13, 16, 23), rgb(17, 21, 32)); color: rgb(226, 232, 244); cursor: pointer; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04); font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+    [33mtabindex[39m=[32m"0"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Sem 6":
+  [36m<button[39m
+    [33mdata-pressable[39m=[32m"true"[39m
+    [33mdata-proof-action[39m=[32m"proof-activate-semester-6"[39m
+    [33mdisabled[39m=[32m""[39m
+    [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(29, 78, 216); background: rgb(22, 27, 40); color: rgb(61, 74, 96); cursor: not-allowed; box-shadow: none; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  [36m<div[39m
+    [33maria-live[39m=[32m"polite"[39m
+    [33mrole[39m=[32m"status"[39m
+    [33mstyle[39m=[32m"font-family: \"JetBrains Mono\", monospace; font-size: 12px; color: rgb(226, 232, 244); border: 1px solid rgba(0, 109, 221, 0.25); background: rgba(0, 109, 221, 0.07); border-radius: 14px; padding: 11px 13px; line-height: 1.7;"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<div[39m
+    [33maria-live[39m=[32m"polite"[39m
+    [33mrole[39m=[32m"status"[39m
+    [33mstyle[39m=[32m"font-family: \"JetBrains Mono\", monospace; font-size: 12px; color: rgb(226, 232, 244); border: 1px solid rgba(0, 109, 221, 0.25); background: rgba(0, 109, 221, 0.07); border-radius: 14px; padding: 11px 13px; line-height: 1.7;"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mdata-proof-entity-id[39m=[32m"run_001"[39m
+      [33mdata-proof-shell[39m=[32m"shared"[39m
+      [33mdata-proof-surface[39m=[32m"system-admin-proof-control-plane"[39m
+      [33mdata-surface[39m=[32m"panel"[39m
+      [33mid[39m=[32m"system-admin-proof-control-plane-surface"[39m
+      [33mstyle[39m=[32m"background: rgb(17, 21, 32); border: 1px solid rgb(28, 35, 51); box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08); border-radius: 18px; padding: 14px; display: grid; gap: 14px;"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mstyle[39m=[32m"display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap;"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mstyle[39m=[32m"flex: 1 1 0%; min-width: 260px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mstyle[39m=[32m"font-family: \"JetBrains Mono\", monospace; font-size: 10px; color: rgb(0, 109, 221); text-transform: uppercase; letter-spacing: 0.12em;"[39m
+          [36m>[39m
+            [0mProof Control Plane[0m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mstyle[39m=[32m"font-family: \"Sora\", sans-serif; font-weight: 800; font-size: 24px; color: rgb(226, 232, 244); margin-top: 8px;"[39m
+          [36m>[39m
+            [0mProof Control Plane[0m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mstyle[39m=[32m"font-family: \"JetBrains Mono\", monospace; font-size: 11px; color: rgb(136, 146, 164); margin-top: 8px; line-height: 1.8;"[39m
+          [36m>[39m
+            [0mCurriculum import, crosswalk review, active run control, monitoring state, and snapshot restore all run from the backend proof shell now.[0m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mstyle[39m=[32m"display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto;"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mdata-pressable[39m=[32m"true"[39m
+            [33mdata-proof-action[39m=[32m"proof-create-import"[39m
+            [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(29, 78, 216); background: rgb(29, 78, 216); color: rgb(255, 255, 255); cursor: pointer; box-shadow: 0 14px 28px #1d4ed824; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+            [33mtabindex[39m=[32m"0"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mCreate Import[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33mdata-pressable[39m=[32m"true"[39m
+            [33mdata-proof-action[39m=[32m"proof-validate-import"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(36, 45, 64); background: rgb(22, 27, 40); color: rgb(61, 74, 96); cursor: not-allowed; box-shadow: none; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mValidate Import[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33mdata-pressable[39m=[32m"true"[39m
+            [33mdata-proof-action[39m=[32m"proof-review-crosswalks"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(36, 45, 64); background: rgb(22, 27, 40); color: rgb(61, 74, 96); cursor: not-allowed; box-shadow: none; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReview Mappings[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33mdata-pressable[39m=[32m"true"[39m
+            [33mdata-proof-action[39m=[32m"proof-approve-import"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(36, 45, 64); background: rgb(22, 27, 40); color: rgb(61, 74, 96); cursor: not-allowed; box-shadow: none; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mApprove Import[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33mdata-pressable[39m=[32m"true"[39m
+            [33mdata-proof-action[39m=[32m"proof-run-rerun"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(29, 78, 216); background: rgb(22, 27, 40); color: rgb(61, 74, 96); cursor: not-allowed; box-shadow: none; font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mRun / Rerun[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33mdata-pressable[39m=[32m"true"[39m
+            [33mdata-proof-action[39m=[32m"proof-recompute-risk"[39m
+            [33mstyle[39m=[32m"border-radius: 9px; padding: 8px 12px; border: 1px solid rgb(36, 45, 64); background: linear-gradient(180deg, rgb(13, 16, 23), rgb(17, 21, 32)); color: rgb(226, 232, 244); cursor: pointer; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04); font-family: \"JetBrains Mono\", monospace; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;"[39m
+            [33mtabindex[39m=[32m"0"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mRecompute Risk[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mstyle[39m=[32m"display: grid; gap: 10px;"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33mrole[39m=[32m"status"[39m
+          [33mstyle[39m=[32m"font-family: \"JetBrains Mono\", monospace; font-size: 12px; color: rgb(226, 232, 244); border: 1px solid rgba(0, 109, 221, 0.25); background: rgba(0, 109, 221, 0.07); border-radius: 14px; padding: 11px 13px; line-height: 1.7;"[39m
+        [36m>[39m
+          [0mScope System admin proof route · resolved from Proof Run 1 · Proof-run counts · operational semester 6 · Proof mode.[0m
+        [36m</div>[39m
+        [36m<div[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33mrole[39m=[32m"status"[39m
+          [33mstyle[39m=[32m"font-family: \"JetBrains Mono\", monospace; font-size: 12px; color: rgb(226, 232, 244); border: 1px solid rgba(0, 109, 221, 0.25); background: rgba(0, 109, 221, 0.07); border-radiu...
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/system-admin-proof-dashboard-workspace.test.tsx:998:44
+    996|     }))
+    997|
+    998|     const earlyLateSemesterButton = screen.getByRole('button', { name:…
+       |                                            ^
+    999|     const activeSemesterButton = screen.getByRole('button', { name: 'S…
+    1000|     const targetSemesterButton = screen.getByRole('button', { name: 'S…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 5 passed (6)
+      Tests  1 failed | 23 passed (24)
+   Start at  19:40:06
+   Duration  2.39s (transform 1.18s, setup 0ms, import 2.72s, tests 1.12s, environment 949ms)
+

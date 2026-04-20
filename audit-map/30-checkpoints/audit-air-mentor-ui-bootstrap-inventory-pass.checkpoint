@@ -1,0 +1,6 @@
+pass_name=inventory-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-inventory-pass
+workdir=/home/raed/projects/air-mentor-ui
+last_event=completed
+last_checkpoint_at=2026-04-14T22:53:24Z

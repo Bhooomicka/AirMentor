@@ -1,0 +1,16 @@
+[2026-04-01T13:23:45Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T13:23:45Z] command=env -C air-mentor-api npx vitest run --reporter=verbose --maxWorkers=1 tests/risk-explorer.test.ts -t keeps\ the\ default\ risk\ explorer\ aligned\ with\ activated\ semesters\ 1\ through\ 3 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/risk-explorer.test.ts > student risk explorer > returns checkpoint-bound proof analysis for an in-scope course leader and matches shell evidence
+ ↓ tests/risk-explorer.test.ts > student risk explorer > enforces scoped access and lets sysadmin inspect an archived run explicitly
+ ↓ tests/risk-explorer.test.ts > student risk explorer > uses the activated proof semester for the default risk explorer while keeping checkpoint playback separate
+ ✓ tests/risk-explorer.test.ts > student risk explorer > keeps the default risk explorer aligned with activated semesters 1 through 3 61950ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 3 skipped (4)
+   Start at  18:53:45
+   Duration  63.29s (transform 811ms, setup 0ms, import 1.24s, tests 61.95s, environment 0ms)
+
+[2026-04-01T13:24:49Z] exit=0

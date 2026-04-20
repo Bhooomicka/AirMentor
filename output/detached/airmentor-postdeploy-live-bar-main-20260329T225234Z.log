@@ -1,0 +1,572 @@
+[2026-03-29T22:52:35Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-29T22:52:35Z] command=bash -lc gh\ run\ watch\ 23721016394\ --exit-status\ \&\&\ gh\ run\ watch\ 23721016410\ --exit-status\ \&\&\ RAILWAY_PUBLIC_API_URL=https://api-production-ab72.up.railway.app\ EXPECTED_FRONTEND_ORIGIN=https://raed2180416.github.io\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ npm\ --workspace\ air-mentor-api\ run\ verify:live-session-contract\ \&\&\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ npm\ run\ verify:proof-closure:live\ \&\&\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\ npm\ run\ playwright:admin-live:teaching-parity\ \&\&\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\ npm\ run\ playwright:admin-live:acceptance 
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy to GitHub Pages · 23721016394
+Triggered via push less than a minute ago
+
+JOBS
+* build (ID 69095933694)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Install dependencies
+  * Build
+  * Setup Pages
+  * Upload artifact
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy to GitHub Pages · 23721016394
+Triggered via push less than a minute ago
+
+JOBS
+✓ build in 44s (ID 69095933694)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Install dependencies
+  ✓ Build
+  ✓ Setup Pages
+  ✓ Upload artifact
+  ✓ Post Setup Node
+  ✓ Post Checkout
+  ✓ Complete job
+* deploy (ID 69095969161)
+
+ANNOTATIONS
+! Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/configure-pages@v5, actions/setup-node@v4, actions/upload-artifact@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build: .github#2
+
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy to GitHub Pages · 23721016394
+Triggered via push less than a minute ago
+
+JOBS
+✓ build in 44s (ID 69095933694)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Install dependencies
+  ✓ Build
+  ✓ Setup Pages
+  ✓ Upload artifact
+  ✓ Post Setup Node
+  ✓ Post Checkout
+  ✓ Complete job
+* deploy (ID 69095969161)
+  * Set up job
+
+ANNOTATIONS
+! Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/configure-pages@v5, actions/setup-node@v4, actions/upload-artifact@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build: .github#2
+
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy to GitHub Pages · 23721016394
+Triggered via push less than a minute ago
+
+JOBS
+✓ build in 44s (ID 69095933694)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Install dependencies
+  ✓ Build
+  ✓ Setup Pages
+  ✓ Upload artifact
+  ✓ Post Setup Node
+  ✓ Post Checkout
+  ✓ Complete job
+* deploy (ID 69095969161)
+  ✓ Set up job
+  * Deploy to GitHub Pages
+
+ANNOTATIONS
+! Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/configure-pages@v5, actions/setup-node@v4, actions/upload-artifact@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build: .github#2
+
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy to GitHub Pages · 23721016394
+Triggered via push about 1 minute ago
+
+JOBS
+✓ build in 44s (ID 69095933694)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Install dependencies
+  ✓ Build
+  ✓ Setup Pages
+  ✓ Upload artifact
+  ✓ Post Setup Node
+  ✓ Post Checkout
+  ✓ Complete job
+* deploy (ID 69095969161)
+  ✓ Set up job
+  ✓ Deploy to GitHub Pages
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/configure-pages@v5, actions/setup-node@v4, actions/upload-artifact@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build: .github#2
+
+✓ main Deploy to GitHub Pages · 23721016394
+Triggered via push about 1 minute ago
+
+JOBS
+✓ build in 44s (ID 69095933694)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Install dependencies
+  ✓ Build
+  ✓ Setup Pages
+  ✓ Upload artifact
+  ✓ Post Setup Node
+  ✓ Post Checkout
+  ✓ Complete job
+✓ deploy in 10s (ID 69095969161)
+  ✓ Set up job
+  ✓ Deploy to GitHub Pages
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/configure-pages@v5, actions/setup-node@v4, actions/upload-artifact@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build: .github#2
+
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 1 minute ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 2 minutes ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 2 minutes ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  * Deploy to Railway
+  * Verify Railway health
+  * Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 2 minutes ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  ✓ Deploy to Railway
+  ✓ Verify Railway health
+  - Railway health verification not configured
+  * Verify Railway live session contract
+  * Railway live session contract verification not configured
+  * Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Deploy API to Railway · 23721016410
+Triggered via push about 2 minutes ago
+
+JOBS
+* deploy (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  ✓ Deploy to Railway
+  ✓ Verify Railway health
+  - Railway health verification not configured
+  X Verify Railway live session contract
+  - Railway live session contract verification not configured
+  ✓ Capture Railway failure diagnostics
+  * Upload Railway diagnostics
+  * Railway deployment not configured
+  * Post Setup Node
+  * Post Checkout
+X main Deploy API to Railway · 23721016410
+Triggered via push about 2 minutes ago
+
+JOBS
+X deploy in 1m55s (ID 69095944253)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node
+  ✓ Check Railway configuration
+  ✓ Install dependencies
+  ✓ Build API
+  ✓ Install Railway CLI
+  ✓ Railway deploy preflight
+  ✓ Deploy to Railway
+  ✓ Verify Railway health
+  - Railway health verification not configured
+  X Verify Railway live session contract
+  - Railway live session contract verification not configured
+  ✓ Capture Railway failure diagnostics
+  ✓ Upload Railway diagnostics
+  - Railway deployment not configured
+  - Post Setup Node
+  ✓ Post Checkout
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/setup***node@v4, actions/upload***artifact@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025***09***19***deprecation***of***node***20***on***github***actions***runners/
+deploy: .github#2
+
+X Process completed with exit code 1.
+deploy: .github#20
+

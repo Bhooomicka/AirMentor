@@ -1,0 +1,19 @@
+[2026-03-30T19:10:54Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:10:54Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/openapi.test.ts\ tests/proof-control-plane-activation-service.test.ts\ tests/msruas-proof-sandbox.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/openapi.test.ts > openapi > publishes the implemented route surface 6945ms
+ ✓ tests/openapi.test.ts > openapi > documents the semester activation request and response contract 9090ms
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > bootstraps the proof branch, batch, import, and run when the proof sandbox is missing 4106ms
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > does not duplicate proof seed records when recovery runs twice 3956ms
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > updates the active operational semester, publishes the active projection, and emits audit payload details 4ms
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > does not republish projections when the target proof run is inactive 1ms
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > rejects semesters outside the proof run range before mutating state or audit 1ms
+
+ Test Files  3 passed (3)
+      Tests  7 passed (7)
+   Start at  00:40:56
+   Duration  27.04s (transform 1.19s, setup 0ms, import 2.60s, tests 24.11s, environment 0ms)
+
+[2026-03-30T19:11:23Z] exit=0

@@ -1,0 +1,98 @@
+Indexing...
+Uploading...
+  Build Logs: https://railway.com/project/71baa9af-c17f-4782-b1a7-f53259a161fe/service/f81182f4-2023-4ac9-9f26-dad15cb00435?id=905d9cd5-2350-4244-9201-61b13170ba38&
+CI mode enabled
+
+[35m[Region: asia-southeast1][0m
+[35m==============
+==============
+[0m
+context: p6zq-j7gq
+╔════════════ Nixpacks v1.38.0 ════════════╗
+║ setup      │ nodejs_22, npm-9_x, openssl ║
+║──────────────────────────────────────────║
+║ install    │ npm ci                      ║
+║──────────────────────────────────────────║
+║ build      │ npm run build               ║
+║──────────────────────────────────────────║
+║ start      │ npm run start               ║
+[internal] load build definition from Dockerfile
+[internal] load build definition from Dockerfile
+[internal] load build definition from Dockerfile
+[internal] load build definition from Dockerfile
+[internal] load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+[internal] load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+[internal] load .dockerignore
+[internal] load .dockerignore
+[internal] load .dockerignore
+[stage-0 10/10] COPY . /app
+[stage-0  9/10] RUN printf '\nPATH=/app/node_modules/.bin:$PATH' >> /root/.profile
+[stage-0  8/10] RUN --mount=type=cache,id=s/f81182f4-2023-4ac9-9f26-dad15cb00435-node_modules/cache,target=/app/node_modules/.cache npm run build
+[stage-0  6/10] RUN --mount=type=cache,id=s/f81182f4-2023-4ac9-9f26-dad15cb00435-/root/npm,target=/root/.npm npm ci
+[stage-0  5/10] COPY . /app/.
+[internal] load build context
+[stage-0  2/10] WORKDIR /app/
+[stage-0  1/10] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+[stage-0  1/10] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+[internal] load build context
+[internal] load build context
+[stage-0  1/10] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+[internal] load build context
+[stage-0  2/10] WORKDIR /app/
+[stage-0  3/10] COPY .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix
+[stage-0  5/10] COPY . /app/.
+[stage-0  6/10] RUN --mount=type=cache,id=s/f81182f4-2023-4ac9-9f26-dad15cb00435-/root/npm,target=/root/.npm npm ci
+npm warn config production Use `--omit=dev` instead.
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'vite@8.0.0',
+npm warn EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },
+npm warn EBADENGINE   current: { node: 'v22.11.0', npm: '10.9.0' }
+npm warn EBADENGINE }
+
+npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+
+
+added 161 packages, and audited 162 packages in 5s
+
+
+45 packages are looking for funding
+
+  run `npm fund` for details
+
+
+8 vulnerabilities (6 moderate, 2 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+
+[stage-0  7/10] COPY . /app/.
+[stage-0  7/10] COPY . /app/.
+[stage-0  8/10] RUN --mount=type=cache,id=s/f81182f4-2023-4ac9-9f26-dad15cb00435-node_modules/cache,target=/app/node_modules/.cache npm run build
+npm warn config production Use `--omit=dev` instead.
+
+
+> air-mentor-api@0.1.0 build
+> tsc -p tsconfig.build.json
+
+
+[stage-0  9/10] RUN printf '\nPATH=/app/node_modules/.bin:$PATH' >> /root/.profile
+[stage-0 10/10] COPY . /app
+[stage-0 10/10] COPY . /app
+exporting to docker image format
+[auth] sharing credentials for production-asia-southeast1-eqsg3a.railway-registry.com
+importing to docker
+importing to docker
+=== Successfully Built! ===
+Run:
+docker run -it production-asia-southeast1-eqsg3a.railway-registry.com/f81182f4-2023-4ac9-9f26-dad15cb00435:905d9cd5-2350-4244-9201-61b13170ba38
+[92mBuild time: 38.87 seconds[0m
+Deploy complete

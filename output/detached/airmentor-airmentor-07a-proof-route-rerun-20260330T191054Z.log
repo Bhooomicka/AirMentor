@@ -1,0 +1,9 @@
+[2026-03-30T19:10:54Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:10:54Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ --maxWorkers=1\ tests/admin-control-plane.test.ts\ -t\ \"runs\ the\ proof\ control\ plane\ end\ to\ end\ and\ exposes\ proof\ operations\ on\ the\ faculty\ profile\|re-seeds\ proof\ batch\ routes\ after\ the\ canonical\ batch\ disappears\|activates\ a\ requested\ semester\ on\ the\ active\ proof\ run\ when\ readiness\ is\ satisfied\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > rejects assigning a second active owner to the same offering
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > limits HoD faculty profile access to supervised departments and branches
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > propagates admin-created faculty records into teaching login, bootstrap, and faculty profile
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > previews and bulk-applies mentor assignment changes with confirmation, audit detail, and mentor-surface parity

@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: System-admin portal startup and login gate
+- Parent domain: Bootstrap / system-admin portal
+- Feature scope boundary: `#/admin` entry, backend requirement, session restore, login, and role-required gate only. Excludes the live admin workspaces after entry.
+- Roles and role-specific variants: Public / unauthenticated, SYSTEM_ADMIN, and non-admin authenticated users.
+- Product or user intent: Require a live backend and a valid system-admin session before the sysadmin workspace renders.
+- Source files: [`src/system-admin-app.tsx`](../../src/system-admin-app.tsx), [`src/system-admin-session-shell.tsx`](../../src/system-admin-session-shell.tsx), [`src/system-admin-live-app.tsx`](../../src/system-admin-live-app.tsx), [`src/App.tsx`](../../src/App.tsx)
+- Entry points: `SystemAdminApp`, `SystemAdminSessionBoundary`, `onExitPortal`, `onSwitchToSystemAdmin`.
+- Routes, deep links, query params, and restore entry states: `#/admin`, `#/admin/*`; restore can land on the gate before the live control plane mounts.
+- Preconditions and guard conditions: `VITE_AIRMENTOR_API_BASE_URL` must be present; the current session must contain a usable system-admin grant or a login route.
+- Visible surfaces involved: Backend-required card, restoring-session fallback, system-admin login form, role-required screen.
+- Hidden or conditional surfaces involved: Role-switch prompt, the backend diagnostics text, and the restore-in-progress state.
+- Trigger sources: Open the system-admin portal, sign in, switch into SYSTEM_ADMIN, or return to the portal selector.
+- Atomic user actions: Open the admin portal; sign in; switch the current session into the SYSTEM_ADMIN grant; return to the chooser.
+- Hidden, hover-only, or keyboard-only actions: Standard form focus/submit and button focus states; no hidden alternate admin entry is exposed.
+- Automatic or system actions: Run startup diagnostics; require the API base URL before rendering; restore the current session before mounting the workspace; reject non-admin active role contexts with a role-required screen; permit switching to SYSTEM_ADMIN when the session already contains that grant.
+- API and backend calls: `GET /api/session`, `POST /api/session/login`, `POST /api/session/role-context`, then the admin endpoint families after entry.
+- State dependencies: `booting`, `activeRoleCode`, `canSwitchToSystemAdmin`, `authBusy`, `authError`, `identifier`, `password`.
+- Persistence dependencies: Session cookie/CSRF, admin theme preference.
+- Restore behavior: A restored session may re-enter the gate without a fresh login, but the live control plane still requires SYSTEM_ADMIN as the active role.
+- Permissions and scope logic: The admin workspace only renders when the active role is SYSTEM_ADMIN; otherwise the user sees login or role-switch affordances first.
+- State transitions: Missing backend -> backend-required; restore-in-progress -> gate; unauthenticated -> login; non-admin active role -> role-required; SYSTEM_ADMIN -> live control plane.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Backend-required state when the API base URL is missing; restore-in-progress state while session loads; inline login errors; role mismatch blocking the workspace.
+- Success path: A valid backend and a valid SYSTEM_ADMIN session allow the admin app to mount and keep the portal hash at `#/admin`.
+- Failure and recovery paths: Missing config blocks at the gate; login errors keep the form open; non-admin roles can switch or logout and retry.
+- Data read: API base URL, active session, current role code, startup diagnostics.
+- Data written: Startup telemetry, backend session state, portal hash routing to `#/admin`.
+- Telemetry, analytics, or audit-trail side effects: Startup diagnostics and auth/session events are emitted by the shared session layer.
+- Downstream effects: Unlocks hierarchy, request, proof, roster, and registry management surfaces; leaving the portal clears workspace hints and returns to the chooser.
+- Hidden couplings: The shell depends on live backend availability and on the session layer keeping a system-admin grant available for switching.
+- Expected behavior: Missing API config shows the backend-required state, restore-in-progress shows the loading state, unauthenticated users see the login form, non-admin active roles see a switch-or-logout prompt, and SYSTEM_ADMIN proceeds into the live control plane.
+- Implemented behavior: The gate validates the backend config, restores session state, and routes non-admin users through login or role-switch affordances before entry.
+- Tested behavior: [`tests/portal-routing.test.ts`](../../tests/portal-routing.test.ts), [`air-mentor-api/tests/session.test.ts`](../../air-mentor-api/tests/session.test.ts), [`air-mentor-api/tests/admin-foundation.test.ts`](../../air-mentor-api/tests/admin-foundation.test.ts), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts), [`tests/verify-final-closeout-live.test.ts`](../../tests/verify-final-closeout-live.test.ts).
+- Live behavior notes: The active app path is backend-backed only; mock admin mode has been removed from the live entry path.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/portal-routing.test.ts`](../../tests/portal-routing.test.ts), [`air-mentor-api/tests/session.test.ts`](../../air-mentor-api/tests/session.test.ts), [`air-mentor-api/tests/admin-foundation.test.ts`](../../air-mentor-api/tests/admin-foundation.test.ts), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts), [`tests/verify-final-closeout-live.test.ts`](../../tests/verify-final-closeout-live.test.ts).
+- Known gaps: No dedicated UI test asserts the exact admin restore, login, and role-required transitions.
+- Open questions: Should a successful admin login always re-enter `#/admin`, or should the shell preserve whatever subroute the user was on?
+- Confidence level: Medium-high

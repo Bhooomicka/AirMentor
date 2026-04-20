@@ -1,0 +1,23 @@
+[2026-03-30T07:49:48Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:49:48Z] command=npm --workspace air-mentor-api run build 
+
+> air-mentor-api@0.1.0 build
+> tsc -p tsconfig.build.json
+
+src/modules/people.ts(355,7): error TS2322: Type 'null' is not assignable to type '{ scopeType: "institution" | "department" | "branch" | "batch" | "section" | "student" | "academic-faculty" | "proof"; scopeId: string; label: string; batchId: string | null; sectionCode: string | null; branchName: string | null; simulationRunId: string | null; simulationStageCheckpointId: string | null; studentId: ...'.
+src/modules/people.ts(356,7): error TS2322: Type 'null' is not assignable to type '{ kind: "proof-run" | "proof-checkpoint" | "default-policy" | "policy-override" | "proof-unavailable"; scopeType: "institution" | "department" | "branch" | "batch" | "section" | "student" | "academic-faculty" | "proof" | null; scopeId: string | null; label: string; } | undefined'.
+src/modules/people.ts(357,7): error TS2322: Type 'null' is not assignable to type '"institution" | "department" | "branch" | "batch" | "section" | "academic-faculty" | "proof" | undefined'.
+src/modules/people.ts(358,7): error TS2322: Type 'null' is not assignable to type '"operational-semester" | "proof-run" | "proof-checkpoint" | "unavailable" | undefined'.
+src/modules/people.ts(373,7): error TS2322: Type '{ kind: string; scopeType: "institution" | "department" | "branch" | "batch" | "section" | "academic-faculty"; scopeId: string; label: string; }' is not assignable to type '{ kind: "proof-run" | "proof-checkpoint" | "default-policy" | "policy-override" | "proof-unavailable"; scopeType: "institution" | "department" | "branch" | "batch" | "section" | "student" | "academic-faculty" | "proof" | null; scopeId: string | null; label: string; }'.
+  Types of property 'kind' are incompatible.
+    Type 'string' is not assignable to type '"proof-run" | "proof-checkpoint" | "default-policy" | "policy-override" | "proof-unavailable"'.
+src/modules/students.ts(204,5): error TS2322: Type '{ kind: string; scopeType: "institution" | "department" | "branch" | "batch" | "section" | "academic-faculty"; scopeId: string; label: string; }' is not assignable to type '{ kind: "proof-run" | "proof-checkpoint" | "default-policy" | "policy-override" | "proof-unavailable"; scopeType: "institution" | "department" | "branch" | "batch" | "section" | "student" | "academic-faculty" | "proof" | null; scopeId: string | null; label: string; }'.
+  Types of property 'kind' are incompatible.
+    Type 'string' is not assignable to type '"proof-run" | "proof-checkpoint" | "default-policy" | "policy-override" | "proof-unavailable"'.
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path /home/raed/projects/air-mentor-ui/air-mentor-api
+npm error workspace air-mentor-api@0.1.0
+npm error location /home/raed/projects/air-mentor-ui/air-mentor-api
+npm error command failed
+npm error command sh -c tsc -p tsconfig.build.json

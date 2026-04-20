@@ -1,0 +1,13 @@
+Feature atom pass complete. I replaced the old v1 five-cluster scaffold with 24 v2 atom docs covering portal, academic course, mentor, HoD, planner, and system-admin families.
+
+- Updated [feature-registry.md](/home/raed/projects/air-mentor-ui/audit-map/15-final-maps/feature-registry.md) to point at the new v2 atom files.
+- Added 24 atom files under `audit-map/04-feature-atoms/`, including [public-portal-chooser-and-routing.md](/home/raed/projects/air-mentor-ui/audit-map/04-feature-atoms/public-portal-chooser-and-routing.md) and [system-admin-proof-dashboard-checkpoints-and-playback.md](/home/raed/projects/air-mentor-ui/audit-map/04-feature-atoms/system-admin-proof-dashboard-checkpoints-and-playback.md).
+- Marked the pass mapped in [coverage-ledger.md](/home/raed/projects/air-mentor-ui/audit-map/23-coverage/coverage-ledger.md).
+- Updated [working-knowledge.md](/home/raed/projects/air-mentor-ui/audit-map/24-agent-memory/working-knowledge.md), [known-facts.md](/home/raed/projects/air-mentor-ui/audit-map/24-agent-memory/known-facts.md), and [stale-findings-watchlist.md](/home/raed/projects/air-mentor-ui/audit-map/24-agent-memory/stale-findings-watchlist.md).
+- Stamped completed state in [audit-air-mentor-ui-bootstrap-feature-atom-pass.status](/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-feature-atom-pass.status), [audit-air-mentor-ui-bootstrap-feature-atom-pass.checkpoint](/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-feature-atom-pass.checkpoint), [audit-air-mentor-ui-bootstrap-feature-atom-pass.last-message.md](/home/raed/projects/air-mentor-ui/audit-map/32-reports/audit-air-mentor-ui-bootstrap-feature-atom-pass.last-message.md), and removed the pass from remaining queue order in [current-run-status.md](/home/raed/projects/air-mentor-ui/audit-map/32-reports/current-run-status.md).
+- No tests or live browser verification were run in this pass.
+- No new contradictions were added; [contradiction-matrix.md](/home/raed/projects/air-mentor-ui/audit-map/14-reconciliation/contradiction-matrix.md) still carries `C-006` for the sysadmin request transition mismatch.
+- Residual gap: live browser verification and audit-the-audit are still pending, especially for bootstrap/login transitions, proof playback, and the request-transition mismatch.
+- Model/provider/account routing did not change. Caveman was not used.
+- Next pass should be `dependency-pass`.
+- Manual checkpoint required: none.

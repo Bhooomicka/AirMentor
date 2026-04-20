@@ -1,0 +1,19 @@
+[2026-03-30T18:49:17Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T18:49:17Z] command=bash /tmp/airmentor-live-import-probe.sh 
+login-response
+{"sessionId":"session_79a56e65-e00a-432b-8522-d49bb8c5db65","csrfToken":"5qrXiuEcm0_g0eChB3RBDGlruX84UwH2Q95n3U-FfgU","user":{"userId":"user_sysadmin","username":"sysadmin","email":"sysadmin@airmentor.local"},"faculty":{"facultyId":"fac_sysadmin","displayName":"System Admin"},"activeRoleGrant":{"grantId":"grant_sysadmin_global","facultyId":"fac_sysadmin","roleCode":"SYSTEM_ADMIN","scopeType":"institution","scopeId":"inst_airmentor","startDate":"2024-01-01","endDate":null,"status":"active","version":1},"availableRoleGrants":[{"grantId":"grant_sysadmin_global","facultyId":"fac_sysadmin","roleCode":"SYSTEM_ADMIN","scopeType":"institution","scopeId":"inst_airmentor","startDate":"2024-01-01","endDate":null,"status":"active","version":1},{"grantId":"grant_sysadmin_hod_cse","facultyId":"fac_sysadmin","roleCode":"HOD","scopeType":"department","scopeId":"dept_cse","startDate":"2024-01-01","endDate":null,"status":"active","version":1}],"preferences":{"themeMode":"frosted-focus-dark","version":223,"updatedAt":"2026-03-29T13:45:46.330Z"}}
+csrf=5qrXiuEcm0_g0eChB3RBDGlruX84UwH2Q95n3U-FfgU
+
+post-response
+status=500
+{"error":"INTERNAL_SERVER_ERROR","message":"Unexpected server error"}
+dashboard-after
+{
+  "imports": 0,
+  "latestImport": null,
+  "latestImportStatus": null,
+  "runs": 0,
+  "activeRun": null,
+  "checkpoints": null
+}
+[2026-03-30T18:49:17Z] exit=0

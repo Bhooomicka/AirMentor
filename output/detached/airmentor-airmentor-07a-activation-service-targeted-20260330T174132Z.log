@@ -1,0 +1,5 @@
+[2026-03-30T17:41:32Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T17:41:32Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ NODE_OPTIONS=--max-old-space-size=8192\ npx\ vitest\ run\ --maxWorkers=1\ --reporter=verbose\ tests/proof-control-plane-activation-service.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+

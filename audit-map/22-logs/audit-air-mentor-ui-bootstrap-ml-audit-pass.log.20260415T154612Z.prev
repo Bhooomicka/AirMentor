@@ -1,0 +1,13 @@
+[2026-04-15T15:26:03Z] session=audit-air-mentor-ui-bootstrap-ml-audit-pass
+[2026-04-15T15:26:03Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-bootstrap-ml-audit-pass.command.sh
+[2026-04-15T15:26:03Z] execution-attempt=1 provider=native-codex slot=native account=native-codex-session model=gpt-5.4
+error: unexpected argument '--search' found
+
+  tip: to pass '--search' as a value, use '-- --search'
+
+Usage: codex exec [OPTIONS] [PROMPT]
+       codex exec [OPTIONS] <COMMAND> [ARGS]
+
+For more information, try '--help'.
+[2026-04-15T15:26:33Z] execution-failure-class=unknown provider=native-codex slot=native model=gpt-5.4 attempt=1 log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-ml-audit-pass.attempt-1.GKjJFc.log
+[2026-04-15T15:26:33Z] exit_code=75

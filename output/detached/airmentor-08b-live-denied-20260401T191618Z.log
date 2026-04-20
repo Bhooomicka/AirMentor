@@ -1,0 +1,30 @@
+[2026-04-01T19:16:18Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T19:16:18Z] command=env AIRMENTOR_DENIED_ARTIFACT_PREFIX=08b-live-denied AIRMENTOR_LIVE_STACK=1 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 node scripts/hod-proof-invalid-checkpoint-probe.mjs 
+[denied] login system admin
+[denied] POST /api/session/login
+[denied] read seeded proof dashboard
+[denied] GET /api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard
+[denied] resolve seeded HoD password
+[denied] POST /api/session/login
+[denied] POST /api/session/login
+[denied] login HoD and switch role if needed
+[denied] POST /api/session/login
+[denied] POST /api/session/role-context
+[denied] fetch HoD proof students for a valid checkpoint
+[denied] GET /api/academic/hod/proof-students?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+Error: Timed out after 30000ms: GET /api/academic/hod/proof-students?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+    at node:internal/deps/undici/undici:16416:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async apiRequest (file:///home/raed/projects/air-mentor-ui/scripts/hod-proof-invalid-checkpoint-probe.mjs:81:20)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/hod-proof-invalid-checkpoint-probe.mjs:159:26
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+Error: Timed out after 30000ms: GET /api/academic/hod/proof-students?simulationStageCheckpointId=stage_checkpoint_654335929a345857eab259b0
+    at node:internal/deps/undici/undici:16416:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async apiRequest (file:///home/raed/projects/air-mentor-ui/scripts/hod-proof-invalid-checkpoint-probe.mjs:81:20)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/hod-proof-invalid-checkpoint-probe.mjs:159:26
+
+Node.js v24.13.0

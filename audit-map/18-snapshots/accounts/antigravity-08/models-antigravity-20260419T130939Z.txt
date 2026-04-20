@@ -1,0 +1,7 @@
+[92m[1mModels cache refreshed[0m
+antigravity/claude-opus-4-5-thinking
+antigravity/claude-sonnet-4-5
+antigravity/claude-sonnet-4-5-thinking
+antigravity/gemini-3-flash
+antigravity/gemini-3-pro-high
+antigravity/gemini-3-pro-low

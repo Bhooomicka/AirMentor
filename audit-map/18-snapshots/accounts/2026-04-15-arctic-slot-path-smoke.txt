@@ -1,0 +1,12 @@
+Arctic slot path smoke verification
+Date: 2026-04-15
+
+Command used:
+  XDG_DATA_HOME=/tmp/arctic-slot-test-data XDG_CONFIG_HOME=/tmp/arctic-slot-test-config arctic auth list
+
+Observed credential path:
+  /tmp/arctic-slot-test-data/arctic/auth.json
+
+Interpretation:
+  The installed Arctic CLI respects XDG_DATA_HOME for credential storage on this machine.
+  This is sufficient to implement one isolated Arctic slot per account without relying on the unverified `--name` multi-account flag.

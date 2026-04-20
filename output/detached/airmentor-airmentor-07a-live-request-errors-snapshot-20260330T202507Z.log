@@ -1,0 +1,46 @@
+[2026-03-30T20:25:07Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:25:07Z] command=zsh -lc $'export PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\nnode --input-type=module <<\'NODE\'\nconst api = process.env.PLAYWRIGHT_API_URL\nconst origin = new URL(process.env.PLAYWRIGHT_APP_URL).origin\nconst loginResponse = await fetch(new URL("/api/session/login", api), { method: "POST", headers: { origin, "content-type": "application/json" }, body: JSON.stringify({ identifier: process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER, password: process.env.AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD }) })\nconst body = await loginResponse.json()\nconst setCookies = typeof loginResponse.headers.getSetCookie === "function" ? loginResponse.headers.getSetCookie() : [loginResponse.headers.get("set-cookie")].filter(Boolean)\nconst cookieHeader = setCookies.map(value => value.split(";", 1)[0]).join("; ")\nconst dashboard = await fetch(new URL("/api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard", api), { headers: { origin, cookie: cookieHeader } }).then(r => r.json())\nconsole.log(JSON.stringify({ activeOperationalSemester: dashboard.activeRunDetail?.activeOperationalSemester, requestErrors: dashboard.recentOperationalEvents.filter(event => event.name === "request.error").slice(0, 10) }, null, 2))\nNODE' 
+{
+  "activeOperationalSemester": 6,
+  "requestErrors": [
+    {
+      "operationalTelemetryEventId": "ops_evt_1e289d9f-9d17-4a1f-b355-d7834c722472",
+      "source": "backend",
+      "name": "request.error",
+      "level": "warn",
+      "timestamp": "2026-03-30T20:25:04.910Z",
+      "details": {
+        "method": "GET",
+        "route": "/api/session",
+        "statusCode": 401,
+        "code": "UNAUTHORIZED",
+        "error": {
+          "name": "Error",
+          "message": "Authentication required",
+          "code": "UNAUTHORIZED"
+        }
+      },
+      "createdAt": "2026-03-30T20:25:04.911Z"
+    },
+    {
+      "operationalTelemetryEventId": "ops_evt_15f4968d-9c70-4c8c-9317-2e5b66a3f23c",
+      "source": "backend",
+      "name": "request.error",
+      "level": "warn",
+      "timestamp": "2026-03-30T20:20:04.387Z",
+      "details": {
+        "method": "POST",
+        "route": "/api/session/login",
+        "statusCode": 401,
+        "code": "UNAUTHORIZED",
+        "error": {
+          "name": "Error",
+          "message": "Invalid credentials",
+          "code": "UNAUTHORIZED"
+        }
+      },
+      "createdAt": "2026-03-30T20:20:04.387Z"
+    }
+  ]
+}
+[2026-03-30T20:25:14Z] exit=0

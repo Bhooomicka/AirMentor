@@ -1,0 +1,43 @@
+[2026-03-30T19:48:28Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:48:28Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/academic-bootstrap-routes.test.ts\ tests/academic-parity.test.ts\ -t\ \"validates\ a\ requested\ playback\ checkpoint\ against\ the\ checkpoint\ run\ instead\ of\ the\ first\ active\ run\ row\|keeps\ academic\ playback\ checkpoints\ available\ when\ another\ proof\ run\ is\ also\ active\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof context and linked proof drilldowns aligned for the active teaching role
+ ↓ tests/academic-parity.test.ts > academic bootstrap > exposes non-overlapping faculty timetable blocks in the proof bootstrap for course-leader playback
+ ↓ tests/academic-parity.test.ts > academic bootstrap > ignores legacy academic asset snapshots and derives the live view from admin-owned records
+ ↓ tests/academic-parity.test.ts > academic bootstrap > reflects admin master-data changes into the academic bootstrap on the next fetch
+ ↓ tests/academic-parity.test.ts > academic bootstrap > persists resolved course outcomes, offering schemes, and question papers through backend-owned routes
+ ↓ tests/academic-parity.test.ts > academic bootstrap > persists authoritative queue, calendar workspace, attendance, and TT1 entry state through the teaching routes
+ ↓ tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof payloads and student drilldowns scoped for course leaders and mentors
+ × tests/academic-parity.test.ts > academic bootstrap > keeps academic playback checkpoints available when another proof run is also active 3985ms
+   → expected undefined to be truthy
+ ✓ tests/academic-bootstrap-routes.test.ts > academic bootstrap routes > validates a requested playback checkpoint against the checkpoint run instead of the first active run row 62ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/academic-parity.test.ts > academic bootstrap > keeps academic playback checkpoints available when another proof run is also active
+AssertionError: expected undefined to be truthy
+
+- Expected:
+true
+
++ Received:
+undefined
+
+ ❯ tests/academic-parity.test.ts:877:32
+    875|       asc(simulationStageCheckpoints.stageOrder),
+    876|     )
+    877|     expect(selectedCheckpoint).toBeTruthy()
+       |                                ^
+    878|
+    879|     const [checkpointRun] = await current.db.select().from(simulationR…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 1 passed | 7 skipped (9)
+   Start at  01:18:30
+   Duration  5.69s (transform 754ms, setup 0ms, import 1.47s, tests 4.05s, environment 0ms)
+

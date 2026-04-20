@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-04-01T18:22:45.779Z",
+  "appUrl": "https://raed2180416.github.io/AirMentor/",
+  "artifacts": {
+    "successScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow.png",
+    "successReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-report.json",
+    "failureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-failure.png",
+    "failureReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-failure.json",
+    "prefixedSuccessScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/08a-live-request-flow-system-admin-live-request-flow.png",
+    "prefixedSuccessReport": "/home/raed/projects/air-mentor-ui/output/playwright/08a-live-request-flow-system-admin-live-request-flow-report.json",
+    "prefixedFailureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/08a-live-request-flow-system-admin-live-request-flow-failure.png",
+    "prefixedFailureReport": "/home/raed/projects/air-mentor-ui/output/playwright/08a-live-request-flow-system-admin-live-request-flow-failure.json"
+  },
+  "checks": [
+    {
+      "name": "system-admin-login",
+      "status": "passed"
+    },
+    {
+      "name": "request-list-open",
+      "status": "passed"
+    },
+    {
+      "name": "request-detail-open",
+      "status": "passed",
+      "summary": "Grant additional mentor mapping coverage"
+    },
+    {
+      "name": "request-deep-link-persists",
+      "status": "passed",
+      "url": "https://raed2180416.github.io/AirMentor/#/admin/requests/request_001"
+    },
+    {
+      "name": "request-closeout",
+      "status": "passed"
+    }
+  ]
+}

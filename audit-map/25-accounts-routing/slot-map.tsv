@@ -1,0 +1,20 @@
+slot	provider	canonical_label	identity_hint	auth_source_key
+anthropic-main	anthropic	Anthropic OAuth	Anthropic OAuth primary account	anthropic
+antigravity-main	antigravity	Antigravity OAuth	Global Arctic Antigravity OAuth default	antigravity
+antigravity-02	antigravity	antigravity-unknownme	Antigravity account unknownme	antigravity:unknownme
+antigravity-03	antigravity	antigravity-juniorretard	Antigravity account juniorretard	antigravity:juniorretard
+antigravity-04	antigravity	antigravity-accneww	Antigravity account accneww	antigravity:accneww
+antigravity-05	antigravity	antigravity-geowakeapp	Antigravity account geowakeapp	antigravity:geowakeapp
+antigravity-06	antigravity	antigravity-steamraed	Antigravity account steamraed	antigravity:steamraed
+antigravity-07	antigravity	antigravity-pleasedontmail	Antigravity account pleasedontmail	antigravity:pleasedontmail
+antigravity-08	antigravity	antigravity-raedhazzy	Antigravity account raedhazzy	antigravity:raedhazzy
+antigravity-09	antigravity	antigravity-randstuff	Antigravity account randstuff	antigravity:randstuff
+codex-01	codex	dummy account	pleasedontmail21@gmail.com	codex:pleasedontmail
+codex-02	codex	GeoWake App	geowakeapp@gmail.com	codex:geowake
+codex-03	codex	Hazzy	raedhazzy@gmail.com	codex
+codex-04	codex	Raed	steamraed29@gmail.com	codex:steamraed
+codex-05	codex	raed siddiqui	juniorretard123@gmail.com	codex:juniorretard
+codex-06	codex	stuff rand (You)	randstuff904@gmail.com	codex:randstuff
+copilot-raed2180416	github-copilot	Raed2180416	GitHub account Raed2180416	github-copilot
+copilot-accneww432	github-copilot	accneww432	GitHub account accneww432	github-copilot:accneww-copilot
+google-main	google	youaretalkingtoraed@gmail.com	youaretalkingtoraed@gmail.com	google

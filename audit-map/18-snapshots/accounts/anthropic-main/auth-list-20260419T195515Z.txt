@@ -1,0 +1,9 @@
+┌  Credentials [90m~/.local/share/air-mentor-audit/arctic-slots/anthropic-main/data/arctic/auth.json
+│
+●  Anthropic
+│
+│    └─ oauth [90m(default)
+│
+│    └─ oauth [90m(Suprava-Claude)
+│
+└  2 credentials

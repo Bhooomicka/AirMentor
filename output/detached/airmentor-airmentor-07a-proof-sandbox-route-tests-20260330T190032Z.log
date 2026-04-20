@@ -1,0 +1,5 @@
+[2026-03-30T19:00:32Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:00:32Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ tests/msruas-proof-sandbox.test.ts\ tests/admin-control-plane.test.ts\ tests/proof-control-plane-activation-service.test.ts\ tests/openapi.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+

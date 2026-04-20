@@ -1,0 +1,5 @@
+codex_models:
+- gpt-5.4 :: gpt-5.4
+- gpt-5.4-mini :: GPT-5.4-Mini
+- gpt-5.3-codex :: gpt-5.3-codex
+- gpt-5.2 :: gpt-5.2

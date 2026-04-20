@@ -1,0 +1,17 @@
+pass_name=feature-intent-integrity-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-feature-intent-integrity-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=1
+caveman_mode=full
+stop_reason=No\ progress\ signal\ observed\ for\ 1200s.
+runtime_failure_class=stalled-no-progress
+runtime_failure_log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-feature-intent-integrity-pass.attempt-2.woakFU.log
+current_provider=github-copilot
+current_account=copilot-accneww432
+current_model=gpt-5.3-codex
+current_slot=copilot-accneww432
+route_attempt=3
+execution_supervisor_pid=4003363
+last_event=completed
+last_checkpoint_at=2026-04-18T01:17:11Z

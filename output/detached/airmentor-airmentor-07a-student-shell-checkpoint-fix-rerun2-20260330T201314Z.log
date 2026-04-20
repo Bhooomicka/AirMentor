@@ -1,0 +1,15 @@
+[2026-03-30T20:13:14Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:13:14Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/academic-proof-routes.test.ts\ tests/academic-bootstrap-routes.test.ts\ -t\ \"passes\ checkpoint\ playback\ identity\ through\ student-shell\ proof\ scope\ checks\|validates\ a\ requested\ playback\ checkpoint\ against\ the\ checkpoint\ run\ instead\ of\ the\ first\ active\ run\ row\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/academic-proof-routes.test.ts > academic proof routes > passes checkpoint playback identity through student-shell proof scope checks 402ms
+ ↓ tests/academic-proof-routes.test.ts > academic proof routes > resolves checkpoint session messages against the session run instead of the first active proof row
+ ✓ tests/academic-bootstrap-routes.test.ts > academic bootstrap routes > validates a requested playback checkpoint against the checkpoint run instead of the first active run row 86ms
+
+ Test Files  2 passed (2)
+      Tests  2 passed | 1 skipped (3)
+   Start at  01:43:19
+   Duration  2.46s (transform 195ms, setup 0ms, import 1.62s, tests 491ms, environment 0ms)
+
+[2026-03-30T20:13:22Z] exit=0

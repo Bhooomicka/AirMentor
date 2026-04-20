@@ -1,0 +1,569 @@
+{
+  "mode": "session-contract",
+  "generatedAt": "2026-03-29T23:07:39.540Z",
+  "apiBaseUrl": "https://api-production-ab72.up.railway.app",
+  "expectedFrontendOrigin": "https://raed2180416.github.io",
+  "identifier": "sysadmin",
+  "status": "failed",
+  "retryWindow": {
+    "maxAttempts": 36,
+    "retryDelayMs": 5000,
+    "attemptsUsed": 36,
+    "recoveredAfterAttempt": null
+  },
+  "response": {
+    "status": 429,
+    "hasCsrfToken": false,
+    "hasSessionCookie": false,
+    "hasCsrfCookie": false,
+    "restoreStatus": null
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": 401,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 401 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"UNAUTHORIZED\",\"message\":\"Invalid credentials\"}"
+    },
+    {
+      "attempt": 2,
+      "status": 401,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 401 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"UNAUTHORIZED\",\"message\":\"Invalid credentials\"}"
+    },
+    {
+      "attempt": 3,
+      "status": 401,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 401 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"UNAUTHORIZED\",\"message\":\"Invalid credentials\"}"
+    },
+    {
+      "attempt": 4,
+      "status": 401,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 401 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"UNAUTHORIZED\",\"message\":\"Invalid credentials\"}"
+    },
+    {
+      "attempt": 5,
+      "status": 401,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 401 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"UNAUTHORIZED\",\"message\":\"Invalid credentials\"}"
+    },
+    {
+      "attempt": 6,
+      "status": 401,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 401 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"UNAUTHORIZED\",\"message\":\"Invalid credentials\"}"
+    },
+    {
+      "attempt": 7,
+      "status": 401,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 401 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"UNAUTHORIZED\",\"message\":\"Invalid credentials\"}"
+    },
+    {
+      "attempt": 8,
+      "status": 401,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 401 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"UNAUTHORIZED\",\"message\":\"Invalid credentials\"}"
+    },
+    {
+      "attempt": 9,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 10,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 11,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 12,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 13,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 14,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 15,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 16,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 17,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 18,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 19,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 20,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 21,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 22,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 23,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 24,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 25,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 26,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 27,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 28,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 29,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 30,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 31,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 32,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 33,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 34,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 35,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    },
+    {
+      "attempt": 36,
+      "status": 429,
+      "hasCsrfToken": false,
+      "hasSessionCookie": false,
+      "hasCsrfCookie": false,
+      "restoreStatus": null,
+      "issues": [
+        "login returned 429 instead of 200",
+        "login body is missing csrfToken",
+        "login response did not set airmentor_session",
+        "login response did not set airmentor_csrf"
+      ],
+      "bodyPreview": "{\"error\":\"TOO_MANY_REQUESTS\",\"message\":\"Too many login attempts. Please wait and try again.\"}"
+    }
+  ],
+  "issues": [
+    "login returned 429 instead of 200",
+    "login body is missing csrfToken",
+    "login response did not set airmentor_session",
+    "login response did not set airmentor_csrf"
+  ]
+}

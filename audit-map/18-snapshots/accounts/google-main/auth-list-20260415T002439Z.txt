@@ -1,0 +1,5 @@
+┌  Credentials [90m~/.local/share/air-mentor-audit/arctic-slots/google-main/data/arctic/auth.json
+│
+●  Google [90m(OAuth)
+│
+└  1 credential

@@ -1,0 +1,2 @@
+[94m⠋ Working...[0m[94m⠙ Working...[0m[94m⠹ Working...[0m[94m⠸ Working...[0m[94m⠼ Working...[0m[94m⠴ Working...[0m[91m[1mError: [0mmodel: claude-3-7-sonnet-20250219
+                                                  

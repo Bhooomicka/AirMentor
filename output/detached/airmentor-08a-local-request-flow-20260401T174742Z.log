@@ -1,0 +1,29 @@
+[2026-04-01T17:47:42Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T17:47:42Z] command=env PLAYWRIGHT_OUTPUT_DIR=output/playwright/08a-local AIRMENTOR_REQUEST_FLOW_ARTIFACT_PREFIX=08a-local-request-flow npm run playwright:admin-live:request-flow 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:request-flow
+> bash scripts/playwright-admin-live-request-flow.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running focused system admin live request flow...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:40309
+Backend log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-backend.log
+Preview log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-preview.log
+Playwright root: /nix/store/w94nd74jw950wlwm06f51n62d0sb5yp0-playwright-test-1.57.0
+Browsers path: /nix/store/bas6dg486nm7lc5b9529da43418mymbz-playwright-browsers
+System admin live request flow passed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow.png
+Prefixed request-flow artifacts:
+- report: /home/raed/projects/air-mentor-ui/output/playwright/08a-local-request-flow-system-admin-live-request-flow-report.json
+- screenshot: /home/raed/projects/air-mentor-ui/output/playwright/08a-local-request-flow-system-admin-live-request-flow.png
+[2026-04-01T17:48:51Z] exit=0

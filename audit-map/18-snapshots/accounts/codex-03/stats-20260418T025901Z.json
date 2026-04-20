@@ -1,0 +1,65 @@
+{
+  "totalSessions": 79,
+  "totalTokens": 1495954,
+  "totalCost": 2.0478657499999997,
+  "activeDays": 4,
+  "longestStreak": 4,
+  "currentStreak": 4,
+  "longestSession": 240908,
+  "peakHour": 5,
+  "modelUsage": {
+    "gpt-5.4": {
+      "count": 76,
+      "tokens": 0,
+      "cost": 0
+    },
+    "gpt-5.3-codex": {
+      "count": 19,
+      "tokens": 1495954,
+      "cost": 2.0478657499999997
+    }
+  },
+  "dailyActivity": {
+    "2026-04-18": 0,
+    "2026-04-17": 0,
+    "2026-04-16": 0,
+    "2026-04-15": 1495954
+  },
+  "dailyCost": {
+    "2026-04-18": 0,
+    "2026-04-17": 0,
+    "2026-04-16": 0,
+    "2026-04-15": 2.0478657499999997
+  },
+  "hourlyActivity": {
+    "0": 5,
+    "1": 3,
+    "2": 9,
+    "3": 1,
+    "4": 3,
+    "5": 12,
+    "6": 6,
+    "7": 5,
+    "8": 9,
+    "15": 1,
+    "19": 5,
+    "20": 4,
+    "21": 5,
+    "22": 9,
+    "23": 2
+  },
+  "tokenBreakdown": {
+    "input": 1057113,
+    "output": 14137,
+    "cacheRead": 424704,
+    "cacheWrite": 0
+  },
+  "costBreakdown": {
+    "input": 1.84994775,
+    "output": 0.19791800000000004,
+    "cacheRead": 0,
+    "cacheWrite": 0
+  },
+  "costPerDay": 0.5119664374999999,
+  "costPerSession": 0.02592235126582278
+}

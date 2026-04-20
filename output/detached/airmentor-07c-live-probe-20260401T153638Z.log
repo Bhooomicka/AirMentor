@@ -1,0 +1,9 @@
+[2026-04-01T15:36:38Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T15:36:38Z] command=env PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 AIRMENTOR_PROOF_SEMESTER_TARGETS=4\,5\,6 AIRMENTOR_PROOF_ARTIFACT_PREFIX=07c-live-probe node scripts/proof-risk-semester-walk-probe.mjs 
+AssertionError [ERR_ASSERTION]: Seeded proof dashboard should reflect operational semester 4 after activation
+
+3 !== 4
+
+    at main (file:///home/raed/projects/air-mentor-ui/scripts/proof-risk-semester-walk-probe.mjs:181:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/proof-risk-semester-walk-probe.mjs:246:3

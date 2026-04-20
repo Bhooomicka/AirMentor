@@ -1,0 +1,15 @@
+[2026-03-30T19:28:43Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:28:43Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/msruas-proof-sandbox.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > bootstraps the proof branch, batch, import, and run when the proof sandbox is missing 4044ms
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > does not duplicate proof seed records when recovery runs twice 3854ms
+ ✓ tests/msruas-proof-sandbox.test.ts > msruas proof sandbox seed recovery > rebuilds the canonical proof batch shell when the proof cohort already exists 3988ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  00:58:45
+   Duration  12.88s (transform 447ms, setup 0ms, import 899ms, tests 11.89s, environment 0ms)
+
+[2026-03-30T19:28:58Z] exit=0

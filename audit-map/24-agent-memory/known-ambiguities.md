@@ -1,0 +1,50 @@
+# Known Ambiguities
+
+- The currently deployed Railway service did not satisfy the repo's expected `/health` contract during bootstrap.
+- Arctic docs and Arctic CLI disagree on the auth file location.
+- Arctic docs show a named multi-account CLI flow, but the installed CLI on this machine rejects `--name`.
+- Arctic model refresh completed, but provider-targeted `arctic models openai` and `arctic models codex` reported "Provider not found".
+- Exact reasoning-effort control and higher-tier runtime support per authenticated Arctic slot are still not fully verified even though the requested slots are authenticated and model-visible.
+- It is not yet verified whether the current live deployment still matches the repo's documented closeout assumptions.
+- `nix shell nixpkgs#opencode` and the repo's pinned flake currently resolve to different OpenCode versions.
+- `audit-map/index.md` still references a root `README.md`, but the current shallow file inventory did not find a repo-root `README.md`.
+- `src/data.old.ts` exists alongside `src/data.ts`, and the current pass has not verified whether `data.old.ts` is archival or still referenced.
+- `air-mentor-api/scripts/curriculum_linkage_nlp.py` is present, but deployment-time availability of `spacy`, `sentence-transformers`, and optional Ollama assist remains unverified.
+- The live impact of proof-scoped bootstrap filtering on academic `allowedRoles` versus the underlying session `availableRoleGrants` is only partially verified.
+- The exact live boundary behavior of `resolveStudentShellRun()` and `assertStudentShellScope()` still needs end-to-end confirmation.
+- The HoD faculty-profile overlap check is test-backed, but the same path still needs live authenticated verification.
+- It is not yet verified whether the missing `Needs Info` and `Rejected` controls in the sysadmin request workspace are intentional simplification or an omitted UI path.
+- Live role-surface verification for the newly mapped cross-cutting drilldowns remains pending until the later live-behavior pass.
+- No separate out-of-process worker or cron consumer was found in local code for queued proof runs; deployed liveness of the in-process proof worker loop still needs runtime confirmation.
+- A fresh proof-risk evaluation report could not be regenerated in this sandbox because both `tsx` and the fallback `node --import tsx/esm` path hit local listener `EPERM` failures.
+- It remains unverified whether the currently deployed environment has active governed proof-risk artifacts loaded or is still operating in a fallback-heavy posture similar to prior closeout evidence.
+- It remains unverified whether deployed curriculum-linkage environments actually have Python NLP, `sentence-transformers`, or optional Ollama assist available, or whether they silently degrade to TypeScript fallback.
+- Arctic alternate providers are now execution-ready on pinned runtime models, but end-to-end reasoning-effort control and separate execution proof for higher visible tiers such as Arctic Codex `gpt-5.4` / `gpt-5.4-mini` remain unverified.
+- The current native Codex terminal environment could only confirm shell-level Pages reachability directly; both live-pass attempts hit `getaddrinfo EBUSY` from Node for `raed2180416.github.io` and `api-production-ab72.up.railway.app`, Playwright MCP browser calls were cancelled, and the available `web` fetcher still did not materialize Railway bodies.
+- As of `2026-04-16T18:21:12Z`, the current shell still has no exported live URLs or credentials and still hits `getaddrinfo EBUSY` on direct fetch to both live hosts, so this session cannot refresh the earlier same-day Railway `404` evidence without manual env injection and a network-capable shell.
+- The earlier live-pass blocker prose over-attributed failure to missing shell env. A later direct rerun with `sysadmin/admin1234` against the documented Railway URL reached the network and returned `404 Application not found` on `/api/session/login`, so the stronger current ambiguity is whether the documented public API URL is stale or the deployment itself is gone.
+- `output/railway-live-session-contract.json` still contains an older passing report from `2026-03-28` and should be treated as stale local output rather than current live truth.
+- The default Zen browser profile still contains Railway cookies, but replaying Railway's cookie-session auth hop lands on `https://railway.com/login` and GraphQL remains `Not Authorized`, so local Railway browser auth is currently stale rather than reusable.
+- Railway auth is now valid in the CLI, and the canonical production service metadata is no longer ambiguous: service name `api`, domain `https://api-production-ab72.up.railway.app`, latest deployment failed, no active deployments.
+- The current live Railway outage is not only a stale-domain problem. Deployment logs show the API later crashes on an unhandled `pg` pool error (`Connection terminated unexpectedly`), and a narrow survivability fix is ready but currently undeployable because Railway reports the workspace trial has expired.
+- Even with live admin credentials, same-target parity remains blocked until the repo has a safe read-only live proof/parity observer or a fully proven restore path for the current mutating helpers.
+- The detached tmux control surface is inconsistent from this shell: `tmux ls` is visible, but `tmux has-session` can still return `Operation not permitted`, so some wrapper-driven stop/status operations may fail even when sessions exist.
+- No single test yet proves the same student truth across mentor, course leader, HoD, and `SYSTEM_ADMIN` surfaces in one shared fixture or live run.
+- Frontend microinteraction mapping is now strong for six high-density clusters, but full every-component interaction mapping across all remaining `src/` files is still pending if exhaustive breadth is required.
+- No test yet proves that the sysadmin request workspace exposes the backend-supported `Needs Info` and `Rejected` transitions.
+- No local test yet proves live proof-artifact freshness, fallback frequency, or production-vs-challenger provenance on Railway.
+- No live Playwright evidence yet proves the credentialed Pages + Railway auth/session contract or the live teaching/HoD/student parity flows.
+- Accessibility contract tests do not yet prove that the dense proof and admin surfaces remain understandable at production data volume.
+- Client and backend telemetry plus startup-diagnostics surfaces are now confirmed in code and tests, but the audit still does not know whether deployed Pages + Railway environments actually use the relay/sink path or persist operational events as intended.
+- It is still unresolved whether the proof provenance / model-usefulness wording emitted from `src/proof-provenance.ts` is an intentional cross-role contract or just opportunistic shared phrasing; no direct tests lock the copy or same-target parity across sysadmin, HoD, faculty-profile, risk-explorer, and student-shell surfaces.
+- The sysadmin helper cluster around section scope, bulk mentor assignment, scoped registry launches, faculty calendar/timetable editing, queue dismissals, and the session boundary is only indirectly represented; exact restore and mutation semantics still need component-level decomposition.
+- The playback reset / stage summary helper family is now locally mapped, but deployed read-only confirmation is still missing for checkpoint-reset safety, invalid-checkpoint handling, and the active-semester default-slice behavior.
+- Active-run selection, authoritative-first fallback, live-run seeding, dashboard diagnostics, section-risk aggregation, and mentor provisioning eligibility are now locally mapped, but their same-student parity effects and deployed runtime behavior remain unverified.
+- `air-mentor-api/scripts/generate-academic-parity-seed.ts` is durably mapped as a fixture generator, but live consumer freshness and its relationship to live/admin proof data remain unverified.
+- Live auth and recovery helper scripts are durably mapped, but the end-to-end recovery path and live credentialed role flow remain unverified.
+- The `docs/closeout` stage-gate automation chain (`scripts/run-detached.sh`, `scripts/closeout-stage-*.mjs`, and `scripts/finalize-stage-*-after-session.sh`) is durably mapped, but the audit has not yet verified whether that promotion logic still matches current deployment truth or only historical closeout practice.
+- It is still unresolved whether a safe live same-target parity pass should be built from a new read-only proof-dashboard observer, from a constrained semester-activation probe with explicit restore guarantees, or from some other workflow. The current repo helpers are too write-heavy for blind production use.
+- Same-student parity now has a durable local matrix in `audit-map/32-reports/same-student-cross-surface-parity-report.md`; the remaining ambiguity is not whether local parity paths exist, but whether the same tuple can be captured safely on live infrastructure.
+- Backend DB-backed parity reruns are currently blocked in this sandbox by `listen EPERM: operation not permitted 127.0.0.1`, so current route-level parity confidence relies on committed backend tests plus code inspection rather than a fresh rerun.
+- Shared proof provenance wording and tuple-resolution logic are now locally mapped across faculty-profile, HoD, risk explorer, student shell, and sysadmin proof surfaces, but live authenticated confirmation is still missing.
+- It remains unresolved whether run-labeled / checkpoint-backed default proof slices are an intentional abstraction or a provenance bug that should be surfaced more honestly across faculty, HoD, and student proof views (`C-021`).

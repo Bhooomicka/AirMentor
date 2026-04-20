@@ -1,0 +1,5 @@
+┌  Credentials [90m~/.local/share/air-mentor-audit/arctic-slots/copilot-accneww432/data/arctic/auth.json
+│
+●  GitHub Copilot [90m(OAuth)
+│
+└  1 credential

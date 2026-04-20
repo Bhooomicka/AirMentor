@@ -1,0 +1,15 @@
+[2026-03-30T17:47:03Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T17:47:03Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ npx\ vitest\ run\ --maxWorkers=1\ --reporter=verbose\ tests/proof-control-plane-activation-service.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > updates the active operational semester, publishes the active projection, and emits audit payload details 3ms
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > does not republish projections when the target proof run is inactive 0ms
+ ✓ tests/proof-control-plane-activation-service.test.ts > proof-control-plane-activation-service > rejects semesters outside the proof run range before mutating state or audit 1ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  23:17:04
+   Duration  452ms (transform 85ms, setup 0ms, import 356ms, tests 6ms, environment 0ms)
+
+[2026-03-30T17:47:05Z] exit=0

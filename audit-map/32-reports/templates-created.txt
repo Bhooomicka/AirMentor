@@ -1,0 +1,14 @@
+audit-map/20-prompts/templates/account-routing-decision-template.md
+audit-map/20-prompts/templates/data-flow-template.md
+audit-map/20-prompts/templates/dependency-template.md
+audit-map/20-prompts/templates/feature-template.md
+audit-map/20-prompts/templates/final-synthesis-template.md
+audit-map/20-prompts/templates/issue-template.md
+audit-map/20-prompts/templates/live-behavior-template.md
+audit-map/20-prompts/templates/ml-component-template.md
+audit-map/20-prompts/templates/role-surface-template.md
+audit-map/20-prompts/templates/route-entry-template.md
+audit-map/20-prompts/templates/state-flow-template.md
+audit-map/20-prompts/templates/test-gap-template.md
+audit-map/20-prompts/templates/tmux-job-template.md
+audit-map/20-prompts/templates/ux-friction-template.md

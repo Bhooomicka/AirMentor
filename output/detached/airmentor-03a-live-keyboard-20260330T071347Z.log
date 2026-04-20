@@ -1,0 +1,49 @@
+[2026-03-30T07:13:47Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:13:47Z] command=env AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:keyboard-regression 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:keyboard-regression
+> bash scripts/playwright-admin-live-keyboard-regression.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+error (ignored): SQLite database '/home/raed/.cache/nix/eval-cache-v6/b280fe097ff928dba65190de02c6c4724cc5d929a241615ccebd194e30d678f6.sqlite' is busy
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running system admin live keyboard regression...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+[keyboard] step: login-system-admin
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T07:14:03.707Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T07:14:03.708Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[response:401] https://api-production-ab72.up.railway.app/api/session
+[keyboard] live proof route discovered: faculty=Engineering and Technology department=Computer Science and Engineering branch=Mathematics and Computing batch=2022 checkpoints=5
+[keyboard] request route discovered: id=request_001 status=Closed summary=Grant additional mentor mapping coverage
+[keyboard] step: request-flow-keyboard
+[keyboard] step: student-modal-focus-trap
+[keyboard] step: proof-dashboard-keyboard
+[browser:info] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"info","timestamp":"2026-03-30T07:14:38.607Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_bd42d066caf1fdbda3a3ee5a","stageLabel":"Pre TT1","playbackAccessible":true,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":true,"canPlayToEnd":false}}
+[browser:warning] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"warn","timestamp":"2026-03-30T07:14:39.246Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_1c95a10012cbb14075051da1","stageLabel":"Post SEE","playbackAccessible":false,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":false,"canPlayToEnd":false}}
+[browser:info] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"info","timestamp":"2026-03-30T07:14:39.466Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_bd42d066caf1fdbda3a3ee5a","stageLabel":"Pre TT1","playbackAccessible":true,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":true,"canPlayToEnd":false}}
+[keyboard] step: switch-to-academic-portal
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T07:14:41.673Z","details":{"workspace":"academic","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T07:14:41.673Z","details":{"workspace":"academic","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[response:401] https://api-production-ab72.up.railway.app/api/session
+[browser:info] {"type":"airmentor-client-event","name":"proof.playback.restored","level":"info","timestamp":"2026-03-30T07:14:47.145Z","details":{"workspace":"academic","simulationStageCheckpointId":"stage_checkpoint_bd42d066caf1fdbda3a3ee5a","semesterLabel":"Semester 1","stageLabel":"Pre TT1"}}
+[keyboard] step: teacher-risk-and-shell-keyboard
+[keyboard] step: proof-playback-restore-reset
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T07:14:48.605Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T07:14:48.606Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[response:401] https://api-production-ab72.up.railway.app/api/session
+[requestfailed] GET https://api-production-ab72.up.railway.app/api/admin/policy-overrides :: NS_BINDING_ABORTED
+[requestfailed] GET https://api-production-ab72.up.railway.app/api/admin/curriculum-courses :: NS_BINDING_ABORTED
+[requestfailed] GET https://api-production-ab72.up.railway.app/api/admin/students :: NS_BINDING_ABORTED
+[requestfailed] GET https://api-production-ab72.up.railway.app/api/admin/offerings :: NS_BINDING_ABORTED
+[requestfailed] GET https://api-production-ab72.up.railway.app/api/admin/requests :: NS_BINDING_ABORTED
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T07:14:50.689Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T07:14:50.690Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[browser:info] {"type":"airmentor-client-event","name":"auth.session.restored","level":"info","timestamp":"2026-03-30T07:14:51.047Z","details":{"workspace":"system-admin","sessionId":"session_24ee04ad-b326-4a05-9705-45d1835e3b4b","facultyId":"fac_sysadmin","activeRole":"SYSTEM_ADMIN"}}
+[browser:info] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"info","timestamp":"2026-03-30T07:14:54.366Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_bd42d066caf1fdbda3a3ee5a","stageLabel":"Pre TT1","playbackAccessible":true,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":true,"canPlayToEnd":false}}
+System admin live keyboard regression passed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-keyboard-regression.png
+[2026-03-30T07:14:56Z] exit=0

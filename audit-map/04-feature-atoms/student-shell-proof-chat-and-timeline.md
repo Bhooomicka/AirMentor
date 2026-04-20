@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Student shell proof chat and timeline
+- Parent domain: Academic student/proof surface
+- Feature scope boundary: The student shell, its proof-backed tabs, session creation, chat, and timeline interactions. Excludes mentor queueing and the risk explorer page.
+- Roles and role-specific variants: Academic users with access to the selected student scope, including mentor, HoD, course-leader, and related proof-drilldown roles.
+- Product or user intent: Give a bounded, evidence-backed student explainer that can answer questions only from the stored proof card and timeline.
+- Source files: [`src/pages/student-shell.tsx`](../../src/pages/student-shell.tsx), [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`air-mentor-api/src/modules/academic-proof-routes.ts`](../../air-mentor-api/src/modules/academic-proof-routes.ts), [`air-mentor-api/src/modules/academic.ts`](../../air-mentor-api/src/modules/academic.ts)
+- Entry points: `StudentShellPage`, `Start Session`, `Send Prompt`, and the tab handlers for overview/topic-co/assessment/interventions/timeline/chat.
+- Routes, deep links, query params, and restore entry states: Student-shell route state inside the academic workspace; timeline loads on demand and chat uses the current shell session.
+- Preconditions and guard conditions: The selected student must be in scope for the current proof run and active role.
+- Visible surfaces involved: Overview, topic-co, assessment, interventions, timeline, and chat tabs; start-session button; send-prompt button; proof launcher popup; loading/empty/error states.
+- Hidden or conditional surfaces involved: Timeline load-on-demand, chat citations, guardrail copy, and the popup footer that stays bound to the selected proof card.
+- Trigger sources: Open the student shell, start a session, send a prompt, switch tabs, or open the proof launcher popup.
+- Atomic user actions: Start a session, send a prompt, inspect the timeline, and move across the proof-backed tabs.
+- Hidden, hover-only, or keyboard-only actions: Standard tab and button controls are keyboard reachable; no hidden admin-style edit surface exists here.
+- Automatic or system actions: Bind the shell to the selected proof card; load timeline data only when requested; keep citations attached to chat and timeline entries.
+- API and backend calls: Student-shell session, timeline, and message routes from `air-mentor-api/src/modules/academic-proof-routes.ts`.
+- State dependencies: Selected student, proof card, shell session, timeline payload, message list, and popup state.
+- Persistence dependencies: Shell session state and any backend-backed timeline/message state.
+- Restore behavior: Reopening the same student shell reuses the proof-backed card if the active run and student scope still match.
+- Permissions and scope logic: The shell cannot escape the selected proof card or disclose hidden simulation internals; scope checks protect the student route.
+- State transitions: Student selected -> shell load -> optional session start -> prompt/chat/timeline interaction -> return.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Loading, empty, and load-error states are explicit; stage-blocked copy appears when the proof checkpoint blocks progression.
+- Success path: The shell loads, the user inspects evidence, and the chat/timeline stay bound to the selected proof card.
+- Failure and recovery paths: Load errors keep the shell in its error state until the backend or scope is corrected; chat cannot override policy-derived records.
+- Data read: Student proof card, timeline entries, session messages, citations, and checkpoint context.
+- Data written: Shell session state, chat prompts, and any backend message/session records created by the shell.
+- Telemetry, analytics, or audit-trail side effects: Chat and timeline activity remain visible in the academic proof trail.
+- Downstream effects: The shell acts as the bounded explainer for mentor, HoD, and course-leader drilldowns.
+- Hidden couplings: The shell depends on the same active proof run, checkpoint context, and student-scope checks used by the mentor queue and HoD views.
+- Expected behavior: The shell should answer only from the stored proof card, keep citations visible, and refuse to override the policy-derived record.
+- Implemented behavior: `StudentShellPage` exposes the tabs, session controls, timeline loading, and guardrail copy bound to the selected proof card.
+- Tested behavior: [`tests/student-shell.test.tsx`](../../tests/student-shell.test.tsx), [`tests/student-shell-loading.test.tsx`](../../tests/student-shell-loading.test.tsx), [`tests/proof-surface-shell.test.tsx`](../../tests/proof-surface-shell.test.tsx), [`air-mentor-api/tests/student-agent-shell.test.ts`](../../air-mentor-api/tests/student-agent-shell.test.ts), [`air-mentor-api/tests/academic-proof-routes.test.ts`](../../air-mentor-api/tests/academic-proof-routes.test.ts).
+- Live behavior notes: Not browser-replayed in this pass.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/student-shell.test.tsx`](../../tests/student-shell.test.tsx), [`tests/student-shell-loading.test.tsx`](../../tests/student-shell-loading.test.tsx), [`tests/proof-surface-shell.test.tsx`](../../tests/proof-surface-shell.test.tsx), [`air-mentor-api/tests/student-agent-shell.test.ts`](../../air-mentor-api/tests/student-agent-shell.test.ts), [`air-mentor-api/tests/academic-proof-routes.test.ts`](../../air-mentor-api/tests/academic-proof-routes.test.ts).
+- Known gaps: No live browser pass confirmed the prompt/chat/timeline sequence end to end.
+- Open questions: Should the shell make the checkpoint-bound guardrail copy more prominent in the chat tab?
+- Confidence level: High

@@ -1,0 +1,5 @@
+data-flow-corpus-rerun-pass	bootstrap	
+proof-refresh-completion-pass	bootstrap	
+frontend-long-tail-pass	bootstrap	
+live-credentialed-parity-pass	live	
+closure-readiness-pass	bootstrap	

@@ -1,0 +1,38 @@
+[2026-03-30T08:52:06Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T08:52:06Z] command=npm run playwright:admin-live:teaching-parity 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:teaching-parity
+> bash scripts/playwright-admin-live-teaching-parity.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running sysadmin -> teaching parity smoke...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:41667
+Backend log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-backend.log
+Preview log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-teaching-preview.log
+System admin -> teaching parity smoke failed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke-failure.png
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 20000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('button', { name: 'Open Student', exact: true }).first() to be visible[22m
+
+    at expectVisible (/home/raed/projects/air-mentor-ui/scripts/system-admin-teaching-parity-smoke.mjs:35:17)
+    at clickAndSettle (/home/raed/projects/air-mentor-ui/scripts/system-admin-teaching-parity-smoke.mjs:61:9)
+    at /home/raed/projects/air-mentor-ui/scripts/system-admin-teaching-parity-smoke.mjs:207:9 {
+  name: 'TimeoutError'
+}
+
+Node.js v24.13.0

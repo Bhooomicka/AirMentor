@@ -1,0 +1,28 @@
+[2026-03-30T08:10:31Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T08:10:31Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ npx\ vitest\ run\ tests/academic-parity.test.ts\ tests/academic-access.test.ts\ tests/academic-runtime-narrow-routes.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ❯ tests/academic-parity.test.ts (7 tests | 1 failed) 83430ms
+     × keeps faculty-profile proof payloads and student drilldowns scoped for course leaders and mentors 58764ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof payloads and student drilldowns scoped for course leaders and mentors
+AssertionError: expected 0 to be greater than 0
+ ❯ tests/academic-parity.test.ts:790:35
+    788|     ))
+    789|     const mentorStudentIds = new Set(mentorRows.map(row => row.student…
+    790|     expect(mentorStudentIds.size).toBeGreaterThan(0)
+       |                                   ^
+    791|
+    792|     const loadProfileForRole = async (roleCode: 'COURSE_LEADER' | 'MEN…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 17 passed (18)
+   Start at  13:40:32
+   Duration  115.81s (transform 858ms, setup 0ms, import 1.92s, tests 113.60s, environment 0ms)
+

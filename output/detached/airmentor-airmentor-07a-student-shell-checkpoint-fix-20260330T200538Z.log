@@ -1,0 +1,36 @@
+[2026-03-30T20:05:39Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:05:39Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/academic-bootstrap-routes.test.ts\ tests/academic-parity.test.ts\ -t\ \"validates\ a\ requested\ playback\ checkpoint\ against\ the\ checkpoint\ run\ instead\ of\ the\ first\ active\ run\ row\|keeps\ academic\ playback\ checkpoints\ available\ when\ another\ proof\ run\ is\ also\ active\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof context and linked proof drilldowns aligned for the active teaching role
+ ↓ tests/academic-parity.test.ts > academic bootstrap > exposes non-overlapping faculty timetable blocks in the proof bootstrap for course-leader playback
+ ↓ tests/academic-parity.test.ts > academic bootstrap > ignores legacy academic asset snapshots and derives the live view from admin-owned records
+ ↓ tests/academic-parity.test.ts > academic bootstrap > reflects admin master-data changes into the academic bootstrap on the next fetch
+ ↓ tests/academic-parity.test.ts > academic bootstrap > persists resolved course outcomes, offering schemes, and question papers through backend-owned routes
+ ↓ tests/academic-parity.test.ts > academic bootstrap > persists authoritative queue, calendar workspace, attendance, and TT1 entry state through the teaching routes
+ ↓ tests/academic-parity.test.ts > academic bootstrap > keeps faculty-profile proof payloads and student drilldowns scoped for course leaders and mentors
+ × tests/academic-parity.test.ts > academic bootstrap > keeps academic playback checkpoints available when another proof run is also active 58991ms
+   → expected 0 to be greater than 0
+ ✓ tests/academic-bootstrap-routes.test.ts > academic bootstrap routes > validates a requested playback checkpoint against the checkpoint run instead of the first active run row 67ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/academic-parity.test.ts > academic bootstrap > keeps academic playback checkpoints available when another proof run is also active
+AssertionError: expected 0 to be greater than 0
+ ❯ tests/academic-parity.test.ts:955:32
+    953|     expect(hodStudentsResponse.statusCode).toBe(200)
+    954|     const hodStudents = hodStudentsResponse.json().items as Array<{ st…
+    955|     expect(hodStudents.length).toBeGreaterThan(0)
+       |                                ^
+    956|
+    957|     const hodStudentId = hodStudents[0]?.studentId as string
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 1 passed | 7 skipped (9)
+   Start at  01:35:41
+   Duration  60.88s (transform 773ms, setup 0ms, import 1.62s, tests 59.06s, environment 0ms)
+

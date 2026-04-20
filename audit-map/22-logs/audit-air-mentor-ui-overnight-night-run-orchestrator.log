@@ -1,0 +1,10 @@
+[2026-04-20T01:41:38Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-20T01:41:38Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+[2026-04-20T01:42:35Z] cooldown-aware-rotation-monitor started with pid=1491683
+[2026-04-20T01:42:38Z] COST WARNING: No native Codex spend API is wired into this audit OS; using class-based guardrails plus observed route health.
+session=audit-air-mentor-ui-bootstrap-gap-closure-deploy-audit-reconciliation-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-gap-closure-deploy-audit-reconciliation-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-gap-closure-deploy-audit-reconciliation-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-gap-closure-deploy-audit-reconciliation-pass.checkpoint
+Overnight queue complete.
+[2026-04-20T02:02:42Z] exit_code=0

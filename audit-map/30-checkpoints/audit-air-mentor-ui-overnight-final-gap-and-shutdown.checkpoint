@@ -1,0 +1,8 @@
+pass_name=final-gap-and-shutdown
+context=overnight
+session_name=audit-air-mentor-ui-overnight-final-gap-and-shutdown
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+last_event=completed
+last_checkpoint_at=2026-04-16T00:31:28Z

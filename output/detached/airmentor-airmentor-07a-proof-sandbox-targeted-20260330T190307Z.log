@@ -1,0 +1,84 @@
+[2026-03-30T19:03:09Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:03:09Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ tests/msruas-proof-sandbox.test.ts\ tests/admin-control-plane.test.ts\ -t\ \"bootstraps\ the\ proof\ branch\|does\ not\ duplicate\ proof\ seed\ records\ when\ recovery\ runs\ twice\|re-seeds\ proof\ batch\ routes\ after\ the\ canonical\ batch\ disappears\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+stderr | tests/admin-control-plane.test.ts > admin control plane routes > re-seeds proof batch routes after the canonical batch disappears
+DrizzleQueryError: Failed query: insert into "user_accounts" ("user_id", "institution_id", "username", "email", "phone", "status", "version", "created_at", "updated_at") values ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+params: user_mnc_t1,inst_airmentor,devika.shetty,devika.shetty@msruas.ac.in,+91-9000002101,active,1,2026-03-16T00:00:00.000Z,2026-03-16T00:00:00.000Z
+    at NodePgPreparedQuery.queryWithCache (file:///home/raed/projects/air-mentor-ui/node_modules/drizzle-orm/pg-core/session.js:41:15)
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at seedMsruasProofSandbox (/home/raed/projects/air-mentor-ui/air-mentor-api/src/lib/msruas-proof-sandbox.ts:697:5)
+    ... 2 lines matching cause stack trace ...
+    at resolveBatchCurriculumFeatures (/home/raed/projects/air-mentor-ui/air-mentor-api/src/modules/admin-structure.ts:1446:24) {
+  query: 'insert into "user_accounts" ("user_id", "institution_id", "username", "email", "phone", "status", "version", "created_at", "updated_at") values ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+  params: [
+    'user_mnc_t1',
+    'inst_airmentor',
+    'devika.shetty',
+    'devika.shetty@msruas.ac.in',
+    '+91-9000002101',
+    'active',
+    1,
+    '2026-03-16T00:00:00.000Z',
+    '2026-03-16T00:00:00.000Z'
+  ],
+  cause: error: duplicate key value violates unique constraint "user_accounts_pkey"
+      at /home/raed/projects/air-mentor-ui/node_modules/pg-pool/index.js:45:11
+      at processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at file:///home/raed/projects/air-mentor-ui/node_modules/drizzle-orm/node-postgres/session.js:113:20
+      at NodePgPreparedQuery.queryWithCache (file:///home/raed/projects/air-mentor-ui/node_modules/drizzle-orm/pg-core/session.js:39:16)
+      at seedMsruasProofSandbox (/home/raed/projects/air-mentor-ui/air-mentor-api/src/lib/msruas-proof-sandbox.ts:697:5)
+      at ensureMsruasProofSandboxSeeded (/home/raed/projects/air-mentor-ui/air-mentor-api/src/lib/msruas-proof-sandbox.ts:197:3)
+      at getBatchScopeContext (/home/raed/projects/air-mentor-ui/air-mentor-api/src/modules/admin-structure.ts:1154:5)
+      at resolveBatchCurriculumFeatures (/home/raed/projects/air-mentor-ui/air-mentor-api/src/modules/admin-structure.ts:1446:24) {
+    length: 219,
+    severity: 'ERROR',
+    code: '23505',
+    detail: 'Key (user_id)=(user_mnc_t1) already exists.',
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: 'public',
+    table: 'user_accounts',
+    column: undefined,
+    dataType: undefined,
+    constraint: 'user_accounts_pkey',
+    file: 'nbtinsert.c',
+    line: '673',
+    routine: '_bt_check_unique'
+  }
+}
+
+ ❯ tests/admin-control-plane.test.ts (15 tests | 1 failed | 14 skipped) 4324ms
+     × re-seeds proof batch routes after the canonical batch disappears 4323ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/admin-control-plane.test.ts > admin control plane routes > re-seeds proof batch routes after the canonical batch disappears
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ tests/admin-control-plane.test.ts:1064:46
+    1062|       headers: { cookie: adminLogin.cookie },
+    1063|     })
+    1064|     expect(featureConfigResponse.statusCode).toBe(200)
+       |                                              ^
+    1065|
+    1066|     const dashboardResponse = await current.app.inject({
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 2 passed | 14 skipped (17)
+   Start at  00:33:10
+   Duration  11.15s (transform 769ms, setup 0ms, import 1.79s, tests 9.17s, environment 0ms)
+

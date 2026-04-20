@@ -1,0 +1,7 @@
+[2026-04-18T00:23:10Z] session=audit-air-mentor-ui-overnight-night-run-orchestrator
+[2026-04-18T00:23:10Z] command_file=/home/raed/projects/air-mentor-ui/audit-map/31-queues/audit-air-mentor-ui-overnight-night-run-orchestrator.command.sh
+[2026-04-18T00:23:10Z] cooldown-aware-rotation-monitor started with pid=2495118
+session=audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass
+log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.log
+status=/home/raed/projects/air-mentor-ui/audit-map/29-status/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.status
+checkpoint=/home/raed/projects/air-mentor-ui/audit-map/30-checkpoints/audit-air-mentor-ui-bootstrap-truth-drift-reconciliation-pass.checkpoint

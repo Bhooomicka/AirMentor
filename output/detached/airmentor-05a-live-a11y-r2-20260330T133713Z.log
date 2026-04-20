@@ -1,0 +1,13 @@
+[2026-03-30T13:37:13Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T13:37:13Z] command=env AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:accessibility-regression 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:accessibility-regression
+> bash scripts/playwright-admin-live-accessibility-regression.sh
+
+error (ignored): SQLite database '/home/raed/.cache/nix/eval-cache-v6/ea7966d9909b9552910808838c314bb9d2d51538cbe64808eab429f46f22855f.sqlite' is busy
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Another accessibility regression run is already active (pid 3163030).

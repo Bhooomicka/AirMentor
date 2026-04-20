@@ -1,0 +1,34 @@
+[2026-04-01T18:00:25Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T18:00:25Z] command=env AIRMENTOR_UI_PORT=4173 PLAYWRIGHT_OUTPUT_DIR=output/playwright/08a-local AIRMENTOR_TEACHING_PARITY_ARTIFACT_PREFIX=08a-local-teaching npm run playwright:admin-live:teaching-parity 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:teaching-parity
+> bash scripts/playwright-admin-live-teaching-parity.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Running sysadmin -> teaching parity smoke...
+Frontend URL: http://127.0.0.1:4173
+Backend URL: http://127.0.0.1:41607
+Backend log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-backend.log
+Preview log: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-teaching-preview.log
+System admin -> teaching parity smoke passed.
+Screenshots:
+- faculty profile: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-teaching-parity-smoke.png
+- course leader dashboard: /home/raed/projects/air-mentor-ui/output/playwright/course-leader-dashboard-proof.png
+- mentor view: /home/raed/projects/air-mentor-ui/output/playwright/mentor-view-proof.png
+- queue history: /home/raed/projects/air-mentor-ui/output/playwright/queue-history-proof.png
+Prefixed teaching-parity artifacts:
+- faculty profile: /home/raed/projects/air-mentor-ui/output/playwright/08a-local-teaching-system-admin-teaching-parity-smoke.png
+- course leader dashboard: /home/raed/projects/air-mentor-ui/output/playwright/08a-local-teaching-course-leader-dashboard-proof.png
+- mentor view: /home/raed/projects/air-mentor-ui/output/playwright/08a-local-teaching-mentor-view-proof.png
+- queue history: /home/raed/projects/air-mentor-ui/output/playwright/08a-local-teaching-queue-history-proof.png
+[2026-04-01T18:01:04Z] exit=0

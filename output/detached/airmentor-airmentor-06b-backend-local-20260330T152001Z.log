@@ -1,0 +1,46 @@
+[2026-03-30T15:20:01Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T15:20:01Z] command=env -C air-mentor-api npx vitest run tests/admin-control-plane.test.ts tests/admin-foundation.test.ts tests/openapi.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ❯ tests/openapi.test.ts (1 test | 1 failed) 3835ms
+     × publishes the implemented route surface 3834ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/openapi.test.ts > openapi > publishes the implemented route surface
+Error: Snapshot `openapi > publishes the implemented route surface 1` mismatched
+
+- Expected
++ Received
+
+@@ -77,10 +77,11 @@
+    "/api/admin/faculty/{facultyId}",
+    "/api/admin/faculty/{facultyId}/appointments",
+    "/api/admin/faculty/{facultyId}/role-grants",
+    "/api/admin/institution",
+    "/api/admin/mentor-assignments",
++   "/api/admin/mentor-assignments/bulk-apply",
+    "/api/admin/mentor-assignments/{assignmentId}",
+    "/api/admin/offering-ownership",
+    "/api/admin/offering-ownership/{ownershipId}",
+    "/api/admin/offerings",
+    "/api/admin/offerings/{offeringId}",
+
+ ❯ tests/openapi.test.ts:20:48
+     18|     expect(response.statusCode).toBe(200)
+     19|     const document = response.json()
+     20|     expect(Object.keys(document.paths).sort()).toMatchSnapshot()
+       |                                                ^
+     21|   })
+     22| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+  Snapshots  1 failed
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 10 passed | 5 skipped (16)
+   Start at  20:50:01
+   Duration  107.09s (transform 764ms, setup 0ms, import 2.34s, tests 104.47s, environment 0ms)
+

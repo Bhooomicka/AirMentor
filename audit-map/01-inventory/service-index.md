@@ -1,0 +1,50 @@
+# Service Index
+
+Backend service and library surfaces:
+
+- `air-mentor-api/src/lib/academic-provisioning.ts`
+- `air-mentor-api/src/lib/csrf.ts`
+- `air-mentor-api/src/lib/curriculum-linkage-python.ts`
+- `air-mentor-api/src/lib/curriculum-linkage.ts`
+- `air-mentor-api/src/lib/graph-summary.ts`
+- `air-mentor-api/src/lib/http-errors.ts`
+- `air-mentor-api/src/lib/ids.ts`
+- `air-mentor-api/src/lib/inference-engine.ts`
+- `air-mentor-api/src/lib/json.ts`
+- `air-mentor-api/src/lib/monitoring-engine.ts`
+- `air-mentor-api/src/lib/msruas-curriculum-compiler.ts`
+- `air-mentor-api/src/lib/msruas-proof-control-plane.ts`
+- `air-mentor-api/src/lib/msruas-proof-sandbox.ts`
+- `air-mentor-api/src/lib/msruas-rules.ts`
+- `air-mentor-api/src/lib/operational-event-store.ts`
+- `air-mentor-api/src/lib/passwords.ts`
+- `air-mentor-api/src/lib/proof-active-run.ts`
+- `air-mentor-api/src/lib/proof-control-plane-access.ts`
+- `air-mentor-api/src/lib/proof-control-plane-activation-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-batch-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-checkpoint-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-dashboard-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-elective-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-hod-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-live-run-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-playback-governance-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-playback-reset-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-playback-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-policy-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-rebuild-context-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-runtime-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-section-risk-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-seeded-bootstrap-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-seeded-run-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-seeded-scaffolding-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-seeded-semester-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-stage-summary-service.ts`
+- `air-mentor-api/src/lib/proof-control-plane-tail-service.ts`
+- `air-mentor-api/src/lib/proof-observed-state.ts`
+- `air-mentor-api/src/lib/proof-provenance.ts`
+- `air-mentor-api/src/lib/proof-queue-governance.ts`
+- `air-mentor-api/src/lib/proof-risk-model.ts`
+- `air-mentor-api/src/lib/proof-run-queue.ts`
+- `air-mentor-api/src/lib/stage-policy.ts`
+- `air-mentor-api/src/lib/telemetry.ts`
+- `air-mentor-api/src/lib/time.ts`

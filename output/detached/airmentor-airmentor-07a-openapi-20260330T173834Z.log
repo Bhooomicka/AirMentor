@@ -1,0 +1,14 @@
+[2026-03-30T17:38:34Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T17:38:34Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ NODE_OPTIONS=--max-old-space-size=4096\ npx\ vitest\ run\ --maxWorkers=1\ --reporter=verbose\ tests/openapi.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/openapi.test.ts > openapi > publishes the implemented route surface 12426ms
+ ✓ tests/openapi.test.ts > openapi > documents the semester activation request and response contract 12200ms
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  23:08:36
+   Duration  26.90s (transform 1.20s, setup 0ms, import 2.14s, tests 24.63s, environment 0ms)
+
+[2026-03-30T17:39:03Z] exit=0

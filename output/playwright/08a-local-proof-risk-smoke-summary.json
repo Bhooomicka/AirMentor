@@ -1,0 +1,73 @@
+{
+  "summaryKind": "proof-risk-smoke",
+  "stack": "local",
+  "proofCoverageTarget": "full",
+  "simulationRunId": "sim_mnc_2023_first6_v1",
+  "batchId": "batch_branch_mnc_btech_2023",
+  "routeHash": "#/admin/faculties/academic_faculty_engineering_and_technology/departments/dept_cse/branches/branch_mnc_btech/batches/batch_branch_mnc_btech_2023",
+  "appUrl": "http://127.0.0.1:4173",
+  "apiUrl": "http://127.0.0.1:42531",
+  "targetedSemester": null,
+  "activatedOperationalSemester": 4,
+  "previousOperationalSemester": 6,
+  "availableOperationalSemesters": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "selectedCheckpoint": {
+    "simulationStageCheckpointId": "stage_checkpoint_654335929a345857eab259b0",
+    "semesterNumber": 6,
+    "stageKey": "post-see",
+    "stageLabel": "Post SEE",
+    "stageDescription": "Checkpoint after SEE evidence is present and locked. This is the end-of-semester progression gate.",
+    "stageOrder": 5,
+    "stageAdvanceBlocked": false,
+    "blockingQueueItemCount": 0,
+    "playbackAccessible": false,
+    "blockedByCheckpointId": "stage_checkpoint_45dd134a0ac969ea05a049e7",
+    "blockedProgressionReason": "Playback is blocked until all queue items for checkpoint stage_checkpoint_45dd134a0ac969ea05a049e7 are resolved.",
+    "noActionHighRiskCount": 0,
+    "averageCounterfactualLiftScaled": 0.1,
+    "electiveVisibleCount": 120,
+    "buttonLabel": "S6 · Post SEE",
+    "surfaceLabel": "Sem 6 · Post SEE",
+    "bannerLabel": "semester 6 · Post SEE"
+  },
+  "storedPlaybackSelection": {
+    "simulationRunId": "sim_mnc_2023_first6_v1",
+    "simulationStageCheckpointId": "stage_checkpoint_654335929a345857eab259b0",
+    "updatedAt": "2026-04-01T18:16:24.482Z"
+  },
+  "genericArtifacts": {
+    "screenshots": {
+      "systemAdmin": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-control-plane.png",
+      "teacher": "/home/raed/projects/air-mentor-ui/output/playwright/teacher-proof-panel.png",
+      "teacherRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/teacher-risk-explorer-proof.png",
+      "hod": "/home/raed/projects/air-mentor-ui/output/playwright/hod-proof-analytics.png",
+      "hodRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/hod-risk-explorer-proof.png",
+      "studentShell": "/home/raed/projects/air-mentor-ui/output/playwright/student-shell-proof.png"
+    },
+    "activationArtifacts": {
+      "request": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-local-request.json",
+      "response": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-semester-activation-local-response.json"
+    }
+  },
+  "prefixedArtifacts": {
+    "screenshots": {
+      "systemAdmin": "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-system-admin-proof-control-plane.png",
+      "teacher": "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-teacher-proof-panel.png",
+      "teacherRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-teacher-risk-explorer-proof.png",
+      "hod": "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-hod-proof-analytics.png",
+      "hodRiskExplorer": "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-hod-risk-explorer-proof.png",
+      "studentShell": "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-student-shell-proof.png"
+    },
+    "activationArtifacts": {
+      "request": "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-system-admin-proof-semester-activation-local-request.json",
+      "response": "/home/raed/projects/air-mentor-ui/output/playwright/08a-local-system-admin-proof-semester-activation-local-response.json"
+    }
+  }
+}

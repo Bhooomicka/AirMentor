@@ -1,0 +1,13 @@
+[2026-03-30T19:42:09Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:42:09Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/academic-bootstrap-routes.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/academic-bootstrap-routes.test.ts > academic bootstrap routes > validates a requested playback checkpoint against the checkpoint run instead of the first active run row 190ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  01:12:11
+   Duration  789ms (transform 104ms, setup 0ms, import 496ms, tests 191ms, environment 0ms)
+
+[2026-03-30T19:42:12Z] exit=0

@@ -1,0 +1,40 @@
+[2026-03-30T13:31:44Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T13:31:44Z] command=env AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1 npm run playwright:admin-live:accessibility-regression 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:accessibility-regression
+> bash scripts/playwright-admin-live-accessibility-regression.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running system admin live accessibility regression...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+[accessibility] step: login-system-admin
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T13:31:52.339Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T13:31:52.339Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[response:401] https://api-production-ab72.up.railway.app/api/session
+[accessibility] live proof route discovered: faculty=Engineering and Technology department=Computer Science and Engineering branch=Mathematics and Computing batch=2022 checkpoints=5
+[accessibility] step: request-detail-a11y
+[accessibility] step: student-dialog-a11y
+[accessibility] step: proof-dashboard-a11y
+[browser:info] {"type":"airmentor-client-event","name":"proof.checkpoint.readiness","level":"info","timestamp":"2026-03-30T13:32:06.490Z","details":{"workspace":"system-admin","simulationRunId":"simulation_run_19da4b62-d4e2-4c83-b4ea-ff8bca2e74ed","simulationStageCheckpointId":"stage_checkpoint_bd42d066caf1fdbda3a3ee5a","stageLabel":"Pre TT1","playbackAccessible":true,"stageAdvanceBlocked":false,"blockingQueueItemCount":0,"canStepForward":true,"canPlayToEnd":false}}
+[accessibility] current step: proof-dashboard-a11y
+[accessibility] failure url: https://raed2180416.github.io/AirMentor/#/admin/faculties/academic_faculty_45de4e3f-7a8c-4841-81cb-6e61073a8727/departments/department_45b837f5-273d-4efb-953d-dc00087f6df3/branches/branch_5741716d-3500-404b-8578-1dd136bdd3c9/batches/batch_6238cb50-7d0f-471c-97fb-3061b1f48a2c
+Failure HTML: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-regression-failure.html
+System admin live accessibility regression failed. Report: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-report.json
+Screen-reader preflight transcript: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-screen-reader-preflight.md
+Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-regression-failure.png
+Trace: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-accessibility-regression-failure.zip
+file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-accessibility-regression.mjs:271
+    throw new Error(`${label} has blocking accessibility violations: ${blocking.map(item => `${item.id} (${item.impact ?? 'unknown'})`).join(', ')}`)
+          ^
+
+Error: System admin proof dashboard has blocking accessibility violations: color-contrast (serious)
+    at runScopedAxeScan (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-accessibility-regression.mjs:271:11)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-live-accessibility-regression.mjs:636:3
+
+Node.js v24.13.0

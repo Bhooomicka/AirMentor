@@ -1,0 +1,13 @@
+pass_name=role-surface-pass
+context=bootstrap
+session_name=audit-air-mentor-ui-bootstrap-role-surface-pass
+workdir=/home/raed/projects/air-mentor-ui
+caveman_active=0
+caveman_mode=off
+current_provider=native-codex
+current_account=native-codex-session
+current_model=gpt-5.4-mini
+current_slot=''
+route_attempt=1
+last_event=completed
+last_checkpoint_at=2026-04-15T10:26:21Z

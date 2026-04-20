@@ -1,0 +1,17 @@
+[2026-03-30T07:45:18Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T07:45:18Z] command=npm --workspace air-mentor-api run build 
+
+> air-mentor-api@0.1.0 build
+> tsc -p tsconfig.build.json
+
+src/modules/people.ts(332,7): error TS2353: Object literal may only specify known properties, and 'scopeDescriptor' does not exist in type '{ facultyId: string; userId: string; username: string; email: string; phone: string | null; employeeCode: string; displayName: string; designation: string; joinedOn: string | null; status: string; ... 4 more ...; roleGrants: { ...; }[]; }'.
+src/modules/people.ts(349,7): error TS2353: Object literal may only specify known properties, and 'scopeDescriptor' does not exist in type '{ facultyId: string; userId: string; username: string; email: string; phone: string | null; employeeCode: string; displayName: string; designation: string; joinedOn: string | null; status: string; ... 4 more ...; roleGrants: { ...; }[]; }'.
+src/modules/people.ts(359,5): error TS2353: Object literal may only specify known properties, and 'scopeDescriptor' does not exist in type '{ facultyId: string; userId: string; username: string; email: string; phone: string | null; employeeCode: string; displayName: string; designation: string; joinedOn: string | null; status: string; ... 4 more ...; roleGrants: { ...; }[]; }'.
+src/modules/students.ts(177,5): error TS2353: Object literal may only specify known properties, and 'scopeDescriptor' does not exist in type '{ currentCgpa: number; activeAcademicContext: { enrollmentId: string; branchId: string; branchName: string; departmentId: string | null; departmentName: string | null; termId: string; ... 6 more ...; academicStatus: string; } | null; ... 14 more ...; admissionDate: string; }'.
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path /home/raed/projects/air-mentor-ui/air-mentor-api
+npm error workspace air-mentor-api@0.1.0
+npm error location /home/raed/projects/air-mentor-ui/air-mentor-api
+npm error command failed
+npm error command sh -c tsc -p tsconfig.build.json

@@ -1,0 +1,43 @@
+{
+  "mode": "preflight",
+  "generatedAt": "2026-04-19T01:05:01.119Z",
+  "railwayService": null,
+  "railwayEnvironment": null,
+  "expectedFrontendOrigin": null,
+  "status": "failed",
+  "checks": {
+    "csrfSecretPresent": true,
+    "corsAllowedOrigins": "https://raed2180416.github.io,http://127.0.0.1:5173,http://localhost:5173,http://127.0.0.1:4173,http://localhost:4173",
+    "sessionCookieSecure": "true",
+    "sessionCookieSameSite": "none",
+    "telemetrySinkConfigured": false,
+    "databaseUrlConfigured": true,
+    "host": "0.0.0.0",
+    "railwayServiceInspection": {
+      "environment": "production",
+      "postgresServices": [
+        {
+          "serviceName": "Postgres-N4K8",
+          "status": "SLEEPING",
+          "sleepApplication": true,
+          "configErrors": []
+        },
+        {
+          "serviceName": "Postgres",
+          "status": "SUCCESS",
+          "sleepApplication": true,
+          "configErrors": []
+        }
+      ]
+    }
+  },
+  "syncedUpdates": [],
+  "bootSmoke": null,
+  "deployPathSmoke": null,
+  "issues": [
+    "EXPECTED_FRONTEND_ORIGIN is missing in the GitHub Actions environment."
+  ],
+  "warnings": [
+    "AIRMENTOR_TELEMETRY_SINK_URL is not configured; external telemetry forwarding will remain disabled."
+  ]
+}

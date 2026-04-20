@@ -1,0 +1,8 @@
+arctic_version:
+0.0.0-main-202603151831
+opencode_version_floating_nixpkgs:
+1.4.0
+opencode_version_repo_flake:
+1.2.24
+tmux_version:
+tmux 3.6a

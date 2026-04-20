@@ -1,0 +1,15 @@
+[2026-03-30T17:47:19Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T17:47:19Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ NODE_OPTIONS=--max-old-space-size=4096\ npx\ vitest\ run\ --maxWorkers=1\ --reporter=verbose\ tests/proof-control-plane-dashboard-service.test.ts\ tests/admin-proof-observability.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ✓ tests/admin-proof-observability.test.ts > admin proof dashboard observability > includes recent retained operational events in the proof dashboard payload 6581ms
+ ✓ tests/proof-control-plane-dashboard-service.test.ts > proof-control-plane-dashboard-service > derives queue, lease, retry, and worker diagnostics from proof runs 2ms
+ ✓ tests/proof-control-plane-dashboard-service.test.ts > proof-control-plane-dashboard-service > summarizes checkpoint readiness for dashboard diagnostics 0ms
+
+ Test Files  2 passed (2)
+      Tests  3 passed (3)
+   Start at  23:17:21
+   Duration  7.89s (transform 729ms, setup 0ms, import 1.12s, tests 6.59s, environment 0ms)
+
+[2026-03-30T17:47:29Z] exit=0

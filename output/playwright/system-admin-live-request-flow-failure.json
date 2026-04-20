@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-04-18T23:12:44.855Z",
+  "appUrl": "http://127.0.0.1:4173",
+  "artifacts": {
+    "successScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow.png",
+    "successReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-report.json",
+    "failureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-failure.png",
+    "failureReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-failure.json",
+    "prefixedSuccessScreenshot": null,
+    "prefixedSuccessReport": null,
+    "prefixedFailureScreenshot": null,
+    "prefixedFailureReport": null
+  },
+  "checks": [
+    {
+      "name": "system-admin-login",
+      "status": "passed"
+    },
+    {
+      "name": "request-list-open",
+      "status": "passed"
+    },
+    {
+      "name": "request-detail-open",
+      "status": "passed",
+      "summary": "Grant additional mentor mapping coverage"
+    },
+    {
+      "name": "request-deep-link-persists",
+      "status": "passed",
+      "url": "http://127.0.0.1:4173/#/admin/requests"
+    }
+  ],
+  "failedAt": "2026-04-18T23:13:33.211Z",
+  "error": {
+    "name": "TimeoutError",
+    "message": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Request advanced.', { exact: true }) to be visible\u001b[22m\n"
+  },
+  "pageErrors": [],
+  "consoleMessages": [
+    {
+      "type": "warning",
+      "text": "[JavaScript Warning: \"“127.0.0.1” has been classified as a bounce tracker. If it does not receive user activation within the next 3,600 seconds it will have its state purged.\"]"
+    },
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.diagnostic\",\"level\":\"info\",\"timestamp\":\"2026-04-18T23:12:57.194Z\",\"details\":{\"workspace\":\"system-admin\",\"level\":\"info\",\"code\":\"FRONTEND_STARTUP_MODE\",\"message\":\"Running with local-first frontend origin expectations.\"}}"
+    },
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.ready\",\"level\":\"info\",\"timestamp\":\"2026-04-18T23:12:57.194Z\",\"details\":{\"workspace\":\"system-admin\",\"apiBaseUrl\":\"http://127.0.0.1:4173\",\"configuredPrimaryApiBaseUrl\":\"/\",\"activeApiSource\":\"primary\",\"usingApiFallback\":false,\"telemetrySinkConfigured\":false,\"diagnosticCount\":1,\"errorCount\":0}}"
+    }
+  ]
+}

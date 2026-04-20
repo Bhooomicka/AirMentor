@@ -1,0 +1,39 @@
+[2026-04-01T14:11:05Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-01T14:11:05Z] command=npm test -- --run tests/proof-playback.test.ts tests/proof-risk-semester-walk.test.ts tests/system-admin-proof-dashboard-workspace.test.tsx tests/hod-pages.test.ts tests/risk-explorer.test.tsx tests/student-shell.test.tsx 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/proof-playback.test.ts tests/proof-risk-semester-walk.test.ts tests/system-admin-proof-dashboard-workspace.test.tsx tests/hod-pages.test.ts tests/risk-explorer.test.tsx tests/student-shell.test.tsx
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+ ❯ tests/system-admin-proof-dashboard-workspace.test.tsx (5 tests | 1 failed) 282ms
+     × routes explicit semester activation through the proof dashboard owner 205ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/system-admin-proof-dashboard-workspace.test.tsx > SystemAdminProofDashboardWorkspace > routes explicit semester activation through the proof dashboard owner
+AssertionError: expected null to be truthy
+
+- Expected:
+true
+
++ Received:
+null
+
+ ❯ tests/system-admin-proof-dashboard-workspace.test.tsx:1002:37
+    1000|     const targetSemesterButton = document.querySelector('[data-proof-a…
+    1001|
+    1002|     expect(earlyLateSemesterButton).toBeTruthy()
+       |                                     ^
+    1003|     expect(activeSemesterButton).toBeTruthy()
+    1004|     expect(targetSemesterButton).toBeTruthy()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 5 passed (6)
+      Tests  1 failed | 23 passed (24)
+   Start at  19:41:05
+   Duration  2.57s (transform 1.20s, setup 0ms, import 3.21s, tests 665ms, environment 1.58s)
+

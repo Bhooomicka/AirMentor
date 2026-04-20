@@ -1,0 +1,40 @@
+# Feature Template v2.0
+
+- Feature name: Faculty profile read-only and proof overlays
+- Parent domain: Academic faculty profile surface
+- Feature scope boundary: The faculty profile page, its read-only panels, and proof-mode overlays. Excludes the student shell, risk explorer, and mentor queue.
+- Roles and role-specific variants: Self-access for the same faculty, plus HoD/admin overlap access when the backend checks allow it.
+- Product or user intent: Show a faculty member's appointments, scope, and proof-backed teaching context without turning the page into an edit form.
+- Source files: [`src/academic-faculty-profile-page.tsx`](../../src/academic-faculty-profile-page.tsx), [`src/academic-route-pages.tsx`](../../src/academic-route-pages.tsx), [`air-mentor-api/src/modules/admin-control-plane.ts`](../../air-mentor-api/src/modules/admin-control-plane.ts)
+- Entry points: `AcademicFacultyProfilePage` and the drilldown buttons from the faculty profile workspace.
+- Routes, deep links, query params, and restore entry states: Faculty-profile route state inside the academic workspace; opened from mentor, HoD, or admin-linked drilldowns.
+- Preconditions and guard conditions: The selected faculty must be in scope for the current role and proof run.
+- Visible surfaces involved: Permissions panel, appointments panel, teaching-scope panel, batch-context panel, course-leader-scope panel, mentoring/timetable panels, proof-mode overlays, and drilldown buttons.
+- Hidden or conditional surfaces involved: Proof overlay banners, queue items, and elective-fit blocks that only appear when the proof context contains them.
+- Trigger sources: Open a faculty profile, click a proof-mode drilldown, or return from a linked student/risk shell.
+- Atomic user actions: Inspect appointments, open a student, open the risk explorer, or open the student shell from the faculty profile.
+- Hidden, hover-only, or keyboard-only actions: The drilldown buttons are keyboard reachable; queue item hover details follow the shared card/button primitive.
+- Automatic or system actions: Merge the proof-backed teaching scope and appointment context into a read-only profile projection.
+- API and backend calls: Faculty-profile and proof-scope academic routes, plus the shared academic client.
+- State dependencies: Selected faculty, current role scope, proof overlays, and queue/elective-fit data.
+- Persistence dependencies: Route state and backend profile data; no separate profile edit persistence is used here.
+- Restore behavior: Reopening the same faculty profile restores the read-only profile state if the faculty remains in scope.
+- Permissions and scope logic: The page is self-access for the same faculty and overlap-checked for HoD/admin access.
+- State transitions: Faculty selected -> read-only profile -> proof overlays -> drilldown to student/risk/shell.
+- Empty, loading, stale, disabled, locked, conflict, and error states: Empty or missing panels fall back to the read-only shell; access failures should be blocked by the parent scope gate.
+- Success path: The user inspects the faculty context and opens the desired proof-backed drilldown.
+- Failure and recovery paths: If the overlap check fails, the user must return to the parent workspace and pick a scoped faculty instead.
+- Data read: Faculty identity, appointments, teaching scope, batch context, mentor scope, timetable scope, and proof overlays.
+- Data written: Route state for drilldowns and any clipboard or navigation handoff.
+- Telemetry, analytics, or audit-trail side effects: Drilldowns continue through the shared academic proof audit trail.
+- Downstream effects: Can open student, risk, or shell views for the selected faculty context.
+- Hidden couplings: The faculty profile depends on the same overlap and proof-scope checks used by the admin control plane and mentor scope resolution.
+- Expected behavior: The profile should stay read-only, show the proof overlays, and offer the appropriate drilldowns for the current scope.
+- Implemented behavior: `AcademicFacultyProfilePage` renders the read-only panels and drilldown actions from the current proof-backed faculty context.
+- Tested behavior: [`tests/faculty-profile-proof.test.tsx`](../../tests/faculty-profile-proof.test.tsx), [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts).
+- Live behavior notes: Not browser-replayed in this pass; overlap behavior is currently inferred from the backend tests.
+- Known mismatches: None confirmed in this pass.
+- Tests covering it: [`tests/faculty-profile-proof.test.tsx`](../../tests/faculty-profile-proof.test.tsx), [`tests/academic-route-pages.test.tsx`](../../tests/academic-route-pages.test.tsx), [`air-mentor-api/tests/admin-control-plane.test.ts`](../../air-mentor-api/tests/admin-control-plane.test.ts).
+- Known gaps: No live browser pass confirmed the proof overlay copy or the queue-item drilldowns.
+- Open questions: Should overlap-denied faculty profiles show a clearer recovery path than the parent gate alone?
+- Confidence level: High

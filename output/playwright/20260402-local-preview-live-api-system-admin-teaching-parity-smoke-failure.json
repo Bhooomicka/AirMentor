@@ -1,0 +1,62 @@
+{
+  "failedAt": "2026-04-02T12:54:12.883Z",
+  "appUrl": "http://127.0.0.1:4173",
+  "apiUrl": "https://api-production-ab72.up.railway.app",
+  "pageUrl": "http://127.0.0.1:4173/#/app",
+  "error": {
+    "name": "TimeoutError",
+    "message": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-proof-surface=\"academic-proof-summary\"][data-proof-scope=\"queue-history\"]').first() to be visible\u001b[22m\n"
+  },
+  "pageErrors": [],
+  "consoleMessages": [
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.diagnostic\",\"level\":\"info\",\"timestamp\":\"2026-04-02T12:53:36.932Z\",\"details\":{\"workspace\":\"system-admin\",\"level\":\"info\",\"code\":\"FRONTEND_STARTUP_MODE\",\"message\":\"Running with local-first frontend origin expectations.\"}}"
+    },
+    {
+      "type": "warning",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.diagnostic\",\"level\":\"warn\",\"timestamp\":\"2026-04-02T12:53:36.934Z\",\"details\":{\"workspace\":\"system-admin\",\"level\":\"warning\",\"code\":\"LOCAL_FRONTEND_REMOTE_API\",\"message\":\"Local frontend is pointed at a remote API base URL; verify the cookie and CORS posture before using this as a dev default.\"}}"
+    },
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.ready\",\"level\":\"info\",\"timestamp\":\"2026-04-02T12:53:36.934Z\",\"details\":{\"workspace\":\"system-admin\",\"apiBaseUrl\":\"https://api-production-ab72.up.railway.app\",\"telemetrySinkConfigured\":false,\"diagnosticCount\":2,\"errorCount\":0}}"
+    },
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.diagnostic\",\"level\":\"info\",\"timestamp\":\"2026-04-02T12:53:46.139Z\",\"details\":{\"workspace\":\"academic\",\"level\":\"info\",\"code\":\"FRONTEND_STARTUP_MODE\",\"message\":\"Running with local-first frontend origin expectations.\"}}"
+    },
+    {
+      "type": "warning",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.diagnostic\",\"level\":\"warn\",\"timestamp\":\"2026-04-02T12:53:46.140Z\",\"details\":{\"workspace\":\"academic\",\"level\":\"warning\",\"code\":\"LOCAL_FRONTEND_REMOTE_API\",\"message\":\"Local frontend is pointed at a remote API base URL; verify the cookie and CORS posture before using this as a dev default.\"}}"
+    },
+    {
+      "type": "info",
+      "text": "{\"type\":\"airmentor-client-event\",\"name\":\"startup.ready\",\"level\":\"info\",\"timestamp\":\"2026-04-02T12:53:46.140Z\",\"details\":{\"workspace\":\"academic\",\"apiBaseUrl\":\"https://api-production-ab72.up.railway.app\",\"telemetrySinkConfigured\":false,\"diagnosticCount\":2,\"errorCount\":0}}"
+    }
+  ],
+  "navState": [
+    {
+      "label": "My Mentees",
+      "active": true,
+      "visible": true
+    },
+    {
+      "label": "Queue History",
+      "active": false,
+      "visible": true
+    },
+    {
+      "label": "Calendar / Timetable",
+      "active": false,
+      "visible": true
+    }
+  ],
+  "proofSurfaces": [
+    {
+      "surface": "academic-proof-summary",
+      "scope": "mentor-view",
+      "visible": true,
+      "label": "Proof SummaryMentor View2023 ProofProof modeAuthoritative mentor view proof context. Use these checkpoint-bound counts and scope labels when comparing teacher, "
+    }
+  ]
+}

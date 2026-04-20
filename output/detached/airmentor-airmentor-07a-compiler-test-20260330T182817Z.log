@@ -1,0 +1,12 @@
+[2026-03-30T18:28:18Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T18:28:18Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ npx\ vitest\ run\ tests/msruas-curriculum-compiler.test.ts\ tests/openapi.test.ts\ tests/proof-control-plane-activation-service.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  3 passed (3)
+      Tests  6 passed (6)
+   Start at  23:58:20
+   Duration  13.58s (transform 738ms, setup 0ms, import 1.45s, tests 11.86s, environment 0ms)
+
+[2026-03-30T18:28:33Z] exit=0

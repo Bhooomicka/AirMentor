@@ -1,0 +1,27 @@
+[2026-03-30T19:21:05Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T19:21:05Z] command=zsh -lc cd\ air-mentor-api\ \&\&\ CI=1\ AIRMENTOR_PROOF_RC=1\ npx\ vitest\ run\ --reporter=verbose\ tests/admin-control-plane.test.ts\ -t\ \"runs\ the\ proof\ control\ plane\ end\ to\ end\ and\ exposes\ proof\ operations\ on\ the\ faculty\ profile\" 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > rejects assigning a second active owner to the same offering
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > limits HoD faculty profile access to supervised departments and branches
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > propagates admin-created faculty records into teaching login, bootstrap, and faculty profile
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > previews and bulk-applies mentor assignment changes with confirmation, audit detail, and mentor-surface parity
+ ✓ tests/admin-control-plane.test.ts > admin control plane routes > runs the proof control plane end to end and exposes proof operations on the faculty profile 193673ms
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > activates a proof operational semester without mutating checkpoint playback state
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > re-seeds proof batch routes after the canonical batch disappears
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > recomputes the seeded baseline active proof run when it starts without checkpoints
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > supports reminders and audit search across admin-managed entities
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > soft-deleting a faculty cascades appointments, permissions, ownerships, and mentor links out of the live teaching surface
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > previews and applies scoped mentor bulk assignment with confirmation and audit coverage
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > enforces the faculty timetable direct-edit window while keeping markers editable and reflected in teaching profile status
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > serves HoD proof analytics from the active proof run with faculty-profile parity and deterministic filters
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > scopes faculty proof operations to the active teaching role so proof links stay reachable
+ ↓ tests/admin-control-plane.test.ts > admin control plane routes > returns an empty HoD proof surface outside the supervised proof branch
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 14 skipped (15)
+   Start at  00:51:07
+   Duration  195.13s (transform 877ms, setup 0ms, import 1.29s, tests 193.67s, environment 0ms)
+
+[2026-03-30T19:24:22Z] exit=0

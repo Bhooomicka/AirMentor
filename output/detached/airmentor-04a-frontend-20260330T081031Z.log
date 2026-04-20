@@ -1,0 +1,51 @@
+[2026-03-30T08:10:32Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T08:10:32Z] command=npm test -- --run tests/faculty-profile-proof.test.tsx tests/academic-route-pages.test.tsx tests/academic-workspace-route-surface.test.tsx tests/portal-routing.test.ts tests/system-admin-live-data.test.ts 
+
+> air-mentor-ui@0.0.0 test
+> vitest run --run tests/faculty-profile-proof.test.tsx tests/academic-route-pages.test.tsx tests/academic-workspace-route-surface.test.tsx tests/portal-routing.test.ts tests/system-admin-live-data.test.ts
+
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui
+
+ ❯ tests/academic-route-pages.test.tsx (3 tests | 2 failed) 636ms
+     × opens partial-profile and proof drilldowns from mentee detail 132ms
+     × opens queue-history drilldowns into the same bounded student surfaces 175ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/academic-route-pages.test.tsx > academic route pages > opens partial-profile and proof drilldowns from mentee detail
+AssertionError: expected "vi.fn()" to be called with arguments: [ 'student_001' ]
+
+Number of calls: 0
+
+ ❯ tests/academic-route-pages.test.tsx:132:32
+    130|
+    131|     expect(onOpenHistory).toHaveBeenCalledWith(mentee)
+    132|     expect(onOpenRiskExplorer).toHaveBeenCalledWith('student_001')
+       |                                ^
+    133|     expect(onOpenStudentShell).toHaveBeenCalledWith('student_001')
+    134|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/academic-route-pages.test.tsx > academic route pages > opens queue-history drilldowns into the same bounded student surfaces
+AssertionError: expected "vi.fn()" to be called with arguments: [ { id: 'task_001', …(24) } ]
+
+Number of calls: 0
+
+ ❯ tests/academic-route-pages.test.tsx:157:31
+    155|     fireEvent.click(getNativeButton('Student Shell'))
+    156|
+    157|     expect(onOpenTaskStudent).toHaveBeenCalledWith(task)
+       |                               ^
+    158|     expect(onOpenRiskExplorer).toHaveBeenCalledWith('student_001')
+    159|     expect(onOpenStudentShell).toHaveBeenCalledWith('student_001')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  2 failed | 23 passed (25)
+   Start at  13:40:33
+   Duration  1.76s (transform 1.15s, setup 0ms, import 1.76s, tests 1.39s, environment 623ms)
+

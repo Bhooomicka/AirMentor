@@ -1,0 +1,12 @@
+[2026-03-30T15:29:00Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T15:29:00Z] command=env -C air-mentor-api npx vitest run tests/openapi.test.ts 
+
+ RUN  v4.1.0 /home/raed/projects/air-mentor-ui/air-mentor-api
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  20:59:01
+   Duration  12.38s (transform 751ms, setup 0ms, import 1.16s, tests 11.11s, environment 0ms)
+
+[2026-03-30T15:29:13Z] exit=0

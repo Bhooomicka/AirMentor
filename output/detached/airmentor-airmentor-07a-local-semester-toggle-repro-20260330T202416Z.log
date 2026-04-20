@@ -1,0 +1,22 @@
+[2026-03-30T20:24:18Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:24:18Z] command=zsh -lc $'cd air-mentor-api\nnode --input-type=module <<\'NODE\'\nimport assert from "node:assert/strict"\nimport { createTestApp, loginAs, TEST_ORIGIN } from "./tests/helpers/test-app.ts"\n\nconst current = await createTestApp()\ntry {\n  const adminLogin = await loginAs(current.app, "sysadmin", "admin1234")\n  const dashboard = await current.app.inject({ method: "GET", url: "/api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard", headers: { cookie: adminLogin.cookie } })\n  const activeRunId = dashboard.json().activeRunDetail?.simulationRunId\n  console.log("dashboard-before", dashboard.statusCode, activeRunId, dashboard.json().activeRunDetail?.activeOperationalSemester)\n\n  for (const semesterNumber of [4, 6]) {\n    const response = await current.app.inject({\n      method: "POST",\n      url: `/api/admin/proof-runs/${activeRunId}/activate-semester`,\n      headers: { cookie: adminLogin.cookie, origin: TEST_ORIGIN },\n      payload: { semesterNumber },\n    })\n    console.log(`activate-${semesterNumber}`, response.statusCode, response.body.slice(0, 500))\n    const after = await current.app.inject({ method: "GET", url: "/api/admin/batches/batch_branch_mnc_btech_2023/proof-dashboard", headers: { cookie: adminLogin.cookie } })\n    console.log(`after-${semesterNumber}`, after.statusCode, after.json().activeRunDetail?.activeOperationalSemester)\n  }\n} finally {\n  await current.close()\n}\nNODE' 
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/raed/projects/air-mentor-ui/air-mentor-api/src/app.js' imported from /home/raed/projects/air-mentor-ui/air-mentor-api/tests/helpers/test-app.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:718:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:735:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:764:52)
+    at #resolve (node:internal/modules/esm/loader:700:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:620:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:143:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:228:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///home/raed/projects/air-mentor-ui/air-mentor-api/src/app.js'
+}
+
+Node.js v24.13.0

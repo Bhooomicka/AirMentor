@@ -1,0 +1,52 @@
+
+> air-mentor-api@0.1.0 dev:seeded
+> tsx scripts/start-seeded-server.ts
+
+[air-mentor-api] starting embedded postgres for seeded live server...
+[db:migrate] evaluating 22 migration file(s) from /home/raed/projects/air-mentor-ui/air-mentor-api/src/db/migrations
+[db:migrate] applying migration: 0000_admin_foundation.sql
+[db:migrate] applied migration: 0000_admin_foundation.sql
+[db:migrate] applying migration: 0001_academic_runtime.sql
+[db:migrate] applied migration: 0001_academic_runtime.sql
+[db:migrate] applying migration: 0002_admin_hierarchy.sql
+[db:migrate] applied migration: 0002_admin_hierarchy.sql
+[db:migrate] applying migration: 0002_cleanup_seeded_kavitha_scope.sql
+[db:migrate] applied migration: 0002_cleanup_seeded_kavitha_scope.sql
+[db:migrate] applying migration: 0003_admin_control_plane.sql
+[db:migrate] applied migration: 0003_admin_control_plane.sql
+[db:migrate] applying migration: 0004_academic_assessment_and_history.sql
+[db:migrate] applied migration: 0004_academic_assessment_and_history.sql
+[db:migrate] applying migration: 0005_teaching_authority_phase2.sql
+[db:migrate] applied migration: 0005_teaching_authority_phase2.sql
+[db:migrate] applying migration: 0006_msruas_proof_runtime.sql
+[db:migrate] applied migration: 0006_msruas_proof_runtime.sql
+[db:migrate] applying migration: 0007_msruas_proof_control_plane.sql
+[db:migrate] applied migration: 0007_msruas_proof_control_plane.sql
+[db:migrate] applying migration: 0008_msruas_world_engine_stage2.sql
+[db:migrate] applied migration: 0008_msruas_world_engine_stage2.sql
+[db:migrate] applying migration: 0009_student_agent_shell.sql
+[db:migrate] applied migration: 0009_student_agent_shell.sql
+[db:migrate] applying migration: 0010_simulation_stage_playback.sql
+[db:migrate] applied migration: 0010_simulation_stage_playback.sql
+[db:migrate] applying migration: 0011_risk_model_artifacts.sql
+[db:migrate] applied migration: 0011_risk_model_artifacts.sql
+[db:migrate] applying migration: 0012_faculty_calendar_admin_workspaces.sql
+[db:migrate] applied migration: 0012_faculty_calendar_admin_workspaces.sql
+[db:migrate] applying migration: 0012_proof_queue_case_governance.sql
+[db:migrate] applied migration: 0012_proof_queue_case_governance.sql
+[db:migrate] applying migration: 0012_proof_queue_governance_runtime.sql
+[db:migrate] applied migration: 0012_proof_queue_governance_runtime.sql
+[db:migrate] applying migration: 0013_scope_governance_profiles_and_provisioning.sql
+[db:migrate] applied migration: 0013_scope_governance_profiles_and_provisioning.sql
+[db:migrate] applying migration: 0014_async_proof_run_queue.sql
+[db:migrate] applied migration: 0014_async_proof_run_queue.sql
+[db:migrate] applying migration: 0015_curriculum_linkage_candidates.sql
+[db:migrate] applied migration: 0015_curriculum_linkage_candidates.sql
+[db:migrate] applying migration: 0016_login_rate_limit_windows.sql
+[db:migrate] applied migration: 0016_login_rate_limit_windows.sql
+[db:migrate] applying migration: 0017_operational_telemetry_events.sql
+[db:migrate] applied migration: 0017_operational_telemetry_events.sql
+[db:migrate] applying migration: 0018_proof_active_operational_semester.sql
+[db:migrate] applied migration: 0018_proof_active_operational_semester.sql
+[air-mentor-api] seeded live server ready at http://127.0.0.1:37175
+{"type":"airmentor-seeded-server-ready","apiBaseUrl":"http://127.0.0.1:37175","host":"127.0.0.1","port":37175,"pid":432251,"seedNow":"2026-03-16T00:00:00.000Z"}

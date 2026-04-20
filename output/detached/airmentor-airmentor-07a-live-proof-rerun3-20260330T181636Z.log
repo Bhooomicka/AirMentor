@@ -1,0 +1,48 @@
+[2026-03-30T18:16:37Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T18:16:37Z] command=zsh -lc export\ AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin\ AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234\ PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/\ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/\ AIRMENTOR_LIVE_STACK=1\;\ npm\ run\ playwright:admin-live:proof-risk 
+
+> air-mentor-ui@0.0.0 playwright:admin-live:proof-risk
+> bash scripts/playwright-admin-live-proof-risk-smoke.sh
+
+warning: Git tree '/home/raed/projects/air-mentor-ui' is dirty
+AirMentor dev shell ready.
+Playwright is available through the wrapped Nix runtime.
+Python is available for the curriculum linkage helper.
+Try: playwright --version
+Smoke: bash scripts/playwright-smoke.sh http://127.0.0.1:5173
+Running system admin proof-risk smoke...
+Frontend URL: https://raed2180416.github.io/AirMentor/
+Backend URL: https://api-production-ab72.up.railway.app/
+[smoke] step: login-system-admin
+[browser:info] {"type":"airmentor-client-event","name":"startup.diagnostic","level":"info","timestamp":"2026-03-30T18:16:45.703Z","details":{"workspace":"system-admin","level":"info","code":"FRONTEND_STARTUP_MODE","message":"Running with production-like frontend origin expectations."}}
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=missing
+[browser:info] {"type":"airmentor-client-event","name":"startup.ready","level":"info","timestamp":"2026-03-30T18:16:45.703Z","details":{"workspace":"system-admin","apiBaseUrl":"https://api-production-ab72.up.railway.app","telemetrySinkConfigured":false,"diagnosticCount":1,"errorCount":0}}
+[smoke:session-response] 401 https://api-production-ab72.up.railway.app/api/session set-cookie=missing body={"error":"UNAUTHORIZED","message":"Authentication required"}
+[smoke:session-request] POST https://api-production-ab72.up.railway.app/api/session/login cookie=missing
+[smoke:session-response] 200 https://api-production-ab72.up.railway.app/api/session/login set-cookie=present
+[smoke:session-request] GET https://api-production-ab72.up.railway.app/api/session cookie=present
+[smoke:session-response] 200 https://api-production-ab72.up.railway.app/api/session set-cookie=present
+[smoke] cookies after login: [{"name":"airmentor_session","value":"session_19b2310d-25fd-4749-909c-54e17e79d101","domain":"api-production-ab72.up.railway.app","path":"/","expires":1775499406.356,"httpOnly":true,"secure":true,"sameSite":"None"},{"name":"airmentor_csrf","value":"cawFWwk-FC1soxFtG3UmNA4RyjPnCJeEL3pAV0rTGOQ","domain":"api-production-ab72.up.railway.app","path":"/","expires":1775499406.356,"httpOnly":false,"secure":true,"sameSite":"None"}]
+[smoke] live proof route pinned to seeded batch: batch=batch_branch_mnc_btech_2023 checkpoints=0 proofRuns=0 imports=0
+[smoke] step: activate-proof-semester
+[smoke] proof dashboard before prewarm: imports=0 activeRun=none checkpoints=0
+[smoke] prewarming proof lifecycle through admin endpoints
+[smoke] current step: activate-proof-semester
+[smoke] failure url: https://raed2180416.github.io/AirMentor/#/admin
+Failure HTML: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.html
+System admin proof-risk smoke failed. Screenshot: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.png
+Trace: /home/raed/projects/air-mentor-ui/output/playwright/system-admin-proof-risk-smoke-failure.zip
+[browser] page closed unexpectedly
+[browser] browser disconnected unexpectedly
+file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:325
+    throw new Error(`Admin API ${apiPath} failed with ${payload.status}: ${payload.text.slice(0, 800)}`)
+          ^
+
+Error: Admin API /api/admin/batches/batch_branch_mnc_btech_2023/proof-imports failed with 500: {"error":"INTERNAL_SERVER_ERROR","message":"Unexpected server error"}
+    at adminApiRequest (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:325:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ensureProofRunReady (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:433:5)
+    at async activateProofSemesterForContract (file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:508:27)
+    at async file:///home/raed/projects/air-mentor-ui/scripts/system-admin-proof-risk-smoke.mjs:794:3
+
+Node.js v24.13.0

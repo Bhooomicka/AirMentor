@@ -1,0 +1,250 @@
+[2026-04-19T21:57:43Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-04-19T21:57:43Z] command=zsh -lc cd\ /home/raed/projects/air-mentor-ui/air-mentor-api\ \&\&\ AIRMENTOR_EVAL_SEED_PROFILE=smoke-3\ AIRMENTOR_EVAL_CREATE_CONCURRENCY=4\ npm\ run\ evaluate:proof-risk-model 
+
+> air-mentor-api@0.1.0 evaluate:proof-risk-model
+> tsx scripts/evaluate-proof-risk-model.ts
+
+[db:migrate] evaluating 23 migration file(s) from /home/raed/projects/air-mentor-ui/air-mentor-api/src/db/migrations
+[db:migrate] applying migration: 0000_admin_foundation.sql
+[db:migrate] applied migration: 0000_admin_foundation.sql
+[db:migrate] applying migration: 0001_academic_runtime.sql
+[db:migrate] applied migration: 0001_academic_runtime.sql
+[db:migrate] applying migration: 0002_admin_hierarchy.sql
+[db:migrate] applied migration: 0002_admin_hierarchy.sql
+[db:migrate] applying migration: 0002_cleanup_seeded_kavitha_scope.sql
+[db:migrate] applied migration: 0002_cleanup_seeded_kavitha_scope.sql
+[db:migrate] applying migration: 0003_admin_control_plane.sql
+[db:migrate] applied migration: 0003_admin_control_plane.sql
+[db:migrate] applying migration: 0004_academic_assessment_and_history.sql
+[db:migrate] applied migration: 0004_academic_assessment_and_history.sql
+[db:migrate] applying migration: 0005_teaching_authority_phase2.sql
+[db:migrate] applied migration: 0005_teaching_authority_phase2.sql
+[db:migrate] applying migration: 0006_msruas_proof_runtime.sql
+[db:migrate] applied migration: 0006_msruas_proof_runtime.sql
+[db:migrate] applying migration: 0007_msruas_proof_control_plane.sql
+[db:migrate] applied migration: 0007_msruas_proof_control_plane.sql
+[db:migrate] applying migration: 0008_msruas_world_engine_stage2.sql
+[db:migrate] applied migration: 0008_msruas_world_engine_stage2.sql
+[db:migrate] applying migration: 0009_student_agent_shell.sql
+[db:migrate] applied migration: 0009_student_agent_shell.sql
+[db:migrate] applying migration: 0010_simulation_stage_playback.sql
+[db:migrate] applied migration: 0010_simulation_stage_playback.sql
+[db:migrate] applying migration: 0011_risk_model_artifacts.sql
+[db:migrate] applied migration: 0011_risk_model_artifacts.sql
+[db:migrate] applying migration: 0012_faculty_calendar_admin_workspaces.sql
+[db:migrate] applied migration: 0012_faculty_calendar_admin_workspaces.sql
+[db:migrate] applying migration: 0012_proof_queue_case_governance.sql
+[db:migrate] applied migration: 0012_proof_queue_case_governance.sql
+[db:migrate] applying migration: 0012_proof_queue_governance_runtime.sql
+[db:migrate] applied migration: 0012_proof_queue_governance_runtime.sql
+[db:migrate] applying migration: 0013_scope_governance_profiles_and_provisioning.sql
+[db:migrate] applied migration: 0013_scope_governance_profiles_and_provisioning.sql
+[db:migrate] applying migration: 0014_async_proof_run_queue.sql
+[db:migrate] applied migration: 0014_async_proof_run_queue.sql
+[db:migrate] applying migration: 0015_curriculum_linkage_candidates.sql
+[db:migrate] applied migration: 0015_curriculum_linkage_candidates.sql
+[db:migrate] applying migration: 0016_login_rate_limit_windows.sql
+[db:migrate] applied migration: 0016_login_rate_limit_windows.sql
+[db:migrate] applying migration: 0017_operational_telemetry_events.sql
+[db:migrate] applied migration: 0017_operational_telemetry_events.sql
+[db:migrate] applying migration: 0018_proof_active_operational_semester.sql
+[db:migrate] applied migration: 0018_proof_active_operational_semester.sql
+[db:migrate] applying migration: 0019_password_setup_tokens.sql
+[db:migrate] applied migration: 0019_password_setup_tokens.sql
+[proof-eval] initialized evaluation app and database
+[proof-eval] resolved effective batch policy
+[proof-eval] created proof import curriculum_import_ac38c078-d2a4-48ff-815c-aa8eda11078c
+[proof-eval] approved proof import curriculum_import_ac38c078-d2a4-48ff-815c-aa8eda11078c
+[proof-eval] governed corpus request: 3 seeds (0 reused, 3 to create, concurrency 4)
+{"type":"airmentor-operational-event","name":"database.pool.error","level":"error","timestamp":"2026-04-19T22:00:10.106Z","details":{"error":{"name":"error","message":"terminating connection due to administrator command","code":"57P01"}}}
+Database pool error error: terminating connection due to administrator command
+    at parseErrorMessage (/home/raed/projects/air-mentor-ui/node_modules/pg-protocol/src/parser.ts:394:9)
+    at Parser.handlePacket (/home/raed/projects/air-mentor-ui/node_modules/pg-protocol/src/parser.ts:212:19)
+    at Parser.parse (/home/raed/projects/air-mentor-ui/node_modules/pg-protocol/src/parser.ts:105:30)
+    at Socket.<anonymous> (/home/raed/projects/air-mentor-ui/node_modules/pg-protocol/src/index.ts:7:48)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:563:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+    at Readable.push (node:internal/streams/readable:394:5)
+    at TCP.onStreamRead (node:internal/stream_base_commons:189:23) {
+  length: 116,
+  severity: 'FATAL',
+  code: '57P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postgres.c',
+  line: '3355',
+  routine: 'ProcessInterrupts',
+  client: Client {
+    _events: [Object: null prototype] { error: [Function (anonymous)] },
+    _eventsCount: 1,
+    _maxListeners: undefined,
+    connectionParameters: ConnectionParameters {
+      user: 'postgres',
+      database: 'postgres',
+      port: 46205,
+      host: '127.0.0.1',
+      binary: false,
+      options: undefined,
+      ssl: false,
+      client_encoding: '',
+      replication: undefined,
+      isDomainSocket: false,
+      application_name: undefined,
+      fallback_application_name: undefined,
+      statement_timeout: false,
+      lock_timeout: false,
+      idle_in_transaction_session_timeout: false,
+      query_timeout: false,
+      connect_timeout: 0
+    },
+    user: 'postgres',
+    database: 'postgres',
+    port: 46205,
+    host: '127.0.0.1',
+    replication: undefined,
+    _Promise: [Function: Promise],
+    _types: TypeOverrides { _types: [Object], text: {}, binary: {} },
+    _ending: true,
+    _ended: false,
+    _connecting: false,
+    _connected: true,
+    _connectionError: false,
+    _queryable: false,
+    _activeQuery: null,
+    enableChannelBinding: false,
+    connection: Connection {
+      _events: [Object: null prototype],
+      _eventsCount: 23,
+      _maxListeners: undefined,
+      stream: [Socket],
+      _keepAlive: false,
+      _keepAliveInitialDelayMillis: 0,
+      parsedStatements: {},
+      ssl: false,
+      _ending: true,
+      _emitMessage: false,
+      _connecting: true,
+      Symbol(shapeMode): false,
+      Symbol(kCapture): false
+    },
+    _queryQueue: [],
+    binary: false,
+    processID: 421012,
+    secretKey: -1598763858,
+    ssl: false,
+    _connectionTimeoutMillis: 0,
+    _connectionCallback: null,
+    release: [Function (anonymous)],
+    readyForQuery: true,
+    hasExecuted: true,
+    _poolUseCount: 632,
+    Symbol(shapeMode): false,
+    Symbol(kCapture): false
+  }
+}
+{"type":"airmentor-operational-event","name":"database.pool.error","level":"error","timestamp":"2026-04-19T22:00:10.119Z","details":{"error":{"name":"error","message":"terminating connection due to administrator command","code":"57P01"}}}
+Database pool error error: terminating connection due to administrator command
+    at parseErrorMessage (/home/raed/projects/air-mentor-ui/node_modules/pg-protocol/src/parser.ts:394:9)
+    at Parser.handlePacket (/home/raed/projects/air-mentor-ui/node_modules/pg-protocol/src/parser.ts:212:19)
+    at Parser.parse (/home/raed/projects/air-mentor-ui/node_modules/pg-protocol/src/parser.ts:105:30)
+    at Socket.<anonymous> (/home/raed/projects/air-mentor-ui/node_modules/pg-protocol/src/index.ts:7:48)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:563:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+    at Readable.push (node:internal/streams/readable:394:5)
+    at TCP.onStreamRead (node:internal/stream_base_commons:189:23) {
+  length: 116,
+  severity: 'FATAL',
+  code: '57P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postgres.c',
+  line: '3355',
+  routine: 'ProcessInterrupts',
+  client: Client {
+    _events: [Object: null prototype] { error: [Function (anonymous)] },
+    _eventsCount: 1,
+    _maxListeners: undefined,
+    connectionParameters: ConnectionParameters {
+      user: 'postgres',
+      database: 'postgres',
+      port: 46205,
+      host: '127.0.0.1',
+      binary: false,
+      options: undefined,
+      ssl: false,
+      client_encoding: '',
+      replication: undefined,
+      isDomainSocket: false,
+      application_name: undefined,
+      fallback_application_name: undefined,
+      statement_timeout: false,
+      lock_timeout: false,
+      idle_in_transaction_session_timeout: false,
+      query_timeout: false,
+      connect_timeout: 0
+    },
+    user: 'postgres',
+    database: 'postgres',
+    port: 46205,
+    host: '127.0.0.1',
+    replication: undefined,
+    _Promise: [Function: Promise],
+    _types: TypeOverrides { _types: [Object], text: {}, binary: {} },
+    _ending: true,
+    _ended: false,
+    _connecting: false,
+    _connected: true,
+    _connectionError: false,
+    _queryable: false,
+    _activeQuery: null,
+    enableChannelBinding: false,
+    connection: Connection {
+      _events: [Object: null prototype],
+      _eventsCount: 23,
+      _maxListeners: undefined,
+      stream: [Socket],
+      _keepAlive: false,
+      _keepAliveInitialDelayMillis: 0,
+      parsedStatements: {},
+      ssl: false,
+      _ending: true,
+      _emitMessage: false,
+      _connecting: true,
+      Symbol(shapeMode): false,
+      Symbol(kCapture): false
+    },
+    _queryQueue: [],
+    binary: false,
+    processID: 453904,
+    secretKey: -1228398972,
+    ssl: false,
+    _connectionTimeoutMillis: 0,
+    _connectionCallback: null,
+    release: [Function (anonymous)],
+    readyForQuery: true,
+    hasExecuted: true,
+    _poolUseCount: 2,
+    Symbol(shapeMode): false,
+    Symbol(kCapture): false
+  }
+}

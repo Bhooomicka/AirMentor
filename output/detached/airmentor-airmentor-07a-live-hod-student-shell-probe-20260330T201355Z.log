@@ -1,0 +1,22 @@
+[2026-03-30T20:13:57Z] cwd=/home/raed/projects/air-mentor-ui
+[2026-03-30T20:13:57Z] command=zsh -lc $'export AIRMENTOR_LIVE_SYSTEM_ADMIN_IDENTIFIER=sysadmin AIRMENTOR_LIVE_SYSTEM_ADMIN_PASSWORD=admin1234 PLAYWRIGHT_APP_URL=https://raed2180416.github.io/AirMentor/ PLAYWRIGHT_API_URL=https://api-production-ab72.up.railway.app/ AIRMENTOR_LIVE_STACK=1\nnode --input-type=module <<\'NODE\'\nimport assert from "node:assert/strict"\n\nconst api = process.env.PLAYWRIGHT_API_URL\nconst app = process.env.PLAYWRIGHT_APP_URL\nconst origin = new URL(app).origin\nconst checkpointId = "stage_checkpoint_654335929a345857eab259b0"\nconst studentId = "mnc_student_101"\n\nconst loginResponse = await fetch(new URL("/api/session/login", api), {\n  method: "POST",\n  headers: { origin, "content-type": "application/json" },\n  body: JSON.stringify({ identifier: "kavitha.rao", password: "1234" }),\n})\nassert.equal(loginResponse.status, 200, "HoD login should succeed")\nconst cookie = loginResponse.headers.get("set-cookie")\nassert(cookie, "HoD login should set cookie")\n\nconst sessionResponse = await fetch(new URL("/api/session", api), { headers: { origin, cookie } })\nassert.equal(sessionResponse.status, 200, "session should load after HoD login")\nconst session = await sessionResponse.json()\nconst hodGrant = session?.availableRoleGrants?.find?.(grant => grant?.roleCode === "HOD")\nassert(hodGrant?.grantId, "expected an HOD grant")\nconsole.log("hod-grant", hodGrant.grantId)\n\nconst roleResponse = await fetch(new URL("/api/session/role-context", api), {\n  method: "POST",\n  headers: { origin, cookie, "content-type": "application/json" },\n  body: JSON.stringify({ grantId: hodGrant.grantId }),\n})\nassert.equal(roleResponse.status, 200, "role-context switch to HOD should succeed")\nconsole.log("role-context-status", roleResponse.status)\n\nfor (const path of [\n  `/api/academic/student-shell/students/${encodeURIComponent(studentId)}/card?simulationStageCheckpointId=${encodeURIComponent(checkpointId)}`,\n  `/api/academic/student-shell/students/${encodeURIComponent(studentId)}/timeline?simulationStageCheckpointId=${encodeURIComponent(checkpointId)}`,\n  `/api/academic/students/${encodeURIComponent(studentId)}/risk-explorer?simulationStageCheckpointId=${encodeURIComponent(checkpointId)}`,\n]) {\n  const response = await fetch(new URL(path, api), { headers: { origin, cookie } })\n  const text = await response.text()\n  console.log("probe", response.status, path)\n  console.log(text.slice(0, 1000))\n  assert.equal(response.status, 200, `${path} should succeed for the requested checkpoint`)\n}\nconsole.log("probe-ok", JSON.stringify({ checkpointId, studentId }))\nNODE' 
+hod-grant grant_t1_hod
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: role-context switch to HOD should succeed
+
+403 !== 200
+
+    at file:///home/raed/projects/air-mentor-ui/[eval1]:30:8
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 403,
+  expected: 200,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.13.0

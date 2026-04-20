@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-04-01T21:16:55.767Z",
+  "appUrl": "http://127.0.0.1:4173",
+  "artifacts": {
+    "successScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow.png",
+    "successReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-report.json",
+    "failureScreenshot": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-failure.png",
+    "failureReport": "/home/raed/projects/air-mentor-ui/output/playwright/system-admin-live-request-flow-failure.json",
+    "prefixedSuccessScreenshot": null,
+    "prefixedSuccessReport": null,
+    "prefixedFailureScreenshot": null,
+    "prefixedFailureReport": null
+  },
+  "checks": [
+    {
+      "name": "system-admin-login",
+      "status": "passed"
+    },
+    {
+      "name": "request-list-open",
+      "status": "passed"
+    },
+    {
+      "name": "request-detail-open",
+      "status": "passed",
+      "summary": "Grant additional mentor mapping coverage"
+    },
+    {
+      "name": "request-deep-link-persists",
+      "status": "passed",
+      "url": "http://127.0.0.1:4173/#/admin/requests/request_001"
+    },
+    {
+      "name": "request-closeout",
+      "status": "passed"
+    }
+  ]
+}
