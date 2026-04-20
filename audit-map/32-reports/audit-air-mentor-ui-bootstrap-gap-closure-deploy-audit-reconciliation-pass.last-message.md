@@ -39,6 +39,12 @@
   - Caveman remained active in `full`.
   - No live verification performed in this pass.
 
+- Commit / push / remote checks:
+  - Commit: `444c078c3289c2b5fd4e928dde840bf62e1ceb71` (`test(audit): preserve gap closure truth`)
+  - Branch: `promote-proof-dashboard-origin`
+  - Push: succeeded to `origin/promote-proof-dashboard-origin`
+  - Remote workflow check after push: `gh run list --branch promote-proof-dashboard-origin --limit 20 ...` showed no new auto-triggered runs for `444c078`; only older manual deploy runs from `2026-04-12` remained visible (`Deploy to GitHub Pages` failure, `Deploy API to Railway` cancelled on SHA `84670710...`)
+
 - Next pass:
   - `ml-optimal-model-deep-tune-pass` only after stable commit/push of current non-deferred closure set.
 
