@@ -1,0 +1,179 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+target="${1:-unknown}"
+
+recommended_model="gpt-5.4-mini"
+fallback_model="gpt-5.2"
+risk_class="medium"
+task_class="structured"
+reasoning_effort="high"
+enable_web_search="0"
+supports_caveman="0"
+provider_admission_policy="native-first"
+allow_alt_providers="1"
+
+case "$target" in
+  inventory-pass|route-map-pass|role-surface-pass)
+    task_class="structured"
+    recommended_model="gpt-5.4-mini"
+    fallback_model="gpt-5.2"
+    risk_class="medium"
+    reasoning_effort="xhigh"
+    provider_admission_policy="native-first"
+    ;;
+  feature-atom-pass|dependency-pass|data-flow-pass|state-flow-pass|test-gap-pass|ux-friction-pass)
+    task_class="structured"
+    recommended_model="gpt-5.4-mini"
+    fallback_model="gpt-5.2"
+    risk_class="medium"
+    reasoning_effort="xhigh"
+    provider_admission_policy="native-first"
+    ;;
+  frontend-microinteraction-pass|backend-provenance-pass)
+    task_class="structured"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    provider_admission_policy="native-first"
+    ;;
+  workflow-automation-pass|script-behavior-pass)
+    task_class="structured"
+    recommended_model="gpt-5.4-mini"
+    fallback_model="gpt-5.2"
+    risk_class="medium"
+    reasoning_effort="xhigh"
+    provider_admission_policy="verified-alt-ok"
+    ;;
+  same-student-cross-surface-parity-pass)
+    task_class="high-stakes"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    enable_web_search="1"
+    provider_admission_policy="native-first"
+    ;;
+  claim-verification-pass|unknown-omission-pass)
+    task_class="high-stakes"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    provider_admission_policy="native-first"
+    allow_alt_providers="1"
+    ;;
+  residual-gap-closure-pass|closure-readiness-pass)
+    task_class="high-stakes"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    provider_admission_policy="native-first"
+    allow_alt_providers="1"
+    ;;
+  truth-drift-reconciliation-pass|feature-intent-integrity-pass|cross-flow-recovery-pass|fault-tolerance-degradation-pass|memory-lifecycle-cleanup-pass|ux-consistency-cohesion-pass)
+    task_class="high-stakes"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    provider_admission_policy="native-first"
+    allow_alt_providers="1"
+    ;;
+  data-flow-corpus-rerun-pass|proof-refresh-completion-pass|frontend-long-tail-pass)
+    task_class="high-stakes"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    enable_web_search="1"
+    provider_admission_policy="native-first"
+    allow_alt_providers="1"
+    ;;
+  live-credentialed-parity-pass)
+    task_class="high-stakes"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    enable_web_search="1"
+    provider_admission_policy="native-only"
+    allow_alt_providers="0"
+    ;;
+  gap-closure-deploy-audit-reconciliation-pass)
+    task_class="high-stakes"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    enable_web_search="1"
+    provider_admission_policy="native-first"
+    allow_alt_providers="1"
+    ;;
+  ml-optimal-model-deep-tune-pass)
+    task_class="high-stakes"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    enable_web_search="1"
+    provider_admission_policy="verified-alt-ok"
+    allow_alt_providers="1"
+    ;;
+  unattended-run-pass)
+    task_class="structured"
+    recommended_model="gpt-5.4-mini"
+    fallback_model="gpt-5.2"
+    risk_class="medium"
+    reasoning_effort="high"
+    provider_admission_policy="native-first"
+    ;;
+  cost-optimization-pass|prompt-self-improvement-pass)
+    task_class="bookkeeping"
+    recommended_model="gpt-5.4-mini"
+    fallback_model="gpt-5.2"
+    risk_class="low"
+    reasoning_effort="medium"
+    supports_caveman="1"
+    provider_admission_policy="verified-alt-ok"
+    ;;
+  audit-the-audit-pass)
+    task_class="high-stakes"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    provider_admission_policy="native-first"
+    allow_alt_providers="1"
+    ;;
+  ml-audit-pass|live-behavior-pass|synthesis-pass|account-routing-pass)
+    task_class="high-stakes"
+    recommended_model="gpt-5.4"
+    fallback_model="gpt-5.2"
+    risk_class="high"
+    reasoning_effort="xhigh"
+    enable_web_search="1"
+    provider_admission_policy="native-first"
+    allow_alt_providers="1"
+    ;;
+  *)
+    task_class="structured"
+    recommended_model="gpt-5.4-mini"
+    fallback_model="gpt-5.2"
+    risk_class="medium"
+    reasoning_effort="high"
+    provider_admission_policy="native-first"
+    ;;
+esac
+
+printf 'task_class=%q\n' "$task_class"
+printf 'recommended_model=%q\n' "$recommended_model"
+printf 'fallback_model=%q\n' "$fallback_model"
+printf 'risk_class=%q\n' "$risk_class"
+printf 'reasoning_effort=%q\n' "$reasoning_effort"
+printf 'enable_web_search=%q\n' "$enable_web_search"
+printf 'supports_caveman=%q\n' "$supports_caveman"
+printf 'provider_admission_policy=%q\n' "$provider_admission_policy"
+printf 'allow_alt_providers=%q\n' "$allow_alt_providers"

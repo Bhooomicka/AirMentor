@@ -1,0 +1,5 @@
+# pass\tcontext\ttask_class\tprompt_file
+# Queue sample for overnight orchestrator.
+
+gap-closure-deploy-audit-reconciliation-pass	bootstrap		audit-map/20-prompts/gap-closure-deploy-audit-reconciliation-pass.md
+ml-optimal-model-deep-tune-pass	bootstrap		audit-map/20-prompts/ml-optimal-model-deep-tune-pass.md
