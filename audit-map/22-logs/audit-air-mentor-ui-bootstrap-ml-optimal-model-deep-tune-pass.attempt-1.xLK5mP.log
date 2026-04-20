@@ -211,4 +211,4 @@ slot=google-main
 <bash_metadata>
 bash tool truncated output as it exceeded 30000 char limit
 </bash_metadata>
-[94m⠇ Working...[0m                                                  
+[94m⠇ Working...[0m                                                  [2026-04-20T02:26:30Z] supervisor=idle-timeout provider=google slot=google-main model=gemini-3.1-pro-preview pid=2104593 idle_seconds=1200

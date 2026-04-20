@@ -345,6 +345,16 @@ if [ -n "$require_provider" ]; then
         eval "$slot_selection"
         route_state="ready"
         route_reason="Verified Arctic slot is ready for provider '$require_provider'."
+      elif [ "$pass_name" = "ml-optimal-model-deep-tune-pass" ] && [ "$allow_alt_providers" = "1" ] && [ -n "$exclude_slot" ]; then
+        if slot_selection="$(pick_best_alternate_slot 2>/dev/null)"; then
+          eval "$slot_selection"
+          route_state="ready"
+          route_reason="No execution-verified slot is ready for provider '$require_provider' after excluding slot '$exclude_slot'; using the highest-ranked verified alternate route."
+        else
+          route_state="wait"
+          selected_provider="$require_provider"
+          route_reason="No execution-verified Arctic slot is ready for provider '$require_provider', and no verified alternate provider is currently ready."
+        fi
       else
         route_state="wait"
         selected_provider="$require_provider"

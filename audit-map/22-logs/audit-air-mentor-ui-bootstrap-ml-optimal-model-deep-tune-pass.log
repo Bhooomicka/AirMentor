@@ -214,4 +214,5 @@ slot=google-main
 <bash_metadata>
 bash tool truncated output as it exceeded 30000 char limit
 </bash_metadata>
-[94m⠇ Working...[0m                                                  
+[94m⠇ Working...[0m                                                  [2026-04-20T02:26:30Z] supervisor=idle-timeout provider=google slot=google-main model=gemini-3.1-pro-preview pid=2104593 idle_seconds=1200
+[2026-04-20T02:26:33Z] execution-failure-class=stalled-no-progress provider=google slot=google-main model=gemini-3.1-pro-preview attempt=1 log=/home/raed/projects/air-mentor-ui/audit-map/22-logs/audit-air-mentor-ui-bootstrap-ml-optimal-model-deep-tune-pass.attempt-1.xLK5mP.log

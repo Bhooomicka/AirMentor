@@ -137,3 +137,4 @@
 | 2026-04-20T01:16:39Z | native-codex:native-codex-session | antigravity:antigravity-02 | Pass 'ml-optimal-model-deep-tune-pass' started on a verified alternate route. Selected alternate route. | Started |
 | 2026-04-20T01:17:06Z | native-codex:native-codex-session | google:google-main | Pass 'ml-optimal-model-deep-tune-pass' started on a verified alternate route. Selected alternate route. | Started |
 | 2026-04-20T02:05:59Z | native-codex:native-codex-session | google:google-main | Pass 'ml-optimal-model-deep-tune-pass' started on a verified alternate route. Selected alternate route. | Started |
+| 2026-04-20T02:26:33Z | google:google-main | wait | Runtime failure class=stalled-no-progress No execution-verified Arctic slot is ready for provider 'google'. | Waiting |
