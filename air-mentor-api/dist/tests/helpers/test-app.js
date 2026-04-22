@@ -96,6 +96,7 @@ export async function createTestApp(options) {
             db,
             pool,
             clock: () => TEST_NOW,
+            emailTransport: options?.emailTransport,
         });
         await app.ready();
         const rawInject = app.inject.bind(app);

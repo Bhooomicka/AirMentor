@@ -36,6 +36,8 @@ export function AcademicWorkspaceRouteSurface({
 }: AcademicWorkspaceRouteSurfaceProps) {
   const role: Role = workspace.role
   const page = workspace.page as string
+  const queueHistoryTasks = workspace.queueHistoryTasks ?? workspace.roleTasks
+  const staticEditableOverride = workspace.liveAcademicMode === false ? true : undefined
 
   return (
     <AcademicWorkspaceContentShell
@@ -112,6 +114,7 @@ export function AcademicWorkspaceRouteSurface({
         <LazyCalendarTimetablePage
           currentTeacher={workspace.currentTeacher}
           activeRole={role}
+          editableOverride={staticEditableOverride}
           allowedRoles={workspace.allowedRoles}
           facultyOfferings={workspace.calendarOfferings}
           mergedTasks={workspace.mergedCalendarTasks}
@@ -172,7 +175,7 @@ export function AcademicWorkspaceRouteSurface({
         />
       )}
       {role === 'Course Leader' && page === 'queue-history' && (
-        <QueueHistoryPage role={role} tasks={workspace.roleTasks} resolvedTaskIds={workspace.resolvedTasks} proofProfile={workspace.facultyProfile} onBack={workspace.handleNavigateBack} onOpenTaskStudent={workspace.handleOpenTaskStudent} onOpenUnlockReview={workspace.handleOpenUnlockReview} onRestoreTask={workspace.handleRestoreTask} />
+        <QueueHistoryPage role={role} tasks={queueHistoryTasks} resolvedTaskIds={workspace.resolvedTasks} proofProfile={workspace.facultyProfile} onBack={workspace.handleNavigateBack} onOpenTaskStudent={workspace.handleOpenTaskStudent} onOpenUnlockReview={workspace.handleOpenUnlockReview} onRestoreTask={workspace.handleRestoreTask} />
       )}
 
       {role === 'Mentor' && page === 'mentees' && (
@@ -198,7 +201,7 @@ export function AcademicWorkspaceRouteSurface({
       {role === 'Mentor' && page === 'queue-history' && (
         <QueueHistoryPage
           role={role}
-          tasks={workspace.roleTasks}
+          tasks={queueHistoryTasks}
           resolvedTaskIds={workspace.resolvedTasks}
           proofProfile={workspace.facultyProfile}
           onBack={workspace.handleNavigateBack}
@@ -213,6 +216,7 @@ export function AcademicWorkspaceRouteSurface({
         <LazyCalendarTimetablePage
           currentTeacher={workspace.currentTeacher}
           activeRole={role}
+          editableOverride={staticEditableOverride}
           allowedRoles={workspace.allowedRoles}
           facultyOfferings={workspace.calendarOfferings}
           mergedTasks={workspace.mergedCalendarTasks}
@@ -278,7 +282,7 @@ export function AcademicWorkspaceRouteSurface({
       {role === 'HoD' && page === 'queue-history' && (
         <QueueHistoryPage
           role={role}
-          tasks={workspace.roleTasks}
+          tasks={queueHistoryTasks}
           resolvedTaskIds={workspace.resolvedTasks}
           proofProfile={workspace.facultyProfile}
           onBack={workspace.handleNavigateBack}
@@ -293,6 +297,7 @@ export function AcademicWorkspaceRouteSurface({
         <LazyCalendarTimetablePage
           currentTeacher={workspace.currentTeacher}
           activeRole={role}
+          editableOverride={staticEditableOverride}
           allowedRoles={workspace.allowedRoles}
           facultyOfferings={workspace.calendarOfferings}
           mergedTasks={workspace.mergedCalendarTasks}

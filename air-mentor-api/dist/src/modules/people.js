@@ -5,8 +5,11 @@ import { createId } from '../lib/ids.js';
 import { notFound } from '../lib/http-errors.js';
 import { hashPassword } from '../lib/passwords.js';
 import { buildPasswordSetupLink, deriveFacultyCredentialStatus, issuePasswordSetupToken } from '../lib/password-setup.js';
+import { createNoopEmailTransport } from '../lib/email-transport.js';
+import { EmailRateLimiter } from '../lib/email-rate-limiter.js';
 import { resolveBatchPolicy } from './admin-structure.js';
 import { emitAuditEvent, expectVersion, parseOrThrow, requireRole } from './support.js';
+const adminPasswordSetupRateLimiter = new EmailRateLimiter(10 * 60 * 1000, 5);
 const facultyCreateSchema = z.object({
     username: z.string().min(1),
     email: z.string().email(),
@@ -737,13 +740,31 @@ export async function registerPeopleRoutes(app, context) {
                 previewEnabled: context.config.passwordSetupPreviewEnabled,
             },
         });
+        const setupLink = buildPasswordSetupLink(context.config, issued.rawToken);
+        const transport = context.emailTransport ?? createNoopEmailTransport();
+        const rateLimitResult = adminPasswordSetupRateLimiter.check(user.email, Date.now());
+        let emailDelivered = false;
+        if (rateLimitResult.allowed) {
+            const deliveryResult = await transport.sendPasswordSetupEmail({
+                to: user.email,
+                recipientName: profile.displayName ?? user.username,
+                setupLink,
+                purpose,
+                expiresAt: issued.expiresAt,
+                fromAddress: context.config.emailFromAddress,
+                fromName: context.config.emailFromName,
+            });
+            emailDelivered = deliveryResult.delivered;
+        }
         return {
             facultyId: profile.facultyId,
             purpose,
             issuedToEmail: user.email,
             expiresAt: issued.expiresAt,
             previewEnabled: context.config.passwordSetupPreviewEnabled,
-            setupUrl: context.config.passwordSetupPreviewEnabled ? buildPasswordSetupLink(context.config, issued.rawToken) : null,
+            setupUrl: context.config.passwordSetupPreviewEnabled ? setupLink : null,
+            emailDelivered,
+            rateLimited: !rateLimitResult.allowed,
         };
     });
     app.post('/api/admin/faculty/:facultyId/appointments', {

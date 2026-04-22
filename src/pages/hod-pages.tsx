@@ -124,10 +124,38 @@ export function HodView({
   const [showActionNeededOnly, setShowActionNeededOnly] = useState(true)
   const [overviewRiskFilter, setOverviewRiskFilter] = useState<'all' | 'high' | 'medium'>('all')
   const [facultyFilter, setFacultyFilter] = useState<'all' | 'overloaded'>('all')
+  const [acknowledgedStudentIds, setAcknowledgedStudentIds] = useState<Record<string, number>>({})
+
+  const effectiveStudentWatchRows = useMemo(() => studentWatchRows.map(row => {
+    if (!acknowledgedStudentIds[row.studentId]) return row
+    const queueState = resolveGovernedQueueState(row.currentReassessmentStatus)
+    if (queueState && queueState !== 'open') return row
+    return {
+      ...row,
+      currentQueueState: 'watch',
+      currentReassessmentStatus: 'watching',
+    }
+  }), [acknowledgedStudentIds, studentWatchRows])
+
+  const effectiveReassessmentRows = useMemo(() => reassessmentRows.map(row => {
+    const acknowledgedAt = acknowledgedStudentIds[row.studentId]
+    if (!acknowledgedAt) return row
+    const normalizedStatus = row.status.trim().toLowerCase()
+    return {
+      ...row,
+      status: normalizedStatus === 'open' || normalizedStatus === 'opened' ? 'acknowledged' : row.status,
+      acknowledgement: row.acknowledgement ?? {
+        acknowledgedByFacultyId: row.assignedFacultyId ?? null,
+        status: 'Acknowledged',
+        note: 'Acknowledged from HoD watchlist.',
+        createdAt: new Date(acknowledgedAt).toISOString(),
+      },
+    }
+  }), [acknowledgedStudentIds, reassessmentRows])
 
   const selectedStudent = useMemo(
-    () => studentWatchRows.find(row => row.studentId === selectedStudentId) ?? null,
-    [selectedStudentId, studentWatchRows],
+    () => effectiveStudentWatchRows.find(row => row.studentId === selectedStudentId) ?? null,
+    [effectiveStudentWatchRows, selectedStudentId],
   )
   const selectedCourse = useMemo(
     () => courseRollups.find(row => row.courseCode === selectedCourseCode) ?? null,
@@ -140,19 +168,24 @@ export function HodView({
 
   const selectedCourseStudents = useMemo(() => {
     if (!selectedCourse) return []
-    return studentWatchRows.filter(row =>
+    return effectiveStudentWatchRows.filter(row =>
       row.courseSnapshots.some(snapshot => snapshot.courseCode === selectedCourse.courseCode),
     )
-  }, [selectedCourse, studentWatchRows])
+  }, [effectiveStudentWatchRows, selectedCourse])
 
   const selectedFacultyReassessments = useMemo(() => {
     if (!selectedFaculty) return []
-    return reassessmentRows.filter(row => row.assignedToRole.toLowerCase() === 'hod' || selectedFaculty.permissions.includes(row.assignedToRole))
-  }, [reassessmentRows, selectedFaculty])
+    return effectiveReassessmentRows.filter(row => row.assignedToRole.toLowerCase() === 'hod' || selectedFaculty.permissions.includes(row.assignedToRole))
+  }, [effectiveReassessmentRows, selectedFaculty])
   const checkpointContext = summary?.activeRunContext?.checkpointContext ?? null
+  const scopeDepartmentNames = useMemo(() => Array.from(new Set(summary?.scope.departmentNames ?? [])), [summary])
+  const scopeBranchNames = useMemo(() => {
+    const deptNames = new Set(scopeDepartmentNames.map(name => name.toLowerCase()))
+    return Array.from(new Set(summary?.scope.branchNames ?? [])).filter(name => !deptNames.has(name.toLowerCase()))
+  }, [scopeDepartmentNames, summary])
 
   const filteredStudents = useMemo(() => {
-    let rows = studentWatchRows
+    let rows = effectiveStudentWatchRows
     if (showActionNeededOnly) {
       rows = rows.filter(row => resolveGovernedQueueState(row.currentReassessmentStatus) === 'open')
     }
@@ -162,7 +195,7 @@ export function HodView({
       rows = rows.filter(row => toRiskBand(row.currentRiskBand) === 'Medium')
     }
     return rows
-  }, [overviewRiskFilter, showActionNeededOnly, studentWatchRows])
+  }, [effectiveStudentWatchRows, overviewRiskFilter, showActionNeededOnly])
 
   const visibleFacultyRollups = useMemo(() => (
     facultyFilter === 'overloaded'
@@ -219,8 +252,8 @@ export function HodView({
               <Chip color={T.success}>{activeRunContext.branchName ?? 'Branch scope pending'}</Chip>
               <Chip color={T.warning}>{activeRunContext.status}</Chip>
               {checkpointContext ? <Chip color={T.orange}>{`Sem ${checkpointContext.semesterNumber} · ${checkpointContext.stageLabel}`}</Chip> : null}
-              {summary.scope.departmentNames.map(name => <Chip key={name} color={T.muted}>{name}</Chip>)}
-              {summary.scope.branchNames.map(name => <Chip key={name} color={T.dim}>{name}</Chip>)}
+              {scopeDepartmentNames.map(name => <Chip key={`dept-${name}`} color={T.muted}>{name}</Chip>)}
+              {scopeBranchNames.map(name => <Chip key={`branch-${name}`} color={T.dim}>{name}</Chip>)}
             </>
           )}
           notices={(
@@ -572,7 +605,16 @@ export function HodView({
                         <TD>
                           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                             {actionNeeded ? (
-                              <Btn size="sm" variant="ghost">Acknowledge</Btn>
+                              <Btn
+                                size="sm"
+                                variant="ghost"
+                                onClick={() => setAcknowledgedStudentIds(prev => ({
+                                  ...prev,
+                                  [row.studentId]: prev[row.studentId] ?? Date.now(),
+                                }))}
+                              >
+                                Acknowledge
+                              </Btn>
                             ) : null}
                             <Btn size="sm" variant="ghost" onClick={() => setSelectedStudentId(row.studentId)}>Inspect</Btn>
                             <Btn
@@ -726,7 +768,7 @@ export function HodView({
                 </tr>
               </thead>
               <tbody>
-                {reassessmentRows.map(row => (
+                {effectiveReassessmentRows.map(row => (
                   <tr key={row.reassessmentEventId}>
                     <TD>
                       <div style={{ ...mono, fontSize: 11, color: T.text }}>{row.studentName}</div>

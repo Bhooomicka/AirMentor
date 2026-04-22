@@ -270,9 +270,9 @@ export function randFloat(): number {
 
 // ───── Professor ─────
 export const PROFESSOR: Professor = {
-  name: 'Dr. Kavitha Rao', id: 'FET-CSE-2018-047',
+  name: 'Dr. Narendra Babu', id: 'FET-CSE-2018-047',
   dept: 'Computer Science & Engineering', role: 'Associate Professor',
-  initials: 'KR', email: 'kavitha.rao@msruas.ac.in',
+  initials: 'NB', email: 'narendra.babu@msruas.ac.in',
 }
 
 // ───── Year Stages (per-year, not per-course) ─────
@@ -687,7 +687,7 @@ export interface FacultyRecordDir {
 }
 
 export const FACULTY_DIRECTORY: FacultyRecordDir[] = [
-  { id: 't1', name: 'Dr. Kavitha Rao', initials: 'KR', email: 'kavitha.rao@msruas.ac.in', dept: 'CSE', roleTitle: 'Associate Professor', roles: ['Course Leader', 'Mentor', 'HoD'], subjectRuns: ['run-CS401', 'run-CS403'], sections: ['c3-A', 'c3-B', 'c4-C'], mentees: ['m1', 'm2'] },
+  { id: 't1', name: 'Dr. Narendra Babu', initials: 'NB', email: 'narendra.babu@msruas.ac.in', dept: 'CSE', roleTitle: 'Associate Professor', roles: ['Course Leader', 'Mentor', 'HoD'], subjectRuns: ['run-CS401', 'run-CS403'], sections: ['c3-A', 'c3-B', 'c4-C'], mentees: ['m1', 'm2'] },
   { id: 't2', name: 'Dr. Arvind Kumar', initials: 'AK', email: 'arvind.k@msruas.ac.in', dept: 'CSE', roleTitle: 'Professor', roles: ['Course Leader'], subjectRuns: ['run-CS601'], sections: ['c6-A'], mentees: [] },
   { id: 't3', name: 'Prof. Sneha Nair', initials: 'SN', email: 'sneha.n@msruas.ac.in', dept: 'CSE', roleTitle: 'Assistant Professor', roles: ['Mentor'], subjectRuns: [], sections: ['c1-A'], mentees: ['m3', 'm4'] },
   { id: 't4', name: 'Dr. Rajesh Bhat', initials: 'RB', email: 'rajesh.b@msruas.ac.in', dept: 'CSE', roleTitle: 'Associate Professor', roles: ['Course Leader', 'Mentor'], subjectRuns: ['run-CS702'], sections: ['c8-A'], mentees: ['m5', 'm6'] },

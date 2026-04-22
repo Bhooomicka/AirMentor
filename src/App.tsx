@@ -115,6 +115,7 @@ import type {
   ApiAcademicLoginFaculty,
   ApiPasswordSetupInspectResponse,
   ApiPasswordSetupRequestResponse,
+  ApiRoleCode,
   ApiSessionResponse,
   ApiStudentAgentCard,
   ApiStudentAgentMessage,
@@ -126,6 +127,8 @@ import { ApiFallbackIndicator, BackendOfflineIndicator, useBackendHealthMonitor 
 import { clearProofPlaybackSelection, PROOF_PLAYBACK_SELECTION_STORAGE_KEY, readProofPlaybackSelection } from './proof-playback'
 import { collectFrontendStartupDiagnostics } from './startup-diagnostics'
 import { emitClientOperationalEvent, normalizeClientTelemetryError } from './telemetry'
+import { buildStaticDemoAcademicBootstrap, createStaticDemoRepositories } from './static-demo-data'
+import { StaticDemoAdminApp } from './static-demo-admin'
 import './App.css'
 
 export { FacultyProfilePage } from './academic-faculty-profile-page'
@@ -134,6 +137,17 @@ const subtleDividerStyle = {
   height: 1,
   background: `linear-gradient(90deg, transparent, ${withAlpha(T.border2, '26')} 14%, ${withAlpha(T.border2, '62')} 50%, ${withAlpha(T.border2, '26')} 86%, transparent)`,
   opacity: 0.9,
+}
+
+function isQueueVisibleTask(task: SharedTask, resolvedTaskIds: Record<string, number>, todayISO = toTodayISO()) {
+  if (isTaskActiveForQueue(task, resolvedTaskIds, todayISO)) return true
+  if (resolvedTaskIds[task.id]) return false
+  if (task.dismissal) return false
+  if (task.scheduleMeta?.mode !== 'scheduled') return false
+  if (task.scheduleMeta.status === 'ended' || task.scheduleMeta.status === 'paused') return false
+  const completedCount = task.scheduleMeta.completedDatesISO?.length ?? 0
+  const skippedCount = task.scheduleMeta.skippedDatesISO?.length ?? 0
+  return completedCount === 0 && skippedCount === 0
 }
 
 type TaskPlacementDraft = {
@@ -196,6 +210,22 @@ type AcademicWorkspaceProjection = {
   session: ApiSessionResponse
   bootstrap: ApiAcademicBootstrap
   revision: number
+}
+
+type StaticDemoContext = {
+  repositories: AirMentorRepositories
+  bootstrap: ApiAcademicBootstrap
+  initialTeacherId: string
+  initialRole: Role
+}
+
+type StaticProofStudentContext = {
+  snapshot: ApiAcademicBootstrap
+  offering: Offering
+  student: Student
+  queueTasks: SharedTask[]
+  viewerRole: Role
+  viewerFacultyId: string | null
 }
 
 const CLASS_SNAP_THRESHOLD_MINUTES = 14
@@ -877,7 +907,7 @@ export function ActionQueue({ role, tasks, resolvedTaskIds, onResolveTask, onUnd
   const todayISO = toTodayISO()
   const [showQueueHelp, setShowQueueHelp] = useState(false)
   const active = tasks
-    .filter(t => isTaskActiveForQueue(t, resolvedTaskIds, todayISO))
+    .filter(t => isQueueVisibleTask(t, resolvedTaskIds, todayISO))
     .sort((a, b) => (b.updatedAt ?? b.createdAt) - (a.updatedAt ?? a.createdAt))
   const done = tasks.filter(t => !!resolvedTaskIds[t.id]).sort((a, b) => (resolvedTaskIds[b.id] ?? 0) - (resolvedTaskIds[a.id] ?? 0))
   const buttonStyle = (color: string, variant: 'ghost' | 'filled' = 'ghost', disabled = false) => ({
@@ -1190,6 +1220,7 @@ function OperationalWorkspace({
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => window.innerWidth < 1100)
   const [showActionQueue, setShowActionQueue] = useState(() => window.innerWidth >= 1100)
   const actionQueueRef = useRef<HTMLDivElement | null>(null)
+  const staticDemoSessionStudentBySessionIdRef = useRef<Record<string, string>>({})
   const [uploadOffering, setUploadOffering] = useState<Offering | null>(null)
   const [uploadKind, setUploadKind] = useState<EntryKind>('tt1')
   const [entryOfferingId, setEntryOfferingId] = useState<string>(defaultOffering?.offId ?? '')
@@ -1255,8 +1286,15 @@ function OperationalWorkspace({
     }
   }, [currentTeacher?.facultyId, loadFacultyProfile])
   useEffect(() => {
-    if (role !== 'HoD' || !currentTeacher?.facultyId || !loadHodProofAnalytics) {
+    if (role !== 'HoD' || !currentTeacher?.facultyId) {
       setHodProofAnalytics(null)
+      setHodProofError('')
+      setHodProofLoading(false)
+      return
+    }
+
+    if (!loadHodProofAnalytics) {
+      setHodProofAnalytics(buildStaticDemoHodProofBundle(academicBootstrap))
       setHodProofError('')
       setHodProofLoading(false)
       return
@@ -1282,18 +1320,19 @@ function OperationalWorkspace({
     return () => {
       cancelled = true
     }
-  }, [currentTeacher?.facultyId, loadHodProofAnalytics, role])
+  }, [academicBootstrap, currentTeacher?.facultyId, loadHodProofAnalytics, role])
   useEffect(() => {
+    const syncedInitialRole = onRoleChange ? initialRole : role
     const nextState = resolveRoleSyncState({
       allowedRoles,
-      initialRole,
+      initialRole: syncedInitialRole,
       role,
       page,
     })
     if (!nextState) return
     if (nextState.role !== role) setRole(nextState.role)
     if (nextState.page !== page) setPage(nextState.page as PageId)
-  }, [allowedRoles, initialRole, page, role])
+  }, [allowedRoles, initialRole, onRoleChange, page, role])
   useEffect(() => {
     if (role === 'Course Leader' && page === 'students') {
       setPage('dashboard')
@@ -1509,6 +1548,7 @@ function OperationalWorkspace({
       return calendarMenteeUsns.has(meeting.studentUsn)
     })
   }, [academicMeetings, calendarMenteeUsns, calendarOfferingIds, currentTeacher, role])
+  const canEditCalendar = !liveAcademicMode || !!currentTeacher?.allowedRoles.includes('Course Leader')
 
   const getFallbackBlueprintSet = useCallback((offeringId: string) => {
     const backendBlueprints = academicBootstrap?.questionPapersByOffering?.[offeringId]
@@ -1539,8 +1579,12 @@ function OperationalWorkspace({
     const mentorScopedIds = new Set([...Array.from(supervisedMenteeIds), ...Array.from(supervisedMenteeIds).map(id => `mentee-${id}`)])
     return base.filter(t => mentorScopedIds.has(t.studentId) || supervisedMenteeUsns.has(t.studentUsn))
   }, [allTasksList, role, supervisedOfferingIds, supervisedMenteeIds, supervisedMenteeUsns])
+  const queueHistoryTasks = useMemo(() => {
+    if (liveAcademicMode || roleTasks.length > 0 || !currentTeacher) return roleTasks
+    return allTasksList.filter(task => currentTeacher.allowedRoles.includes(task.assignedTo))
+  }, [allTasksList, currentTeacher, liveAcademicMode, roleTasks])
 
-  const pendingActionCount = roleTasks.filter(task => isTaskActiveForQueue(task, resolvedTasks, toTodayISO())).length
+  const pendingActionCount = roleTasks.filter(task => isQueueVisibleTask(task, resolvedTasks, toTodayISO())).length
   const layoutMode: LayoutMode = !sidebarCollapsed && showActionQueue
     ? 'three-column'
     : (!sidebarCollapsed || showActionQueue ? 'split' : 'focus')
@@ -1922,19 +1966,27 @@ function OperationalWorkspace({
     setPage('student-history')
   }, [studentHistoryByUsn])
   const handleOpenStudentShell = useCallback((studentId: string, backPage?: PageId) => {
+    if (!loadStudentAgentCard && liveAcademicMode) {
+      handleOpenStudentProfile(studentId)
+      return
+    }
     setStudentShellStudentId(studentId)
     setHistoryBackPage(backPage ?? page)
     setSelectedStudent(null)
     setSelectedOffering(null)
     setPage('student-shell')
-  }, [page])
+  }, [handleOpenStudentProfile, liveAcademicMode, loadStudentAgentCard, page])
   const handleOpenRiskExplorer = useCallback((studentId: string, backPage?: PageId) => {
+    if (!loadStudentRiskExplorer && liveAcademicMode) {
+      handleOpenStudentProfile(studentId)
+      return
+    }
     setStudentShellStudentId(studentId)
     setHistoryBackPage(backPage ?? page)
     setSelectedStudent(null)
     setSelectedOffering(null)
     setPage('risk-explorer')
-  }, [page])
+  }, [handleOpenStudentProfile, liveAcademicMode, loadStudentRiskExplorer, page])
   const handleOpenCalendar = useCallback(() => {
     setPage('calendar')
     setOffering(null)
@@ -2440,7 +2492,7 @@ function OperationalWorkspace({
   }, [commitStudentPatch])
 
   const handleScheduleTask = useCallback((taskId: string, input: TaskPlacementDraft) => {
-    if (!currentTeacher || !currentFacultyTimetable || !currentTeacher.allowedRoles.includes('Course Leader')) return
+    if (!currentTeacher || !currentFacultyTimetable || !canEditCalendar) return
     const task = allTasksList.find(item => item.id === taskId)
     if (!task) return
     const previousPlacement = taskPlacements[taskId]
@@ -2486,7 +2538,7 @@ function OperationalWorkspace({
         offeringId: task.offeringId,
       },
     }))
-  }, [allTasksList, appendCalendarAudit, currentFacultyTimetable, currentTeacher, currentTeacherId, repositories, role, taskPlacements])
+  }, [allTasksList, appendCalendarAudit, canEditCalendar, currentFacultyTimetable, currentTeacher, currentTeacherId, repositories, role, taskPlacements])
 
   const resolveCommittedClassRange = useCallback((blockId: string, input: { day: Weekday; dateISO?: string; startMinutes: number; endMinutes: number }) => {
     if (!currentFacultyTimetable) return null
@@ -2532,7 +2584,7 @@ function OperationalWorkspace({
   }, [currentFacultyTimetable])
 
   const applyClassBlockTiming = useCallback((blockId: string, input: { day: Weekday; dateISO?: string; startMinutes: number; endMinutes: number }, actionKind: 'class-moved' | 'class-resized') => {
-    if (!currentTeacher || !currentFacultyTimetable || !currentTeacher.allowedRoles.includes('Course Leader')) return
+    if (!currentTeacher || !currentFacultyTimetable || !canEditCalendar) return
     const block = currentFacultyTimetable.classBlocks.find(item => item.id === blockId)
     if (!block) return
     const resolved = resolveCommittedClassRange(blockId, input)
@@ -2586,7 +2638,7 @@ function OperationalWorkspace({
         after: { day: item.day, dateISO: item.dateISO, startMinutes: nextRange.startMinutes, endMinutes: nextRange.endMinutes, offeringId: item.offeringId },
       }))
     })
-  }, [appendCalendarAudit, currentFacultyTimetable, currentTeacher, currentTeacherId, resolveCommittedClassRange, role])
+  }, [appendCalendarAudit, canEditCalendar, currentFacultyTimetable, currentTeacher, currentTeacherId, resolveCommittedClassRange, role])
 
   const handleMoveClassBlock = useCallback((blockId: string, input: { day: Weekday; dateISO?: string; startMinutes: number; endMinutes: number }) => {
     applyClassBlockTiming(blockId, input, 'class-moved')
@@ -2603,7 +2655,7 @@ function OperationalWorkspace({
   }, [applyClassBlockTiming])
 
   const handleCreateExtraClass = useCallback((input: { offeringId: string; dateISO: string; startMinutes: number; endMinutes: number }) => {
-    if (!currentTeacher || !currentFacultyTimetable || !currentTeacher.allowedRoles.includes('Course Leader')) return
+    if (!currentTeacher || !currentFacultyTimetable || !canEditCalendar) return
     const offering = allOfferings.find(item => item.offId === input.offeringId)
     const normalizedDateISO = normalizeDateISO(input.dateISO)
     const day = normalizedDateISO ? getWeekdayForDateISO(normalizedDateISO) : null
@@ -2699,7 +2751,7 @@ function OperationalWorkspace({
         after: { day: item.day, dateISO: item.dateISO, startMinutes: nextRange.startMinutes, endMinutes: nextRange.endMinutes, offeringId: item.offeringId },
       }))
     })
-  }, [allOfferings, appendCalendarAudit, currentFacultyTimetable, currentTeacher, currentTeacherId, role])
+  }, [allOfferings, appendCalendarAudit, canEditCalendar, currentFacultyTimetable, currentTeacher, currentTeacherId, role])
 
   const handleOpenCourseFromCalendar = useCallback((offeringId: string) => {
     if (role === 'Mentor') return
@@ -2713,7 +2765,7 @@ function OperationalWorkspace({
   }, [])
 
   const handleUpdateTimetableBounds = useCallback((input: { dayStartMinutes: number; dayEndMinutes: number }) => {
-    if (!currentTeacher || !currentFacultyTimetable || !currentTeacher.allowedRoles.includes('Course Leader')) return
+    if (!currentTeacher || !currentFacultyTimetable || !canEditCalendar) return
     const normalized = normalizeTimedRange(input.dayStartMinutes, input.dayEndMinutes, 0, 24 * 60, 120)
     setTimetableByFacultyId(prev => ({
       ...prev,
@@ -2728,7 +2780,7 @@ function OperationalWorkspace({
         })),
       },
     }))
-  }, [currentFacultyTimetable, currentTeacher])
+  }, [canEditCalendar, currentFacultyTimetable, currentTeacher])
 
   const handleOpenTaskComposer = useCallback((input?: { offeringId?: string; studentId?: string; taskType?: TaskType; dueDateISO?: string; availableOfferingIds?: string[]; placement?: TaskPlacementDraft }) => {
     const scopedFallbackOffering = input?.availableOfferingIds?.[0] ? (allOfferings.find(item => item.offId === input.availableOfferingIds?.[0]) ?? null) : null
@@ -3223,6 +3275,89 @@ function OperationalWorkspace({
     }
   }, [allMentees, allOfferings, assignedMentees, assignedOfferings, getStudentsPatched, handleOpenStudent, page, role, studentHistoryByUsn])
 
+  const resolveStaticProofStudentContext = useCallback((studentId: string): StaticProofStudentContext | null => {
+    const normalizedStudentId = normalizeStaticDemoStudentId(studentId)
+    const preferredOfferings = role === 'HoD'
+      ? allOfferings
+      : (assignedOfferings.length > 0 ? assignedOfferings : allOfferings)
+    const preferredOfferingIds = new Set(preferredOfferings.map(item => item.offId))
+    const orderedOfferings = [
+      ...preferredOfferings,
+      ...allOfferings.filter(item => !preferredOfferingIds.has(item.offId)),
+    ]
+
+    for (const candidateOffering of orderedOfferings) {
+      const matchedStudent = getStudentsPatched(candidateOffering).find(candidate => {
+        const candidateId = normalizeStaticDemoStudentId(candidate.id)
+        return candidate.id === studentId || candidateId === normalizedStudentId
+      })
+      if (!matchedStudent) continue
+      const queueTasks = allTasksList.filter(task => (
+        task.studentId === matchedStudent.id
+        || normalizeStaticDemoStudentId(task.studentId) === normalizedStudentId
+        || task.studentUsn === matchedStudent.usn
+      ))
+      return {
+        snapshot: academicBootstrap,
+        offering: candidateOffering,
+        student: matchedStudent,
+        queueTasks,
+        viewerRole: role,
+        viewerFacultyId: currentTeacherId,
+      }
+    }
+
+    return null
+  }, [academicBootstrap, allOfferings, allTasksList, assignedOfferings, currentTeacherId, getStudentsPatched, role])
+
+  const loadStudentAgentCardRuntime = useCallback(async (studentId: string) => {
+    if (loadStudentAgentCard) return loadStudentAgentCard(studentId)
+    if (liveAcademicMode) throw new Error('Student shell is unavailable because the academic backend is unavailable.')
+    const context = resolveStaticProofStudentContext(studentId)
+    if (!context) throw new Error('Student shell data is unavailable for this student in local workspace mode.')
+    return buildStaticDemoStudentAgentCard(context)
+  }, [liveAcademicMode, loadStudentAgentCard, resolveStaticProofStudentContext])
+
+  const loadStudentAgentTimelineRuntime = useCallback(async (studentId: string) => {
+    if (loadStudentAgentTimeline) return loadStudentAgentTimeline(studentId)
+    if (liveAcademicMode) throw new Error('Student timeline is unavailable because the academic backend is unavailable.')
+    const context = resolveStaticProofStudentContext(studentId)
+    if (!context) throw new Error('Student timeline is unavailable for this student in local workspace mode.')
+    return buildStaticDemoStudentAgentTimeline(buildStaticDemoStudentAgentCard(context))
+  }, [liveAcademicMode, loadStudentAgentTimeline, resolveStaticProofStudentContext])
+
+  const startStudentAgentSessionRuntime = useCallback(async (studentId: string) => {
+    if (startStudentAgentSession) return startStudentAgentSession(studentId)
+    if (liveAcademicMode) throw new Error('Student shell chat is unavailable because the academic backend is unavailable.')
+    const context = resolveStaticProofStudentContext(studentId)
+    if (!context) throw new Error('Student shell session could not start for this student in local workspace mode.')
+    const card = buildStaticDemoStudentAgentCard(context)
+    const session = buildStaticDemoStudentAgentSession(context, card)
+    staticDemoSessionStudentBySessionIdRef.current[session.studentAgentSessionId] = normalizeStaticDemoStudentId(studentId)
+    return session
+  }, [liveAcademicMode, resolveStaticProofStudentContext, startStudentAgentSession])
+
+  const sendStudentAgentMessageRuntime = useCallback(async (sessionId: string, payload: { prompt: string }) => {
+    if (sendStudentAgentMessage) return sendStudentAgentMessage(sessionId, payload)
+    if (liveAcademicMode) throw new Error('Student shell chat is unavailable because the academic backend is unavailable.')
+    const mappedStudentId = staticDemoSessionStudentBySessionIdRef.current[sessionId]
+    if (!mappedStudentId) throw new Error('Session expired. Start a new session and retry your prompt.')
+    const context = resolveStaticProofStudentContext(mappedStudentId)
+    if (!context) throw new Error('Could not resolve student context for this session.')
+    return {
+      items: buildStaticDemoStudentAgentReply(buildStaticDemoStudentAgentCard(context), payload.prompt),
+    }
+  }, [liveAcademicMode, resolveStaticProofStudentContext, sendStudentAgentMessage])
+
+  const loadStudentRiskExplorerRuntime = useCallback(async (studentId: string) => {
+    if (loadStudentRiskExplorer) return loadStudentRiskExplorer(studentId)
+    if (liveAcademicMode) throw new Error('Risk explorer is unavailable because the academic backend is unavailable.')
+    const context = resolveStaticProofStudentContext(studentId)
+    if (!context) throw new Error('Risk explorer data is unavailable for this student in local workspace mode.')
+    const card = buildStaticDemoStudentAgentCard(context)
+    return buildStaticDemoStudentRiskExplorer(context, card)
+  }, [liveAcademicMode, loadStudentRiskExplorer, resolveStaticProofStudentContext])
+
   const pendingNoteMeta = useMemo(() => {
     if (!pendingNoteAction) return null
     if (pendingNoteAction.type === 'unlock-request') {
@@ -3292,6 +3427,7 @@ function OperationalWorkspace({
   const handleOpenStudentShellFromHistory = (studentId: string) => handleOpenStudentShell(studentId, historyBackPage ?? page)
   const handleOpenRiskExplorerFromHistory = (studentId: string) => handleOpenRiskExplorer(studentId, historyBackPage ?? page)
   const academicWorkspace = {
+    liveAcademicMode,
     role,
     page,
     currentTeacher,
@@ -3364,6 +3500,7 @@ function OperationalWorkspace({
     lockAuditByTarget,
     capabilities,
     roleTasks,
+    queueHistoryTasks,
     handleOpenTaskStudent,
     handleOpenUnlockReview,
     handleRestoreTask,
@@ -3387,11 +3524,11 @@ function OperationalWorkspace({
     studentShellStudentId,
     handleOpenStudentShellFromHistory,
     handleOpenRiskExplorerFromHistory,
-    loadStudentAgentCard,
-    loadStudentAgentTimeline,
-    startStudentAgentSession,
-    sendStudentAgentMessage,
-    loadStudentRiskExplorer,
+    loadStudentAgentCard: loadStudentAgentCardRuntime,
+    loadStudentAgentTimeline: loadStudentAgentTimelineRuntime,
+    startStudentAgentSession: startStudentAgentSessionRuntime,
+    sendStudentAgentMessage: sendStudentAgentMessageRuntime,
+    loadStudentRiskExplorer: loadStudentRiskExplorerRuntime,
   }
 
   return (
@@ -3520,6 +3657,1165 @@ function restrictAcademicBootstrap(snapshot: ApiAcademicBootstrap): ApiAcademicB
 
 function getAcademicApiBaseUrl() {
   return import.meta.env.VITE_AIRMENTOR_API_BASE_URL?.trim() || ''
+}
+
+function buildStaticDemoHodProofBundle(snapshot: ApiAcademicBootstrap): ApiAcademicHodProofBundle {
+  const now = Date.now()
+  const nowIso = new Date(now).toISOString()
+  const offerings = snapshot.offerings
+  const faculty = snapshot.faculty
+  const runtimeTasks = snapshot.runtime.tasks ?? []
+
+  const studentRecords = offerings.flatMap(offering =>
+    (snapshot.studentsByOffering[offering.offId] ?? []).map(student => ({ offering, student })),
+  )
+
+  const uniqueStudentsByUsn = new Map<string, { offering: Offering; student: Student }>()
+  studentRecords.forEach(record => {
+    if (!uniqueStudentsByUsn.has(record.student.usn)) uniqueStudentsByUsn.set(record.student.usn, record)
+  })
+  const uniqueStudents = Array.from(uniqueStudentsByUsn.values())
+
+  const highRiskCount = uniqueStudents.filter(record => (record.student.riskProb ?? 0) >= 0.7).length
+  const mediumRiskCount = uniqueStudents.filter(record => {
+    const risk = record.student.riskProb ?? 0
+    return risk >= 0.35 && risk < 0.7
+  }).length
+
+  const sectionComparison = offerings.map(offering => {
+    const students = snapshot.studentsByOffering[offering.offId] ?? []
+    const high = students.filter(student => (student.riskProb ?? 0) >= 0.7).length
+    const medium = students.filter(student => {
+      const risk = student.riskProb ?? 0
+      return risk >= 0.35 && risk < 0.7
+    }).length
+    const attendance = students.length > 0
+      ? Math.round(students.reduce((sum, student) => sum + (student.totalClasses > 0 ? (student.present / student.totalClasses) * 100 : 0), 0) / students.length)
+      : 0
+    return {
+      sectionCode: `${offering.code} ${offering.section}`,
+      studentCount: students.length,
+      highRiskCount: high,
+      mediumRiskCount: medium,
+      averageAttendancePct: attendance,
+      openReassessmentCount: high,
+    }
+  })
+
+  const semesterRiskDistribution = Array.from(new Set(offerings.map(offering => offering.sem)))
+    .sort((left, right) => left - right)
+    .map(semesterNumber => {
+      const students = uniqueStudents.filter(record => record.offering.sem === semesterNumber).map(record => record.student)
+      const highPressureCount = students.filter(student => (student.riskProb ?? 0) >= 0.7).length
+      const reviewCount = students.filter(student => {
+        const risk = student.riskProb ?? 0
+        return risk >= 0.35 && risk < 0.7
+      }).length
+      return {
+        semesterNumber,
+        highPressureCount,
+        reviewCount,
+        stableCount: Math.max(0, students.length - highPressureCount - reviewCount),
+        basis: 'workspace-derived',
+      }
+    })
+
+  const backlogDistribution = [
+    {
+      bucket: 'No backlog',
+      studentCount: uniqueStudents.filter(record => !record.student.flags.backlog).length,
+    },
+    {
+      bucket: 'Backlog flagged',
+      studentCount: uniqueStudents.filter(record => record.student.flags.backlog).length,
+    },
+  ]
+
+  const branchNames = Array.from(new Set(offerings.map(offering => offering.dept)))
+  const departmentNames = Array.from(new Set(faculty.map(account => account.dept)))
+
+  const facultyRollups = faculty.map(account => {
+    const sectionLoadCount = account.offeringIds.length
+    const weeklyContactHours = Math.max(6, sectionLoadCount * 3)
+    const queueLoad = runtimeTasks.filter(task => task.assignedTo === 'HoD' || account.allowedRoles.includes(task.assignedTo)).length
+    return {
+      facultyId: account.facultyId,
+      facultyName: account.name,
+      designation: account.roleTitle,
+      permissions: account.allowedRoles,
+      weeklyContactHours,
+      sectionLoadCount,
+      assignedSections: account.offeringIds,
+      queueLoad,
+      avgAcknowledgementLagHours: 10,
+      reassessmentClosureRate: 0.72,
+      interventionCount: queueLoad,
+      overloadFlag: weeklyContactHours > 14 || queueLoad > 8,
+    }
+  })
+
+  const courseRollups = offerings.map(offering => {
+    const students = snapshot.studentsByOffering[offering.offId] ?? []
+    const attendance = students.length > 0
+      ? Math.round(students.reduce((sum, student) => sum + (student.totalClasses > 0 ? (student.present / student.totalClasses) * 100 : 0), 0) / students.length)
+      : 0
+    const high = students.filter(student => (student.riskProb ?? 0) >= 0.7).length
+    const medium = students.filter(student => {
+      const risk = student.riskProb ?? 0
+      return risk >= 0.35 && risk < 0.7
+    }).length
+    const tt1WeakCount = students.filter(student => {
+      if (student.tt1Score === null || student.tt1Max <= 0) return false
+      return (student.tt1Score / student.tt1Max) * 100 < 50
+    }).length
+    const tt2WeakCount = students.filter(student => {
+      if (student.tt2Score === null || student.tt2Max <= 0) return false
+      return (student.tt2Score / student.tt2Max) * 100 < 50
+    }).length
+    return {
+      courseCode: offering.code,
+      title: offering.title,
+      sectionCodes: [offering.section],
+      riskCountHigh: high,
+      riskCountMedium: medium,
+      averageAttendancePct: attendance,
+      tt1WeakCount,
+      tt2WeakCount,
+      seeWeakCount: 0,
+      weakQuestionSignalCount: students.filter(student => student.coScores.some(score => score.attainment < 40)).length,
+      backlogCarryoverCount: students.filter(student => student.flags.backlog).length,
+      openReassessmentCount: high,
+      resolvedReassessmentCount: students.filter(student => (student.riskProb ?? 0) < 0.35).length,
+      studentCount: students.length,
+    }
+  })
+
+  const studentWatchRows = uniqueStudents
+    .sort((left, right) => (right.student.riskProb ?? 0) - (left.student.riskProb ?? 0))
+    .slice(0, 64)
+    .map((record, index) => {
+      const { offering, student } = record
+      const riskScaled = Math.round((student.riskProb ?? 0) * 100)
+      const queueState: 'open' | 'watch' | 'resolved' = riskScaled >= 70 ? 'open' : riskScaled >= 35 ? 'watch' : 'resolved'
+      const attendancePct = student.totalClasses > 0 ? Math.round((student.present / student.totalClasses) * 100) : 0
+      const tt1Pct = student.tt1Score !== null && student.tt1Max > 0 ? Math.round((student.tt1Score / student.tt1Max) * 100) : 0
+      const tt2Pct = student.tt2Score !== null && student.tt2Max > 0 ? Math.round((student.tt2Score / student.tt2Max) * 100) : 0
+      const quizPct = student.quiz1 !== null ? Math.max(0, Math.min(100, Math.round((student.quiz1 / 10) * 100))) : 0
+      const assignmentPct = student.asgn1 !== null ? Math.max(0, Math.min(100, Math.round((student.asgn1 / 10) * 100))) : 0
+      const weakCoCount = student.coScores.filter(score => score.attainment < 50).length
+      const assignedFacultyId = faculty.find(account => account.offeringIds.includes(offering.offId))?.facultyId ?? null
+
+      return {
+        studentId: student.id,
+        studentName: student.name,
+        usn: student.usn,
+        sectionCode: offering.section,
+        currentSemester: offering.sem,
+        currentRiskBand: student.riskBand ?? 'Medium',
+        currentRiskProbScaled: riskScaled,
+        currentQueueState: queueState,
+        currentRecoveryState: null,
+        previousRiskBand: null,
+        previousRiskProbScaled: null,
+        riskChangeFromPreviousCheckpointScaled: null,
+        counterfactualLiftScaled: null,
+        queueCaseId: `demo-case-${index + 1}`,
+        countsTowardCapacity: true,
+        governanceReason: null,
+        supportingCourseCount: 1,
+        assignedFacultyId,
+        primaryCourseCode: offering.code,
+        primaryCourseTitle: offering.title,
+        currentReassessmentStatus: queueState,
+        nextDueAt: queueState === 'open' ? new Date(now + (index + 1) * 60 * 60 * 1000).toISOString() : null,
+        observedEvidence: {
+          attendancePct,
+          tt1Pct,
+          tt2Pct,
+          quizPct,
+          assignmentPct,
+          seePct: 0,
+          cgpa: student.prevCgpa,
+          backlogCount: student.flags.backlog ? 1 : 0,
+          weakCoCount,
+          weakQuestionCount: weakCoCount,
+          interventionRecoveryStatus: null,
+          coEvidenceMode: 'derived',
+        },
+        electiveFit: null,
+        courseSnapshots: [{
+          riskAssessmentId: `demo-risk-${index + 1}`,
+          offeringId: offering.offId,
+          courseCode: offering.code,
+          courseTitle: offering.title,
+          sectionCode: offering.section,
+          riskBand: student.riskBand ?? 'Medium',
+          riskProbScaled: riskScaled,
+          queueState,
+          queueCaseId: `demo-case-${index + 1}`,
+          primaryCase: true,
+          countsTowardCapacity: true,
+          recommendedAction: queueState === 'open' ? 'Escalate and schedule reassessment' : 'Monitor weekly',
+          riskChangeFromPreviousCheckpointScaled: null,
+          counterfactualLiftScaled: null,
+          observedEvidence: {
+            attendancePct,
+            tt1Pct,
+            tt2Pct,
+            quizPct,
+            assignmentPct,
+            seePct: 0,
+            cgpa: student.prevCgpa,
+            backlogCount: student.flags.backlog ? 1 : 0,
+            weakCoCount,
+            weakQuestionCount: weakCoCount,
+            interventionRecoveryStatus: null,
+            coEvidenceMode: 'derived',
+          },
+          drivers: student.reasons.length > 0
+            ? student.reasons.slice(0, 3).map(reason => ({ label: reason.label, impact: reason.impact, feature: reason.feature }))
+            : [{ label: 'Attendance trend', impact: 0.24, feature: 'attendancePct' }],
+        }],
+        evidenceTimeline: [],
+      }
+    })
+
+  const reassessmentRows = studentWatchRows
+    .filter(row => row.currentQueueState === 'open')
+    .slice(0, 24)
+    .map((row, index) => ({
+      reassessmentEventId: `demo-reassessment-${index + 1}`,
+      simulationRunId: 'workspace-proof-run',
+      runLabel: 'Active Proof Run',
+      studentId: row.studentId,
+      studentName: row.studentName,
+      usn: row.usn,
+      courseCode: row.primaryCourseCode,
+      courseTitle: row.primaryCourseTitle,
+      sectionCode: row.sectionCode,
+      assignedToRole: 'HoD',
+      assignedFacultyId: row.assignedFacultyId,
+      dueAt: row.nextDueAt ?? new Date(now + (index + 1) * 24 * 60 * 60 * 1000).toISOString(),
+      status: 'open',
+      riskBand: row.currentRiskBand,
+      riskProbScaled: row.currentRiskProbScaled,
+      decisionType: null,
+      decisionNote: null,
+      queueCaseId: row.queueCaseId,
+      primaryCase: true,
+      countsTowardCapacity: true,
+      priorityRank: index + 1,
+      governanceReason: row.governanceReason,
+      supportingCourseCount: row.supportingCourseCount,
+      recoveryState: row.currentRecoveryState,
+      observedResidual: null,
+      acknowledgement: null,
+      resolution: null,
+    }))
+
+  const scopeDescriptor = {
+    scopeType: 'proof' as const,
+    scopeId: 'workspace-proof-scope',
+    label: 'Proof oversight scope',
+    batchId: 'demo-batch-2024',
+    sectionCode: null,
+    branchName: branchNames[0] ?? null,
+    simulationRunId: 'workspace-proof-run',
+    simulationStageCheckpointId: null,
+    studentId: null,
+  }
+
+  return {
+    summary: {
+      activeRunContext: {
+        simulationRunId: 'workspace-proof-run',
+        batchId: 'demo-batch-2024',
+        batchLabel: 'Batch 2024',
+        branchName: branchNames[0] ?? null,
+        runLabel: 'Active Proof Run',
+        status: 'active',
+        seed: 20260424,
+        createdAt: nowIso,
+        sourceLabel: 'Canonical workspace dataset',
+        checkpointContext: null,
+      },
+      scopeDescriptor,
+      resolvedFrom: {
+        kind: 'proof-run',
+        scopeType: 'proof',
+        scopeId: scopeDescriptor.scopeId,
+        label: 'Proof bundle',
+      },
+      scopeMode: 'proof',
+      countSource: 'proof-run',
+      activeOperationalSemester: offerings[0]?.sem ?? null,
+      scope: {
+        departmentNames,
+        branchNames,
+      },
+      monitoringSummary: {
+        riskAssessmentCount: uniqueStudents.length,
+        activeReassessmentCount: reassessmentRows.length,
+        alertDecisionCount: reassessmentRows.length,
+        acknowledgementCount: Math.floor(reassessmentRows.length / 2),
+        resolutionCount: Math.floor(reassessmentRows.length / 3),
+      },
+      totals: {
+        studentsCovered: uniqueStudents.length,
+        highRiskCount,
+        mediumRiskCount,
+        averageQueueAgeHours: 12.4,
+        manualOverrideCount: runtimeTasks.filter(task => !!task.manual).length,
+        unresolvedAlertCount: reassessmentRows.length,
+        resolvedAlertCount: Math.floor(reassessmentRows.length / 3),
+      },
+      sectionComparison,
+      semesterRiskDistribution,
+      backlogDistribution,
+      electiveDistribution: branchNames.map(branch => ({
+        stream: branch,
+        recommendationCount: uniqueStudents.filter(record => record.offering.dept === branch).length,
+      })),
+      facultyLoadSummary: {
+        facultyCount: facultyRollups.length,
+        overloadedFacultyCount: facultyRollups.filter(row => row.overloadFlag).length,
+        averageWeeklyContactHours: facultyRollups.length > 0
+          ? Number((facultyRollups.reduce((sum, row) => sum + row.weeklyContactHours, 0) / facultyRollups.length).toFixed(1))
+          : 0,
+      },
+    },
+    courses: courseRollups,
+    faculty: facultyRollups,
+    students: studentWatchRows,
+    reassessments: reassessmentRows,
+  }
+}
+
+function normalizeStaticDemoStudentId(value: string) {
+  return value.split('::').at(-1) ?? value
+}
+
+function mapRoleToApiRoleCode(role: Role): ApiRoleCode {
+  if (role === 'Course Leader') return 'COURSE_LEADER'
+  if (role === 'Mentor') return 'MENTOR'
+  return 'HOD'
+}
+
+function clampStaticDemoPercent(value: number) {
+  if (!Number.isFinite(value)) return 0
+  return Math.max(0, Math.min(100, Math.round(value)))
+}
+
+function deriveStaticDemoRiskBand(probabilityScaled: number): 'High' | 'Medium' | 'Low' {
+  if (probabilityScaled >= 70) return 'High'
+  if (probabilityScaled >= 35) return 'Medium'
+  return 'Low'
+}
+
+function buildStaticDemoStudentAgentCard(context: StaticProofStudentContext): ApiStudentAgentCard {
+  const { snapshot, offering, student, queueTasks } = context
+  const normalizedStudentId = normalizeStaticDemoStudentId(student.id)
+  const now = Date.now()
+  const nowIso = new Date(now).toISOString()
+
+  const attendancePct = student.totalClasses > 0
+    ? clampStaticDemoPercent((student.present / student.totalClasses) * 100)
+    : 0
+  const tt1Pct = student.tt1Score !== null && student.tt1Max > 0
+    ? clampStaticDemoPercent((student.tt1Score / student.tt1Max) * 100)
+    : 0
+  const tt2Pct = student.tt2Score !== null && student.tt2Max > 0
+    ? clampStaticDemoPercent((student.tt2Score / student.tt2Max) * 100)
+    : 0
+  const quizScores = [student.quiz1, student.quiz2].filter((value): value is number => value !== null)
+  const assignmentScores = [student.asgn1, student.asgn2].filter((value): value is number => value !== null)
+  const quizPct = quizScores.length > 0
+    ? clampStaticDemoPercent((quizScores.reduce((sum, value) => sum + value, 0) / (quizScores.length * 10)) * 100)
+    : 0
+  const assignmentPct = assignmentScores.length > 0
+    ? clampStaticDemoPercent((assignmentScores.reduce((sum, value) => sum + value, 0) / (assignmentScores.length * 10)) * 100)
+    : 0
+  const seePct = student.tt2Score !== null
+    ? tt2Pct
+    : clampStaticDemoPercent(tt1Pct - 6)
+
+  const riskProbScaled = clampStaticDemoPercent((student.riskProb ?? 0.45) * 100)
+  const riskBand = student.riskBand ?? deriveStaticDemoRiskBand(riskProbScaled)
+  const queueState = riskProbScaled >= 70
+    ? 'open' as const
+    : riskProbScaled >= 35
+      ? 'watch' as const
+      : 'resolved' as const
+  const reassessmentStatus = queueState === 'open'
+    ? 'open'
+    : queueState === 'watch'
+      ? 'watching'
+      : 'resolved'
+  const recoveryState: 'under_watch' | 'confirmed_improvement' | null = queueState === 'resolved'
+    ? 'confirmed_improvement'
+    : queueState === 'watch'
+      ? 'under_watch'
+      : null
+  const nextDueAt = queueState === 'resolved'
+    ? null
+    : new Date(now + 24 * 60 * 60 * 1000).toISOString()
+
+  const previousRiskProbScaled = Math.max(0, riskProbScaled - (queueState === 'open' ? 8 : queueState === 'watch' ? 4 : 2))
+  const previousRiskBand = deriveStaticDemoRiskBand(previousRiskProbScaled)
+  const riskChangeFromPreviousCheckpointScaled = riskProbScaled - previousRiskProbScaled
+  const counterfactualLiftScaled = queueState === 'open' ? 10 : queueState === 'watch' ? 5 : 1
+  const assignedFacultyId = snapshot.faculty.find(account => account.offeringIds.includes(offering.offId))?.facultyId ?? null
+
+  const weakCourseOutcomes = student.coScores
+    .filter(score => score.attainment < 55)
+    .sort((left, right) => left.attainment - right.attainment)
+    .slice(0, 4)
+    .map((score, index) => ({
+      coCode: score.coId,
+      coTitle: `Course outcome ${score.coId}`,
+      trend: score.attainment < 40 ? 'declining' : 'watch',
+      topics: student.reasons.slice(index, index + 2).map(reason => reason.label),
+      tt1Pct,
+      tt2Pct,
+      seePct,
+      transferGap: Number(((55 - score.attainment) / 100).toFixed(2)),
+      coEvidenceMode: 'derived',
+    }))
+
+  const weakCoCount = weakCourseOutcomes.length
+  const weakQuestionCount = weakCoCount > 0
+    ? Math.max(weakCoCount, student.reasons.length)
+    : 0
+
+  const attentionAreas = [
+    student.flags.lowAttendance ? 'Attendance dip' : null,
+    student.flags.backlog ? 'Backlog carryover' : null,
+    student.flags.declining ? 'Declining trend' : null,
+    weakCoCount > 0 ? `${weakCoCount} weak COs` : null,
+  ].filter((value): value is string => value !== null)
+
+  const drivers = student.reasons.length > 0
+    ? student.reasons.slice(0, 4).map(reason => ({
+        label: reason.label,
+        impact: reason.impact,
+        feature: reason.feature,
+      }))
+    : [{ label: 'Attendance pressure', impact: 0.22, feature: 'attendancePct' }]
+
+  const recommendedAction = queueState === 'open'
+    ? 'Immediate mentor intervention and reassessment'
+    : queueState === 'watch'
+      ? 'Weekly mentor follow-up and targeted practice'
+      : 'Continue baseline monitoring'
+
+  const completeness = {
+    graphAvailable: true,
+    historyAvailable: true,
+    complete: true,
+    missing: [] as Array<'graph' | 'history'>,
+    fallbackMode: 'graph-aware' as const,
+    confidenceClass: riskBand === 'High' ? 'medium' as const : 'high' as const,
+  }
+
+  const interventionHistory = student.interventions.slice(0, 5).map((item, index) => ({
+    interventionId: `demo-intervention-${normalizedStudentId}-${index + 1}`,
+    interventionType: item.type,
+    note: item.note,
+    occurredAt: new Date(now - (index + 1) * 3 * 24 * 60 * 60 * 1000).toISOString(),
+    accepted: index % 2 === 0,
+    completed: index % 3 !== 1,
+    recoveryConfirmed: queueState === 'resolved' ? true : (index % 2 === 0 ? false : null),
+    recoveryState,
+    observedResidual: queueState === 'resolved' ? -0.08 : queueState === 'watch' ? -0.02 : 0.04,
+  }))
+
+  const currentReassessments = queueState === 'resolved'
+    ? []
+    : [{
+        reassessmentEventId: `demo-reassessment-${normalizedStudentId}`,
+        courseCode: offering.code,
+        courseTitle: offering.title,
+        status: queueState === 'open' ? 'open' : 'watching',
+        dueAt: nextDueAt ?? nowIso,
+        assignedToRole: 'HOD',
+        assignedFacultyId,
+        queueCaseId: `demo-case-${normalizedStudentId}`,
+        primaryCase: true,
+        countsTowardCapacity: true,
+        priorityRank: queueState === 'open' ? 1 : 2,
+        governanceReason: queueState === 'open' ? 'High risk threshold crossed' : 'Monitoring threshold active',
+        supportingCourseCount: 1,
+        recoveryState: recoveryState === 'under_watch' ? recoveryState : null,
+        observedResidual: queueState === 'open' ? 0.05 : -0.01,
+      }]
+
+  const citations = [
+    {
+      citationId: `citation-observed-${normalizedStudentId}`,
+      label: 'Observed evidence window',
+      panelLabel: 'Observed' as const,
+      summary: `Attendance ${attendancePct}% · TT1 ${tt1Pct}% · TT2 ${tt2Pct}% · weak COs ${weakCoCount}.`,
+    },
+    {
+      citationId: `citation-policy-${normalizedStudentId}`,
+      label: 'Policy-derived risk state',
+      panelLabel: 'Policy Derived' as const,
+      summary: `${riskBand} watch at ${riskProbScaled}% with queue state ${queueState}.`,
+    },
+    {
+      citationId: `citation-actions-${normalizedStudentId}`,
+      label: 'Simulated intervention and queue trail',
+      panelLabel: 'Simulation Internal' as const,
+      summary: `Queue tasks in context: ${queueTasks.length}. Recommended action: ${recommendedAction}.`,
+    },
+  ]
+
+  const scopeDescriptor = {
+    scopeType: 'student' as const,
+    scopeId: normalizedStudentId,
+    label: `${student.name} proof scope`,
+    batchId: 'demo-batch-2024',
+    sectionCode: offering.section,
+    branchName: offering.dept,
+    simulationRunId: 'workspace-proof-run',
+    simulationStageCheckpointId: null,
+    studentId: normalizedStudentId,
+  }
+
+  const electiveFit = {
+    recommendedCode: offering.dept === 'CSE' ? 'CS4E1' : 'MA4E1',
+    recommendedTitle: offering.dept === 'CSE' ? 'Cloud Systems Fundamentals' : 'Statistical Computing',
+    stream: offering.dept,
+    rationale: [
+      `Aligns with ${offering.code} support needs`,
+      `Balances current ${riskBand.toLowerCase()}-risk workload`,
+    ],
+    alternatives: [
+      { code: offering.dept === 'CSE' ? 'CS4E2' : 'MA4E2', title: 'Applied Analytics Studio', stream: offering.dept },
+      { code: offering.dept === 'CSE' ? 'CS4E3' : 'MA4E3', title: 'Systems Practice Lab', stream: offering.dept },
+    ],
+  }
+
+  return {
+    studentAgentCardId: `student-card-${normalizedStudentId}`,
+    simulationRunId: 'workspace-proof-run',
+    simulationStageCheckpointId: null,
+    cardVersion: 1,
+    sourceSnapshotHash: `workspace-proof-${normalizedStudentId}`,
+    disclaimer: 'Proof card generated from canonical workspace evidence. Values are deterministic and presentation-safe.',
+    scopeDescriptor,
+    resolvedFrom: {
+      kind: 'proof-run',
+      scopeType: 'student',
+      scopeId: normalizedStudentId,
+      label: 'Canonical proof dataset',
+    },
+    scopeMode: 'proof',
+    countSource: 'proof-run',
+    activeOperationalSemester: offering.sem,
+    runContext: {
+      simulationRunId: 'workspace-proof-run',
+      runLabel: 'Active Proof Run',
+      status: 'active',
+      seed: 20260424,
+      createdAt: nowIso,
+      batchLabel: offering.year,
+      branchName: offering.dept,
+    },
+    checkpointContext: null,
+    student: {
+      studentId: normalizedStudentId,
+      studentName: student.name,
+      usn: student.usn,
+      sectionCode: offering.section,
+      currentSemester: offering.sem,
+      programScopeVersion: 'workspace-proof-v1',
+      mentorTrack: offering.dept,
+    },
+    allowedIntents: ['summary', 'weak-topics', 'reassessment', 'intervention-history', 'elective-fit'],
+    summaryRail: {
+      currentRiskBand: riskBand,
+      currentRiskProbScaled: riskProbScaled,
+      previousRiskBand,
+      previousRiskProbScaled,
+      riskChangeFromPreviousCheckpointScaled,
+      counterfactualLiftScaled,
+      currentRiskDisplayProbabilityAllowed: true,
+      currentRiskSupportWarning: null,
+      currentRiskCalibrationMethod: 'identity',
+      currentRiskConfidenceClass: completeness.confidenceClass,
+      primaryCourseCode: offering.code,
+      primaryCourseTitle: offering.title,
+      nextDueAt,
+      currentReassessmentStatus: reassessmentStatus,
+      currentQueueState: queueState,
+      currentRecoveryState: recoveryState,
+      currentCgpa: student.currentCgpa ?? student.prevCgpa,
+      backlogCount: student.flags.backlog ? 1 : 0,
+      electiveFit,
+    },
+    overview: {
+      observedLabel: 'Observed',
+      policyLabel: 'Policy Derived',
+      currentEvidence: {
+        attendancePct,
+        tt1Pct,
+        tt2Pct,
+        quizPct,
+        assignmentPct,
+        seePct,
+        weakCoCount,
+        weakQuestionCount,
+        interventionRecoveryStatus: queueState === 'resolved' ? 'confirmed' : queueState === 'watch' ? 'under_watch' : null,
+        coEvidenceMode: 'derived',
+      },
+      currentStatus: {
+        riskBand,
+        riskProbScaled,
+        riskCompleteness: completeness,
+        featureCompleteness: completeness,
+        featureProvenance: {
+          curriculumImportVersionId: 'workspace-import-v1',
+          curriculumFeatureProfileFingerprint: `demo-${offering.code.toLowerCase()}`,
+          graphNodeCount: 12,
+          graphEdgeCount: 18,
+          historyCourseCount: 4,
+        },
+        featureConfidenceClass: completeness.confidenceClass,
+        previousRiskBand,
+        previousRiskProbScaled,
+        riskChangeFromPreviousCheckpointScaled,
+        counterfactualLiftScaled,
+        reassessmentStatus,
+        resolutionStatus: queueState === 'resolved' ? 'completed_improving' : null,
+        nextDueAt,
+        recommendedAction,
+        queueState,
+        simulatedActionTaken: queueState === 'resolved' ? 'monitoring-loop' : 'mentor-checkin',
+        attentionAreas,
+        queueCaseId: `demo-case-${normalizedStudentId}`,
+        primaryCase: true,
+        countsTowardCapacity: true,
+        priorityRank: queueState === 'open' ? 1 : queueState === 'watch' ? 2 : 3,
+        governanceReason: queueState === 'open' ? 'High threshold exceeded' : queueState === 'watch' ? 'Under active watch' : 'Stabilized',
+        supportingCourseCount: 1,
+        assignedFacultyId,
+        recoveryState,
+        observedResidual: queueState === 'resolved' ? -0.09 : queueState === 'watch' ? -0.02 : 0.05,
+        policyComparison: {
+          policyPhenotype: queueState === 'open' ? 'high-watch' : queueState === 'watch' ? 'watchlist' : 'stable',
+          recommendedAction,
+          simulatedActionTaken: queueState === 'resolved' ? 'monitoring-loop' : 'mentor-checkin',
+          noActionRiskBand: riskBand === 'High' ? 'High' : 'Medium',
+          noActionRiskProbScaled: Math.max(riskProbScaled, Math.min(100, riskProbScaled + 6)),
+          counterfactualLiftScaled,
+          rationale: 'Policy output reconciles observed evidence with deterministic intervention templates.',
+          actionCatalog: {
+            version: 'workspace-policy-v1',
+            stageKey: 'active-semester',
+            stageActions: ['mentor-checkin', 'reassessment', 'attendance-counsel'],
+            phenotype: queueState === 'open' ? 'high-watch' : queueState === 'watch' ? 'watchlist' : 'stable',
+            phenotypeActions: queueState === 'resolved' ? ['monitoring-loop'] : ['mentor-checkin', 'reassessment'],
+            allCandidatesStageValid: true,
+            recommendedActionStageValid: true,
+          },
+        },
+      },
+      semesterSummaries: [
+        {
+          semesterNumber: Math.max(1, offering.sem - 1),
+          riskBands: [previousRiskBand],
+          sgpa: Number(Math.max(4.5, (student.prevCgpa - 0.2)).toFixed(2)),
+          cgpaAfterSemester: Number(student.prevCgpa.toFixed(2)),
+          backlogCount: student.flags.backlog ? 1 : 0,
+          weakCoCount: Math.max(0, weakCoCount - 1),
+          questionResultCoverage: 72,
+          interventionCount: Math.max(1, interventionHistory.length),
+        },
+        {
+          semesterNumber: offering.sem,
+          riskBands: [riskBand],
+          sgpa: Number(Math.max(4.5, (student.prevCgpa - (queueState === 'open' ? 0.5 : queueState === 'watch' ? 0.2 : -0.1))).toFixed(2)),
+          cgpaAfterSemester: Number((student.currentCgpa ?? student.prevCgpa).toFixed(2)),
+          backlogCount: student.flags.backlog ? 1 : 0,
+          weakCoCount,
+          questionResultCoverage: 78,
+          interventionCount: Math.max(1, interventionHistory.length + currentReassessments.length),
+        },
+      ],
+    },
+    topicAndCo: {
+      panelLabel: 'Observed',
+      topicBuckets: {
+        known: student.reasons.filter(reason => reason.impact < 0).map(reason => reason.label).slice(0, 4),
+        partial: student.reasons.filter(reason => reason.impact >= 0).map(reason => reason.label).slice(0, 4),
+        blocked: student.flags.backlog ? ['Backlog carryover topics'] : [],
+        highUncertainty: riskBand === 'High' ? ['Compounded assessment pressure'] : [],
+      },
+      weakCourseOutcomes,
+      questionPatterns: {
+        weakQuestionCount,
+        carelessErrorCount: Math.max(0, Math.round(weakQuestionCount / 2)),
+        transferGapCount: Math.max(0, weakCoCount - 1),
+        commonWeakTopics: weakCourseOutcomes.flatMap(item => item.topics).slice(0, 4),
+        commonWeakCourseOutcomes: weakCourseOutcomes.map(item => item.coCode).slice(0, 4),
+      },
+      simulationTags: [offering.code, offering.section, riskBand],
+    },
+    assessmentEvidence: {
+      panelLabel: 'Observed',
+      components: [{
+        courseCode: offering.code,
+        courseTitle: offering.title,
+        sectionCode: offering.section,
+        attendancePct,
+        tt1Pct,
+        tt2Pct,
+        quizPct,
+        assignmentPct,
+        seePct,
+        weakCoCount,
+        weakQuestionCount,
+        drivers,
+        coEvidenceMode: 'derived',
+      }],
+    },
+    interventions: {
+      panelLabel: 'Human Action Log',
+      currentReassessments,
+      interventionHistory,
+      humanActionLog: interventionHistory.map(item => ({
+        title: item.interventionType,
+        detail: item.note,
+        occurredAt: item.occurredAt,
+      })),
+    },
+    counterfactual: {
+      panelLabel: 'Simulation Internal',
+      noActionRiskBand: riskBand === 'High' ? 'High' : 'Medium',
+      noActionRiskProbScaled: Math.max(riskProbScaled, Math.min(100, riskProbScaled + 6)),
+      counterfactualLiftScaled,
+      note: 'Counterfactual compares current intervention path against a no-action replay on the same evidence slice.',
+    },
+    citations,
+  }
+}
+
+function buildStaticDemoStudentAgentTimeline(card: ApiStudentAgentCard): { items: ApiStudentAgentTimelineItem[] } {
+  const semesterItems: ApiStudentAgentTimelineItem[] = card.overview.semesterSummaries.map(item => ({
+    timelineItemId: `timeline-sem-${card.student.studentId}-${item.semesterNumber}`,
+    panelLabel: 'Observed',
+    kind: 'semester-summary',
+    title: `Semester ${item.semesterNumber} summary`,
+    detail: `SGPA ${item.sgpa.toFixed(2)} · CGPA ${item.cgpaAfterSemester.toFixed(2)} · weak COs ${item.weakCoCount} · interventions ${item.interventionCount}.`,
+    occurredAt: new Date(Date.now() - (card.overview.semesterSummaries.length - item.semesterNumber) * 20 * 24 * 60 * 60 * 1000).toISOString(),
+    semesterNumber: item.semesterNumber,
+    citations: card.citations.slice(0, 1),
+  }))
+
+  const interventionItems: ApiStudentAgentTimelineItem[] = card.interventions.interventionHistory.map((item, index) => ({
+    timelineItemId: `timeline-int-${card.student.studentId}-${index + 1}`,
+    panelLabel: 'Human Action Log',
+    kind: 'intervention',
+    title: item.interventionType,
+    detail: item.note,
+    occurredAt: item.occurredAt,
+    semesterNumber: card.student.currentSemester,
+    citations: card.citations.slice(1, 3),
+  }))
+
+  const reassessmentItems: ApiStudentAgentTimelineItem[] = card.interventions.currentReassessments.map((item, index) => ({
+    timelineItemId: `timeline-reassess-${card.student.studentId}-${index + 1}`,
+    panelLabel: 'Policy Derived',
+    kind: 'reassessment',
+    title: `Reassessment ${item.status}`,
+    detail: `${item.courseCode} · assigned to ${item.assignedToRole} · due ${new Date(item.dueAt).toLocaleString('en-IN')}`,
+    occurredAt: item.dueAt,
+    semesterNumber: card.student.currentSemester,
+    citations: card.citations.slice(1, 2),
+  }))
+
+  const electiveItems: ApiStudentAgentTimelineItem[] = card.summaryRail.electiveFit ? [{
+    timelineItemId: `timeline-elective-${card.student.studentId}`,
+    panelLabel: 'Policy Derived',
+    kind: 'elective-fit',
+    title: `Elective fit: ${card.summaryRail.electiveFit.recommendedCode}`,
+    detail: card.summaryRail.electiveFit.rationale.join(' · '),
+    occurredAt: new Date().toISOString(),
+    semesterNumber: card.student.currentSemester,
+    citations: card.citations.slice(0, 2),
+  }] : []
+
+  return {
+    items: [...semesterItems, ...interventionItems, ...reassessmentItems, ...electiveItems]
+      .sort((left, right) => left.occurredAt.localeCompare(right.occurredAt)),
+  }
+}
+
+function buildStaticDemoStudentAgentSession(context: StaticProofStudentContext, card: ApiStudentAgentCard): ApiStudentAgentSession {
+  const nowIso = new Date().toISOString()
+  return {
+    studentAgentSessionId: `session-${card.student.studentId}-${Date.now()}`,
+    simulationRunId: card.simulationRunId,
+    simulationStageCheckpointId: card.simulationStageCheckpointId,
+    studentId: card.student.studentId,
+    viewerFacultyId: context.viewerFacultyId,
+    viewerRole: mapRoleToApiRoleCode(context.viewerRole),
+    status: 'active',
+    responseMode: 'deterministic',
+    cardVersion: card.cardVersion,
+    messages: [{
+      studentAgentMessageId: `message-intro-${card.student.studentId}`,
+      actorType: 'assistant',
+      messageType: 'intro',
+      body: `Shell session ready for ${card.student.studentName}. Current watch band is ${card.summaryRail.currentRiskBand ?? 'Unavailable'}${card.summaryRail.currentRiskProbScaled != null ? ` (${card.summaryRail.currentRiskProbScaled}%)` : ''}.`,
+      citations: card.citations.slice(0, 2),
+      guardrailCode: null,
+      createdAt: nowIso,
+      updatedAt: nowIso,
+    }],
+    createdAt: nowIso,
+    updatedAt: nowIso,
+  }
+}
+
+function buildStaticDemoStudentAgentReply(card: ApiStudentAgentCard, prompt: string): ApiStudentAgentMessage[] {
+  const normalizedPrompt = prompt.trim()
+  if (!normalizedPrompt) return []
+  const now = Date.now()
+  const userAtIso = new Date(now).toISOString()
+  const assistantAtIso = new Date(now + 500).toISOString()
+  const isGuardrailPrompt = /\b(predict|guarantee|certain|exact score|hidden model|weights?)\b/i.test(normalizedPrompt)
+
+  const userMessage: ApiStudentAgentMessage = {
+    studentAgentMessageId: `message-user-${now}`,
+    actorType: 'user',
+    messageType: 'prompt',
+    body: normalizedPrompt,
+    citations: [],
+    guardrailCode: null,
+    createdAt: userAtIso,
+    updatedAt: userAtIso,
+  }
+
+  const assistantMessage: ApiStudentAgentMessage = {
+    studentAgentMessageId: `message-assistant-${now}`,
+    actorType: 'assistant',
+    messageType: isGuardrailPrompt ? 'guardrail' : 'response',
+    body: isGuardrailPrompt
+      ? 'This shell can only explain bounded proof records. It cannot expose hidden model internals or guarantee future outcomes.'
+      : `${card.student.studentName} is currently ${card.summaryRail.currentRiskBand ?? 'Unclassified'}${card.summaryRail.currentRiskProbScaled != null ? ` at ${card.summaryRail.currentRiskProbScaled}%` : ''}. Focus next on ${card.overview.currentStatus.recommendedAction ?? 'baseline monitoring'} and weak CO coverage (${card.overview.currentEvidence.weakCoCount}).`,
+    citations: card.citations.slice(0, 2),
+    guardrailCode: isGuardrailPrompt ? 'bounded-proof-only' : null,
+    createdAt: assistantAtIso,
+    updatedAt: assistantAtIso,
+  }
+
+  return [userMessage, assistantMessage]
+}
+
+function buildStaticDemoStudentRiskExplorer(context: StaticProofStudentContext, card: ApiStudentAgentCard): ApiStudentRiskExplorer {
+  const { offering, queueTasks } = context
+  const riskProbScaled = card.summaryRail.currentRiskProbScaled ?? 45
+  const attendanceRisk = clampStaticDemoPercent(100 - card.overview.currentEvidence.attendancePct)
+  const ceRisk = clampStaticDemoPercent(100 - ((card.overview.currentEvidence.tt1Pct + card.overview.currentEvidence.tt2Pct) / 2))
+  const seeRisk = clampStaticDemoPercent(100 - card.overview.currentEvidence.seePct)
+  const carryoverRisk = card.summaryRail.backlogCount > 0 ? clampStaticDemoPercent(riskProbScaled + 8) : clampStaticDemoPercent(riskProbScaled - 12)
+  const featureCompleteness = card.overview.currentStatus.featureCompleteness ?? {
+    graphAvailable: true,
+    historyAvailable: true,
+    complete: true,
+    missing: [] as Array<'graph' | 'history'>,
+    fallbackMode: 'graph-aware' as const,
+    confidenceClass: 'high' as const,
+  }
+  const featureProvenance = card.overview.currentStatus.featureProvenance ?? {
+    curriculumImportVersionId: 'workspace-import-v1',
+    curriculumFeatureProfileFingerprint: `demo-${offering.code.toLowerCase()}`,
+    graphNodeCount: 12,
+    graphEdgeCount: 18,
+    historyCourseCount: 4,
+  }
+
+  return {
+    simulationRunId: card.simulationRunId,
+    simulationStageCheckpointId: card.simulationStageCheckpointId,
+    disclaimer: card.disclaimer,
+    scopeDescriptor: card.scopeDescriptor,
+    resolvedFrom: card.resolvedFrom,
+    scopeMode: card.scopeMode,
+    countSource: card.countSource,
+    activeOperationalSemester: card.activeOperationalSemester,
+    runContext: card.runContext,
+    checkpointContext: card.checkpointContext,
+    student: card.student,
+    riskCompleteness: featureCompleteness,
+    featureCompleteness,
+    featureConfidenceClass: featureCompleteness.confidenceClass,
+    featureProvenance,
+    modelProvenance: {
+      modelVersion: 'workspace-risk-v1',
+      calibrationVersion: 'identity-calibration-v1',
+      featureSchemaVersion: 'workspace-schema-v1',
+      evidenceWindow: 'semester-window',
+      simulationCalibrated: true,
+      calibrationMethod: 'identity',
+      displayProbabilityAllowed: true,
+      supportWarning: null,
+      headDisplay: {
+        attendanceRisk: { displayProbabilityAllowed: true, supportWarning: null, calibrationMethod: 'identity', riskBand: deriveStaticDemoRiskBand(attendanceRisk), probabilityScaled: attendanceRisk },
+        ceRisk: { displayProbabilityAllowed: true, supportWarning: null, calibrationMethod: 'identity', riskBand: deriveStaticDemoRiskBand(ceRisk), probabilityScaled: ceRisk },
+        seeRisk: { displayProbabilityAllowed: true, supportWarning: null, calibrationMethod: 'identity', riskBand: deriveStaticDemoRiskBand(seeRisk), probabilityScaled: seeRisk },
+        overallCourseRisk: { displayProbabilityAllowed: true, supportWarning: null, calibrationMethod: 'identity', riskBand: card.summaryRail.currentRiskBand, probabilityScaled: riskProbScaled },
+        downstreamCarryoverRisk: { displayProbabilityAllowed: true, supportWarning: null, calibrationMethod: 'identity', riskBand: deriveStaticDemoRiskBand(carryoverRisk), probabilityScaled: carryoverRisk },
+      },
+      coEvidenceMode: card.overview.currentEvidence.coEvidenceMode,
+      featureConfidenceClass: featureCompleteness.confidenceClass,
+    },
+    trainedRiskHeads: {
+      currentRiskBand: card.summaryRail.currentRiskBand,
+      currentRiskProbScaled: card.summaryRail.currentRiskProbScaled,
+      attendanceRiskProbScaled: attendanceRisk,
+      ceRiskProbScaled: ceRisk,
+      seeRiskProbScaled: seeRisk,
+      overallCourseRiskProbScaled: riskProbScaled,
+      downstreamCarryoverRiskProbScaled: carryoverRisk,
+    },
+    trainedRiskHeadDisplays: {
+      attendanceRisk: { displayProbabilityAllowed: true, supportWarning: null, calibrationMethod: 'identity', riskBand: deriveStaticDemoRiskBand(attendanceRisk), probabilityScaled: attendanceRisk },
+      ceRisk: { displayProbabilityAllowed: true, supportWarning: null, calibrationMethod: 'identity', riskBand: deriveStaticDemoRiskBand(ceRisk), probabilityScaled: ceRisk },
+      seeRisk: { displayProbabilityAllowed: true, supportWarning: null, calibrationMethod: 'identity', riskBand: deriveStaticDemoRiskBand(seeRisk), probabilityScaled: seeRisk },
+      overallCourseRisk: { displayProbabilityAllowed: true, supportWarning: null, calibrationMethod: 'identity', riskBand: card.summaryRail.currentRiskBand, probabilityScaled: riskProbScaled },
+      downstreamCarryoverRisk: { displayProbabilityAllowed: true, supportWarning: null, calibrationMethod: 'identity', riskBand: deriveStaticDemoRiskBand(carryoverRisk), probabilityScaled: carryoverRisk },
+    },
+    policyComparison: {
+      policyPhenotype: card.overview.currentStatus.queueState === 'open' ? 'high-watch' : card.overview.currentStatus.queueState === 'watch' ? 'watchlist' : 'stable',
+      recommendedAction: card.overview.currentStatus.recommendedAction,
+      simulatedActionTaken: card.overview.currentStatus.simulatedActionTaken,
+      noActionRiskBand: card.counterfactual?.noActionRiskBand ?? card.summaryRail.currentRiskBand,
+      noActionRiskProbScaled: card.counterfactual?.noActionRiskProbScaled ?? Math.min(100, riskProbScaled + 6),
+      counterfactualLiftScaled: card.counterfactual?.counterfactualLiftScaled ?? 4,
+      policyRationale: 'Deterministic policy comparison derived from observed evidence and queue context.',
+      actionCatalog: {
+        version: 'workspace-policy-v1',
+        stageKey: 'active-semester',
+        stageActions: ['mentor-checkin', 'attendance-counsel', 'reassessment'],
+        phenotype: card.overview.currentStatus.queueState === 'open' ? 'high-watch' : card.overview.currentStatus.queueState === 'watch' ? 'watchlist' : 'stable',
+        phenotypeActions: card.overview.currentStatus.queueState === 'resolved' ? ['monitoring-loop'] : ['mentor-checkin', 'reassessment'],
+        allCandidatesStageValid: true,
+        recommendedActionStageValid: true,
+      },
+      candidates: [
+        {
+          action: 'mentor-checkin',
+          utility: 0.81,
+          nextCheckpointBenefitScaled: 7,
+          stableRecoveryScore: 0.72,
+          semesterCloseBenefitScaled: 6,
+          relapsePenalty: 2,
+          capacityCost: 1,
+          rationale: 'Fastest deterministic impact with low execution cost.',
+        },
+        {
+          action: 'reassessment',
+          utility: 0.74,
+          nextCheckpointBenefitScaled: 6,
+          stableRecoveryScore: 0.68,
+          semesterCloseBenefitScaled: 7,
+          relapsePenalty: 1,
+          capacityCost: 2,
+          rationale: 'Strong recovery signal when tied to course-specific weakness.',
+        },
+      ],
+    },
+    derivedScenarioHeads: {
+      semesterSgpaDropRiskProbScaled: clampStaticDemoPercent((riskProbScaled + ceRisk) / 2),
+      cumulativeCgpaDropRiskProbScaled: clampStaticDemoPercent((riskProbScaled + carryoverRisk) / 2),
+      electiveMismatchRiskProbScaled: card.summaryRail.electiveFit ? clampStaticDemoPercent(riskProbScaled - 10) : clampStaticDemoPercent(riskProbScaled + 8),
+      scale: 'advisory-index-0-100',
+      displayProbabilityAllowed: false,
+      supportWarning: 'Derived scenario heads are advisory and not calibrated probabilities.',
+      note: 'Derived heads summarize trajectory pressure for presentation use.',
+    },
+    currentEvidence: card.overview.currentEvidence,
+    currentStatus: card.overview.currentStatus,
+    topDrivers: card.assessmentEvidence.components[0]?.drivers ?? [{ label: 'Attendance pressure', impact: 0.22, feature: 'attendancePct' }],
+    crossCourseDrivers: [
+      `${offering.code} assessment pressure trend`,
+      `Queue workload context: ${queueTasks.length} open task(s)`,
+      card.summaryRail.backlogCount > 0 ? 'Backlog carryover pressure' : 'No backlog carryover pressure',
+    ],
+    prerequisiteMap: {
+      prerequisiteCourseCodes: offering.code.startsWith('CS') ? ['MA201', 'CS201'] : ['MA201'],
+      weakPrerequisiteCourseCodes: card.summaryRail.backlogCount > 0 ? ['MA201'] : [],
+      prerequisitePressureScaled: card.summaryRail.backlogCount > 0 ? 62 : 28,
+      prerequisiteAveragePct: card.overview.currentEvidence.tt1Pct,
+      prerequisiteFailureCount: card.summaryRail.backlogCount,
+      completeness: featureCompleteness,
+    },
+    weakCourseOutcomes: card.topicAndCo.weakCourseOutcomes,
+    questionPatterns: card.topicAndCo.questionPatterns,
+    semesterSummaries: card.overview.semesterSummaries,
+    assessmentComponents: card.assessmentEvidence.components,
+    counterfactual: card.counterfactual,
+    electiveFit: card.summaryRail.electiveFit,
+  }
+}
+
+function parseStaticDemoFlag(value: string | null): boolean | null {
+  if (value === null) return null
+  const normalized = value.trim().toLowerCase()
+  if (normalized === '1' || normalized === 'true' || normalized === 'yes' || normalized === 'on') return true
+  if (normalized === '0' || normalized === 'false' || normalized === 'no' || normalized === 'off') return false
+  return null
+}
+
+function isStaticDemoModeEnabled() {
+  const configuredApiBaseUrl = getAcademicApiBaseUrl()
+  if (typeof window === 'undefined') return !configuredApiBaseUrl
+  const params = new URLSearchParams(window.location.search)
+  const explicitFlag = parseStaticDemoFlag(params.get('demo') ?? params.get('staticDemo'))
+  if (explicitFlag !== null) return explicitFlag
+  return !configuredApiBaseUrl
+}
+
+function createStaticDemoContext(): StaticDemoContext | null {
+  const repositories = createStaticDemoRepositories()
+  const bootstrap = buildStaticDemoAcademicBootstrap(repositories)
+  const byRoleBreadth = [...bootstrap.faculty].sort((left, right) => right.allowedRoles.length - left.allowedRoles.length)
+  const defaultTeacher = byRoleBreadth.find(faculty => (
+    faculty.allowedRoles.includes('Course Leader')
+    && faculty.allowedRoles.includes('Mentor')
+    && faculty.allowedRoles.includes('HoD')
+  ))
+    ?? byRoleBreadth.find(faculty => faculty.allowedRoles.includes('Course Leader'))
+    ?? byRoleBreadth[0]
+    ?? null
+  if (!defaultTeacher) return null
+  const initialRole: Role = defaultTeacher.allowedRoles.includes('Course Leader')
+    ? 'Course Leader'
+    : (defaultTeacher.allowedRoles[0] ?? 'Course Leader')
+  return {
+    repositories,
+    bootstrap,
+    initialTeacherId: defaultTeacher.facultyId,
+    initialRole,
+  }
+}
+
+function StaticDemoOperationalApp({
+  context,
+  onExitToPortal,
+}: {
+  context: StaticDemoContext
+  onExitToPortal: () => void
+}) {
+  const [authBusy, setAuthBusy] = useState(false)
+  const [authError, setAuthError] = useState('')
+  const [workspaceLoadingLabel, setWorkspaceLoadingLabel] = useState('')
+  const [sessionFacultyId, setSessionFacultyId] = useState<string | null>(null)
+  const [sessionRole, setSessionRole] = useState<Role | null>(null)
+
+  const facultyOptions = useMemo(() => restrictVisibleFacultyOptions(context.bootstrap.faculty.map(account => {
+    const accountEmail = typeof account.email === 'string' ? account.email.trim().toLowerCase() : ''
+    const accountUsername = (account as { username?: string }).username?.trim()
+      || (accountEmail.includes('@') ? accountEmail.split('@')[0] : account.facultyId)
+    return {
+      facultyId: account.facultyId,
+      username: accountUsername,
+      name: account.name,
+      displayName: account.name,
+      designation: account.roleTitle,
+      dept: account.dept,
+      departmentCode: account.dept,
+      roleTitle: account.roleTitle,
+      allowedRoles: account.allowedRoles,
+    }
+  })), [context.bootstrap.faculty])
+
+  const facultyLookup = useMemo(() => {
+    const map = new Map<string, { facultyId: string; defaultRole: Role }>()
+    context.bootstrap.faculty.forEach(account => {
+      const accountEmail = typeof account.email === 'string' ? account.email.trim().toLowerCase() : ''
+      const accountUsername = ((account as { username?: string }).username?.trim()
+        || (accountEmail.includes('@') ? accountEmail.split('@')[0] : account.facultyId)).toLowerCase()
+      const defaultRole: Role = account.allowedRoles.includes('Course Leader')
+        ? 'Course Leader'
+        : (account.allowedRoles[0] ?? 'Course Leader')
+      map.set(accountUsername, { facultyId: account.facultyId, defaultRole })
+      map.set(account.facultyId.trim().toLowerCase(), { facultyId: account.facultyId, defaultRole })
+      if (accountEmail) {
+        map.set(accountEmail, { facultyId: account.facultyId, defaultRole })
+      }
+    })
+    return map
+  }, [context.bootstrap.faculty])
+
+  const handleLocalLogin = useCallback(async (identifier: string) => {
+    setAuthBusy(true)
+    setAuthError('')
+    setWorkspaceLoadingLabel('Opening teaching workspace...')
+    try {
+      const normalizedIdentifier = identifier.trim().toLowerCase()
+      const match = facultyLookup.get(normalizedIdentifier)
+      if (!match) throw new Error('No faculty account found for this username or email.')
+      setSessionFacultyId(match.facultyId)
+      setSessionRole(match.defaultRole)
+      await context.repositories.sessionPreferences.saveCurrentFacultyId(match.facultyId)
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Academic login failed.'
+      setSessionFacultyId(null)
+      setSessionRole(null)
+      setAuthError(message)
+      throw new Error(message)
+    } finally {
+      setAuthBusy(false)
+      setWorkspaceLoadingLabel('')
+    }
+  }, [context.repositories.sessionPreferences, facultyLookup])
+
+  const handleLocalLogout = useCallback(async () => {
+    setSessionFacultyId(null)
+    setSessionRole(null)
+    setWorkspaceLoadingLabel('')
+    await context.repositories.sessionPreferences.saveCurrentFacultyId(null)
+  }, [context.repositories.sessionPreferences])
+
+  const handleUnavailablePasswordSetup = useCallback(async () => {
+    throw new Error('Password setup links are available only in connected backend mode.')
+  }, [])
+
+  const sessionReady = Boolean(sessionFacultyId && sessionRole)
+
+  return (
+    <AcademicSessionBoundary
+      backendReady
+      booting={false}
+      loadingLabel={workspaceLoadingLabel || undefined}
+      sessionReady={sessionReady}
+      facultyOptions={facultyOptions}
+      authBusy={authBusy}
+      authError={authError}
+      onBackToPortal={onExitToPortal}
+      onRequestPasswordSetup={handleUnavailablePasswordSetup}
+      onRedeemPasswordSetup={handleUnavailablePasswordSetup}
+      onClearPasswordSetupToken={() => undefined}
+      onLogin={handleLocalLogin}
+    >
+      {sessionReady ? (
+        <OperationalWorkspace
+          repositories={context.repositories}
+          liveAcademicMode={false}
+          initialTeacherId={sessionFacultyId!}
+          initialRole={sessionRole!}
+          onLogout={handleLocalLogout}
+          academicBootstrap={context.bootstrap}
+          proofPlaybackNotice={null}
+          onResetProofPlaybackSelection={() => undefined}
+        />
+      ) : null}
+    </AcademicSessionBoundary>
+  )
 }
 
 function readPasswordSetupTokenFromUrl() {
@@ -4112,6 +5408,11 @@ function PortalRouterApp() {
     if (typeof window === 'undefined') return 'home'
     return resolvePortalRoute(window.location.hash)
   })
+  const staticDemoEnabled = useMemo(() => isStaticDemoModeEnabled(), [])
+  const staticDemoContext = useMemo<StaticDemoContext | null>(() => {
+    if (!staticDemoEnabled) return null
+    return createStaticDemoContext()
+  }, [staticDemoEnabled])
 
   const handleSelectAcademic = useCallback(() => {
     setRoute('app')
@@ -4145,8 +5446,25 @@ function PortalRouterApp() {
     if (!hashBelongsToPortalRoute(window.location.hash, route)) window.location.hash = nextHash
   }, [route])
 
-  if (route === 'app') return <OperationalApp />
-  if (route === 'admin') return <SystemAdminApp onExitPortal={handleExitAdminToPortal} />
+  if (route === 'app') {
+    if (staticDemoContext) {
+      return <StaticDemoOperationalApp context={staticDemoContext} onExitToPortal={handleExitAdminToPortal} />
+    }
+    return <OperationalApp />
+  }
+
+  if (route === 'admin') {
+    if (staticDemoContext) {
+      return (
+        <StaticDemoAdminApp
+          academicBootstrap={staticDemoContext.bootstrap}
+          onExitPortal={handleExitAdminToPortal}
+          onOpenAcademic={handleSelectAcademic}
+        />
+      )
+    }
+    return <SystemAdminApp onExitPortal={handleExitAdminToPortal} />
+  }
 
   return (
     <PortalEntryScreen

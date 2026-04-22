@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "dev": "vite",
+    "dev:demo": "VITE_AIRMENTOR_API_BASE_URL= vite",
     "dev:live": "bash scripts/dev-live.sh",
     "dev:local-backend": "VITE_AIRMENTOR_API_BASE_URL=http://127.0.0.1:4000 npm run dev",
     "dev:live-with-fallback": "VITE_AIRMENTOR_API_BASE_URL=https://api-production-ab72.up.railway.app VITE_AIRMENTOR_API_FALLBACK_BASE_URLS=http://127.0.0.1:4000 npm run dev",
@@ -30,7 +31,10 @@
     "verify:final-closeout:live": "bash scripts/verify-final-closeout-live.sh",
     "diagnostics:all": "npx tsc -p tsconfig.app.json --noEmit || true; npx tsc -p tsconfig.node.json --noEmit || true; npx tsc -p tests/tsconfig.json --noEmit || true; npx tsc -p air-mentor-api/tsconfig.json --noEmit || true; npm run -s lint || true",
     "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:api": "playwright test tests/e2e/api-health.spec.ts --project=chromium",
     "preview": "vite preview",
+    "playwright:install": "playwright install --with-deps",
     "playwright:version": "nix develop -c playwright --version",
     "playwright:smoke": "bash scripts/playwright-smoke.sh",
     "playwright:firefox:acceptance": "bash scripts/playwright-firefox-acceptance.sh",
@@ -51,6 +55,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.59.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",

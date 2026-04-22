@@ -21,6 +21,15 @@ function createConfig(overrides) {
         loginRateLimitWindowMs: 15 * 60 * 1000,
         loginRateLimitMaxAttempts: 8,
         defaultThemeMode: 'frosted-focus-light',
+        smtpHost: null,
+        smtpPort: 587,
+        smtpSecure: false,
+        smtpUser: null,
+        smtpPass: null,
+        emailFromAddress: 'noreply@airmentor.example.com',
+        emailFromName: 'AirMentor',
+        passwordSetupEmailRateLimitWindowMs: 10 * 60 * 1000,
+        passwordSetupEmailRateLimitMax: 3,
         ...overrides,
     };
 }

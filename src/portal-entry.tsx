@@ -79,15 +79,15 @@ export function PortalEntryScreen({
         justifyContent: 'center',
       }}
     >
-      <div style={{ width: '100%', maxWidth: 1120 }}>
+      <main style={{ width: '100%', maxWidth: 1120 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
           <div>
             <div style={{ ...mono, fontSize: 10, color: T.accent, textTransform: 'uppercase', letterSpacing: '0.12em' }}>
               AirMentor Portal
             </div>
-            <div style={{ ...sora, fontSize: 44, fontWeight: 800, color: T.text, marginTop: 10, maxWidth: 780, lineHeight: 1.05 }}>
+            <h1 style={{ ...sora, fontSize: 44, fontWeight: 800, color: T.text, marginTop: 10, maxWidth: 780, lineHeight: 1.05 }}>
               One live site. Two runtime workspaces.
-            </div>
+            </h1>
             <div style={{ ...mono, fontSize: 12, color: T.muted, marginTop: 14, maxWidth: 700, lineHeight: 1.8 }}>
               Choose the portal that matches your role. Academic users stay in the existing teaching workspace. System admins sign in to the backend-backed control plane.
             </div>
@@ -131,7 +131,7 @@ export function PortalEntryScreen({
             onSelect={onSelectAdmin}
           />
         </div>
-      </div>
+      </main>
     </div>
   )
 }

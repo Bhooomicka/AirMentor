@@ -9,22 +9,53 @@ import { officialCodeCrosswalks, riskEvidenceSnapshots, riskModelArtifacts, simu
 import { inferObservableRisk } from '../src/lib/inference-engine.js';
 import { activateProofSimulationRun, approveProofCurriculumImport, buildCoEvidenceDiagnosticsFromRows, buildPolicyDiagnostics, createProofCurriculumImport, getProofRiskModelActive, getProofRiskModelCorrelations, getProofRiskModelEvaluation, mergeCoEvidenceDiagnostics, mergePolicyDiagnostics, recomputeObservedOnlyRisk, reviewProofCrosswalks, startProofSimulationRun, validateProofCurriculumImport, } from '../src/lib/msruas-proof-control-plane.js';
 import { resolveBatchPolicy } from '../src/modules/admin-structure.js';
-import { PROOF_CORPUS_MANIFEST, PROOF_CORPUS_MANIFEST_VERSION, scoreObservableRiskWithModel, } from '../src/lib/proof-risk-model.js';
+import { BASELINE_V5_LIKE_PROOF_RISK_TRAINING_CONFIG, PRODUCTION_RISK_THRESHOLDS, PROOF_CORPUS_MANIFEST, PROOF_CORPUS_MANIFEST_VERSION, createProofRiskModelTrainingBuilder, scoreObservableRiskWithModel, scoreObservableRiskWithChallengerModel, } from '../src/lib/proof-risk-model.js';
 import { DEFAULT_POLICY } from '../src/modules/admin-structure.js';
 import { DEFAULT_STAGE_POLICY } from '../src/lib/stage-policy.js';
 import { PROOF_QUEUE_ACTIONABLE_PPV_PROXY_MINIMUM, PROOF_QUEUE_GOVERNANCE_THRESHOLDS, PROOF_QUEUE_SECTION_EXCESS_TOLERANCE, PROOF_QUEUE_WATCH_RATE_LIMIT, proofQueueActionableRateLimitForStage, } from '../src/lib/proof-queue-governance.js';
 const DEFAULT_SEEDS = PROOF_CORPUS_MANIFEST.map(entry => entry.seed);
+const COVERAGE_24_SEEDS = [
+    101, 202, 303, 404, 505, 606, 707, 808,
+    4141, 4242, 4343, 4444, 4545, 4646, 4747, 4848,
+    5757, 5858, 5959, 6060, 6161, 6262, 6363, 6464,
+];
+const COVERAGE_32_SEEDS = [
+    101, 202, 303, 404, 505, 606, 707, 808,
+    909, 1010, 1111, 1212, 1313, 1414, 1515, 1616,
+    4141, 4242, 4343, 4444, 4545, 4646, 4747, 4848,
+    5757, 5858, 5959, 6060, 6161, 6262, 6363, 6464,
+];
+const EVAL_SEED_PROFILES = {
+    'smoke-3': [101, 4141, 5353],
+    'coverage-24': COVERAGE_24_SEEDS,
+    'coverage-32': COVERAGE_32_SEEDS,
+    'manifest-64': DEFAULT_SEEDS,
+};
 const DEFAULT_PROGRESS_EVERY = 8;
 const DEFAULT_CREATE_CONCURRENCY = Math.min(4, Math.max(1, availableParallelism() - 1));
 const EVAL_PAGE_SIZE = 5_000;
-function parseSeeds() {
+function uniqueSortedSeeds(seeds) {
+    return [...new Set(seeds.filter(value => Number.isFinite(value)).map(value => Math.floor(value)))].sort((left, right) => left - right);
+}
+function parseSeedSelection() {
     const raw = process.env.AIRMENTOR_EVAL_SEEDS?.trim();
-    if (!raw)
-        return DEFAULT_SEEDS;
-    return raw
-        .split(',')
-        .map(value => Number(value.trim()))
-        .filter(value => Number.isFinite(value));
+    if (raw) {
+        return {
+            profile: 'custom',
+            seeds: uniqueSortedSeeds(raw.split(',').map(value => Number(value.trim()))),
+        };
+    }
+    const profile = process.env.AIRMENTOR_EVAL_SEED_PROFILE?.trim();
+    if (profile && EVAL_SEED_PROFILES[profile]) {
+        return {
+            profile,
+            seeds: uniqueSortedSeeds([...EVAL_SEED_PROFILES[profile]]),
+        };
+    }
+    return {
+        profile: 'manifest-64',
+        seeds: uniqueSortedSeeds([...DEFAULT_SEEDS]),
+    };
 }
 function parseProgressEvery() {
     const raw = Number(process.env.AIRMENTOR_EVAL_PROGRESS_EVERY ?? DEFAULT_PROGRESS_EVERY);
@@ -45,6 +76,14 @@ function roundToOne(value) {
 }
 function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
+}
+function sigmoid(value) {
+    if (value >= 0) {
+        const exponent = Math.exp(-value);
+        return 1 / (1 + exponent);
+    }
+    const exponent = Math.exp(value);
+    return exponent / (1 + exponent);
 }
 function average(values) {
     return values.length > 0 ? values.reduce((sum, value) => sum + value, 0) / values.length : 0;
@@ -139,6 +178,34 @@ function brierScore(rows) {
         ? rows.reduce((sum, row) => sum + ((row.label - row.prob) ** 2), 0) / rows.length
         : 0;
 }
+function logLoss(rows) {
+    return rows.length > 0
+        ? rows.reduce((sum, row) => {
+            const prob = clamp(row.prob, 0.0001, 0.9999);
+            return sum - ((row.label * Math.log(prob)) + ((1 - row.label) * Math.log(1 - prob)));
+        }, 0) / rows.length
+        : 0;
+}
+function averagePrecision(rows) {
+    const positiveCount = rows.reduce((count, row) => count + row.label, 0);
+    if (positiveCount <= 0)
+        return 0;
+    const ordered = rows
+        .map((row, index) => ({ ...row, index }))
+        .sort((left, right) => right.prob - left.prob || left.index - right.index);
+    let truePositives = 0;
+    let falsePositives = 0;
+    let precisionSum = 0;
+    ordered.forEach(row => {
+        if (row.label === 1) {
+            truePositives += 1;
+            precisionSum += truePositives / Math.max(1, truePositives + falsePositives);
+            return;
+        }
+        falsePositives += 1;
+    });
+    return precisionSum / positiveCount;
+}
 function expectedCalibrationError(rows, binCount = 10) {
     if (!rows.length)
         return 0;
@@ -153,21 +220,255 @@ function expectedCalibrationError(rows, binCount = 10) {
     }
     return total;
 }
-function summarizeMetrics(rows) {
+function fitSigmoidCalibration(rows) {
+    if (!rows.length) {
+        return { slope: 1, intercept: 0 };
+    }
+    let slope = 1;
+    let intercept = 0;
+    for (let iteration = 0; iteration < 120; iteration += 1) {
+        let slopeGradient = 0;
+        let interceptGradient = 0;
+        for (const row of rows) {
+            const clamped = clamp(row.prob, 0.0001, 0.9999);
+            const rawLogit = Math.log(clamped / (1 - clamped));
+            const prediction = sigmoid((slope * rawLogit) + intercept);
+            const error = prediction - row.label;
+            slopeGradient += error * rawLogit;
+            interceptGradient += error;
+        }
+        const learningRate = 0.08 / (1 + (iteration / 40));
+        slope -= learningRate * (slopeGradient / Math.max(1, rows.length));
+        intercept -= learningRate * (interceptGradient / Math.max(1, rows.length));
+    }
     return {
-        brier: roundToFour(brierScore(rows)),
-        rocAuc: roundToFour(rocAuc(rows)),
-        expectedCalibrationError: roundToFour(expectedCalibrationError(rows)),
-        positiveRate: roundToFour(average(rows.map(row => row.label))),
-        support: rows.length,
+        slope: roundToFour(slope),
+        intercept: roundToFour(intercept),
     };
 }
-function evaluationPaths(rootDir) {
-    const outputDir = path.join(rootDir, 'output', 'proof-risk-model');
+function summarizeBudgetMetrics(rows, budgetRate) {
+    if (!rows.length) {
+        return {
+            budgetRate,
+            thresholdAtBudget: 0,
+            flaggedRateAtBudget: 0,
+            precisionAtBudget: 0,
+            recallAtBudget: 0,
+            overloadRatio: 0,
+        };
+    }
+    const ordered = [...rows].sort((left, right) => right.prob - left.prob);
+    const budgetCount = Math.max(1, Math.floor(rows.length * budgetRate));
+    const thresholdAtBudget = ordered[budgetCount - 1]?.prob ?? 0;
+    let flaggedCount = 0;
+    let truePositives = 0;
+    let positiveCount = 0;
+    rows.forEach(row => {
+        if (row.label === 1)
+            positiveCount += 1;
+        if (row.prob >= thresholdAtBudget) {
+            flaggedCount += 1;
+            if (row.label === 1)
+                truePositives += 1;
+        }
+    });
+    const flaggedRateAtBudget = flaggedCount / rows.length;
+    const overloadRatio = budgetRate > 0 ? flaggedRateAtBudget / budgetRate : 0;
+    return {
+        budgetRate,
+        thresholdAtBudget: roundToFour(thresholdAtBudget),
+        flaggedRateAtBudget: roundToFour(flaggedRateAtBudget),
+        precisionAtBudget: roundToFour(flaggedCount > 0 ? truePositives / flaggedCount : 0),
+        recallAtBudget: roundToFour(positiveCount > 0 ? truePositives / positiveCount : 0),
+        overloadRatio: roundToFour(overloadRatio),
+    };
+}
+function summarizeThresholdMetrics(rows, threshold) {
+    if (!rows.length) {
+        return {
+            flaggedRate: 0,
+            precision: 0,
+            recall: 0,
+        };
+    }
+    let flaggedCount = 0;
+    let truePositives = 0;
+    let positiveCount = 0;
+    rows.forEach(row => {
+        if (row.label === 1)
+            positiveCount += 1;
+        if (row.prob < threshold)
+            return;
+        flaggedCount += 1;
+        if (row.label === 1)
+            truePositives += 1;
+    });
+    return {
+        flaggedRate: roundToFour(flaggedCount / rows.length),
+        precision: roundToFour(flaggedCount > 0 ? truePositives / flaggedCount : 0),
+        recall: roundToFour(positiveCount > 0 ? truePositives / positiveCount : 0),
+    };
+}
+function summarizeMetrics(rows, budgetRate = 0.20) {
+    const calibration = fitSigmoidCalibration(rows);
+    return {
+        brier: roundToFour(brierScore(rows)),
+        logLoss: roundToFour(logLoss(rows)),
+        rocAuc: roundToFour(rocAuc(rows)),
+        averagePrecision: roundToFour(averagePrecision(rows)),
+        expectedCalibrationError: roundToFour(expectedCalibrationError(rows)),
+        calibrationSlope: calibration.slope,
+        calibrationIntercept: calibration.intercept,
+        positiveRate: roundToFour(average(rows.map(row => row.label))),
+        support: rows.length,
+        mediumThreshold: summarizeThresholdMetrics(rows, PRODUCTION_RISK_THRESHOLDS.medium),
+        highThreshold: summarizeThresholdMetrics(rows, PRODUCTION_RISK_THRESHOLDS.high),
+        budgetMetrics: summarizeBudgetMetrics(rows, budgetRate),
+    };
+}
+export function blendProbabilityRows(currentRows, challengerRows, alpha) {
+    if (currentRows.length !== challengerRows.length) {
+        throw new Error(`Hybrid blend requires aligned row counts (current=${currentRows.length}, challenger=${challengerRows.length})`);
+    }
+    const clampedAlpha = clamp(alpha, 0, 1);
+    return currentRows.map((row, index) => {
+        const challengerRow = challengerRows[index];
+        if (!challengerRow) {
+            throw new Error(`Hybrid blend missing challenger row at index ${index}`);
+        }
+        if (row.label !== challengerRow.label) {
+            throw new Error(`Hybrid blend label mismatch at index ${index}: current=${row.label}, challenger=${challengerRow.label}`);
+        }
+        return {
+            label: row.label,
+            prob: roundToFour((clampedAlpha * row.prob) + ((1 - clampedAlpha) * challengerRow.prob)),
+        };
+    });
+}
+function compareHybridBlendChoice(left, right) {
+    const lowerBetterChecks = [
+        [left.metrics.logLoss, right.metrics.logLoss, 0.0005],
+        [left.metrics.brier, right.metrics.brier, 0.0005],
+        [left.metrics.expectedCalibrationError, right.metrics.expectedCalibrationError, 0.0005],
+    ];
+    for (const [leftValue, rightValue, epsilon] of lowerBetterChecks) {
+        if (leftValue + epsilon < rightValue)
+            return -1;
+        if (rightValue + epsilon < leftValue)
+            return 1;
+    }
+    const higherBetterChecks = [
+        [left.metrics.averagePrecision, right.metrics.averagePrecision, 0.001],
+        [left.metrics.rocAuc, right.metrics.rocAuc, 0.001],
+        [left.metrics.budgetMetrics.precisionAtBudget, right.metrics.budgetMetrics.precisionAtBudget, 0.001],
+        [left.metrics.budgetMetrics.recallAtBudget, right.metrics.budgetMetrics.recallAtBudget, 0.001],
+        [left.metrics.highThreshold.precision, right.metrics.highThreshold.precision, 0.001],
+        [left.metrics.mediumThreshold.recall, right.metrics.mediumThreshold.recall, 0.001],
+    ];
+    for (const [leftValue, rightValue, epsilon] of higherBetterChecks) {
+        if (leftValue > rightValue + epsilon)
+            return -1;
+        if (rightValue > leftValue + epsilon)
+            return 1;
+    }
+    return Math.abs(left.alpha - 1) - Math.abs(right.alpha - 1);
+}
+export function chooseHybridBlendAlpha(currentRows, challengerRows, headKey, alphaGrid = [1, 0]) {
+    if (currentRows.length === 0 || challengerRows.length === 0) {
+        return {
+            alpha: 1,
+            metrics: summarizeMetrics(currentRows),
+        };
+    }
+    if (headKey === 'downstreamCarryoverRisk' || headKey === 'overallCourseRisk') {
+        return {
+            alpha: 1,
+            metrics: summarizeMetrics(currentRows),
+        };
+    }
+    const choices = alphaGrid.map(alpha => ({
+        alpha,
+        metrics: summarizeMetrics(blendProbabilityRows(currentRows, challengerRows, alpha)),
+    }));
+    const currentChoice = choices.find(c => c.alpha === 1);
+    const validChoices = choices.filter(choice => {
+        if (choice.alpha === 1)
+            return true;
+        if (choice.metrics.support < 50)
+            return false;
+        if (currentChoice.metrics.rocAuc - choice.metrics.rocAuc > 0.01)
+            return false;
+        if (choice.metrics.expectedCalibrationError - currentChoice.metrics.expectedCalibrationError > 0.02)
+            return false;
+        return true;
+    });
+    return validChoices.sort(compareHybridBlendChoice)[0];
+}
+export function buildHybridBlendPlan(headKey, validationRows, validationRowsByStage) {
+    const fallback = chooseHybridBlendAlpha(validationRows.current, validationRows.challenger, headKey);
+    return {
+        fallbackAlpha: fallback.alpha,
+        fallbackMetrics: fallback.metrics,
+        byStage: Object.fromEntries(Object.entries(validationRowsByStage).map(([stageKey, rows]) => {
+            const choice = chooseHybridBlendAlpha(rows.current, rows.challenger, headKey);
+            return [stageKey, {
+                    alpha: choice.alpha,
+                    metrics: choice.metrics,
+                    support: rows.current.length,
+                }];
+        })),
+    };
+}
+function summarizeVariantDelta(reference, candidate) {
+    return {
+        brierLift: roundToFour(candidate.brier - reference.brier),
+        aucLift: roundToFour(reference.rocAuc - candidate.rocAuc),
+        averagePrecisionLift: roundToFour(reference.averagePrecision - candidate.averagePrecision),
+        calibrationGain: roundToFour(candidate.expectedCalibrationError - reference.expectedCalibrationError),
+    };
+}
+function summarizeVariantComparison(input) {
+    const current = summarizeMetrics(input.current);
+    const baseline = summarizeMetrics(input.baseline);
+    const challenger = summarizeMetrics(input.challenger);
+    const hybrid = summarizeMetrics(input.hybrid);
+    const heuristic = summarizeMetrics(input.heuristic);
+    return {
+        current,
+        baseline,
+        challenger,
+        hybrid,
+        heuristic,
+        currentVsBaseline: summarizeVariantDelta(current, baseline),
+        currentVsChallenger: summarizeVariantDelta(current, challenger),
+        currentVsHybrid: summarizeVariantDelta(current, hybrid),
+        currentVsHeuristic: summarizeVariantDelta(current, heuristic),
+        hybridVsChallenger: summarizeVariantDelta(hybrid, challenger),
+        challengerVsHeuristic: summarizeVariantDelta(challenger, heuristic),
+    };
+}
+export function evaluationPaths(rootDir) {
+    const configuredOutputDir = process.env.AIRMENTOR_EVAL_OUTPUT_DIR?.trim();
+    const configuredOutputStem = process.env.AIRMENTOR_EVAL_OUTPUT_STEM?.trim();
+    const outputDir = configuredOutputDir
+        ? path.resolve(rootDir, configuredOutputDir)
+        : path.join(rootDir, 'output', 'proof-risk-model');
+    const outputStem = configuredOutputStem
+        ? path.basename(configuredOutputStem, path.extname(configuredOutputStem))
+        : 'evaluation-report';
     return {
         outputDir,
-        jsonPath: path.join(outputDir, 'evaluation-report.json'),
-        markdownPath: path.join(outputDir, 'evaluation-report.md'),
+        jsonPath: path.join(outputDir, `${outputStem}.json`),
+        markdownPath: path.join(outputDir, `${outputStem}.md`),
+    };
+}
+function createVariantProbabilityBuckets() {
+    return {
+        current: [],
+        baseline: [],
+        challenger: [],
+        hybrid: [],
+        heuristic: [],
     };
 }
 async function reviewPendingCrosswalks(current, curriculumImportVersionId) {
@@ -225,13 +526,27 @@ function compareGovernedCorpusRuns(left, right) {
         return right.createdAt.localeCompare(left.createdAt);
     return left.simulationRunId.localeCompare(right.simulationRunId);
 }
+function runMatchesManifestScenarioFamily(row, manifestEntry) {
+    if (!manifestEntry)
+        return true;
+    try {
+        const metrics = JSON.parse(row.metricsJson ?? '{}');
+        return typeof metrics.scenarioFamily !== 'string' || metrics.scenarioFamily === manifestEntry.scenarioFamily;
+    }
+    catch {
+        return true;
+    }
+}
 function selectGovernedCorpusRuns(runRows, manifest = PROOF_CORPUS_MANIFEST, completeRunIds) {
     const manifestBySeed = new Map(manifest.map(entry => [entry.seed, entry]));
     const candidatesBySeed = new Map();
     runRows.forEach(row => {
-        if (!manifestBySeed.has(row.seed))
+        const manifestEntry = manifestBySeed.get(row.seed);
+        if (!manifestEntry)
             return;
         if (completeRunIds && !completeRunIds.has(row.simulationRunId))
+            return;
+        if (!runMatchesManifestScenarioFamily(row, manifestEntry))
             return;
         candidatesBySeed.set(row.seed, [...(candidatesBySeed.get(row.seed) ?? []), row]);
     });
@@ -260,6 +575,10 @@ function selectGovernedCorpusRuns(runRows, manifest = PROOF_CORPUS_MANIFEST, com
                 .map(row => row.simulationRunId)
                 .sort()
             : [],
+        skippedScenarioMismatchManifestRunIds: runRows
+            .filter(row => manifestBySeed.has(row.seed) && !runMatchesManifestScenarioFamily(row, manifestBySeed.get(row.seed)))
+            .map(row => row.simulationRunId)
+            .sort(),
     };
 }
 function selectCompleteGovernedRunIdsFromCounts(input) {
@@ -342,7 +661,8 @@ async function main() {
         });
         logProgress(`approved proof import ${createdImport.curriculumImportVersionId}`);
         const manifestBySeed = new Map(PROOF_CORPUS_MANIFEST.map(entry => [entry.seed, entry]));
-        const requestedSeeds = parseSeeds();
+        const seedSelection = parseSeedSelection();
+        const requestedSeeds = seedSelection.seeds;
         const governedSeeds = requestedSeeds.filter(seed => manifestBySeed.has(seed));
         const skippedRequestedSeeds = requestedSeeds.filter(seed => !manifestBySeed.has(seed));
         if (governedSeeds.length === 0) {
@@ -432,7 +752,7 @@ async function main() {
             ?? selectedGovernedRuns.find(row => row.status === 'completed' || row.status === 'active')?.simulationRunId
             ?? selectedGovernedRuns.at(-1).simulationRunId;
         logProgress(`selected ${selectedGovernedRuns.length}/${governedSeeds.length} governed runs `
-            + `(duplicates skipped: ${governedSelection.skippedDuplicateManifestRunIds.length}, incomplete skipped: ${governedSelection.skippedIncompleteManifestRunIds.length}, non-manifest skipped: ${governedSelection.skippedNonManifestRunIds.length})`);
+            + `(duplicates skipped: ${governedSelection.skippedDuplicateManifestRunIds.length}, incomplete skipped: ${governedSelection.skippedIncompleteManifestRunIds.length}, scenario-mismatch skipped: ${governedSelection.skippedScenarioMismatchManifestRunIds.length}, non-manifest skipped: ${governedSelection.skippedNonManifestRunIds.length})`);
         logProgress(`activating run ${activeRunId}`);
         await activateProofSimulationRun(current.db, {
             simulationRunId: activeRunId,
@@ -460,11 +780,15 @@ async function main() {
         if (!activeProductionArtifactRow || !activeCorrelationArtifactRow) {
             throw new Error('Active production or correlation artifact is missing after evaluation run generation');
         }
-        const productionModel = JSON.parse(activeProductionArtifactRow.payloadJson);
-        const correlations = JSON.parse(activeCorrelationArtifactRow.payloadJson);
         const selectedRunRows = selectedGovernedRuns;
         const splitByRunId = new Map(selectedRunRows.map(row => [row.simulationRunId, manifestBySeed.get(row.seed)?.split ?? 'train']));
         const scenarioFamilyByRunId = new Map(selectedRunRows.map(row => [row.simulationRunId, manifestBySeed.get(row.seed)?.scenarioFamily ?? 'balanced']));
+        const runMetadataById = new Map(selectedRunRows.map(row => [row.simulationRunId, {
+                simulationRunId: row.simulationRunId,
+                seed: row.seed,
+                split: manifestBySeed.get(row.seed)?.split ?? 'train',
+                scenarioFamily: manifestBySeed.get(row.seed)?.scenarioFamily ?? 'balanced',
+            }]));
         const headLabels = [
             ['attendanceRisk', 'attendanceRiskLabel'],
             ['ceRisk', 'ceShortfallLabel'],
@@ -472,16 +796,17 @@ async function main() {
             ['overallCourseRisk', 'overallCourseFailLabel'],
             ['downstreamCarryoverRisk', 'downstreamCarryoverLabel'],
         ];
-        const modelVsHeuristic = Object.fromEntries(headLabels.map(([headKey]) => [headKey, {
-                model: [],
-                heuristic: [],
-            }]));
-        const overallCourseRuntimeVsHeuristic = {
-            model: [],
-            heuristic: [],
-        };
         const coEvidenceDiagnosticsPages = [];
         const perRunPolicyDiagnostics = [];
+        const currentVariantBuilder = createProofRiskModelTrainingBuilder({
+            runMetadataById,
+            manifest: PROOF_CORPUS_MANIFEST,
+        });
+        const baselineVariantBuilder = createProofRiskModelTrainingBuilder({
+            runMetadataById,
+            manifest: PROOF_CORPUS_MANIFEST,
+            trainingConfig: BASELINE_V5_LIKE_PROOF_RISK_TRAINING_CONFIG,
+        });
         const actionRollupSeed = new Map();
         const stageRollupSeed = new Map();
         const queueStageRunSeed = new Map();
@@ -524,6 +849,14 @@ async function main() {
             }).from(riskEvidenceSnapshots).where(and(...conditions)).orderBy(asc(riskEvidenceSnapshots.riskEvidenceSnapshotId)).limit(EVAL_PAGE_SIZE);
             if (page.length === 0)
                 break;
+            const pageRowsForBuilders = page.filter(row => !!row.simulationRunId && !!splitByRunId.get(row.simulationRunId))
+                .map(row => ({
+                featureJson: row.featureJson,
+                labelJson: row.labelJson,
+                sourceRefsJson: row.sourceRefsJson,
+            }));
+            currentVariantBuilder.addSerializedRows(pageRowsForBuilders);
+            baselineVariantBuilder.addSerializedRows(pageRowsForBuilders);
             for (const row of page) {
                 if (!row.simulationRunId)
                     continue;
@@ -535,16 +868,69 @@ async function main() {
                 incrementCount(rowsBySemester, String(row.semesterNumber));
                 const sourceRefs = JSON.parse(row.sourceRefsJson);
                 const labelPayload = JSON.parse(row.labelJson);
-                incrementCount(rowsByStage, sourceRefs.stageKey ?? 'active');
+                const stageKey = sourceRefs.stageKey ?? 'active';
+                incrementCount(rowsByStage, stageKey);
                 incrementCount(rowsByScenarioFamily, scenarioFamilyByRunId.get(row.simulationRunId) ?? 'balanced');
                 headLabels.forEach(([headKey, labelKey]) => {
                     positiveCountsByHeadBySplit[headKey][split] += labelPayload[labelKey];
                 });
-                if (split !== 'test')
+            }
+            coEvidenceDiagnosticsPages.push(buildCoEvidenceDiagnosticsFromRows(page.map(row => {
+                const sourceRefs = JSON.parse(row.sourceRefsJson);
+                return {
+                    semesterNumber: row.semesterNumber,
+                    courseFamily: sourceRefs.courseFamily ?? null,
+                    coEvidenceMode: sourceRefs.coEvidenceMode ?? null,
+                };
+            })));
+            lastEvidenceSnapshotId = page[page.length - 1]?.riskEvidenceSnapshotId ?? null;
+        }
+        const currentLocalBundle = currentVariantBuilder.build(TEST_NOW);
+        const baselineLocalBundle = baselineVariantBuilder.build(TEST_NOW);
+        if (!currentLocalBundle || !baselineLocalBundle) {
+            throw new Error('Local variant training failed after evaluator corpus extraction');
+        }
+        const validationVariantHeadRows = Object.fromEntries(headLabels.map(([headKey]) => [headKey, createVariantProbabilityBuckets()]));
+        const validationVariantHeadRowsByStage = Object.fromEntries(headLabels.map(([headKey]) => [headKey, {}]));
+        const variantHeadRows = Object.fromEntries(headLabels.map(([headKey]) => [headKey, createVariantProbabilityBuckets()]));
+        const variantHeadRowsByStage = Object.fromEntries(headLabels.map(([headKey]) => [headKey, {}]));
+        const validationOverallCourseVariantRows = createVariantProbabilityBuckets();
+        const validationOverallCourseVariantRowsByStage = {};
+        const overallCourseVariantRows = createVariantProbabilityBuckets();
+        const overallCourseVariantRowsByStage = {};
+        totalTestRows = 0;
+        lastEvidenceSnapshotId = null;
+        for (;;) {
+            const conditions = [
+                eq(riskEvidenceSnapshots.batchId, MSRUAS_PROOF_BATCH_ID),
+                isNotNull(riskEvidenceSnapshots.simulationStageCheckpointId),
+                inArray(riskEvidenceSnapshots.simulationRunId, selectedGovernedRunIdList),
+            ];
+            if (lastEvidenceSnapshotId)
+                conditions.push(gt(riskEvidenceSnapshots.riskEvidenceSnapshotId, lastEvidenceSnapshotId));
+            const page = await current.db.select({
+                riskEvidenceSnapshotId: riskEvidenceSnapshots.riskEvidenceSnapshotId,
+                simulationRunId: riskEvidenceSnapshots.simulationRunId,
+                semesterNumber: riskEvidenceSnapshots.semesterNumber,
+                featureJson: riskEvidenceSnapshots.featureJson,
+                labelJson: riskEvidenceSnapshots.labelJson,
+                sourceRefsJson: riskEvidenceSnapshots.sourceRefsJson,
+            }).from(riskEvidenceSnapshots).where(and(...conditions)).orderBy(asc(riskEvidenceSnapshots.riskEvidenceSnapshotId)).limit(EVAL_PAGE_SIZE);
+            if (page.length === 0)
+                break;
+            for (const row of page) {
+                if (!row.simulationRunId)
                     continue;
-                totalTestRows += 1;
+                const split = splitByRunId.get(row.simulationRunId);
+                if (split !== 'validation' && split !== 'test')
+                    continue;
+                if (split === 'test')
+                    totalTestRows += 1;
+                const sourceRefs = JSON.parse(row.sourceRefsJson);
+                const labelPayload = JSON.parse(row.labelJson);
                 const featurePayload = JSON.parse(row.featureJson);
-                const model = scoreObservableRiskWithModel({
+                const stageKey = sourceRefs.stageKey ?? 'active';
+                const currentModel = scoreObservableRiskWithModel({
                     attendancePct: featurePayload.attendancePct,
                     currentCgpa: featurePayload.currentCgpa,
                     backlogCount: featurePayload.backlogCount,
@@ -560,8 +946,32 @@ async function main() {
                     policy: DEFAULT_POLICY,
                     featurePayload,
                     sourceRefs,
-                    productionModel,
-                    correlations,
+                    productionModel: currentLocalBundle.production,
+                    correlations: currentLocalBundle.correlations,
+                });
+                const baselineModel = scoreObservableRiskWithModel({
+                    attendancePct: featurePayload.attendancePct,
+                    currentCgpa: featurePayload.currentCgpa,
+                    backlogCount: featurePayload.backlogCount,
+                    tt1Pct: featurePayload.tt1Pct,
+                    tt2Pct: featurePayload.tt2Pct,
+                    quizPct: featurePayload.quizPct,
+                    assignmentPct: featurePayload.assignmentPct,
+                    seePct: featurePayload.seePct,
+                    weakCoCount: featurePayload.weakCoCount,
+                    attendanceHistoryRiskCount: featurePayload.attendanceHistoryRiskCount,
+                    questionWeaknessCount: featurePayload.weakQuestionCount,
+                    interventionResponseScore: featurePayload.interventionResponseScore,
+                    policy: DEFAULT_POLICY,
+                    featurePayload,
+                    sourceRefs,
+                    productionModel: baselineLocalBundle.production,
+                    correlations: baselineLocalBundle.correlations,
+                });
+                const challengerModel = scoreObservableRiskWithChallengerModel({
+                    featurePayload,
+                    sourceRefs,
+                    challengerModel: currentLocalBundle.challenger,
                 });
                 const heuristic = inferObservableRisk({
                     attendancePct: featurePayload.attendancePct,
@@ -578,34 +988,104 @@ async function main() {
                     interventionResponseScore: featurePayload.interventionResponseScore,
                     policy: DEFAULT_POLICY,
                 });
-                overallCourseRuntimeVsHeuristic.model.push({
+                const targetHeadRows = split === 'validation' ? validationVariantHeadRows : variantHeadRows;
+                const targetHeadRowsByStage = split === 'validation' ? validationVariantHeadRowsByStage : variantHeadRowsByStage;
+                const targetOverallCourseRows = split === 'validation' ? validationOverallCourseVariantRows : overallCourseVariantRows;
+                const targetOverallCourseRowsByStage = split === 'validation' ? validationOverallCourseVariantRowsByStage : overallCourseVariantRowsByStage;
+                targetOverallCourseRows.current.push({
                     label: labelPayload.overallCourseFailLabel,
-                    prob: model.headProbabilities.overallCourseRisk,
+                    prob: currentModel.headProbabilities.overallCourseRisk,
                 });
-                overallCourseRuntimeVsHeuristic.heuristic.push({
+                targetOverallCourseRows.baseline.push({
+                    label: labelPayload.overallCourseFailLabel,
+                    prob: baselineModel.headProbabilities.overallCourseRisk,
+                });
+                targetOverallCourseRows.challenger.push({
+                    label: labelPayload.overallCourseFailLabel,
+                    prob: challengerModel.overallCourseRisk,
+                });
+                targetOverallCourseRows.heuristic.push({
                     label: labelPayload.overallCourseFailLabel,
                     prob: heuristic.riskProb,
                 });
+                const overallStageBucket = targetOverallCourseRowsByStage[stageKey] ?? createVariantProbabilityBuckets();
+                overallStageBucket.current.push({
+                    label: labelPayload.overallCourseFailLabel,
+                    prob: currentModel.headProbabilities.overallCourseRisk,
+                });
+                overallStageBucket.baseline.push({
+                    label: labelPayload.overallCourseFailLabel,
+                    prob: baselineModel.headProbabilities.overallCourseRisk,
+                });
+                overallStageBucket.challenger.push({
+                    label: labelPayload.overallCourseFailLabel,
+                    prob: challengerModel.overallCourseRisk,
+                });
+                overallStageBucket.heuristic.push({
+                    label: labelPayload.overallCourseFailLabel,
+                    prob: heuristic.riskProb,
+                });
+                targetOverallCourseRowsByStage[stageKey] = overallStageBucket;
                 headLabels.forEach(([headKey, labelKey]) => {
-                    modelVsHeuristic[headKey].model.push({
+                    targetHeadRows[headKey].current.push({
                         label: labelPayload[labelKey],
-                        prob: model.headProbabilities[headKey],
+                        prob: currentModel.headProbabilities[headKey],
                     });
-                    modelVsHeuristic[headKey].heuristic.push({
+                    targetHeadRows[headKey].baseline.push({
+                        label: labelPayload[labelKey],
+                        prob: baselineModel.headProbabilities[headKey],
+                    });
+                    targetHeadRows[headKey].challenger.push({
+                        label: labelPayload[labelKey],
+                        prob: challengerModel[headKey],
+                    });
+                    targetHeadRows[headKey].heuristic.push({
                         label: labelPayload[labelKey],
                         prob: heuristic.riskProb,
                     });
+                    const stageBucket = targetHeadRowsByStage[headKey][stageKey] ?? createVariantProbabilityBuckets();
+                    stageBucket.current.push({
+                        label: labelPayload[labelKey],
+                        prob: currentModel.headProbabilities[headKey],
+                    });
+                    stageBucket.baseline.push({
+                        label: labelPayload[labelKey],
+                        prob: baselineModel.headProbabilities[headKey],
+                    });
+                    stageBucket.challenger.push({
+                        label: labelPayload[labelKey],
+                        prob: challengerModel[headKey],
+                    });
+                    stageBucket.heuristic.push({
+                        label: labelPayload[labelKey],
+                        prob: heuristic.riskProb,
+                    });
+                    targetHeadRowsByStage[headKey][stageKey] = stageBucket;
                 });
             }
-            coEvidenceDiagnosticsPages.push(buildCoEvidenceDiagnosticsFromRows(page.map(row => {
-                const sourceRefs = JSON.parse(row.sourceRefsJson);
-                return {
-                    semesterNumber: row.semesterNumber,
-                    courseFamily: sourceRefs.courseFamily ?? null,
-                    coEvidenceMode: sourceRefs.coEvidenceMode ?? null,
-                };
-            })));
             lastEvidenceSnapshotId = page[page.length - 1]?.riskEvidenceSnapshotId ?? null;
+        }
+        const hybridPlanByHead = Object.fromEntries(headLabels.map(([headKey]) => {
+            const validationRowsByStage = Object.fromEntries(Object.entries(validationVariantHeadRowsByStage[headKey]).map(([stageKey, rows]) => [stageKey, {
+                    current: rows.current,
+                    challenger: rows.challenger,
+                }]));
+            const plan = buildHybridBlendPlan(headKey, {
+                current: validationVariantHeadRows[headKey].current,
+                challenger: validationVariantHeadRows[headKey].challenger,
+            }, validationRowsByStage);
+            for (const [stageKey, stageBucket] of Object.entries(variantHeadRowsByStage[headKey])) {
+                const alpha = plan.byStage[stageKey]?.alpha ?? plan.fallbackAlpha;
+                stageBucket.hybrid = blendProbabilityRows(stageBucket.current, stageBucket.challenger, alpha);
+                variantHeadRows[headKey].hybrid.push(...stageBucket.hybrid);
+            }
+            return [headKey, plan];
+        }));
+        const overallCourseHybridPlan = hybridPlanByHead.overallCourseRisk;
+        for (const [stageKey, stageBucket] of Object.entries(overallCourseVariantRowsByStage)) {
+            const alpha = overallCourseHybridPlan.byStage[stageKey]?.alpha ?? overallCourseHybridPlan.fallbackAlpha;
+            stageBucket.hybrid = blendProbabilityRows(stageBucket.current, stageBucket.challenger, alpha);
+            overallCourseVariantRows.hybrid.push(...stageBucket.hybrid);
         }
         for (const runRow of selectedRunRows) {
             const [projectionRows, queueRows, checkpointRows] = await Promise.all([
@@ -821,9 +1301,17 @@ async function main() {
             };
         })
             .sort((left, right) => left.semesterNumber - right.semesterNumber || left.stageOrder - right.stageOrder);
+        const variantComparisonSummary = Object.fromEntries(headLabels.map(([headKey]) => [
+            headKey,
+            summarizeVariantComparison(variantHeadRows[headKey]),
+        ]));
+        const variantComparisonByStage = Object.fromEntries(headLabels.map(([headKey]) => [headKey, Object.fromEntries(Object.entries(variantHeadRowsByStage[headKey]).map(([stageKey, summaries]) => [
+                stageKey,
+                summarizeVariantComparison(summaries),
+            ]))]));
         const modelSummary = Object.fromEntries(headLabels.map(([headKey]) => {
-            const modelMetrics = summarizeMetrics(modelVsHeuristic[headKey].model);
-            const heuristicMetrics = summarizeMetrics(modelVsHeuristic[headKey].heuristic);
+            const modelMetrics = variantComparisonSummary[headKey].current;
+            const heuristicMetrics = variantComparisonSummary[headKey].heuristic;
             return [headKey, {
                     model: modelMetrics,
                     heuristic: heuristicMetrics,
@@ -831,14 +1319,39 @@ async function main() {
                     aucLift: roundToFour(modelMetrics.rocAuc - heuristicMetrics.rocAuc),
                 }];
         }));
-        const runtimeModelMetrics = summarizeMetrics(overallCourseRuntimeVsHeuristic.model);
-        const runtimeHeuristicMetrics = summarizeMetrics(overallCourseRuntimeVsHeuristic.heuristic);
+        const modelSummaryByStage = Object.fromEntries(headLabels.map(([headKey]) => [headKey, Object.fromEntries(Object.entries(variantComparisonByStage[headKey]).map(([stageKey, summaries]) => {
+                const modelMetrics = summaries.current;
+                const heuristicMetrics = summaries.heuristic;
+                return [stageKey, {
+                        model: modelMetrics,
+                        heuristic: heuristicMetrics,
+                        brierLift: roundToFour(heuristicMetrics.brier - modelMetrics.brier),
+                        aucLift: roundToFour(modelMetrics.rocAuc - heuristicMetrics.rocAuc),
+                    }];
+            }))]));
+        const overallCourseVariantSummary = summarizeVariantComparison(overallCourseVariantRows);
+        const overallCourseVariantSummaryByStage = Object.fromEntries(Object.entries(overallCourseVariantRowsByStage).map(([stageKey, summaries]) => [
+            stageKey,
+            summarizeVariantComparison(summaries),
+        ]));
+        const runtimeModelMetrics = overallCourseVariantSummary.current;
+        const runtimeHeuristicMetrics = overallCourseVariantSummary.heuristic;
         const overallCourseRuntimeSummary = {
             model: runtimeModelMetrics,
             heuristic: runtimeHeuristicMetrics,
             brierLift: roundToFour(runtimeHeuristicMetrics.brier - runtimeModelMetrics.brier),
             aucLift: roundToFour(runtimeModelMetrics.rocAuc - runtimeHeuristicMetrics.rocAuc),
         };
+        const overallCourseRuntimeSummaryByStage = Object.fromEntries(Object.entries(overallCourseVariantSummaryByStage).map(([stageKey, summaries]) => {
+            const modelMetrics = summaries.current;
+            const heuristicMetrics = summaries.heuristic;
+            return [stageKey, {
+                    model: modelMetrics,
+                    heuristic: heuristicMetrics,
+                    brierLift: roundToFour(heuristicMetrics.brier - modelMetrics.brier),
+                    aucLift: roundToFour(modelMetrics.rocAuc - heuristicMetrics.rocAuc),
+                }];
+        }));
         const adminProductionDiagnostics = modelEvaluationResponse.production ?? null;
         const policyDiagnostics = mergePolicyDiagnostics(perRunPolicyDiagnostics);
         const coEvidenceDiagnostics = mergeCoEvidenceDiagnostics(coEvidenceDiagnosticsPages);
@@ -916,6 +1429,7 @@ async function main() {
         };
         const output = {
             generatedAt: new Date().toISOString(),
+            seedProfile: seedSelection.profile,
             requestedSeeds,
             governedSeeds,
             skippedRequestedSeeds,
@@ -941,6 +1455,8 @@ async function main() {
                 duplicateGovernedRunIds: governedSelection.skippedDuplicateManifestRunIds,
                 incompleteGovernedRunCount: governedSelection.skippedIncompleteManifestRunIds.length,
                 incompleteGovernedRunIds: governedSelection.skippedIncompleteManifestRunIds,
+                scenarioMismatchGovernedRunCount: governedSelection.skippedScenarioMismatchManifestRunIds.length,
+                scenarioMismatchGovernedRunIds: governedSelection.skippedScenarioMismatchManifestRunIds,
                 skippedNonManifestRunCount: governedSelection.skippedNonManifestRunIds.length,
                 skippedNonManifestRunIds: governedSelection.skippedNonManifestRunIds,
                 missingManifestSeeds: governedSelection.skippedSeeds,
@@ -959,9 +1475,37 @@ async function main() {
                 activeModelFromEndpoint: modelActiveResponse,
                 correlationsFromEndpoint: modelCorrelationResponse,
             },
+            localVariants: {
+                current: {
+                    productionModelVersion: currentLocalBundle.production.modelVersion,
+                    challengerModelVersion: currentLocalBundle.challenger.modelVersion,
+                    challengerModelFamily: currentLocalBundle.challenger.modelFamily,
+                    calibrationVersion: currentLocalBundle.production.calibrationVersion,
+                },
+                baseline: {
+                    productionModelVersion: baselineLocalBundle.production.modelVersion,
+                    challengerModelVersion: baselineLocalBundle.challenger.modelVersion,
+                    challengerModelFamily: baselineLocalBundle.challenger.modelFamily,
+                    calibrationVersion: baselineLocalBundle.production.calibrationVersion,
+                },
+            },
+            hybridPlan: {
+                note: 'Validation-tuned stage router between current-v6 and challenger. Alpha 1 = current-v6, alpha 0 = challenger.',
+                byHead: Object.fromEntries(headLabels.map(([headKey]) => [headKey, {
+                        fallbackAlpha: hybridPlanByHead[headKey].fallbackAlpha,
+                        fallbackMetrics: hybridPlanByHead[headKey].fallbackMetrics,
+                        byStage: hybridPlanByHead[headKey].byStage,
+                    }])),
+            },
             overallCourseRuntimeSummary,
+            overallCourseRuntimeSummaryByStage,
+            overallCourseVariantSummary,
+            overallCourseVariantSummaryByStage,
             runtimeSummary: overallCourseRuntimeSummary,
             modelSummary,
+            modelSummaryByStage,
+            variantComparisonSummary,
+            variantComparisonByStage,
             carryoverHeadSummary,
             policyDiagnostics,
             coEvidenceDiagnostics,
@@ -983,6 +1527,7 @@ async function main() {
             '',
             '## Corpus',
             '',
+            `- Seed profile: ${output.seedProfile}`,
             `- Requested seeds: ${requestedSeeds.join(', ')}`,
             `- Governed seeds evaluated: ${governedSeeds.join(', ')}`,
             `- Reused existing governed runs: ${reusedRunIds.length}`,
@@ -993,6 +1538,7 @@ async function main() {
             `- Held-out test rows: ${output.corpus.totalTestRows}`,
             `- Active run used for UI parity: ${output.corpus.activeRunId}`,
             `- Duplicate governed runs skipped: ${output.corpus.duplicateGovernedRunCount}`,
+            `- Scenario-mismatch governed runs skipped: ${output.corpus.scenarioMismatchGovernedRunCount}`,
             `- Non-manifest runs skipped: ${output.corpus.skippedNonManifestRunCount}`,
             `- Stage definitions per semester: ${output.corpus.completenessGate.stageCountPerSemester}`,
             `- Complete requested runs: ${output.corpus.completenessGate.completeRequestedRunCount}`,
@@ -1009,9 +1555,9 @@ async function main() {
             '',
             '## Overall Course Runtime Risk',
             '',
-            markdownTable(['Scorer', 'Brier', 'ROC-AUC', 'ECE', 'Positive Rate', 'Support'], [
-                ['model', output.overallCourseRuntimeSummary.model.brier, output.overallCourseRuntimeSummary.model.rocAuc, output.overallCourseRuntimeSummary.model.expectedCalibrationError, output.overallCourseRuntimeSummary.model.positiveRate, output.overallCourseRuntimeSummary.model.support],
-                ['heuristic', output.overallCourseRuntimeSummary.heuristic.brier, output.overallCourseRuntimeSummary.heuristic.rocAuc, output.overallCourseRuntimeSummary.heuristic.expectedCalibrationError, output.overallCourseRuntimeSummary.heuristic.positiveRate, output.overallCourseRuntimeSummary.heuristic.support],
+            markdownTable(['Scorer', 'Brier', 'Log Loss', 'ROC-AUC', 'PR-AUC', 'ECE', 'Slope', 'Intercept', 'Positive Rate', 'Support'], [
+                ['model', output.overallCourseRuntimeSummary.model.brier, output.overallCourseRuntimeSummary.model.logLoss, output.overallCourseRuntimeSummary.model.rocAuc, output.overallCourseRuntimeSummary.model.averagePrecision, output.overallCourseRuntimeSummary.model.expectedCalibrationError, output.overallCourseRuntimeSummary.model.calibrationSlope, output.overallCourseRuntimeSummary.model.calibrationIntercept, output.overallCourseRuntimeSummary.model.positiveRate, output.overallCourseRuntimeSummary.model.support],
+                ['heuristic', output.overallCourseRuntimeSummary.heuristic.brier, output.overallCourseRuntimeSummary.heuristic.logLoss, output.overallCourseRuntimeSummary.heuristic.rocAuc, output.overallCourseRuntimeSummary.heuristic.averagePrecision, output.overallCourseRuntimeSummary.heuristic.expectedCalibrationError, output.overallCourseRuntimeSummary.heuristic.calibrationSlope, output.overallCourseRuntimeSummary.heuristic.calibrationIntercept, output.overallCourseRuntimeSummary.heuristic.positiveRate, output.overallCourseRuntimeSummary.heuristic.support],
             ]),
             '',
             `- Overall-course runtime Brier lift: ${output.overallCourseRuntimeSummary.brierLift}`,
@@ -1019,18 +1565,55 @@ async function main() {
             '',
             '## Head Metrics',
             '',
-            markdownTable(['Head', 'Model Brier', 'Heuristic Brier', 'Brier Lift', 'Model ROC-AUC', 'Heuristic ROC-AUC', 'AUC Lift', 'Model ECE', 'Heuristic ECE'], headLabels.map(([headKey]) => {
+            markdownTable(['Head', 'Model Brier', 'Heuristic Brier', 'Brier Lift', 'Model Log Loss', 'Heuristic Log Loss', 'Model ROC-AUC', 'Heuristic ROC-AUC', 'AUC Lift', 'Model PR-AUC', 'Heuristic PR-AUC', 'Model ECE', 'Heuristic ECE'], headLabels.map(([headKey]) => {
                 const summary = output.modelSummary[headKey];
                 return [
                     headKey,
                     summary.model.brier,
                     summary.heuristic.brier,
                     summary.brierLift,
+                    summary.model.logLoss,
+                    summary.heuristic.logLoss,
                     summary.model.rocAuc,
                     summary.heuristic.rocAuc,
                     summary.aucLift,
+                    summary.model.averagePrecision,
+                    summary.heuristic.averagePrecision,
                     summary.model.expectedCalibrationError,
                     summary.heuristic.expectedCalibrationError,
+                ];
+            })),
+            '',
+            '## Variant Comparison',
+            '',
+            markdownTable(['Variant', 'Brier', 'Log Loss', 'ROC-AUC', 'PR-AUC', 'ECE', 'Budget Rate', 'Flagged@Budget', 'Precision@Budget', 'Recall@Budget', 'Overload Ratio'], [
+                ['current-v6', output.overallCourseVariantSummary.current.brier, output.overallCourseVariantSummary.current.logLoss, output.overallCourseVariantSummary.current.rocAuc, output.overallCourseVariantSummary.current.averagePrecision, output.overallCourseVariantSummary.current.expectedCalibrationError, output.overallCourseVariantSummary.current.budgetMetrics.budgetRate, output.overallCourseVariantSummary.current.budgetMetrics.flaggedRateAtBudget, output.overallCourseVariantSummary.current.budgetMetrics.precisionAtBudget, output.overallCourseVariantSummary.current.budgetMetrics.recallAtBudget, output.overallCourseVariantSummary.current.budgetMetrics.overloadRatio],
+                ['baseline-v5-like', output.overallCourseVariantSummary.baseline.brier, output.overallCourseVariantSummary.baseline.logLoss, output.overallCourseVariantSummary.baseline.rocAuc, output.overallCourseVariantSummary.baseline.averagePrecision, output.overallCourseVariantSummary.baseline.expectedCalibrationError, output.overallCourseVariantSummary.baseline.budgetMetrics.budgetRate, output.overallCourseVariantSummary.baseline.budgetMetrics.flaggedRateAtBudget, output.overallCourseVariantSummary.baseline.budgetMetrics.precisionAtBudget, output.overallCourseVariantSummary.baseline.budgetMetrics.recallAtBudget, output.overallCourseVariantSummary.baseline.budgetMetrics.overloadRatio],
+                ['hybrid-router', output.overallCourseVariantSummary.hybrid.brier, output.overallCourseVariantSummary.hybrid.logLoss, output.overallCourseVariantSummary.hybrid.rocAuc, output.overallCourseVariantSummary.hybrid.averagePrecision, output.overallCourseVariantSummary.hybrid.expectedCalibrationError, output.overallCourseVariantSummary.hybrid.budgetMetrics.budgetRate, output.overallCourseVariantSummary.hybrid.budgetMetrics.flaggedRateAtBudget, output.overallCourseVariantSummary.hybrid.budgetMetrics.precisionAtBudget, output.overallCourseVariantSummary.hybrid.budgetMetrics.recallAtBudget, output.overallCourseVariantSummary.hybrid.budgetMetrics.overloadRatio],
+                ['challenger', output.overallCourseVariantSummary.challenger.brier, output.overallCourseVariantSummary.challenger.logLoss, output.overallCourseVariantSummary.challenger.rocAuc, output.overallCourseVariantSummary.challenger.averagePrecision, output.overallCourseVariantSummary.challenger.expectedCalibrationError, output.overallCourseVariantSummary.challenger.budgetMetrics.budgetRate, output.overallCourseVariantSummary.challenger.budgetMetrics.flaggedRateAtBudget, output.overallCourseVariantSummary.challenger.budgetMetrics.precisionAtBudget, output.overallCourseVariantSummary.challenger.budgetMetrics.recallAtBudget, output.overallCourseVariantSummary.challenger.budgetMetrics.overloadRatio],
+                ['heuristic', output.overallCourseVariantSummary.heuristic.brier, output.overallCourseVariantSummary.heuristic.logLoss, output.overallCourseVariantSummary.heuristic.rocAuc, output.overallCourseVariantSummary.heuristic.averagePrecision, output.overallCourseVariantSummary.heuristic.expectedCalibrationError, output.overallCourseVariantSummary.heuristic.budgetMetrics.budgetRate, output.overallCourseVariantSummary.heuristic.budgetMetrics.flaggedRateAtBudget, output.overallCourseVariantSummary.heuristic.budgetMetrics.precisionAtBudget, output.overallCourseVariantSummary.heuristic.budgetMetrics.recallAtBudget, output.overallCourseVariantSummary.heuristic.budgetMetrics.overloadRatio],
+            ]),
+            '',
+            markdownTable(['Head', 'Fallback Alpha', 'Stage Routes'], headLabels.map(([headKey]) => {
+                const plan = output.hybridPlan.byHead[headKey];
+                return [
+                    headKey,
+                    plan.fallbackAlpha,
+                    Object.entries(plan.byStage).map(([stageKey, stagePlan]) => `${stageKey}:${stagePlan.alpha}`).join(', ') || 'fallback-only',
+                ];
+            })),
+            '',
+            markdownTable(['Head', 'Baseline ROC-AUC', 'Current ROC-AUC', 'Hybrid ROC-AUC', 'Challenger ROC-AUC', 'Current-Baseline Brier Lift', 'Current-Hybrid Brier Lift', 'Hybrid-Challenger Brier Lift'], headLabels.map(([headKey]) => {
+                const summary = output.variantComparisonSummary[headKey];
+                return [
+                    headKey,
+                    summary.baseline.rocAuc,
+                    summary.current.rocAuc,
+                    summary.hybrid.rocAuc,
+                    summary.challenger.rocAuc,
+                    summary.currentVsBaseline.brierLift,
+                    summary.currentVsHybrid.brierLift,
+                    summary.hybridVsChallenger.brierLift,
                 ];
             })),
             '',

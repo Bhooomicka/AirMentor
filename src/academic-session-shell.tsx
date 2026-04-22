@@ -252,7 +252,7 @@ function AcademicLoginPage({
                     value={identifier}
                     onChange={event => setIdentifier(event.target.value)}
                     disabled={busy}
-                    placeholder="e.g. kavitha.rao or kavitha.rao@msruas.ac.in"
+                    placeholder="e.g. narendra.babu or narendra.babu@msruas.ac.in"
                     autoComplete="username"
                   />
                 </div>

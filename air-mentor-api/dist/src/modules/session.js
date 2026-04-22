@@ -7,10 +7,13 @@ import { facultyProfiles, loginRateLimitWindows, roleGrants, sessions, uiPrefere
 import { createId } from '../lib/ids.js';
 import { badRequest, conflict, notFound, tooManyRequests, unauthorized } from '../lib/http-errors.js';
 import { buildPasswordSetupLink, deriveFacultyCredentialStatus, hashPasswordSetupToken, isPasswordSetupTokenExpired, issuePasswordSetupToken } from '../lib/password-setup.js';
+import { createNoopEmailTransport } from '../lib/email-transport.js';
+import { EmailRateLimiter } from '../lib/email-rate-limiter.js';
 import { hashPassword, verifyPassword } from '../lib/passwords.js';
 import { emitOperationalEvent } from '../lib/telemetry.js';
 import { addHours } from '../lib/time.js';
 import { ensurePreference, parseOrThrow, requireAuth, resolveRequestAuth, sortActiveRoleGrantRows } from './support.js';
+const selfServicePasswordSetupRateLimiter = new EmailRateLimiter(10 * 60 * 1000, 3);
 const loginSchema = z.object({
     identifier: z.string().min(1),
     password: z.string().min(1),
@@ -296,10 +299,24 @@ export async function registerSessionRoutes(app, context) {
             purpose,
             previewEnabled: context.config.passwordSetupPreviewEnabled,
         });
+        const setupLink = buildPasswordSetupLink(context.config, issued.rawToken);
+        const transport = context.emailTransport ?? createNoopEmailTransport();
+        const rateLimitResult = selfServicePasswordSetupRateLimiter.check(user.email, Date.now());
+        if (rateLimitResult.allowed) {
+            await transport.sendPasswordSetupEmail({
+                to: user.email,
+                recipientName: faculty.displayName ?? user.username,
+                setupLink,
+                purpose,
+                expiresAt: issued.expiresAt,
+                fromAddress: context.config.emailFromAddress,
+                fromName: context.config.emailFromName,
+            });
+        }
         return {
             ok: true,
             previewEnabled: context.config.passwordSetupPreviewEnabled,
-            setupUrl: context.config.passwordSetupPreviewEnabled ? buildPasswordSetupLink(context.config, issued.rawToken) : null,
+            setupUrl: context.config.passwordSetupPreviewEnabled ? setupLink : null,
             message: context.config.passwordSetupPreviewEnabled
                 ? 'Password setup preview link is ready on this local system.'
                 : 'If this account exists, a password setup link has been sent.',

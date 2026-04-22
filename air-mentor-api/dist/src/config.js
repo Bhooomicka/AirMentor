@@ -73,5 +73,14 @@ export function loadConfig(env = process.env) {
         loginRateLimitWindowMs: parseNumber(env.LOGIN_RATE_LIMIT_WINDOW_MS, 15 * 60 * 1000),
         loginRateLimitMaxAttempts: parseNumber(env.LOGIN_RATE_LIMIT_MAX_ATTEMPTS, 8),
         defaultThemeMode: env.DEFAULT_THEME_MODE ?? 'frosted-focus-light',
+        smtpHost: env.SMTP_HOST?.trim() || null,
+        smtpPort: parseNumber(env.SMTP_PORT, 587),
+        smtpSecure: parseBoolean(env.SMTP_SECURE, false),
+        smtpUser: env.SMTP_USER?.trim() || null,
+        smtpPass: env.SMTP_PASS?.trim() || null,
+        emailFromAddress: env.EMAIL_FROM_ADDRESS?.trim() || 'noreply@airmentor.example.com',
+        emailFromName: env.EMAIL_FROM_NAME?.trim() || 'AirMentor',
+        passwordSetupEmailRateLimitWindowMs: parseNumber(env.PASSWORD_SETUP_EMAIL_RATE_LIMIT_WINDOW_MS, 10 * 60 * 1000),
+        passwordSetupEmailRateLimitMax: parseNumber(env.PASSWORD_SETUP_EMAIL_RATE_LIMIT_MAX, 3),
     };
 }

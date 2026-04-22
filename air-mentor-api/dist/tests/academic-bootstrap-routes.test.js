@@ -1,7 +1,7 @@
 import fastify from 'fastify';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { z } from 'zod';
-import { simulationStageCheckpoints } from '../src/db/schema.js';
+import { simulationRuns, simulationStageCheckpoints } from '../src/db/schema.js';
 import { registerAcademicBootstrapRoutes } from '../src/modules/academic-bootstrap-routes.js';
 describe('academic bootstrap routes', () => {
     let app = null;
@@ -27,7 +27,11 @@ describe('academic bootstrap routes', () => {
         const db = {
             select: () => ({
                 from: (table) => ({
-                    where: async () => (table === simulationStageCheckpoints ? [checkpoint] : []),
+                    where: async () => (table === simulationStageCheckpoints
+                        ? [checkpoint]
+                        : table === simulationRuns
+                            ? [{ simulationRunId: 'sim_mnc_2023_active' }]
+                            : []),
                 }),
             }),
         };

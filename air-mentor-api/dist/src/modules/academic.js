@@ -3284,6 +3284,7 @@ async function buildAcademicBootstrap(context, viewer = {}) {
             stageOrder: stageCheckpointRow.stageOrder,
             previousCheckpointId: stageCheckpointRow.previousCheckpointId,
             nextCheckpointId: stageCheckpointRow.nextCheckpointId,
+            currentDateISO: stageCheckpointRow.createdAt.slice(0, 10),
         } : null,
     };
 }

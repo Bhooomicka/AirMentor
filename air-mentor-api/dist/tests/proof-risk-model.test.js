@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_POLICY } from '../src/modules/admin-structure.js';
-import { PROOF_CORPUS_MANIFEST, PROOF_CORPUS_MANIFEST_VERSION, PRODUCTION_RISK_THRESHOLDS, buildObservableFeaturePayload, scoreObservableRiskWithModel, summarizeProofRiskModelEvaluation, trainProofRiskModel, } from '../src/lib/proof-risk-model.js';
+import { BASELINE_V5_LIKE_PROOF_RISK_TRAINING_CONFIG, PROOF_CORPUS_MANIFEST, PROOF_CORPUS_MANIFEST_VERSION, PRODUCTION_RISK_THRESHOLDS, buildObservableFeaturePayload, scenarioFamilyForSeed, scoreObservableRiskWithModel, summarizeProofRiskModelEvaluation, trainProofRiskModel, } from '../src/lib/proof-risk-model.js';
 function buildFeaturePayload(index, risky) {
     return buildObservableFeaturePayload({
         attendancePct: risky ? 58 + (index % 6) : 82 - (index % 4),
@@ -65,7 +65,7 @@ function buildRowsForRun(seed, count, riskyOffset = 0) {
                 runId,
                 studentId: `student-${index}`,
                 semesterNumber: 1 + (index % 6),
-                stageKey: ['semester-start', 'post-tt1', 'post-reassessment', 'post-tt2', 'post-see', 'semester-close'][index % 6],
+                stageKey: ['pre-tt1', 'post-tt1', 'post-tt2', 'post-assignments', 'post-see', 'post-see'][index % 6],
                 sectionCode: index % 2 === 0 ? 'A' : 'B',
                 courseCode: index % 3 === 0 ? 'AMC301' : index % 3 === 1 ? 'AMC302' : 'AMC303L',
                 coEvidenceMode: index % 3 === 2 ? 'rubric-derived' : 'synthetic-blueprint',
@@ -74,6 +74,11 @@ function buildRowsForRun(seed, count, riskyOffset = 0) {
     });
 }
 describe('proof risk model', () => {
+    it('aligns scenario family lookup with governed manifest seeds', () => {
+        PROOF_CORPUS_MANIFEST.slice(0, 16).forEach(entry => {
+            expect(scenarioFamilyForSeed(entry.seed)).toBe(entry.scenarioFamily);
+        });
+    });
     it('trains deterministically on governed manifest rows and skips non-manifest runs', () => {
         const manifestEntries = [
             PROOF_CORPUS_MANIFEST[0],
@@ -312,7 +317,7 @@ describe('proof risk model', () => {
                 runId: 'sim-carryover',
                 studentId: 'student-cautious',
                 semesterNumber: 4,
-                stageKey: 'semester-close',
+                stageKey: 'post-see',
                 sectionCode: 'A',
                 courseCode: 'AMC302',
                 coEvidenceMode: 'synthetic-blueprint',
@@ -339,7 +344,7 @@ describe('proof risk model', () => {
                 runId: 'sim-carryover',
                 studentId: 'student-pressured',
                 semesterNumber: 4,
-                stageKey: 'semester-close',
+                stageKey: 'post-see',
                 sectionCode: 'A',
                 courseCode: 'AMC302',
                 coEvidenceMode: 'synthetic-blueprint',
@@ -348,5 +353,158 @@ describe('proof risk model', () => {
             correlations: bundle.correlations,
         });
         expect(scoredPressured.headProbabilities.downstreamCarryoverRisk).toBeGreaterThan(scoredCautious.headProbabilities.downstreamCarryoverRisk);
+    });
+    it('adapts probabilities across evidence stages for the same observable payload', () => {
+        const manifestEntries = [PROOF_CORPUS_MANIFEST[0], PROOF_CORPUS_MANIFEST[40], PROOF_CORPUS_MANIFEST[52]];
+        const runMetadataById = new Map(manifestEntries.map(entry => [
+            `sim-${entry.seed}`,
+            {
+                simulationRunId: `sim-${entry.seed}`,
+                seed: entry.seed,
+                split: entry.split,
+                scenarioFamily: entry.scenarioFamily,
+            },
+        ]));
+        const rows = [
+            ...buildRowsForRun(manifestEntries[0].seed, 20),
+            ...buildRowsForRun(manifestEntries[1].seed, 20, 1),
+            ...buildRowsForRun(manifestEntries[2].seed, 20, 2),
+        ];
+        const bundle = trainProofRiskModel(rows, '2026-03-23T00:00:00.000Z', { runMetadataById });
+        expect(bundle).not.toBeNull();
+        const payload = buildFeaturePayload(4, true);
+        const preTt1 = scoreObservableRiskWithModel({
+            attendancePct: payload.attendancePct,
+            currentCgpa: payload.currentCgpa,
+            backlogCount: payload.backlogCount,
+            tt1Pct: payload.tt1Pct,
+            tt2Pct: payload.tt2Pct,
+            quizPct: payload.quizPct,
+            assignmentPct: payload.assignmentPct,
+            seePct: payload.seePct,
+            weakCoCount: payload.weakCoCount,
+            attendanceHistoryRiskCount: payload.attendanceHistoryRiskCount,
+            questionWeaknessCount: payload.weakQuestionCount,
+            interventionResponseScore: payload.interventionResponseScore,
+            policy: DEFAULT_POLICY,
+            featurePayload: payload,
+            sourceRefs: buildSourceRefs({
+                runId: 'sim-stage',
+                studentId: 'student-stage',
+                semesterNumber: 5,
+                stageKey: 'pre-tt1',
+                sectionCode: 'A',
+                courseCode: 'AMC301',
+                coEvidenceMode: 'synthetic-blueprint',
+            }),
+            productionModel: bundle.production,
+            correlations: bundle.correlations,
+        });
+        const postAssignments = scoreObservableRiskWithModel({
+            attendancePct: payload.attendancePct,
+            currentCgpa: payload.currentCgpa,
+            backlogCount: payload.backlogCount,
+            tt1Pct: payload.tt1Pct,
+            tt2Pct: payload.tt2Pct,
+            quizPct: payload.quizPct,
+            assignmentPct: payload.assignmentPct,
+            seePct: payload.seePct,
+            weakCoCount: payload.weakCoCount,
+            attendanceHistoryRiskCount: payload.attendanceHistoryRiskCount,
+            questionWeaknessCount: payload.weakQuestionCount,
+            interventionResponseScore: payload.interventionResponseScore,
+            policy: DEFAULT_POLICY,
+            featurePayload: payload,
+            sourceRefs: buildSourceRefs({
+                runId: 'sim-stage',
+                studentId: 'student-stage',
+                semesterNumber: 5,
+                stageKey: 'post-assignments',
+                sectionCode: 'A',
+                courseCode: 'AMC301',
+                coEvidenceMode: 'synthetic-blueprint',
+            }),
+            productionModel: bundle.production,
+            correlations: bundle.correlations,
+        });
+        expect(preTt1.headProbabilities.overallCourseRisk).not.toBe(postAssignments.headProbabilities.overallCourseRisk);
+    });
+    it('keeps stage-only scoring invariant under baseline v5-like training config', () => {
+        const manifestEntries = [PROOF_CORPUS_MANIFEST[0], PROOF_CORPUS_MANIFEST[40], PROOF_CORPUS_MANIFEST[52]];
+        const runMetadataById = new Map(manifestEntries.map(entry => [
+            `sim-${entry.seed}`,
+            {
+                simulationRunId: `sim-${entry.seed}`,
+                seed: entry.seed,
+                split: entry.split,
+                scenarioFamily: entry.scenarioFamily,
+            },
+        ]));
+        const rows = [
+            ...buildRowsForRun(manifestEntries[0].seed, 20),
+            ...buildRowsForRun(manifestEntries[1].seed, 20, 1),
+            ...buildRowsForRun(manifestEntries[2].seed, 20, 2),
+        ];
+        const bundle = trainProofRiskModel(rows, '2026-03-23T00:00:00.000Z', {
+            runMetadataById,
+            trainingConfig: BASELINE_V5_LIKE_PROOF_RISK_TRAINING_CONFIG,
+        });
+        expect(bundle).not.toBeNull();
+        const payload = buildFeaturePayload(4, true);
+        const preTt1 = scoreObservableRiskWithModel({
+            attendancePct: payload.attendancePct,
+            currentCgpa: payload.currentCgpa,
+            backlogCount: payload.backlogCount,
+            tt1Pct: payload.tt1Pct,
+            tt2Pct: payload.tt2Pct,
+            quizPct: payload.quizPct,
+            assignmentPct: payload.assignmentPct,
+            seePct: payload.seePct,
+            weakCoCount: payload.weakCoCount,
+            attendanceHistoryRiskCount: payload.attendanceHistoryRiskCount,
+            questionWeaknessCount: payload.weakQuestionCount,
+            interventionResponseScore: payload.interventionResponseScore,
+            policy: DEFAULT_POLICY,
+            featurePayload: payload,
+            sourceRefs: buildSourceRefs({
+                runId: 'sim-stage',
+                studentId: 'student-stage',
+                semesterNumber: 5,
+                stageKey: 'pre-tt1',
+                sectionCode: 'A',
+                courseCode: 'AMC301',
+                coEvidenceMode: 'synthetic-blueprint',
+            }),
+            productionModel: bundle.production,
+            correlations: bundle.correlations,
+        });
+        const postAssignments = scoreObservableRiskWithModel({
+            attendancePct: payload.attendancePct,
+            currentCgpa: payload.currentCgpa,
+            backlogCount: payload.backlogCount,
+            tt1Pct: payload.tt1Pct,
+            tt2Pct: payload.tt2Pct,
+            quizPct: payload.quizPct,
+            assignmentPct: payload.assignmentPct,
+            seePct: payload.seePct,
+            weakCoCount: payload.weakCoCount,
+            attendanceHistoryRiskCount: payload.attendanceHistoryRiskCount,
+            questionWeaknessCount: payload.weakQuestionCount,
+            interventionResponseScore: payload.interventionResponseScore,
+            policy: DEFAULT_POLICY,
+            featurePayload: payload,
+            sourceRefs: buildSourceRefs({
+                runId: 'sim-stage',
+                studentId: 'student-stage',
+                semesterNumber: 5,
+                stageKey: 'post-assignments',
+                sectionCode: 'A',
+                courseCode: 'AMC301',
+                coEvidenceMode: 'synthetic-blueprint',
+            }),
+            productionModel: bundle.production,
+            correlations: bundle.correlations,
+        });
+        expect(preTt1.headProbabilities.overallCourseRisk).toBe(postAssignments.headProbabilities.overallCourseRisk);
     });
 });

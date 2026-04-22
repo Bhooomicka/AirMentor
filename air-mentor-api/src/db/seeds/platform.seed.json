@@ -133,11 +133,11 @@
     {
       "userId": "user_t1",
       "facultyId": "t1",
-      "username": "kavitha.rao",
-      "email": "kavitha.rao@msruas.ac.in",
+      "username": "narendra.babu",
+      "email": "narendra.babu@msruas.ac.in",
       "phone": "+91-9000000001",
       "employeeCode": "EMP-T001",
-      "displayName": "Dr. Kavitha Rao",
+      "displayName": "Dr. Narendra Babu",
       "designation": "Associate Professor",
       "joinedOn": "2024-01-01",
       "status": "active",
@@ -13576,19 +13576,19 @@
   ],
   "academicAssets": {
     "professor": {
-      "name": "Dr. Kavitha Rao",
+      "name": "Dr. Narendra Babu",
       "id": "FET-CSE-2018-047",
       "dept": "Computer Science & Engineering",
       "role": "Associate Professor",
-      "initials": "KR",
-      "email": "kavitha.rao@msruas.ac.in"
+      "initials": "NB",
+      "email": "narendra.babu@msruas.ac.in"
     },
     "faculty": [
       {
         "facultyId": "t1",
-        "name": "Dr. Kavitha Rao",
-        "initials": "KR",
-        "email": "kavitha.rao@msruas.ac.in",
+        "name": "Dr. Narendra Babu",
+        "initials": "NB",
+        "email": "narendra.babu@msruas.ac.in",
         "dept": "CSE",
         "roleTitle": "Associate Professor",
         "allowedRoles": [
@@ -14979,8 +14979,8 @@
     "teachers": [
       {
         "id": "t1",
-        "name": "Dr. Kavitha Rao",
-        "initials": "KR",
+        "name": "Dr. Narendra Babu",
+        "initials": "NB",
         "dept": "CSE",
         "role": "Associate Professor",
         "roles": [

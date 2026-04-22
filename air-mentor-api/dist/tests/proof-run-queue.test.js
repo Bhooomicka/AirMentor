@@ -72,4 +72,20 @@ describe('proof run queue worker', () => {
         await vi.advanceTimersByTimeAsync(5_000);
         expect(query).toHaveBeenCalledTimes(2);
     });
+    it('does not let the worker steal direct synchronous running runs', async () => {
+        const query = vi.fn().mockResolvedValue({ rows: [] });
+        const stopWorker = startProofRunWorker({
+            db: {},
+            pool: { query },
+            clock: () => '2026-04-03T00:00:00.000Z',
+            startDelayMs: 0,
+            pollMs: 1_000,
+            heartbeatMs: 1_000,
+        });
+        await vi.advanceTimersByTimeAsync(0);
+        const claimSql = String(query.mock.calls[0]?.[0] ?? '');
+        expect(claimSql).toMatch(/WHERE\s+\(\s*status = 'queued'\s+OR\s+\(status = 'running' AND worker_lease_token IS NOT NULL\)\s*\)/);
+        expect(claimSql).not.toContain(`status IN ('queued', 'running')`);
+        await stopWorker();
+    });
 });
